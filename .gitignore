@@ -10,3 +10,4 @@ rebel.xml
 ## front
 **/*.lock
 os_del.cmd
+/.vscode/
