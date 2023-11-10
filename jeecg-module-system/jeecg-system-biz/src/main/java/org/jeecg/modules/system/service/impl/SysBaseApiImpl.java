@@ -185,7 +185,7 @@ public class SysBaseApiImpl implements ISysBaseAPI {
 			
 			//update-begin-author:taoyan date:2023-2-21 for: 解决参数顺序问题
 			List<String> allPossiblePaths = this.getOnlinePossiblePaths(requestPath);
-			log.info("获取的菜单地址= {}", allPossiblePaths.toString());
+			log.info("Get the menu address= {}", allPossiblePaths.toString());
 			if(allPossiblePaths.size()==1){
 				query.eq(SysPermission::getUrl, requestPath);
 			}else{
