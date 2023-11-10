@@ -9,52 +9,52 @@ import org.jeecg.common.constant.CommonConstant;
 import java.io.Serializable;
 
 /**
- *   接口返回数据格式
+ *   The data format returned by the API
  * @author scott
  * @email jeecgos@163.com
- * @date  2019年1月19日
+ * @date  19 Jan 2019
  */
 @Data
-@ApiModel(value="接口返回对象", description="接口返回对象")
+@ApiModel(value="The interface returns the object", description="The interface returns the object")
 public class Result<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 成功标志
+	 * Signs of success
 	 */
-	@ApiModelProperty(value = "成功标志")
+	@ApiModelProperty(value = "Signs of success")
 	private boolean success = true;
 
 	/**
-	 * 返回处理消息
+	 * Return to processing the message
 	 */
-	@ApiModelProperty(value = "返回处理消息")
+	@ApiModelProperty(value = "Return to processing the message")
 	private String message = "";
 
 	/**
 	 * 返回代码
 	 */
-	@ApiModelProperty(value = "返回代码")
+	@ApiModelProperty(value = "Return code")
 	private Integer code = 0;
 	
 	/**
-	 * 返回数据对象 data
+	 * Returns data objects data
 	 */
-	@ApiModelProperty(value = "返回数据对象")
+	@ApiModelProperty(value = "Returns data objects")
 	private T result;
 	
 	/**
-	 * 时间戳
+	 * TIMESTAMP
 	 */
-	@ApiModelProperty(value = "时间戳")
+	@ApiModelProperty(value = "TIMESTAMP")
 	private long timestamp = System.currentTimeMillis();
 
 	public Result() {
 	}
 
     /**
-     * 兼容VUE3版token失效不跳转登录页面
+     * Compatible with VUE version 3, the login page will not be redirected when the token expires
      * @param code
      * @param message
      */
@@ -103,7 +103,7 @@ public class Result<T> implements Serializable {
 	}
 
 	/**
-	 * 此方法是为了兼容升级所创建
+	 * This method was created to be compatible with upgrades
 	 *
 	 * @param msg
 	 * @param <T>
@@ -165,7 +165,7 @@ public class Result<T> implements Serializable {
 	}
 
 	/**
-	 * 无权限访问返回结果
+	 * No permission to access the returned results
 	 */
 	public static<T> Result<T> noauth(String msg) {
 		return error(CommonConstant.SC_JEECG_NO_AUTHZ, msg);

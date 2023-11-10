@@ -46,7 +46,7 @@ import java.util.*;
 
 /**
  * <p>
- * 部门表 前端控制器
+ * Department Table Front-End Controllers
  * <p>
  * 
  * @Author: Steve @Since： 2019-01-22
@@ -65,7 +65,7 @@ public class SysDepartController {
 	@Autowired
 	private ISysUserDepartService sysUserDepartService;
 	/**
-	 * 查询数据 查出我的部门,并以树结构数据格式响应给前端
+	 * Query Data Find out my department and respond to the frontend in a tree structure data format
 	 *
 	 * @return
 	 */
@@ -95,7 +95,7 @@ public class SysDepartController {
 	}
 
 	/**
-	 * 查询数据 查出所有部门,并以树结构数据格式响应给前端
+	 * Query data Isolate all departments and respond to the frontend in a tree structure data format
 	 * 
 	 * @return
 	 */
@@ -103,7 +103,7 @@ public class SysDepartController {
 	public Result<List<SysDepartTreeModel>> queryTreeList(@RequestParam(name = "ids", required = false) String ids) {
 		Result<List<SysDepartTreeModel>> result = new Result<>();
 		try {
-			// 从内存中读取
+			// Read from memory
 //			List<SysDepartTreeModel> list =FindsDepartsChildrenUtil.getSysDepartTreeList();
 //			if (CollectionUtils.isEmpty(list)) {
 //				list = sysDepartService.queryTreeList();
@@ -123,10 +123,10 @@ public class SysDepartController {
 	}
 
 	/**
-	 * 异步查询部门list
-	 * @param parentId 父节点 异步加载时传递
-	 * @param ids 前端回显是传递
-	 * @param primaryKey 主键字段（id或者orgCode）
+	 * Asynchronously query the department list
+	 * @param parentId Parent node is passed when loaded asynchronously
+	 * @param ids The front-end echo is transitive
+	 * @param primaryKey Primary key field (id or org code)
 	 * @return
 	 */
 	@RequestMapping(value = "/queryDepartTreeSync", method = RequestMethod.GET)
@@ -139,16 +139,16 @@ public class SysDepartController {
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
 			result.setSuccess(false);
-			result.setMessage("查询失败");
+			result.setMessage("The query failed");
 		}
 		return result;
 	}
 
 	/**
-	 * 获取某个部门的所有父级部门的ID
+	 * Get the IDs of all parent departments of a department
 	 *
-	 * @param departId 根据departId查
-	 * @param orgCode  根据orgCode查，departId和orgCode必须有一个不为空
+	 * @param departId Check according to the depart ID
+	 * @param orgCode  According to the org code query, one of the depart id and org code must not be empty
 	 */
 	@GetMapping("/queryAllParentId")
 	public Result queryParentIds(
@@ -161,7 +161,7 @@ public class SysDepartController {
 			} else if (oConvertUtils.isNotEmpty(orgCode)) {
 				data = sysDepartService.queryAllParentIdByOrgCode(orgCode);
 			} else {
-				return Result.error("departId 和 orgCode 不能都为空！");
+				return Result.error("departId and orgCode can't be both null！");
 			}
 			return Result.OK(data);
 		} catch (Exception e) {
@@ -171,7 +171,7 @@ public class SysDepartController {
 	}
 
 	/**
-	 * 添加新数据 添加用户新建的部门对象数据,并保存到数据库
+	 * Add new data Add the object data of the department created by the user,and save to the database
 	 * 
 	 * @param sysDepart
 	 * @return
@@ -188,16 +188,16 @@ public class SysDepartController {
 			//清除部门树内存
 			// FindsDepartsChildrenUtil.clearSysDepartTreeList();
 			// FindsDepartsChildrenUtil.clearDepartIdModel();
-			result.success("添加成功！");
+			result.success("The addition was successful！");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 
 	/**
-	 * 编辑数据 编辑部门的部分数据,并保存到数据库
+	 * Edit Data Edit part of the department's data and save it to the database
 	 * 
 	 * @param sysDepart
 	 * @return
@@ -211,22 +211,22 @@ public class SysDepartController {
 		Result<SysDepart> result = new Result<SysDepart>();
 		SysDepart sysDepartEntity = sysDepartService.getById(sysDepart.getId());
 		if (sysDepartEntity == null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		} else {
 			boolean ok = sysDepartService.updateDepartDataById(sysDepart, username);
-			// TODO 返回false说明什么？
+			// TODO What does returning false mean？
 			if (ok) {
 				//清除部门树内存
 				//FindsDepartsChildrenUtil.clearSysDepartTreeList();
 				//FindsDepartsChildrenUtil.clearDepartIdModel();
-				result.success("修改成功!");
+				result.success("The modification was successful!");
 			}
 		}
 		return result;
 	}
 	
 	 /**
-     *   通过id删除
+     *   Delete by ID
     * @param id
     * @return
     */
@@ -238,20 +238,20 @@ public class SysDepartController {
        Result<SysDepart> result = new Result<SysDepart>();
        SysDepart sysDepart = sysDepartService.getById(id);
        if(sysDepart==null) {
-           result.error500("未找到对应实体");
+           result.error500("No corresponding entity found");
        }else {
            sysDepartService.deleteDepart(id);
 			//清除部门树内存
 		   //FindsDepartsChildrenUtil.clearSysDepartTreeList();
 		   // FindsDepartsChildrenUtil.clearDepartIdModel();
-		   result.success("删除成功!");
+		   result.success("The deletion is successful!");
        }
        return result;
    }
 
 
 	/**
-	 * 批量删除 根据前端请求的多个ID,对数据库执行删除相关部门数据的操作
+	 * Batch deletion Perform the operation of deleting the data of relevant departments on the database based on multiple IDs requested by the frontend
 	 * 
 	 * @param ids
 	 * @return
@@ -263,16 +263,16 @@ public class SysDepartController {
 
 		Result<SysDepart> result = new Result<SysDepart>();
 		if (ids == null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized！");
 		} else {
 			this.sysDepartService.deleteBatchWithChildren(Arrays.asList(ids.split(",")));
-			result.success("删除成功!");
+			result.success("The deletion is successful!");
 		}
 		return result;
 	}
 
 	/**
-	 * 查询数据 添加或编辑页面对该方法发起请求,以树结构形式加载所有部门的名称,方便用户的操作
+	 * The Query Data Add or Edit page makes a request for this method, loading the names of all departments in a tree structure for easy user operation
 	 * 
 	 * @return
 	 */
@@ -310,7 +310,7 @@ public class SysDepartController {
 	 
 	/**
 	 * <p>
-	 * 部门搜索功能方法,根据关键字模糊搜索相关部门
+	 * The department search function method is to search for related departments based on keyword fuzziness
 	 * </p>
 	 * 
 	 * @param keyWord
@@ -328,7 +328,7 @@ public class SysDepartController {
 		List<SysDepartTreeModel> treeList = this.sysDepartService.searchByKeyWord(keyWord,myDeptSearch,departIds);
 		if (treeList == null || treeList.size() == 0) {
 			result.setSuccess(false);
-			result.setMessage("未查询匹配数据！");
+			result.setMessage("Matching data was not queried！");
 			return result;
 		}
 		result.setResult(treeList);
@@ -337,7 +337,7 @@ public class SysDepartController {
 
 
 	/**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      */
@@ -363,18 +363,18 @@ public class SysDepartController {
             }
         });
         //导出文件名称
-        mv.addObject(NormalExcelConstants.FILE_NAME, "部门列表");
+        mv.addObject(NormalExcelConstants.FILE_NAME, "List of departments");
         mv.addObject(NormalExcelConstants.CLASS, SysDepart.class);
         LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("部门列表数据", "导出人:"+user.getRealname(), "导出信息"));
+        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("Department list data", "Exporter:"+user.getRealname(), "Export information"));
         mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
         return mv;
     }
 
     /**
-     * 通过excel导入数据
-	 * 部门导入方案1: 通过机构编码来计算出部门的父级ID,维护上下级关系;
-	 * 部门导入方案2: 你也可以改造下程序,机构编码直接导入,先不设置父ID;全部导入后,写一个sql,补下父ID;
+     * Import data via Excel
+	 * Departmental import scenario 1: The parent ID of the department is calculated through the organization code to maintain the relationship between superiors and subordinates;
+	 * Departmental import scenario 2: You can also modify the program, the organization code is directly imported, and the parent ID is not set first; After all the imports are imported, write a SQL statement and fill in the parent ID.
      *
      * @param request
      * @param response
@@ -396,10 +396,10 @@ public class SysDepartController {
             params.setHeadRows(1);
             params.setNeedSave(true);
             try {
-            	// orgCode编码长度
+            	// The length of the org code
             	int codeLength = YouBianCodeUtil.ZHANWEI_LENGTH;
                 listSysDeparts = ExcelImportUtil.importExcel(file.getInputStream(), SysDepart.class, params);
-                //按长度排序
+                //Sort by length
                 Collections.sort(listSysDeparts, new Comparator<SysDepart>() {
                     @Override
 					public int compare(SysDepart arg0, SysDepart arg1) {
@@ -418,13 +418,13 @@ public class SysDepartController {
                 		SysDepart parentDept = sysDepartService.getOne(queryWrapper);
                 		if(!parentDept.equals(null)) {
 							sysDepart.setParentId(parentDept.getId());
-							//更新父级部门不是叶子结点
+							//The update parent department is not a leaf node
 							sysDepartService.updateIzLeaf(parentDept.getId(),CommonConstant.NOT_LEAF);
 						} else {
 							sysDepart.setParentId("");
 						}
                 		}catch (Exception e) {
-                			//没有查找到parentDept
+                			//No parent Dept found
                 		}
                 	}else{
                 		sysDepart.setParentId("");
@@ -449,7 +449,7 @@ public class SysDepartController {
 				return ImportExcelUtil.imporReturnRes(errorMessageList.size(), listSysDeparts.size() - errorMessageList.size(), errorMessageList);
             } catch (Exception e) {
                 log.error(e.getMessage(),e);
-                return Result.error("文件导入失败:"+e.getMessage());
+                return Result.error("File import failed:"+e.getMessage());
             } finally {
                 try {
                     file.getInputStream().close();
@@ -458,12 +458,12 @@ public class SysDepartController {
                 }
             }
         }
-        return Result.error("文件导入失败！");
+        return Result.error("File import failed！");
     }
 
 
 	/**
-	 * 查询所有部门信息
+	 * Query all department information
 	 * @return
 	 */
 	@GetMapping("listAll")
@@ -481,7 +481,7 @@ public class SysDepartController {
 		return result;
 	}
 	/**
-	 * 查询数据 查出所有部门,并以树结构数据格式响应给前端
+	 * Query data Isolate all departments and respond to the frontend in a tree structure data format
 	 *
 	 * @return
 	 */
@@ -507,7 +507,7 @@ public class SysDepartController {
 	}
 
 	/**
-	 * 根据部门编码获取部门信息
+	 * Get department information based on department code
 	 *
 	 * @param orgCode
 	 * @return
@@ -524,7 +524,7 @@ public class SysDepartController {
 	}
 
 	/**
-	 * 根据部门id获取用户信息
+	 * Obtain user information based on department ID
 	 *
 	 * @param id
 	 * @return
@@ -539,7 +539,7 @@ public class SysDepartController {
 	}
 
 	/**
-	 * @功能：根据id 批量查询
+	 * @Function: Query in batches based on ID
 	 * @param deptIds
 	 * @return
 	 */
@@ -561,8 +561,8 @@ public class SysDepartController {
     }
 
 	/**
-	 * 异步查询部门list
-	 * @param parentId 父节点 异步加载时传递
+	 * Asynchronously query the department list
+	 * @param parentId Parent node is passed when loaded asynchronously
 	 * @return
 	 */
 	@RequestMapping(value = "/queryBookDepTreeSync", method = RequestMethod.GET)
@@ -581,7 +581,7 @@ public class SysDepartController {
 	}
 
 	/**
-	 * 通过部门id和租户id获取用户 【低代码应用: 用于选择部门负责人】
+	 * Acquire users by department ID and tenant ID [Low-code apps: Used to select department heads]
 	 * @param departId
 	 * @return
 	 */
@@ -593,28 +593,28 @@ public class SysDepartController {
 	}
 
 	/**
-	 * 导出excel【低代码应用: 用于导出部门】
+	 * Export to Excel [Low-code app: for exporting departments]
 	 *
 	 * @param request
 	 */
 	@RequestMapping(value = "/appExportXls")
 	public ModelAndView appExportXls(SysDepart sysDepart,HttpServletRequest request) {
-		// Step.1 组装查询条件
+		// Step.1 Assemble query criteria
 		int tenantId = oConvertUtils.getInt(TenantContext.getTenant(), 0);
 		ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
 		List<ExportDepartVo> pageList = sysDepartService.getExcelDepart(tenantId);
 		//Step.2 AutoPoi 导出Excel
 		//导出文件名称
-		mv.addObject(NormalExcelConstants.FILE_NAME, "部门列表");
+		mv.addObject(NormalExcelConstants.FILE_NAME, "List of departments");
 		mv.addObject(NormalExcelConstants.CLASS, ExportDepartVo.class);
 		LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-		mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("部门列表数据", "导出人:"+user.getRealname(), "导出信息"));
+		mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("Department list data", "Exporter:"+user.getRealname(), "Export information"));
 		mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
 		return mv;
 	}
 
 	/**
-	 * 导入excel【低代码应用: 用于导出部门】
+	 * Import Excel [Low-code app: Used to export departments]
 	 *
 	 * @param request
 	 */
@@ -643,7 +643,7 @@ public class SysDepartController {
 				return ImportExcelUtil.imporReturnRes(errorMessageList.size(), listSysDeparts.size() - errorMessageList.size(), errorMessageList);
 			} catch (Exception e) {
 				log.error(e.getMessage(),e);
-				return Result.error("文件导入失败:"+e.getMessage());
+				return Result.error("File import failed:"+e.getMessage());
 			} finally {
 				try {
 					file.getInputStream().close();
@@ -652,7 +652,7 @@ public class SysDepartController {
 				}
 			}
 		}
-		return Result.error("文件导入失败！");
+		return Result.error("File import failed!");
 	}
 	
 }

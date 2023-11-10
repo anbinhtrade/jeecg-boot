@@ -24,13 +24,13 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 
 /**
- * @Description: 编码校验规则
+ * @Description: Encoding check rules
  * @Author: jeecg-boot
  * @Date: 2020-02-04
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "编码校验规则")
+@Api(tags = "Encoding check rules")
 @RestController
 @RequestMapping("/sys/checkRule")
 public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCheckRuleService> {
@@ -39,7 +39,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     private ISysCheckRuleService sysCheckRuleService;
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param sysCheckRule
      * @param pageNo
@@ -47,8 +47,8 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
      * @param request
      * @return
      */
-    @AutoLog(value = "编码校验规则-分页列表查询")
-    @ApiOperation(value = "编码校验规则-分页列表查询", notes = "编码校验规则-分页列表查询")
+    @AutoLog(value = "Encoding Validation Rules - Paginated List Query")
+    @ApiOperation(value = "Encoding Validation Rules - Paginated List Query", notes = "Encoding Validation Rules - Paginated List Query")
     @GetMapping(value = "/list")
     public Result queryPageList(
             SysCheckRule sysCheckRule,
@@ -64,13 +64,14 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
 
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param ruleCode
      * @return
      */
-    @AutoLog(value = "编码校验规则-通过Code校验传入的值")
-    @ApiOperation(value = "编码校验规则-通过Code校验传入的值", notes = "编码校验规则-通过Code校验传入的值")
+    @AutoLog(value = "Encoding Validation Rule - Verify the incoming value by using Code")
+    @ApiOperation(value = "Encoding Validation Rule - Verify the incoming value by using Code",
+            notes = "Encoding Validation Rule - Verify the incoming value by using Code")
     @GetMapping(value = "/checkByCode")
     public Result checkByCode(
             @RequestParam(name = "ruleCode") String ruleCode,
@@ -78,7 +79,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     ) throws UnsupportedEncodingException {
         SysCheckRule sysCheckRule = sysCheckRuleService.getByCode(ruleCode);
         if (sysCheckRule == null) {
-            return Result.error("该编码不存在");
+            return Result.error("The encoding does not exist");
         }
         JSONObject errorResult = sysCheckRuleService.checkValue(sysCheckRule, URLDecoder.decode(value, "UTF-8"));
         if (errorResult == null) {
@@ -91,27 +92,27 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param sysCheckRule
      * @return
      */
-    @AutoLog(value = "编码校验规则-添加")
-    @ApiOperation(value = "编码校验规则-添加", notes = "编码校验规则-添加")
+    @AutoLog(value = "Encoding Checksum Rule - Added")
+    @ApiOperation(value = "Encoding Checksum Rule - Added", notes = "Encoding Checksum Rule - Added")
     @PostMapping(value = "/add")
     public Result add(@RequestBody SysCheckRule sysCheckRule) {
         sysCheckRuleService.save(sysCheckRule);
-        return Result.ok("添加成功！");
+        return Result.ok("The addition was successful！");
     }
 
     /**
-     * 编辑
+     * Edit
      *
      * @param sysCheckRule
      * @return
      */
-    @AutoLog(value = "编码校验规则-编辑")
-    @ApiOperation(value = "编码校验规则-编辑", notes = "编码校验规则-编辑")
+    @AutoLog(value = "Encoding Checksum Rules - Editing")
+    @ApiOperation(value = "Encoding Checksum Rules - Editing", notes = "Encoding Checksum Rules - Editing")
     @RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
     public Result edit(@RequestBody SysCheckRule sysCheckRule) {
         sysCheckRuleService.updateById(sysCheckRule);
@@ -119,41 +120,41 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "编码校验规则-通过id删除")
-    @ApiOperation(value = "编码校验规则-通过id删除", notes = "编码校验规则-通过id删除")
+    @AutoLog(value = "Encoding check rule - Delete by ID")
+    @ApiOperation(value = "Encoding check rule - Delete by ID", notes = "Encoding check rule - Delete by ID")
     @DeleteMapping(value = "/delete")
     public Result delete(@RequestParam(name = "id", required = true) String id) {
         sysCheckRuleService.removeById(id);
-        return Result.ok("删除成功!");
+        return Result.ok("The deletion is successful!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
      */
-    @AutoLog(value = "编码校验规则-批量删除")
-    @ApiOperation(value = "编码校验规则-批量删除", notes = "编码校验规则-批量删除")
+    @AutoLog(value = "Encoding Verification Rule - Batch deletion")
+    @ApiOperation(value = "Encoding Verification Rule - Batch deletion", notes = "Encoding Verification Rule - Batch deletion")
     @DeleteMapping(value = "/deleteBatch")
     public Result deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         this.sysCheckRuleService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.ok("批量删除成功！");
+        return Result.ok("The batch deletion is successful！");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "编码校验规则-通过id查询")
-    @ApiOperation(value = "编码校验规则-通过id查询", notes = "编码校验规则-通过id查询")
+    @AutoLog(value = "Encoding Checksum Rule - Query by ID")
+    @ApiOperation(value = "Encoding Checksum Rule - Query by ID", notes = "Encoding Checksum Rule - Query by ID")
     @GetMapping(value = "/queryById")
     public Result queryById(@RequestParam(name = "id", required = true) String id) {
         SysCheckRule sysCheckRule = sysCheckRuleService.getById(id);
@@ -161,18 +162,18 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      * @param sysCheckRule
      */
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, SysCheckRule sysCheckRule) {
-        return super.exportXls(request, sysCheckRule, SysCheckRule.class, "编码校验规则");
+        return super.exportXls(request, sysCheckRule, SysCheckRule.class, "Encoding check rules");
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response

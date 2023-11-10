@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @Description: gateway路由管理
+ * @Description: Gateway route management
  * @Author: jeecg-boot
  * @Date: 2020-05-26
  * @Version: V1.0
  */
-@Api(tags = "gateway路由管理")
+@Api(tags = "Gateway route management")
 @RestController
 @RequestMapping("/sys/gatewayRoute")
 @Slf4j
@@ -35,7 +35,7 @@ public class SysGatewayRouteController extends JeecgController<SysGatewayRoute, 
     @PostMapping(value = "/updateAll")
     public Result<?> updateAll(@RequestBody JSONObject json) {
         sysGatewayRouteService.updateAll(json);
-        return Result.ok("操作成功！");
+        return Result.ok("Operation successful!");
     }
 
 	@GetMapping(value = "/list")
@@ -59,11 +59,11 @@ public class SysGatewayRouteController extends JeecgController<SysGatewayRoute, 
 	@GetMapping(value = "/clearRedis")
 	public Result<?> clearRedis() {
 		sysGatewayRouteService.clearRedis();
-		return Result.ok("清除成功！");
+		return Result.ok("Clear Success!");
 	}
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
@@ -72,7 +72,7 @@ public class SysGatewayRouteController extends JeecgController<SysGatewayRoute, 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         sysGatewayRouteService.deleteById(id);
-        return Result.ok("删除路由成功");
+        return Result.ok("The route was deleted");
     }
 
 }

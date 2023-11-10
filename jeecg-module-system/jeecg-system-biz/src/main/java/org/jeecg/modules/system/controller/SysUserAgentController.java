@@ -47,7 +47,7 @@ import lombok.extern.slf4j.Slf4j;
 
  /**
  * @Title: Controller
- * @Description: 用户代理人设置
+ * @Description: User Proxy Settings
  * @Author: jeecg-boot
  * @Date:  2019-04-17
  * @Version: V1.0
@@ -63,7 +63,7 @@ public class SysUserAgentController {
 	 private String upLoadPath;
 	
 	/**
-	  * 分页列表查询
+	  * Paginated list queries
 	 * @param sysUserAgent
 	 * @param pageNo
 	 * @param pageSize
@@ -85,7 +85,7 @@ public class SysUserAgentController {
 	}
 	
 	/**
-	  *   添加
+	  *   Add to
 	 * @param sysUserAgent
 	 * @return
 	 */
@@ -94,16 +94,16 @@ public class SysUserAgentController {
 		Result<SysUserAgent> result = new Result<SysUserAgent>();
 		try {
 			sysUserAgentService.save(sysUserAgent);
-			result.success("代理人设置成功！");
+			result.success("The agent has been set up successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 	
 	/**
-	  *  编辑
+	  *  EDIT
 	 * @param sysUserAgent
 	 * @return
 	 */
@@ -112,12 +112,12 @@ public class SysUserAgentController {
 		Result<SysUserAgent> result = new Result<SysUserAgent>();
 		SysUserAgent sysUserAgentEntity = sysUserAgentService.getById(sysUserAgent.getId());
 		if(sysUserAgentEntity==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			boolean ok = sysUserAgentService.updateById(sysUserAgent);
-			//TODO 返回false说明什么？
+			//TODO What does returning false mean？
 			if(ok) {
-				result.success("代理人设置成功!");
+				result.success("The agent has been set up successfully!");
 			}
 		}
 		
@@ -125,7 +125,7 @@ public class SysUserAgentController {
 	}
 	
 	/**
-	  *   通过id删除
+	  *   Delete by ID
 	 * @param id
 	 * @return
 	 */
@@ -134,11 +134,11 @@ public class SysUserAgentController {
 		Result<SysUserAgent> result = new Result<SysUserAgent>();
 		SysUserAgent sysUserAgent = sysUserAgentService.getById(id);
 		if(sysUserAgent==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			boolean ok = sysUserAgentService.removeById(id);
 			if(ok) {
-				result.success("删除成功!");
+				result.success("Deleted successfully!");
 			}
 		}
 		
@@ -146,7 +146,7 @@ public class SysUserAgentController {
 	}
 	
 	/**
-	  *  批量删除
+	  *  Delete in bulk
 	 * @param ids
 	 * @return
 	 */
@@ -154,16 +154,16 @@ public class SysUserAgentController {
 	public Result<SysUserAgent> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		Result<SysUserAgent> result = new Result<SysUserAgent>();
 		if(ids==null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized!");
 		}else {
 			this.sysUserAgentService.removeByIds(Arrays.asList(ids.split(",")));
-			result.success("删除成功!");
+			result.success("Deleted successfully!");
 		}
 		return result;
 	}
 	
 	/**
-	  * 通过id查询
+	  * Query by ID
 	 * @param id
 	 * @return
 	 */
@@ -172,7 +172,7 @@ public class SysUserAgentController {
 		Result<SysUserAgent> result = new Result<SysUserAgent>();
 		SysUserAgent sysUserAgent = sysUserAgentService.getById(id);
 		if(sysUserAgent==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			result.setResult(sysUserAgent);
 			result.setSuccess(true);
@@ -181,7 +181,7 @@ public class SysUserAgentController {
 	}
 	
 	/**
-	  * 通过userName查询
+	  * Query by user name
 	 * @param userName
 	 * @return
 	 */
@@ -192,7 +192,7 @@ public class SysUserAgentController {
 		queryWrapper.eq(SysUserAgent::getUserName, userName);
 		SysUserAgent sysUserAgent = sysUserAgentService.getOne(queryWrapper);
 		if(sysUserAgent==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			result.setResult(sysUserAgent);
 			result.setSuccess(true);
@@ -201,7 +201,7 @@ public class SysUserAgentController {
 	}
 
   /**
-      * 导出excel
+      * Export to Excel
    *
    * @param sysUserAgent
    * @param request
@@ -214,10 +214,10 @@ public class SysUserAgentController {
       ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
       List<SysUserAgent> pageList = sysUserAgentService.list(queryWrapper);
       //导出文件名称
-      mv.addObject(NormalExcelConstants.FILE_NAME, "用户代理人设置列表");
+      mv.addObject(NormalExcelConstants.FILE_NAME, "A list of user agent settings");
       mv.addObject(NormalExcelConstants.CLASS, SysUserAgent.class);
       LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-	  ExportParams exportParams = new ExportParams("用户代理人设置列表数据", "导出人:"+user.getRealname(), "导出信息");
+	  ExportParams exportParams = new ExportParams("User delegates set up list data", "Exporter:"+user.getRealname(), "Export information");
 	  exportParams.setImageBasePath(upLoadPath);
       mv.addObject(NormalExcelConstants.PARAMS, exportParams);
       mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
@@ -225,7 +225,7 @@ public class SysUserAgentController {
   }
 
   /**
-      * 通过excel导入数据
+      * Import data via Excel
    *
    * @param request
    * @param response
@@ -247,10 +247,10 @@ public class SysUserAgentController {
               for (SysUserAgent sysUserAgentExcel : listSysUserAgents) {
                   sysUserAgentService.save(sysUserAgentExcel);
               }
-              return Result.ok("文件导入成功！数据行数：" + listSysUserAgents.size());
+              return Result.ok("The file was imported successfully! Number of rows of data:" + listSysUserAgents.size());
           } catch (Exception e) {
               log.error(e.getMessage(),e);
-              return Result.error("文件导入失败！");
+              return Result.error("File import failed!");
           } finally {
               try {
                   file.getInputStream().close();
@@ -259,7 +259,7 @@ public class SysUserAgentController {
               }
           }
       }
-      return Result.error("文件导入失败！");
+      return Result.error("File import failed!");
   }
 
 }

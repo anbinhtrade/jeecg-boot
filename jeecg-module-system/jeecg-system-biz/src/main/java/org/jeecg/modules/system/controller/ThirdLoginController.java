@@ -71,16 +71,16 @@ public class ThirdLoginController {
 
 	@RequestMapping("/render/{source}")
     public void render(@PathVariable("source") String source, HttpServletResponse response) throws IOException {
-        log.info("第三方登录进入render：" + source);
+        log.info("Third-party login to render:" + source);
         AuthRequest authRequest = factory.get(source);
         String authorizeUrl = authRequest.authorize(AuthStateUtils.createState());
-        log.info("第三方登录认证地址：" + authorizeUrl);
+        log.info("Third-party login authentication address:" + authorizeUrl);
         response.sendRedirect(authorizeUrl);
     }
 
 	@RequestMapping("/{source}/callback")
     public String loginThird(@PathVariable("source") String source, AuthCallback callback,ModelMap modelMap) {
-		log.info("第三方登录进入callback：" + source + " params：" + JSONObject.toJSONString(callback));
+		log.info("Third-party login to enter the callback:" + source + " params：" + JSONObject.toJSONString(callback));
         AuthRequest authRequest = factory.get(source);
         AuthResponse response = authRequest.login(callback);
         log.info(JSONObject.toJSONString(response));
@@ -93,7 +93,7 @@ public class ThirdLoginController {
         	String uuid = data.getString("uuid");
         	//构造第三方登录信息存储对象
 			ThirdLoginModel tlm = new ThirdLoginModel(source, uuid, username, avatar);
-        	//判断有没有这个人
+        	//Judge if there is such a person
 			//update-begin-author:wangshuai date:20201118 for:修改成查询第三方账户表
         	LambdaQueryWrapper<SysThirdAccount> query = new LambdaQueryWrapper<SysThirdAccount>();
         	query.eq(SysThirdAccount::getThirdType, source);
@@ -118,33 +118,33 @@ public class ThirdLoginController {
 				String token = saveToken(sysUser);
     			modelMap.addAttribute("token", token);
 			}else{
-				modelMap.addAttribute("token", "绑定手机号,"+""+uuid);
+				modelMap.addAttribute("token", "bind a mobile phone number,"+""+uuid);
 			}
 			//update-end-author:wangshuai date:20201118 for:从第三方登录查询是否存在用户id，不存在绑定手机号
 		//update-begin--Author:wangshuai  Date:20200729 for：接口在签名校验失败时返回失败的标识码 issues#1441--------------------
         }else{
-			modelMap.addAttribute("token", "登录失败");
+			modelMap.addAttribute("token", "Login failed");
 		}
 		//update-end--Author:wangshuai  Date:20200729 for：接口在签名校验失败时返回失败的标识码 issues#1441--------------------
         result.setSuccess(false);
-        result.setMessage("第三方登录异常,请联系管理员");
+        result.setMessage("If the third-party login is abnormal, contact the administrator");
         return "thirdLogin";
     }
 
 	/**
-	 * 创建新账号
+	 * Create a new account
 	 * @param model
 	 * @return
 	 */
 	@PostMapping("/user/create")
 	@ResponseBody
 	public Result<String> thirdUserCreate(@RequestBody ThirdLoginModel model) {
-		log.info("第三方登录创建新账号：" );
+		log.info("Third-party login to create a new account:" );
 		Result<String> res = new Result<>();
 		Object operateCode = redisUtil.get(CommonConstant.THIRD_LOGIN_CODE);
 		if(operateCode==null || !operateCode.toString().equals(model.getOperateCode())){
 			res.setSuccess(false);
-			res.setMessage("校验失败");
+			res.setMessage("The verification failed");
 			return res;
 		}
 		//创建新账号
@@ -163,7 +163,7 @@ public class ThirdLoginController {
 	}
 
 	/**
-	 * 绑定账号 需要设置密码 需要走一遍校验
+	 * To bind an account, you need to set a password, and you need to go through the verification
 	 * @param json
 	 * @return
 	 */
@@ -174,13 +174,13 @@ public class ThirdLoginController {
 		Object operateCode = redisUtil.get(CommonConstant.THIRD_LOGIN_CODE);
 		if(operateCode==null || !operateCode.toString().equals(json.getString("operateCode"))){
 			result.setSuccess(false);
-			result.setMessage("校验失败");
+			result.setMessage("The verification failed");
 			return result;
 		}
 		String username = json.getString("uuid");
 		SysUser user = this.sysUserService.getUserByName(username);
 		if(user==null){
-			result.setMessage("用户未找到");
+			result.setMessage("The user was not found");
 			result.setSuccess(false);
 			return result;
 		}
@@ -188,7 +188,7 @@ public class ThirdLoginController {
 		String salt = user.getSalt();
 		String passwordEncode = PasswordUtil.encrypt(user.getUsername(), password, salt);
 		if(!passwordEncode.equals(user.getPassword())){
-			result.setMessage("密码不正确");
+			result.setMessage("The password is incorrect");
 			result.setSuccess(false);
 			return result;
 		}
@@ -211,7 +211,7 @@ public class ThirdLoginController {
 	}
 
 	/**
-	 * 第三方登录回调接口
+	 * The third-party login callback API
 	 * @param token
 	 * @param thirdType
 	 * @return
@@ -250,7 +250,7 @@ public class ThirdLoginController {
 		}
 		//update-end-author:wangshuai date:20201118 for:如果真实姓名和头像不存在就取第三方登录的
 		JSONObject obj = new JSONObject();
-		//TODO 第三方登确定登录租户和部门逻辑
+		//TODO Third-party login determines the login tenant and department logic
 
 		//用户登录信息
 		obj.put("userInfo", sysUser);
@@ -261,16 +261,16 @@ public class ThirdLoginController {
 		result.setResult(obj);
 		result.setSuccess(true);
 		result.setCode(200);
-		baseCommonService.addLog("用户名: " + username + ",登录成功[第三方用户]！", CommonConstant.LOG_TYPE_1, null);
+		baseCommonService.addLog("Username: " + username + ", login successfully [third-party user]!", CommonConstant.LOG_TYPE_1, null);
 		return result;
 	}
 	/**
-	 * 第三方绑定手机号返回token
+	 * The third-party bound mobile phone number returns the token
 	 *
 	 * @param jsonObject
 	 * @return
 	 */
-	@ApiOperation("手机号登录接口")
+	@ApiOperation("Mobile phone number login interface")
 	@PostMapping("/bindingThirdPhone")
 	@ResponseBody
 	public Result<String> bindingThirdPhone(@RequestBody JSONObject jsonObject) {
@@ -284,7 +284,7 @@ public class ThirdLoginController {
 		Object captchaCache = redisUtil.get(redisKey);
 		//update-end-author:taoyan date:2022-9-13 for: VUEN-2245 【漏洞】发现新漏洞待处理20220906
 		if (oConvertUtils.isEmpty(captcha) || !captcha.equals(captchaCache)) {
-			result.setMessage("验证码错误");
+			result.setMessage("The verification code is incorrect");
 			result.setSuccess(false);
 			return result;
 		}
@@ -304,7 +304,7 @@ public class ThirdLoginController {
 	}
 
 	/**
-	 * 企业微信/钉钉 OAuth2登录
+	 * Wechat/DingTalk O Auth 2 login
 	 *
 	 * @param source
 	 * @param state
@@ -317,13 +317,13 @@ public class ThirdLoginController {
 		String url;
 		//应用id为空，说明没有配置lowAppId
 		if(oConvertUtils.isEmpty(tenantId)){
-			return "租户编码未配置";
+			return "The tenant code is not configured";
 		}
 		if (CommonConstant.WECHAT_ENTERPRISE.equalsIgnoreCase(source)) {
 			//换成第三方app配置表
 			SysThirdAppConfig config = appConfigService.getThirdConfigByThirdType(Integer.valueOf(tenantId), MessageTypeEnum.QYWX.getType());
 			if(null == config){
-				return "还未配置企业微信应用，请配置企业微信应用";
+				return "If you have not configured the WeCom app, please configure the WeCom app";
 			}
 			StringBuilder builder = new StringBuilder();
 			// 构造企业微信OAuth2登录授权地址
@@ -348,7 +348,7 @@ public class ThirdLoginController {
 			//换成第三方app配置表
 			SysThirdAppConfig appConfig = appConfigService.getThirdConfigByThirdType(Integer.valueOf(tenantId), MessageTypeEnum.DD.getType());
 			if(null == appConfig){
-				return "还未配置钉钉应用，请配置钉钉应用";
+				return "If you have not configured a DingTalk application, please configure a DingTalk application";
 			}
 			//update-end---author:wangshuai ---date:20230224  for：[QQYUN-3440]新建企业微信和钉钉配置表，通过租户模式隔离------------
 			StringBuilder builder = new StringBuilder();
@@ -374,7 +374,7 @@ public class ThirdLoginController {
             //update-end---author:wangshuai ---date:20220613  for：[issues/I5BOUF]oauth2 钉钉无法登录--------------
             url = builder.toString();
 		} else {
-			return "不支持的source";
+			return "Unsupported sources";
 		}
 		log.info("oauth2 login url:" + url);
 		response.sendRedirect(url);
@@ -382,7 +382,7 @@ public class ThirdLoginController {
 	}
 
     /**
-     * 企业微信/钉钉 OAuth2登录回调
+     * Wechat/DingTalk O Auth 2 login callback
      *
      * @param code
      * @param state
@@ -402,19 +402,19 @@ public class ThirdLoginController {
 			HttpServletResponse response) {
         SysUser loginUser;
         if (CommonConstant.WECHAT_ENTERPRISE.equalsIgnoreCase(source)) {
-            log.info("【企业微信】OAuth2登录进入callback：code=" + code + ", state=" + state);
+            log.info("【WeCom】O Auth 2 Login to callback:code=" + code + ", state=" + state);
             loginUser = thirdAppWechatEnterpriseService.oauth2Login(code,Integer.valueOf(tenantId));
             if (loginUser == null) {
-                return "登录失败";
+                return "Login failed";
             }
         } else if (CommonConstant.DINGTALK.equalsIgnoreCase(source)) {
-			log.info("【钉钉】OAuth2登录进入callback：authCode=" + authCode + ", state=" + state);
+			log.info("【DingTalk】O Auth 2 login to callback:auth Code=" + authCode + ", state=" + state);
 			loginUser = thirdAppDingtalkService.oauth2Login(authCode,Integer.valueOf(tenantId));
 			if (loginUser == null) {
-				return "登录失败";
+				return "Login failed";
 			}
         } else {
-            return "不支持的source";
+            return "Unsupported sources";
         }
         try {
 
@@ -439,22 +439,22 @@ public class ThirdLoginController {
 			//update-end-author:taoyan date:2022-6-30 for: 工作流发送消息 点击消息链接跳转办理页面
 
             //update-end---author:wangshuai ---date:20220613  for：[issues/I5BOUF]oauth2 钉钉无法登录------------
-			log.info("OAuth2登录重定向地址: " + state);
+			log.info("O Auth 2 login redirect address: " + state);
             try {
                 response.sendRedirect(state);
                 return "ok";
             } catch (IOException e) {
                 e.printStackTrace();
-                return "重定向失败";
+                return "Redirect failed";
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return "解码失败";
+            return "Decoding failed";
         }
     }
 
 	/**
-	 * 注册账号并绑定第三方账号 【低代码应用专用接口】
+	 * Register an account and bind a third-party account [Low-code application dedicated interface]
 	 * @param jsonObject
 	 * @param user
 	 * @return
@@ -483,23 +483,23 @@ public class ThirdLoginController {
 		String email = jsonObject.getString("email");
 		SysUser sysUser1 = sysUserService.getUserByName(username);
 		if (sysUser1 != null) {
-			return Result.error("用户名已注册");
+			return Result.error("The username is registered");
 		}
 		SysUser sysUser2 = sysUserService.getUserByPhone(phone);
 		if (sysUser2 != null) {
-			return Result.error("该手机号已注册");
+			return Result.error("The mobile phone number is registered");
 		}
 		if (oConvertUtils.isNotEmpty(email)) {
 			SysUser sysUser3 = sysUserService.getUserByEmail(email);
 			if (sysUser3 != null) {
-				return Result.error("邮箱已被注册");
+				return Result.error("The email address has been registered");
 			}
 		}
 		if (null == code) {
-			return Result.error("手机验证码失效，请重新获取");
+			return Result.error("The verification code of your mobile phone is invalid, please obtain it again");
 		}
 		if (!smscode.equals(code.toString())) {
-			return Result.error("手机验证码错误");
+			return Result.error("The verification code on your phone is incorrect");
 		}
 		String realname = jsonObject.getString("realname");
 		if (oConvertUtils.isEmpty(realname)) {
@@ -525,7 +525,7 @@ public class ThirdLoginController {
 			String token = saveToken(user);
 			return Result.ok(token);
 		} catch (Exception e) {
-			return Result.error("注册失败");
+			return Result.error("Registration failed");
 		}
 	}
 }

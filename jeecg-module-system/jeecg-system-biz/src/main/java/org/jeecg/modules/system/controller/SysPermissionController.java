@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * 菜单权限表 前端控制器
+ * Menu permission table Front-end controllers
  * </p>
  *
  * @Author scott
@@ -69,12 +69,12 @@ public class SysPermissionController {
 	private ISysRoleIndexService sysRoleIndexService;
 
     /**
-     * 子菜单
+     * SUBMENU
      */
 	private static final String CHILDREN = "children";
 
 	/**
-	 * 加载数据节点
+	 * Load the data node
 	 *
 	 * @return
 	 */
@@ -108,7 +108,7 @@ public class SysPermissionController {
 			}
 			result.setResult(treeList);
 			result.setSuccess(true);
-            log.info("======获取全部菜单数据=====耗时:" + (System.currentTimeMillis() - start) + "毫秒");
+            log.info("=======Get all menu data=====Time consuming:" + (System.currentTimeMillis() - start) + "MILLISECOND");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
@@ -117,7 +117,7 @@ public class SysPermissionController {
 
 	/*update_begin author:wuxianquan date:20190908 for:先查询一级菜单，当用户点击展开菜单时加载子菜单 */
 	/**
-	 * 系统菜单列表(一级菜单)
+	 * System menu list (first-level menu)
 	 *
 	 * @return
 	 */
@@ -141,12 +141,12 @@ public class SysPermissionController {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-        log.info("======获取一级菜单数据=====耗时:" + (System.currentTimeMillis() - start) + "毫秒");
+        log.info("======Get first-level menu data=====Time-consuming:" + (System.currentTimeMillis() - start) + "MILLISECOND");
 		return result;
 	}
 
 	/**
-	 * 查询子菜单
+	 * Query submenu
 	 * @param parentId
 	 * @return
 	 */
@@ -175,10 +175,10 @@ public class SysPermissionController {
 
 	// update_begin author:sunjianlei date:20200108 for: 新增批量根据父ID查询子级菜单的接口 -------------
 	/**
-	 * 查询子菜单
+	 * Query submenu
 	 *
-	 * @param parentIds 父ID（多个采用半角逗号分割）
-	 * @return 返回 key-value 的 Map
+	 * @param parentIds Parent ID (multiple separated by commas)
+	 * @return RETURN key-value TARGET Map
 	 */
 	@GetMapping("/getSystemSubmenuBatch")
 	public Result getSystemSubmenuBatch(@RequestParam("parentIds") String parentIds) {
@@ -204,7 +204,7 @@ public class SysPermissionController {
 			return Result.ok(listMap);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			return Result.error("批量查询子菜单失败：" + e.getMessage());
+			return Result.error("Batch query submenu failed:" + e.getMessage());
 		}
 	}
 	// update_end author:sunjianlei date:20200108 for: 新增批量根据父ID查询子级菜单的接口 -------------
@@ -232,7 +232,7 @@ public class SysPermissionController {
 //	}
 
 	/**
-	 * 查询用户拥有的菜单权限和按钮权限
+	 * Query the menu and button permissions that a user has
 	 *
 	 * @return
 	 */
@@ -244,16 +244,16 @@ public class SysPermissionController {
 			//直接获取当前用户不适用前端token
 			LoginUser loginUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 			if (oConvertUtils.isEmpty(loginUser)) {
-				return Result.error("请登录系统！");
+				return Result.error("Please log in to the system!");
 			}
 			List<SysPermission> metaList = sysPermissionService.queryByUser(loginUser.getUsername());
 			//添加首页路由
 			//update-begin-author:taoyan date:20200211 for: TASK #3368 【路由缓存】首页的缓存设置有问题，需要根据后台的路由配置来实现是否缓存
 			if(!PermissionDataUtil.hasIndexPage(metaList)){
-				SysPermission indexMenu = sysPermissionService.list(new LambdaQueryWrapper<SysPermission>().eq(SysPermission::getName,"首页")).get(0);
+				SysPermission indexMenu = sysPermissionService.list(new LambdaQueryWrapper<SysPermission>().eq(SysPermission::getName,"HOME")).get(0);
 				metaList.add(0,indexMenu);
 			}
-			//update-end-author:taoyan date:20200211 for: TASK #3368 【路由缓存】首页的缓存设置有问题，需要根据后台的路由配置来实现是否缓存
+			//update-end-author:taoyan date:20200211 for: TASK #3368 [Route Cache] There is a problem with the cache setting of the homepage, and you need to implement whether to cache according to the routing configuration in the background
 
 			//update-begin--Author:zyf Date:20220425  for:自定义首页地址 LOWCOD-1578
 			String version = request.getHeader(CommonConstant.VERSION);
@@ -263,7 +263,7 @@ public class SysPermissionController {
 			//update-end--Author:zyf  Date:20220425  for：自定义首页地址 LOWCOD-1578
 
 			if(roleIndex!=null){
-				List<SysPermission> menus = metaList.stream().filter(sysPermission -> "首页".equals(sysPermission.getName())).collect(Collectors.toList());
+				List<SysPermission> menus = metaList.stream().filter(sysPermission -> "HOME".equals(sysPermission.getName())).collect(Collectors.toList());
 				//update-begin---author:liusq ---date:2022-06-29  for：设置自定义首页地址和组件----------
 				String component = roleIndex.getComponent();
 				String routeUrl = roleIndex.getUrl();
@@ -304,17 +304,17 @@ public class SysPermissionController {
 			json.put("sysSafeMode", jeecgBaseConfig.getFirewall()!=null? jeecgBaseConfig.getFirewall().getDataSourceSafe(): false);
 			result.setResult(json);
 		} catch (Exception e) {
-			result.error500("查询失败:" + e.getMessage());  
+			result.error500("Query failed:" + e.getMessage());
 			log.error(e.getMessage(), e);
 		}
 		return result;
 	}
 
 	/**
-	 * 【vue3专用】获取
-	 * 1、查询用户拥有的按钮/表单访问权限
-	 * 2、所有权限 (菜单权限配置)
-	 * 3、系统安全模式 (开启则online报表的数据源必填)
+	 * [Vue 3 Only] obtained
+	 * 1. Query the button/form access rights that the user has
+	 * 2. All permissions (Menu Permission Configuration)
+	 * 3. System security mode (If you enable it, the data source of the online report is required.)
 	 */
 	@RequestMapping(value = "/getPermCode", method = RequestMethod.GET)
 	public Result<?> getPermCode() {
@@ -322,7 +322,7 @@ public class SysPermissionController {
 			// 直接获取当前用户
 			LoginUser loginUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 			if (oConvertUtils.isEmpty(loginUser)) {
-				return Result.error("请登录系统！");
+				return Result.error("Please log in to the system!");
 			}
 			// 获取当前用户的权限集合
 			List<SysPermission> metaList = sysPermissionService.queryByUser(loginUser.getUsername());
@@ -352,12 +352,12 @@ public class SysPermissionController {
             return Result.OK(result);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-            return Result.error("查询失败:" + e.getMessage());
+            return Result.error("Query failed:" + e.getMessage());
 		}
 	}
 
 	/**
-	  * 添加菜单
+	  * Add a menu
 	 * @param permission
 	 * @return
 	 */
@@ -368,16 +368,16 @@ public class SysPermissionController {
 		try {
 			permission = PermissionDataUtil.intelligentProcessData(permission);
 			sysPermissionService.addPermission(permission);
-			result.success("添加成功！");
+			result.success("Added successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 
 	/**
-	  * 编辑菜单
+	  * Edit the menu
 	 * @param permission
 	 * @return
 	 */
@@ -388,16 +388,16 @@ public class SysPermissionController {
 		try {
 			permission = PermissionDataUtil.intelligentProcessData(permission);
 			sysPermissionService.editPermission(permission);
-			result.success("修改成功！");
+			result.success("Modification successful!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 
 	/**
-	 * 检测菜单路径是否存在
+	 * Detect if a menu path exists
 	 * @param id
 	 * @param url
 	 * @return
@@ -408,18 +408,18 @@ public class SysPermissionController {
 		try {
 			boolean check=sysPermissionService.checkPermDuplication(id,url,alwaysShow);
 			if(check){
-				return Result.ok("该值可用！");
+				return Result.ok("The value is available!");
 			}
-			return Result.error("访问路径不允许重复，请重定义！");
+			return Result.error("The access path is not allowed to be repeated, please redefine!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 
 	/**
-	  * 删除菜单
+	  * Delete the menu
 	 * @param id
 	 * @return
 	 */
@@ -429,7 +429,7 @@ public class SysPermissionController {
 		Result<SysPermission> result = new Result<>();
 		try {
 			sysPermissionService.deletePermission(id);
-			result.success("删除成功!");
+			result.success("Deleted successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			result.error500(e.getMessage());
@@ -438,7 +438,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	  * 批量删除菜单
+	  * Delete menus in bulk
 	 * @param ids
 	 * @return
 	 */
@@ -453,7 +453,7 @@ public class SysPermissionController {
 					try {
 						sysPermissionService.deletePermission(id);
 					} catch (JeecgBootException e) {
-						if(e.getMessage()!=null && e.getMessage().contains("未找到菜单信息")){
+						if(e.getMessage()!=null && e.getMessage().contains("Menu information not found")){
 							log.warn(e.getMessage());
 						}else{
 							throw e;
@@ -461,16 +461,16 @@ public class SysPermissionController {
 					}
 				}
 			}
-			result.success("删除成功!");
+			result.success("Deleted successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("删除失败!");
+			result.error500("Delete failed!");
 		}
 		return result;
 	}
 
 	/**
-	 * 获取全部的权限树
+	 * Get the full permission tree
 	 *
 	 * @return
 	 */
@@ -504,7 +504,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 异步加载数据节点 [接口是废的,没有用到]
+	 * Asynchronously load data nodes [The interface is wasted, not used]
 	 *
 	 * @return
 	 */
@@ -514,7 +514,7 @@ public class SysPermissionController {
 		try {
 			List<TreeModel> list = sysPermissionService.queryListByParentId(parentId);
 			if (list == null || list.size() <= 0) {
-				result.error500("未找到角色信息");
+				result.error500("No role information found");
 			} else {
 				result.setResult(list);
 				result.setSuccess(true);
@@ -527,7 +527,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 查询角色授权
+	 * Query role authorization
 	 *
 	 * @return
 	 */
@@ -545,7 +545,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 保存角色授权
+	 * Save role authorizations
 	 *
 	 * @return
 	 */
@@ -563,10 +563,10 @@ public class SysPermissionController {
             LoginUser loginUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 			baseCommonService.addLog("修改角色ID: "+roleId+" 的权限配置，操作人： " +loginUser.getUsername() ,CommonConstant.LOG_TYPE_2, 2);
             //update-end---author:wangshuai ---date:20220316  for：[VUEN-234]用户管理角色授权添加敏感日志------------
-			result.success("保存成功！");
-			log.info("======角色授权成功=====耗时:" + (System.currentTimeMillis() - start) + "毫秒");
+			result.success("Save successfully!");
+			log.info("======Role authorization successful=====Time:" + (System.currentTimeMillis() - start) + "MILLISECOND");
 		} catch (Exception e) {
-			result.error500("授权失败！");
+			result.error500("Authorization failed!");
 			log.error(e.getMessage(), e);
 		}
 		return result;
@@ -611,7 +611,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示
+	 * If all the submenus of the first-level menu are hidden routes, the first-level menu is not displayed
 	 * @param jsonArray
 	 */
 	private void handleFirstLevelMenuHidden(JSONArray jsonArray) {
@@ -636,7 +636,7 @@ public class SysPermissionController {
 
 
 	/**
-	  *  获取权限JSON数组
+	  *  Get permission JSON array
 	 * @param jsonArray
 	 * @param allList
 	 */
@@ -654,7 +654,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	  *  获取权限JSON数组
+	  *  Get permission JSON array
 	 * @param jsonArray
 	 * @param metaList
 	 */
@@ -674,7 +674,7 @@ public class SysPermissionController {
 		}
 	}
 	/**
-	  *  获取菜单JSON数组
+	  *  Get the menu JSON array
 	 * @param jsonArray
 	 * @param metaList
 	 * @param parentJson
@@ -725,7 +725,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 根据菜单配置生成路由json
+	 * Generate route JSON based on menu configuration
 	 * @param permission
 	 * @return
 	 */
@@ -823,8 +823,8 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 判断是否外网URL 例如： http://localhost:8080/jeecg-boot/swagger-ui.html#/ 支持特殊格式： {{
-	 * window._CONFIG['domianURL'] }}/druid/ {{ JS代码片段 }}，前台解析会自动执行JS代码片段
+	 * Check whether the Internet URL is a public network URL For example: http://localhost:8080/jeecg-boot/swagger-ui.html#/ Special formats supported: {{
+	 * window._CONFIG['domianURL'] }}/druid/ {{ JS code snippet }}, the foreground parsing will automatically execute the JS code snippet
 	 *
 	 * @return
 	 */
@@ -837,7 +837,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 通过URL生成路由name（去掉URL前缀斜杠，替换内容中的斜杠‘/’为-） 举例： URL = /isystem/role RouteName =
+	 * Generate route name from URL (remove the URL prefix slash and replace the slash '/' in the content with -) Example: URL = /isystem/role RouteName =
 	 * isystem-role
 	 *
 	 * @return
@@ -858,7 +858,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 根据菜单id来获取其对应的权限数据
+	 * Obtain the corresponding permission data based on the menu ID
 	 *
 	 * @param sysPermissionDataRule
 	 * @return
@@ -873,7 +873,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 添加菜单权限数据
+	 * Add menu permission data
 	 *
 	 * @param sysPermissionDataRule
 	 * @return
@@ -885,10 +885,10 @@ public class SysPermissionController {
 		try {
 			sysPermissionDataRule.setCreateTime(new Date());
 			sysPermissionDataRuleService.savePermissionDataRule(sysPermissionDataRule);
-			result.success("添加成功！");
+			result.success("Added successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
@@ -899,16 +899,16 @@ public class SysPermissionController {
 		Result<SysPermissionDataRule> result = new Result<SysPermissionDataRule>();
 		try {
 			sysPermissionDataRuleService.saveOrUpdate(sysPermissionDataRule);
-			result.success("更新成功！");
+			result.success("Update Success!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 
 	/**
-	 * 删除菜单权限数据
+	 * Delete menu permission data
 	 *
 	 * @param id
 	 * @return
@@ -919,16 +919,16 @@ public class SysPermissionController {
 		Result<SysPermissionDataRule> result = new Result<SysPermissionDataRule>();
 		try {
 			sysPermissionDataRuleService.deletePermissionDataRule(id);
-			result.success("删除成功！");
+			result.success("Deleted successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 
 	/**
-	 * 查询菜单权限数据
+	 * Query menu permission data
 	 *
 	 * @param sysPermissionDataRule
 	 * @return
@@ -941,13 +941,13 @@ public class SysPermissionController {
 			result.setResult(permRuleList);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 
 	/**
-	 * 部门权限表
+	 * Department Permission Table
 	 * @param departId
 	 * @return
 	 */
@@ -965,7 +965,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 保存部门授权
+	 * Save departmental authorizations
 	 *
 	 * @return
 	 */
@@ -979,10 +979,10 @@ public class SysPermissionController {
 			String permissionIds = json.getString("permissionIds");
 			String lastPermissionIds = json.getString("lastpermissionIds");
 			this.sysDepartPermissionService.saveDepartPermission(departId, permissionIds, lastPermissionIds);
-			result.success("保存成功！");
-			log.info("======部门授权成功=====耗时:" + (System.currentTimeMillis() - start) + "毫秒");
+			result.success("The save was successful！");
+			log.info("======Successful Department Authorization=====Time-consuming:" + (System.currentTimeMillis() - start) + "MILLISECOND");
 		} catch (Exception e) {
-			result.error500("授权失败！");
+			result.error500("Authorization failed!");
 			log.error(e.getMessage(), e);
 		}
 		return result;

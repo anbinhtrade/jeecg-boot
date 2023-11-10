@@ -39,7 +39,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
  /**
- * @Description: 分类字典
+ * @Description: Classification dictionary
  * @Author: jeecg-boot
  * @Date:   2019-05-29
  * @Version: V1.0
@@ -52,12 +52,12 @@ public class SysCategoryController {
 	private ISysCategoryService sysCategoryService;
 
      /**
-      * 分类编码0
+      * Classification code 0
       */
      private static final String CATEGORY_ROOT_CODE = "0";
 
 	/**
-	  * 分页列表查询
+	  * Paginated list queries
 	 * @param sysCategory
 	 * @param pageNo
 	 * @param pageSize
@@ -74,7 +74,7 @@ public class SysCategoryController {
 		}
 		Result<IPage<SysCategory>> result = new Result<IPage<SysCategory>>();
 		//------------------------------------------------------------------------------------------------
-		//是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+		//WHETHER TO ENABLE MULTI-TENANT DATA ISOLATION IN THE SYSTEM MANAGEMENT MODULE [SAAS MULTI-TENANT MODE]
 		if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
 			sysCategory.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(),0));
 		}
@@ -102,7 +102,7 @@ public class SysCategoryController {
 	@GetMapping(value = "/childList")
 	public Result<List<SysCategory>> queryPageList(SysCategory sysCategory,HttpServletRequest req) {
 		//------------------------------------------------------------------------------------------------
-		//是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+		//WHETHER TO ENABLE MULTI-TENANT DATA ISOLATION IN THE SYSTEM MANAGEMENT MODULE [SAAS MULTI-TENANT MODE]
 		if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
 			sysCategory.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(), 0));
 		}
@@ -117,7 +117,7 @@ public class SysCategoryController {
 	
 	
 	/**
-	  *   添加
+	  * Add to
 	 * @param sysCategory
 	 * @return
 	 */
@@ -126,16 +126,16 @@ public class SysCategoryController {
 		Result<SysCategory> result = new Result<SysCategory>();
 		try {
 			sysCategoryService.addSysCategory(sysCategory);
-			result.success("添加成功！");
+			result.success("The addition was successful！");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 	
 	/**
-	  *  编辑
+	  *  Edit
 	 * @param sysCategory
 	 * @return
 	 */
@@ -144,16 +144,16 @@ public class SysCategoryController {
 		Result<SysCategory> result = new Result<SysCategory>();
 		SysCategory sysCategoryEntity = sysCategoryService.getById(sysCategory.getId());
 		if(sysCategoryEntity==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			sysCategoryService.updateSysCategory(sysCategory);
-			result.success("修改成功!");
+			result.success("The modification was successful!");
 		}
 		return result;
 	}
 	
 	/**
-	  *   通过id删除
+	  *   Delete by ID
 	 * @param id
 	 * @return
 	 */
@@ -162,17 +162,17 @@ public class SysCategoryController {
 		Result<SysCategory> result = new Result<SysCategory>();
 		SysCategory sysCategory = sysCategoryService.getById(id);
 		if(sysCategory==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			this.sysCategoryService.deleteSysCategory(id);
-			result.success("删除成功!");
+			result.success("The deletion is successful!");
 		}
 		
 		return result;
 	}
 	
 	/**
-	  *  批量删除
+	  *  Delete in bulk
 	 * @param ids
 	 * @return
 	 */
@@ -180,16 +180,16 @@ public class SysCategoryController {
 	public Result<SysCategory> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		Result<SysCategory> result = new Result<SysCategory>();
 		if(ids==null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized！");
 		}else {
 			this.sysCategoryService.deleteSysCategory(ids);
-			result.success("删除成功!");
+			result.success("The deletion is successful!");
 		}
 		return result;
 	}
 	
 	/**
-	  * 通过id查询
+	  * Query by ID
 	 * @param id
 	 * @return
 	 */
@@ -198,7 +198,7 @@ public class SysCategoryController {
 		Result<SysCategory> result = new Result<SysCategory>();
 		SysCategory sysCategory = sysCategoryService.getById(id);
 		if(sysCategory==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			result.setResult(sysCategory);
 			result.setSuccess(true);
@@ -207,25 +207,25 @@ public class SysCategoryController {
 	}
 
   /**
-      * 导出excel
+      * Export to Excel
    *
    * @param request
    */
   @RequestMapping(value = "/exportXls")
   public ModelAndView exportXls(HttpServletRequest request, SysCategory sysCategory) {
 	  //------------------------------------------------------------------------------------------------
-	  //是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+	  //Specifies whether to enable multi-tenant data isolation in the system management module【SAAS多租户模式】
 	  if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
 		  sysCategory.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(), 0));
 	  }
 	  //------------------------------------------------------------------------------------------------
 	  
-      // Step.1 组装查询条件查询数据
+      // Step.1 Assemble query criteria to query data
       QueryWrapper<SysCategory> queryWrapper = QueryGenerator.initQueryWrapper(sysCategory, request.getParameterMap());
       List<SysCategory> pageList = sysCategoryService.list(queryWrapper);
       // Step.2 AutoPoi 导出Excel
       ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
-      // 过滤选中数据
+      // Filter the selected data
       String selections = request.getParameter("selections");
       if(oConvertUtils.isEmpty(selections)) {
     	  mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
@@ -234,16 +234,16 @@ public class SysCategoryController {
     	  List<SysCategory> exportList = pageList.stream().filter(item -> selectionList.contains(item.getId())).collect(Collectors.toList());
     	  mv.addObject(NormalExcelConstants.DATA_LIST, exportList);
       }
-      //导出文件名称
-      mv.addObject(NormalExcelConstants.FILE_NAME, "分类字典列表");
+      //The name of the export file
+      mv.addObject(NormalExcelConstants.FILE_NAME, "List of categorical dictionaries");
       mv.addObject(NormalExcelConstants.CLASS, SysCategory.class);
       LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-      mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("分类字典列表数据", "导出人:"+user.getRealname(), "导出信息"));
+      mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("Categorical dictionary list data", "Exporter:"+user.getRealname(), "Export information"));
       return mv;
   }
 
   /**
-      * 通过excel导入数据
+      * Import data via Excel
    *
    * @param request
    * @param response
@@ -253,11 +253,11 @@ public class SysCategoryController {
   public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) throws IOException{
       MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
       Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-	  // 错误信息
+	  // Error Message
 	  List<String> errorMessage = new ArrayList<>();
 	  int successLines = 0, errorLines = 0;
 	  for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-          // 获取上传文件对象
+          // Obtain the object to which the file was uploaded
           MultipartFile file = entity.getValue();
           ImportParams params = new ImportParams();
           params.setTitleRows(2);
@@ -267,7 +267,7 @@ public class SysCategoryController {
               List<SysCategory> listSysCategorys = ExcelImportUtil.importExcel(file.getInputStream(), SysCategory.class, params);
 			 //按照编码长度排序
               Collections.sort(listSysCategorys);
-			  log.info("排序后的list====>",listSysCategorys);
+			  log.info("Sorted list====>",listSysCategorys);
               for (int i = 0; i < listSysCategorys.size(); i++) {
 				  SysCategory sysCategoryExcel = listSysCategorys.get(i);
 				  String code = sysCategoryExcel.getCode();
@@ -291,15 +291,15 @@ public class SysCategoryController {
 					  int lineNumber = i + 1;
 					  // 通过索引名判断出错信息
 					  if (message.contains(CommonConstant.SQL_INDEX_UNIQ_CATEGORY_CODE)) {
-						  errorMessage.add("第 " + lineNumber + " 行：分类编码已经存在，忽略导入。");
+						  errorMessage.add("Clause " + lineNumber + " Yes：The classification code already exists, ignore the import.");
 					  }  else {
-						  errorMessage.add("第 " + lineNumber + " 行：未知错误，忽略导入");
+						  errorMessage.add("Clause " + lineNumber + " Line: Unknown error, ignore import");
 						  log.error(e.getMessage(), e);
 					  }
 				  }
               }
           } catch (Exception e) {
-			  errorMessage.add("发生异常：" + e.getMessage());
+			  errorMessage.add("An exception has occurred：" + e.getMessage());
 			  log.error(e.getMessage(), e);
           } finally {
               try {
@@ -315,7 +315,7 @@ public class SysCategoryController {
   
   
   /**
-     * 加载单个数据 用于回显
+     * Load a single piece of data for echoing
    */
     @RequestMapping(value = "/loadOne", method = RequestMethod.GET)
  	public Result<SysCategory> loadOne(@RequestParam(name="field") String field,@RequestParam(name="val") String val) {
@@ -324,17 +324,17 @@ public class SysCategoryController {
 			//update-begin-author:taoyan date:2022-5-6 for: issues/3663 sql注入问题
 			boolean isClassField = ReflectHelper.isClassField(field, SysCategory.class);
 			if (!isClassField) {
-				return Result.error("字段无效，请检查!");
+				return Result.error("The field is invalid, please check!");
 			}
 			//update-end-author:taoyan date:2022-5-6 for: issues/3663 sql注入问题
  			QueryWrapper<SysCategory> query = new QueryWrapper<SysCategory>();
  			query.eq(field, val);
  			List<SysCategory> ls = this.sysCategoryService.list(query);
  			if(ls==null || ls.size()==0) {
- 				result.setMessage("查询无果");
+ 				result.setMessage("The query was fruitless");
  	 			result.setSuccess(false);
  			}else if(ls.size()>1) {
- 				result.setMessage("查询数据异常,["+field+"]存在多个值:"+val);
+ 				result.setMessage("The query data is abnormal,["+field+"]There are multiple values:"+val);
  	 			result.setSuccess(false);
  			}else {
  				result.setSuccess(true);
@@ -349,7 +349,7 @@ public class SysCategoryController {
  	}
    
     /**
-          * 加载节点的子数据
+	 * Load the node's child data
      */
     @RequestMapping(value = "/loadTreeChildren", method = RequestMethod.GET)
 	public Result<List<TreeSelectModel>> loadTreeChildren(@RequestParam(name="pid") String pid) {
@@ -367,7 +367,7 @@ public class SysCategoryController {
 	}
     
     /**
-         * 加载一级节点/如果是同步 则所有数据
+     * Load a level 1 node / if it's synchronous then all data
      */
     @RequestMapping(value = "/loadTreeRoot", method = RequestMethod.GET)
    	public Result<List<TreeSelectModel>> loadTreeRoot(@RequestParam(name="async") Boolean async,@RequestParam(name="pcode") String pcode) {
@@ -388,7 +388,7 @@ public class SysCategoryController {
    	}
   
     /**
-         * 递归求子节点 同步加载用到
+	 * Recursive child nodes are used for synchronous loading
      */
   	private void loadAllCategoryChildren(List<TreeSelectModel> ls) {
   		for (TreeSelectModel tsm : ls) {
@@ -401,7 +401,7 @@ public class SysCategoryController {
   	}
 
 	 /**
-	  * 校验编码
+	  * Check encoding
 	  * @param pid
 	  * @param code
 	  * @return
@@ -409,7 +409,7 @@ public class SysCategoryController {
 	 @GetMapping(value = "/checkCode")
 	 public Result<?> checkCode(@RequestParam(name="pid",required = false) String pid,@RequestParam(name="code",required = false) String code) {
 		if(oConvertUtils.isEmpty(code)){
-			return Result.error("错误,类型编码为空!");
+			return Result.error("Error, type encoding is empty!");
 		}
 		if(oConvertUtils.isEmpty(pid)){
 			return Result.ok();
@@ -418,14 +418,14 @@ public class SysCategoryController {
 		if(code.startsWith(parent.getCode())){
 			return Result.ok();
 		}else{
-			return Result.error("编码不符合规范,须以\""+parent.getCode()+"\"开头!");
+			return Result.error("The code does not meet the specification and must be used\""+parent.getCode()+"\"Beginning!");
 		}
 
 	 }
 
 
 	 /**
-	  * 分类字典树控件 加载节点
+	  * Classification Dictionary Tree Control Load node
 	  * @param pid
 	  * @param pcode
 	  * @param condition
@@ -434,11 +434,11 @@ public class SysCategoryController {
 	 @RequestMapping(value = "/loadTreeData", method = RequestMethod.GET)
 	 public Result<List<TreeSelectModel>> loadDict(@RequestParam(name="pid",required = false) String pid,@RequestParam(name="pcode",required = false) String pcode, @RequestParam(name="condition",required = false) String condition) {
 		 Result<List<TreeSelectModel>> result = new Result<List<TreeSelectModel>>();
-		 //pid如果传值了 就忽略pcode的作用
+		 //If the value of pid is passed, the role of pcode will be ignored
 		 if(oConvertUtils.isEmpty(pid)){
 		 	if(oConvertUtils.isEmpty(pcode)){
 				result.setSuccess(false);
-				result.setMessage("加载分类字典树参数有误.[null]!");
+				result.setMessage("Error loading classification dictionary tree parameter. [null]!");
 				return result;
 			}else{
 		 		if(ISysCategoryService.ROOT_PID_VALUE.equals(pcode)){
@@ -448,7 +448,7 @@ public class SysCategoryController {
 				}
 				if(oConvertUtils.isEmpty(pid)){
 					result.setSuccess(false);
-					result.setMessage("加载分类字典树参数有误.[code]!");
+					result.setMessage("The Classification Dictionary Tree parameter is loading incorrectly.[code]!");
 					return result;
 				}
 			}
@@ -464,10 +464,11 @@ public class SysCategoryController {
 	 }
 
 	 /**
-	  * 分类字典控件数据回显[表单页面]
+	  * Classification Dictionary Control Data Echo [Form Page]
 	  *
 	  * @param ids
-	  * @param delNotExist 是否移除不存在的项，默认为true，设为false如果某个key不存在数据库中，则直接返回key本身
+	  * @param delNotExist If a key does not exist in the database,
+	  *                    the default value is true, and if a key does not exist in the database, the key itself is returned
 	  * @return
 	  */
 	 @RequestMapping(value = "/loadDictItem", method = RequestMethod.GET)
@@ -476,7 +477,7 @@ public class SysCategoryController {
 		 // 非空判断
 		 if (StringUtils.isBlank(ids)) {
 			 result.setSuccess(false);
-			 result.setMessage("ids 不能为空");
+			 result.setMessage("ids It can't be empty");
 			 return result;
 		 }
 		 // 查询数据
@@ -487,7 +488,7 @@ public class SysCategoryController {
 	 }
 
 	 /**
-	  * [列表页面]加载分类字典数据 用于值的替换
+	  * [List Page] Load Categorical Dictionary Data for value substitution
 	  * @param code
 	  * @return
 	  */
@@ -500,7 +501,7 @@ public class SysCategoryController {
 		 }
 		 List<SysCategory> list = this.sysCategoryService.list(query);
 		 if(list==null || list.size()==0) {
-			 result.setMessage("无数据,参数有误.[code]");
+			 result.setMessage("No data, wrong parameters. [code]");
 			 result.setSuccess(false);
 			 return result;
 		 }
@@ -514,7 +515,7 @@ public class SysCategoryController {
 	 }
 
 	 /**
-	  * 根据父级id批量查询子节点
+	  * Query child nodes in batches based on their parent IDs
 	  * @param parentIds
 	  * @return
 	  */
@@ -530,7 +531,7 @@ public class SysCategoryController {
 			 return Result.OK(pageList);
 		 } catch (Exception e) {
 			 log.error(e.getMessage(), e);
-			 return Result.error("批量查询子节点失败：" + e.getMessage());
+			 return Result.error("Failed to query child nodes in batches：" + e.getMessage());
 		 }
 	 }
 

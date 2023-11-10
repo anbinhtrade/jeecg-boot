@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
- * 系统日志表 前端控制器
+ * Syslog table Front-end controllers
  * </p>
  *
  * @Author zhangweijian
@@ -41,12 +41,12 @@ public class SysLogController {
 	private ISysLogService sysLogService;
 
     /**
-     * 全部清除
+     * Clear them all
      */
 	private static final String ALL_ClEAR = "allclear";
 
 	/**
-	 * @功能：查询日志记录
+	 * @功能: Query logging
 	 * @param syslog
 	 * @param pageNo
 	 * @param pageSize
@@ -64,22 +64,22 @@ public class SysLogController {
 		if(oConvertUtils.isNotEmpty(keyWord)) {
 			queryWrapper.like("log_content",keyWord);
 		}
-		//TODO 过滤逻辑处理
-		//TODO begin、end逻辑处理
-		//TODO 一个强大的功能，前端传一个字段字符串，后台只返回这些字符串对应的字段
-		//创建时间/创建人的赋值
+		//TODO Filtering logic processing
+		//TODO Begin and end logic processing
+		//TODO A powerful feature is that the frontend passes a field string, and the backend only returns the fields corresponding to those strings
+		//Creation time/Assignment of creator
 		IPage<SysLog> pageList = sysLogService.page(page, queryWrapper);
-		log.info("查询当前页："+pageList.getCurrent());
-		log.info("查询当前页数量："+pageList.getSize());
-		log.info("查询结果数量："+pageList.getRecords().size());
-		log.info("数据总数："+pageList.getTotal());
+		log.info("To query the current page:"+pageList.getCurrent());
+		log.info("Query the current number of pages:"+pageList.getSize());
+		log.info("Number of query results:"+pageList.getRecords().size());
+		log.info("Total number of data:"+pageList.getTotal());
 		result.setSuccess(true);
 		result.setResult(pageList);
 		return result;
 	}
 	
 	/**
-	 * @功能：删除单个日志记录
+	 * @功能: Deletes a single log record
 	 * @param id
 	 * @return
 	 */
@@ -88,18 +88,18 @@ public class SysLogController {
 		Result<SysLog> result = new Result<SysLog>();
 		SysLog sysLog = sysLogService.getById(id);
 		if(sysLog==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			boolean ok = sysLogService.removeById(id);
 			if(ok) {
-				result.success("删除成功!");
+				result.success("Deleted successfully!");
 			}
 		}
 		return result;
 	}
 	
 	/**
-	 * @功能：批量，全部清空日志记录
+	 * @Function Clear all log records in batches
 	 * @param ids
 	 * @return
 	 */
@@ -107,14 +107,14 @@ public class SysLogController {
 	public Result<SysRole> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		Result<SysRole> result = new Result<SysRole>();
 		if(ids==null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized!");
 		}else {
 			if(ALL_ClEAR.equals(ids)) {
 				this.sysLogService.removeAll();
-				result.success("清除成功!");
+				result.success("Clear Success!");
 			}
 			this.sysLogService.removeByIds(Arrays.asList(ids.split(",")));
-			result.success("删除成功!");
+			result.success("Deleted successfully!");
 		}
 		return result;
 	}

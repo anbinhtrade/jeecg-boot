@@ -46,13 +46,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @Description: 职务表
+ * @Description: Job Title
  * @Author: jeecg-boot
  * @Date: 2019-09-19
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "职务表")
+@Api(tags = "Job Title")
 @RestController
 @RequestMapping("/sys/position")
 public class SysPositionController {
@@ -67,7 +67,7 @@ public class SysPositionController {
     private ISysUserService userService;
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param sysPosition
      * @param pageNo
@@ -75,8 +75,8 @@ public class SysPositionController {
      * @param req
      * @return
      */
-    @AutoLog(value = "职务表-分页列表查询")
-    @ApiOperation(value = "职务表-分页列表查询", notes = "职务表-分页列表查询")
+    @AutoLog(value = "Job Title Table - Paginated List Query")
+    @ApiOperation(value = "Job Title Table - Paginated List Query", notes = "Job Title Table - Paginated List Query")
     @GetMapping(value = "/list")
     public Result<IPage<SysPosition>> queryPageList(SysPosition sysPosition,
                                                     @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
@@ -98,13 +98,13 @@ public class SysPositionController {
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param sysPosition
      * @return
      */
-    @AutoLog(value = "职务表-添加")
-    @ApiOperation(value = "职务表-添加", notes = "职务表-添加")
+    @AutoLog(value = "Job Title Table - Add")
+    @ApiOperation(value = "Job Title Table - Add", notes = "Job Title Table - Add")
     @PostMapping(value = "/add")
     public Result<SysPosition> add(@RequestBody SysPosition sysPosition) {
         Result<SysPosition> result = new Result<SysPosition>();
@@ -117,33 +117,33 @@ public class SysPositionController {
             }
             //update-end---author:wangshuai ---date:20230313  for：【QQYUN-4558】vue3职位功能调整，去掉编码和级别，可以先隐藏-------------
             sysPositionService.save(sysPosition);
-            result.success("添加成功！");
+            result.success("Added successfully!");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            result.error500("操作失败");
+            result.error500("The operation failed");
         }
         return result;
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param sysPosition
      * @return
      */
-    @AutoLog(value = "职务表-编辑")
-    @ApiOperation(value = "职务表-编辑", notes = "职务表-编辑")
+    @AutoLog(value = "Job Title Table - Edit")
+    @ApiOperation(value = "Job Title Table - Edit", notes = "Job Title Table - Edit")
     @RequestMapping(value = "/edit", method ={RequestMethod.PUT, RequestMethod.POST})
     public Result<SysPosition> edit(@RequestBody SysPosition sysPosition) {
         Result<SysPosition> result = new Result<SysPosition>();
         SysPosition sysPositionEntity = sysPositionService.getById(sysPosition.getId());
         if (sysPositionEntity == null) {
-            result.error500("未找到对应实体");
+            result.error500("No corresponding entity found");
         } else {
             boolean ok = sysPositionService.updateById(sysPosition);
             //TODO 返回false说明什么？
             if (ok) {
-                result.success("修改成功!");
+                result.success("Modification successful!");
             }
         }
 
@@ -151,13 +151,13 @@ public class SysPositionController {
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "职务表-通过id删除")
-    @ApiOperation(value = "职务表-通过id删除", notes = "职务表-通过id删除")
+    @AutoLog(value = "Job Title Sheet - Deleted by ID")
+    @ApiOperation(value = "Job Title Sheet - Deleted by ID", notes = "Job Title Sheet - Deleted by ID")
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         try {
@@ -165,46 +165,46 @@ public class SysPositionController {
             //删除用户职位关系表
             userPositionService.removeByPositionId(id);
         } catch (Exception e) {
-            log.error("删除失败", e.getMessage());
-            return Result.error("删除失败!");
+            log.error("Deletion failed", e.getMessage());
+            return Result.error("Delete failed!");
         }
-        return Result.ok("删除成功!");
+        return Result.ok("Deleted successfully!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
      */
-    @AutoLog(value = "职务表-批量删除")
-    @ApiOperation(value = "职务表-批量删除", notes = "职务表-批量删除")
+    @AutoLog(value = "Job Titles - Delete them in bulk")
+    @ApiOperation(value = "Job Titles - Delete them in bulk", notes = "Job Titles - Delete them in bulk")
     @DeleteMapping(value = "/deleteBatch")
     public Result<SysPosition> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         Result<SysPosition> result = new Result<SysPosition>();
         if (ids == null || "".equals(ids.trim())) {
-            result.error500("参数不识别！");
+            result.error500("The parameter is not recognized!");
         } else {
             this.sysPositionService.removeByIds(Arrays.asList(ids.split(",")));
-            result.success("删除成功!");
+            result.success("Deleted successfully!");
         }
         return result;
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "职务表-通过id查询")
-    @ApiOperation(value = "职务表-通过id查询", notes = "职务表-通过id查询")
+    @AutoLog(value = "Job Title Table - Query by ID")
+    @ApiOperation(value = "Job Title Table - Query by ID", notes = "Job Title Table - Query by ID")
     @GetMapping(value = "/queryById")
     public Result<SysPosition> queryById(@RequestParam(name = "id", required = true) String id) {
         Result<SysPosition> result = new Result<SysPosition>();
         SysPosition sysPosition = sysPositionService.getById(id);
         if (sysPosition == null) {
-            result.error500("未找到对应实体");
+            result.error500("No corresponding entity found");
         } else {
             result.setResult(sysPosition);
             result.setSuccess(true);
@@ -213,7 +213,7 @@ public class SysPositionController {
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      * @param response
@@ -243,16 +243,16 @@ public class SysPositionController {
         ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
         List<SysPosition> pageList = sysPositionService.list(queryWrapper);
         LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-        //导出文件名称
-        mv.addObject(NormalExcelConstants.FILE_NAME, "职务表列表");
+        // The name of the export file
+        mv.addObject(NormalExcelConstants.FILE_NAME, "List of job titles");
         mv.addObject(NormalExcelConstants.CLASS, SysPosition.class);
-        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("职务表列表数据", "导出人:"+user.getRealname(),"导出信息"));
+        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("Job Title Table List Data", "Exporter:"+user.getRealname(),"Export information"));
         mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
         return mv;
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response
@@ -279,7 +279,7 @@ public class SysPositionController {
                 successLines+=(listSysPositions.size()-errorLines);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
-                return Result.error("文件导入失败:" + e.getMessage());
+                return Result.error("File import failed:" + e.getMessage());
             } finally {
                 try {
                     file.getInputStream().close();
@@ -292,13 +292,13 @@ public class SysPositionController {
     }
 
     /**
-     * 通过code查询
+     * Query by code
      *
      * @param code
      * @return
      */
-    @AutoLog(value = "职务表-通过code查询")
-    @ApiOperation(value = "职务表-通过code查询", notes = "职务表-通过code查询")
+    @AutoLog(value = "Job Title - Query by code")
+    @ApiOperation(value = "Job Title - Query by code", notes = "Job Title - Query by code")
     @GetMapping(value = "/queryByCode")
     public Result<SysPosition> queryByCode(@RequestParam(name = "code", required = true) String code) {
         Result<SysPosition> result = new Result<SysPosition>();
@@ -306,7 +306,7 @@ public class SysPositionController {
         queryWrapper.eq("code",code);
         SysPosition sysPosition = sysPositionService.getOne(queryWrapper);
         if (sysPosition == null) {
-            result.error500("未找到对应实体");
+            result.error500("No corresponding entity found");
         } else {
             result.setResult(sysPosition);
             result.setSuccess(true);
@@ -316,13 +316,13 @@ public class SysPositionController {
 
 
     /**
-     * 通过多个ID查询
+     * Query by multiple IDs
      *
      * @param ids
      * @return
      */
-    @AutoLog(value = "职务表-通过多个查询")
-    @ApiOperation(value = "职务表-通过多个id查询", notes = "职务表-通过多个id查询")
+    @AutoLog(value = "Job Title Table - Through multiple queries")
+    @ApiOperation(value = "Job Title Table - Query by multiple IDs", notes = "Job Title Table - Query by multiple IDs")
     @GetMapping(value = "/queryByIds")
     public Result<List<SysPosition>> queryByIds(@RequestParam(name = "ids") String ids) {
         Result<List<SysPosition>> result = new Result<>();
@@ -330,7 +330,7 @@ public class SysPositionController {
         queryWrapper.in(true,"id",ids.split(","));
         List<SysPosition> list = sysPositionService.list(queryWrapper);
         if (list == null) {
-            result.error500("未找到对应实体");
+            result.error500("No corresponding entity found");
         } else {
             result.setResult(list);
             result.setSuccess(true);
@@ -341,7 +341,7 @@ public class SysPositionController {
 
 
     /**
-     * 获取职位用户列表
+     * Get a list of job users
      *
      * @param pageNo
      * @param pageSize
@@ -366,7 +366,7 @@ public class SysPositionController {
     }
 
     /**
-     * 添加成员到用户职位关系表
+     * Add members to the User Position Relationships table
      *
      * @param userIds
      * @param positionId
@@ -376,11 +376,11 @@ public class SysPositionController {
     public Result<String> saveUserPosition(@RequestParam(name = "userIds") String userIds,
                                            @RequestParam(name = "positionId") String positionId) {
         userPositionService.saveUserPosition(userIds, positionId);
-        return Result.ok("添加成功");
+        return Result.ok("The addition was successful");
     }
 
     /**
-     * 职位列表移除成员
+     * Job listings
      *
      * @param userIds
      * @param positionId
@@ -390,6 +390,6 @@ public class SysPositionController {
     public Result<String> removeUserPosition(@RequestParam(name = "userIds") String userIds,
                                              @RequestParam(name = "positionId") String positionId) {
         userPositionService.removePositionUser(userIds, positionId);
-        return Result.OK("移除成员成功");
+        return Result.OK("The removal of the member is successful");
     }
 }

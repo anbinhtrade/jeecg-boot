@@ -33,7 +33,7 @@ public class FillRuleUtil {
                 queryWrapper.eq("rule_code", ruleCode);
                 JSONObject entity = JSON.parseObject(JSON.toJSONString(impl.getOne(queryWrapper)));
                 if (entity == null) {
-                    log.warn("填值规则：" + ruleCode + " 不存在");
+                    log.warn("Filling rules：" + ruleCode + " 不存在");
                     return null;
                 }
                 // 获取必要的参数

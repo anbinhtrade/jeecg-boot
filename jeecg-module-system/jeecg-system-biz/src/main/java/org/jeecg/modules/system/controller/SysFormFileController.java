@@ -21,13 +21,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 /**
- * @Description: 表单评论文件
+ * @Description: Form comment file
  * @Author: jeecg-boot
  * @Date: 2022-07-21
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "表单评论文件")
+@Api(tags = "Form comment file")
 @RestController
 @RequestMapping("/sys/formFile")
 public class SysFormFileController extends JeecgController<SysFormFile, ISysFormFileService> {
@@ -35,7 +35,7 @@ public class SysFormFileController extends JeecgController<SysFormFile, ISysForm
     private ISysFormFileService sysFormFileService;
 
     /**
-     * 分页列表查询
+     * Paginated List Queries
      *
      * @param sysFormFile
      * @param pageNo
@@ -43,8 +43,8 @@ public class SysFormFileController extends JeecgController<SysFormFile, ISysForm
      * @param req
      * @return
      */
-    @AutoLog(value = "表单评论文件-分页列表查询")
-    @ApiOperation(value = "表单评论文件-分页列表查询", notes = "表单评论文件-分页列表查询")
+    @AutoLog(value = "Form Comment File - Paginated List Query")
+    @ApiOperation(value = "Form Comment File Paginated List Query", notes = "Form Comment File- Paginated List Query")
     @GetMapping(value = "/list")
     public Result<?> queryPageList(SysFormFile sysFormFile,
                                    @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
@@ -57,69 +57,69 @@ public class SysFormFileController extends JeecgController<SysFormFile, ISysForm
     }
 
     /**
-     * 添加
+     * addTo
      *
      * @param sysFormFile
      * @return
      */
-    @AutoLog(value = "表单评论文件-添加")
-    @ApiOperation(value = "表单评论文件-添加", notes = "表单评论文件-添加")
+    @AutoLog(value = "Form Comment File - Add")
+    @ApiOperation(value = "Form Comment File - Add", notes = "Form Comment File - Add")
     @PostMapping(value = "/add")
     public Result<?> add(@RequestBody SysFormFile sysFormFile) {
         sysFormFileService.save(sysFormFile);
-        return Result.OK("添加成功！");
+        return Result.OK("Added successfully!");
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param sysFormFile
      * @return
      */
-    @AutoLog(value = "表单评论文件-编辑")
-    @ApiOperation(value = "表单评论文件-编辑", notes = "表单评论文件-编辑")
+    @AutoLog(value = "Form Comment File - Edit")
+    @ApiOperation(value = "Form Comment File - Edit", notes = "Form Comment File - Edit")
     @RequestMapping(value = "/edit", method = {RequestMethod.PUT, RequestMethod.POST})
     public Result<?> edit(@RequestBody SysFormFile sysFormFile) {
         sysFormFileService.updateById(sysFormFile);
-        return Result.OK("编辑成功!");
+        return Result.OK("Edit successful!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "表单评论文件-通过id删除")
-    @ApiOperation(value = "表单评论文件-通过id删除", notes = "表单评论文件-通过id删除")
+    @AutoLog(value = "Form comment file - delete by id")
+    @ApiOperation(value = "Form comment file - delete by id", notes = "Form comment file - delete by id")
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         sysFormFileService.removeById(id);
-        return Result.OK("删除成功!");
+        return Result.OK("Deleted successfully!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
      */
-    @AutoLog(value = "表单评论文件-批量删除")
-    @ApiOperation(value = "表单评论文件-批量删除", notes = "表单评论文件-批量删除")
+    @AutoLog(value = "Form Comment Files - Bulk Deletion")
+    @ApiOperation(value = "Form Comment Files - Bulk Deletion", notes = "Form Comment Files - Bulk Deletion")
     @DeleteMapping(value = "/deleteBatch")
     public Result<?> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         this.sysFormFileService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.OK("批量删除成功！");
+        return Result.OK("Batch deletion successful!");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "表单评论文件-通过id查询")
-    @ApiOperation(value = "表单评论文件-通过id查询", notes = "表单评论文件-通过id查询")
+    @AutoLog(value = "Form Comment File - Query by ID")
+    @ApiOperation(value = "Form Comment File - Query by ID", notes = "Form Comment File - Query by ID")
     @GetMapping(value = "/queryById")
     public Result<?> queryById(@RequestParam(name = "id", required = true) String id) {
         SysFormFile sysFormFile = sysFormFileService.getById(id);
@@ -127,7 +127,7 @@ public class SysFormFileController extends JeecgController<SysFormFile, ISysForm
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      * @param sysFormFile
@@ -138,7 +138,7 @@ public class SysFormFileController extends JeecgController<SysFormFile, ISysForm
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response

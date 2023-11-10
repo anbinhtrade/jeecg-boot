@@ -16,27 +16,27 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Title: DuplicateCheckAction
- * @Description: 重复校验工具
- * @Author 张代浩
+ * @Description: Repeat verification tool
+ * @Author Zhang Daihao
  * @Date 2019-03-25
  * @Version V1.0
  */
 @Slf4j
 @RestController
 @RequestMapping("/sys/duplicate")
-@Api(tags="重复校验")
+@Api(tags="Repeat check")
 public class DuplicateCheckController {
 
 	@Autowired
 	ISysDictService sysDictService;
 
 	/**
-	 * 校验数据是否在系统中是否存在
+	 * Verify whether the data exists in the system
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
-	@ApiOperation("重复校验接口")
+	@ApiOperation("Duplicate verification interface")
 	public Result<String> doDuplicateCheck(DuplicateCheckVo duplicateCheckVo, HttpServletRequest request) {
 		log.debug("----duplicate check------："+ duplicateCheckVo.toString());
 		
@@ -45,18 +45,18 @@ public class DuplicateCheckController {
 			Result rs = new Result();
 			rs.setCode(500);
 			rs.setSuccess(true);
-			rs.setMessage("数据为空,不作处理！");
+			rs.setMessage("The data is empty and will not be processed.！");
 			return rs;
 		}
 		
 		// 2.返回结果
 		if (sysDictService.duplicateCheckData(duplicateCheckVo)) {
 			// 该值可用
-			return Result.ok("该值可用！");
+			return Result.ok("The value is available!");
 		} else {
 			// 该值不可用
-			log.info("该值不可用，系统中已存在！");
-			return Result.error("该值不可用，系统中已存在！");
+			log.info("The value is not available and already exists in the system!");
+			return Result.error("The value is not available and already exists in the system!");
 		}
 	}
 

@@ -6,7 +6,7 @@ import org.jeecg.modules.demo.test.entity.JeecgDemo;
 import java.util.List;
 
 /**
- * @Description: 动态数据源测试
+ * @Description: Dynamic data source testing
  * @Author: zyf
  * @Date:2020-04-21
  */

@@ -24,7 +24,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Description: 系统数据日志
+ * @Description: System data logs
  * @author: jeecg-boot
  */
 @RestController
@@ -42,17 +42,17 @@ public class SysDataLogController {
 		QueryWrapper<SysDataLog> queryWrapper = QueryGenerator.initQueryWrapper(dataLog, req.getParameterMap());
 		Page<SysDataLog> page = new Page<SysDataLog>(pageNo, pageSize);
 		IPage<SysDataLog> pageList = service.page(page, queryWrapper);
-		log.info("查询当前页："+pageList.getCurrent());
-		log.info("查询当前页数量："+pageList.getSize());
-		log.info("查询结果数量："+pageList.getRecords().size());
-		log.info("数据总数："+pageList.getTotal());
+		log.info("Query the current page："+pageList.getCurrent());
+		log.info("Query the number of current pages："+pageList.getSize());
+		log.info("The number of query results："+pageList.getRecords().size());
+		log.info("Total number of data："+pageList.getTotal());
 		result.setSuccess(true);
 		result.setResult(pageList);
 		return result;
 	}
 	
 	/**
-	 * 查询对比数据
+	 * Query the comparison data
 	 * @param req
 	 * @return
 	 */
@@ -75,7 +75,7 @@ public class SysDataLogController {
 	}
 	
 	/**
-	 * 查询版本信息
+	 * Query the version information
 	 * @param req
 	 * @return
 	 */
@@ -98,7 +98,7 @@ public class SysDataLogController {
 
 		List<SysDataLog> list = service.list(queryWrapper);
 		if(list==null||list.size()<=0) {
-			result.error500("未找到版本信息");
+			result.error500("Version information not found");
 		}else {
 			result.setResult(list);
 			result.setSuccess(true);

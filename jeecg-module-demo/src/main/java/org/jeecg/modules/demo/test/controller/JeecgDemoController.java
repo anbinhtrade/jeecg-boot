@@ -149,7 +149,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      */
@@ -163,7 +163,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response

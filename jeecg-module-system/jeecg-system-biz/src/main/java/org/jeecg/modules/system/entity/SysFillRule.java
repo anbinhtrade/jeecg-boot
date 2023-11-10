@@ -13,7 +13,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * @Description: 填值规则
+ * @Description: Filling rules
  * @Author: jeecg-boot
  * @Date: 2019-11-07
  * @Version: V1.0
@@ -22,7 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @TableName("sys_fill_rule")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "sys_fill_rule对象", description = "填值规则")
+@ApiModel(value = "sys_fill_rule对象", description = "Filling rules")
 public class SysFillRule {
 
     /**

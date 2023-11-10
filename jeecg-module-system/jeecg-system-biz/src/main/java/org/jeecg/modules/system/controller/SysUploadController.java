@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * minio文件上传示例
+ * Example of minio file upload
  * @author: jeecg-boot
  */
 @Slf4j
@@ -29,7 +29,7 @@ public class SysUploadController {
     private IOssFileService ossFileService;
 
     /**
-     * 上传
+     * UPLOAD
      * @param request
      */
     @PostMapping(value = "/uploadMinio")
@@ -40,7 +40,7 @@ public class SysUploadController {
         //LOWCOD-2580 sys/common/upload接口存在任意文件上传漏洞
         boolean flag = oConvertUtils.isNotEmpty(bizPath) && (bizPath.contains("../") || bizPath.contains("..\\"));
         if (flag) {
-            throw new JeecgBootException("上传目录bizPath，格式非法！");
+            throw new JeecgBootException("Upload directory biz path, the format is illegal!");
         }
 
         if(oConvertUtils.isEmpty(bizPath)){
@@ -54,7 +54,7 @@ public class SysUploadController {
         orgName = CommonUtils.getFileName(orgName);
         String fileUrl =  MinioUtil.upload(file,bizPath);
         if(oConvertUtils.isEmpty(fileUrl)){
-            return Result.error("上传失败,请检查配置信息是否正确!");
+            return Result.error("The upload failed, please check whether the configuration information is correct!");
         }
         //保存文件信息
         OssFile minioFile = new OssFile();

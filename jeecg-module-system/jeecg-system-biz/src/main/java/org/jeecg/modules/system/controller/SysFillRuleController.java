@@ -24,13 +24,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 /**
- * @Description: 填值规则
+ * @Description: Filling rules
  * @Author: jeecg-boot
  * @Date: 2019-11-07
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "填值规则")
+@Api(tags = "Filling rules")
 @RestController
 @RequestMapping("/sys/fillRule")
 public class SysFillRuleController extends JeecgController<SysFillRule, ISysFillRuleService> {
@@ -38,7 +38,7 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
     private ISysFillRuleService sysFillRuleService;
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param sysFillRule
      * @param pageNo
@@ -46,8 +46,8 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
      * @param req
      * @return
      */
-    @AutoLog(value = "填值规则-分页列表查询")
-    @ApiOperation(value = "填值规则-分页列表查询", notes = "填值规则-分页列表查询")
+    @AutoLog(value = "Filling rules-Paginated list queries")
+    @ApiOperation(value = "Filling rules-Paginated list queries", notes = "Filling rules-Paginated list queries")
     @GetMapping(value = "/list")
     public Result<?> queryPageList(SysFillRule sysFillRule,
                                    @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
@@ -60,7 +60,7 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
     }
 
     /**
-     * 测试 ruleCode
+     * TEST ruleCode
      *
      * @param ruleCode
      * @return
@@ -72,69 +72,69 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param sysFillRule
      * @return
      */
-    @AutoLog(value = "填值规则-添加")
-    @ApiOperation(value = "填值规则-添加", notes = "填值规则-添加")
+    @AutoLog(value = "Filling rules-Add")
+    @ApiOperation(value = "Filling rules-Add", notes = "Filling rules-Add")
     @PostMapping(value = "/add")
     public Result<?> add(@RequestBody SysFillRule sysFillRule) {
         sysFillRuleService.save(sysFillRule);
-        return Result.ok("添加成功！");
+        return Result.ok("The addition was successful！");
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param sysFillRule
      * @return
      */
-    @AutoLog(value = "填值规则-编辑")
-    @ApiOperation(value = "填值规则-编辑", notes = "填值规则-编辑")
+    @AutoLog(value = "Filling rules-Edit")
+    @ApiOperation(value = "Filling rules-Edit", notes = "Filling rules-Edit")
     @RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
     public Result<?> edit(@RequestBody SysFillRule sysFillRule) {
         sysFillRuleService.updateById(sysFillRule);
-        return Result.ok("编辑成功!");
+        return Result.ok("Edited successfully!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "填值规则-通过id删除")
-    @ApiOperation(value = "填值规则-通过id删除", notes = "填值规则-通过id删除")
+    @AutoLog(value = "Filling rules-delete by id")
+    @ApiOperation(value = "Filling rules-delete by id", notes = "Filling rules-delete by id")
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         sysFillRuleService.removeById(id);
-        return Result.ok("删除成功!");
+        return Result.ok("The deletion is successful!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
      */
-    @AutoLog(value = "填值规则-批量删除")
-    @ApiOperation(value = "填值规则-批量删除", notes = "填值规则-批量删除")
+    @AutoLog(value = "Filling rules-Delete in bulk")
+    @ApiOperation(value = "Filling rules-Delete in bulk", notes = "Filling rules-Delete in bulk")
     @DeleteMapping(value = "/deleteBatch")
     public Result<?> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         this.sysFillRuleService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.ok("批量删除成功！");
+        return Result.ok("The batch deletion is successful！");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "填值规则-通过id查询")
-    @ApiOperation(value = "填值规则-通过id查询", notes = "填值规则-通过id查询")
+    @AutoLog(value = "Filling rules-Query by ID")
+    @ApiOperation(value = "Filling rules-Query by ID", notes = "Filling rules-Query by ID")
     @GetMapping(value = "/queryById")
     public Result<?> queryById(@RequestParam(name = "id", required = true) String id) {
         SysFillRule sysFillRule = sysFillRuleService.getById(id);
@@ -142,18 +142,18 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      * @param sysFillRule
      */
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, SysFillRule sysFillRule) {
-        return super.exportXls(request, sysFillRule, SysFillRule.class, "填值规则");
+        return super.exportXls(request, sysFillRule, SysFillRule.class, "Filling rules");
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response
@@ -165,11 +165,11 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
     }
 
     /**
-     * 通过 ruleCode 执行自定义填值规则
+     * Use ruleCode to execute custom value filling rules
      *
-     * @param ruleCode 要执行的填值规则编码
-     * @param formData 表单数据，可根据表单数据的不同生成不同的填值结果
-     * @return 运行后的结果
+     * @param ruleCode The encoding of the fill rule to be executed
+     * @param formData Form data, different value filling results can be generated according to different form data
+     * @return The result after the run
      */
     @PutMapping("/executeRuleByCode/{ruleCode}")
     public Result executeByRuleCode(@PathVariable("ruleCode") String ruleCode, @RequestBody JSONObject formData) {
@@ -179,11 +179,11 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
 
 
     /**
-     * 批量通过 ruleCode 执行自定义填值规则
+     * Batch pass ruleCode Execute custom value filling rules
      *
-     * @param ruleData 要执行的填值规则JSON数组：
-     *                 示例： { "commonFormData": {}, rules: [ { "ruleCode": "xxx", "formData": null } ] }
-     * @return 运行后的结果，返回示例： [{"ruleCode": "order_num_rule", "result": "CN2019111117212984"}]
+     * @param ruleData A JSON array of the value filling rules to be executed：
+     *                 Example： { "commonFormData": {}, rules: [ { "ruleCode": "xxx", "formData": null } ] }
+     * @return After the run, an example is returned： [{"ruleCode": "order_num_rule", "result": "CN2019111117212984"}]
      *
      */
     @PutMapping("/executeRuleByCodeBatch")
@@ -196,11 +196,11 @@ public class SysFillRuleController extends JeecgController<SysFillRule, ISysFill
             JSONObject rule = rules.getJSONObject(i);
             String ruleCode = rule.getString("ruleCode");
             JSONObject formData = rule.getJSONObject("formData");
-            // 如果没有传递 formData，就用common的
+            // If there is no delivery formData，就用common的
             if (formData == null) {
                 formData = commonFormData;
             }
-            // 执行填值规则
+            // Execute the value filling rule
             Object result = FillRuleUtil.executeRule(ruleCode, formData);
             JSONObject obj = new JSONObject(rules.size());
             obj.put("ruleCode", ruleCode);

@@ -37,13 +37,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Description: 多数据源管理
+ * @Description: Multi-data source management
  * @Author: jeecg-boot
  * @Date: 2019-12-25
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "多数据源管理")
+@Api(tags = "Multi-data source management")
 @RestController
 @RequestMapping("/sys/dataSource")
 public class SysDataSourceController extends JeecgController<SysDataSource, ISysDataSourceService> {
@@ -53,7 +53,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
 
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param sysDataSource
      * @param pageNo
@@ -61,8 +61,8 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
      * @param req
      * @return
      */
-    @AutoLog(value = "多数据源管理-分页列表查询")
-    @ApiOperation(value = "多数据源管理-分页列表查询", notes = "多数据源管理-分页列表查询")
+    @AutoLog(value = "Multi-data source management-Paginated list queries")
+    @ApiOperation(value = "Multi-data source management-Paginated list queries", notes = "Multi-data source management-Paginated list queries")
     @RequiresPermissions("system:datasource:list")
     @GetMapping(value = "/list")
     public Result<?> queryPageList(
@@ -71,7 +71,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
             @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
             HttpServletRequest req) {
         //------------------------------------------------------------------------------------------------
-        //是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+        //WHETHER TO ENABLE MULTI-TENANT DATA ISOLATION IN THE SYSTEM MANAGEMENT MODULE [SAAS MULTI-TENANT MODE]
         if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
             sysDataSource.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(), 0));
         }
@@ -85,7 +85,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
     @GetMapping(value = "/options")
     public Result<?> queryOptions(SysDataSource sysDataSource, HttpServletRequest req) {
         //------------------------------------------------------------------------------------------------
-        //是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+        //WHETHER TO ENABLE MULTI-TENANT DATA ISOLATION IN THE SYSTEM MANAGEMENT MODULE [SAAS MULTI-TENANT MODE]
         if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
             sysDataSource.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(), 0));
         }
@@ -105,34 +105,34 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param sysDataSource
      * @return
      */
-    @AutoLog(value = "多数据源管理-添加")
-    @ApiOperation(value = "多数据源管理-添加", notes = "多数据源管理-添加")
+    @AutoLog(value = "Multi-data source management-Add to")
+    @ApiOperation(value = "Multi-data source management-添加", notes = "Multi-data source management-Add to")
     @PostMapping(value = "/add")
     public Result<?> add(@RequestBody SysDataSource sysDataSource) {
-        //update-begin-author:taoyan date:2022-8-10 for: jdbc连接地址漏洞问题
+        //update-begin-author:taoyan date:2022-8-10 for: JDBC connection address vulnerability
         try {
             JdbcSecurityUtil.validate(sysDataSource.getDbUrl());
         }catch (JeecgBootException e){
             log.error(e.toString());
-            return Result.error("操作失败：" + e.getMessage());
+            return Result.error("The operation failed：" + e.getMessage());
         }
-        //update-end-author:taoyan date:2022-8-10 for: jdbc连接地址漏洞问题
+        //update-end-author:taoyan date:2022-8-10 for: JDBC connection address vulnerability
         return sysDataSourceService.saveDataSource(sysDataSource);
     }
 
     /**
-     * 编辑
+     * Edit
      *
      * @param sysDataSource
      * @return
      */
-    @AutoLog(value = "多数据源管理-编辑")
-    @ApiOperation(value = "多数据源管理-编辑", notes = "多数据源管理-编辑")
+    @AutoLog(value = "Multi-data source management-Edit")
+    @ApiOperation(value = "Multi-data source management-Edit", notes = "Multi-data source management-Edit")
     @RequestMapping(value = "/edit", method ={RequestMethod.PUT, RequestMethod.POST})
     public Result<?> edit(@RequestBody SysDataSource sysDataSource) {
         //update-begin-author:taoyan date:2022-8-10 for: jdbc连接地址漏洞问题
@@ -140,33 +140,33 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
             JdbcSecurityUtil.validate(sysDataSource.getDbUrl());
         } catch (JeecgBootException e) {
             log.error(e.toString());
-            return Result.error("操作失败：" + e.getMessage());
+            return Result.error("The operation failed：" + e.getMessage());
         }
         //update-end-author:taoyan date:2022-8-10 for: jdbc连接地址漏洞问题
         return sysDataSourceService.editDataSource(sysDataSource);
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "多数据源管理-通过id删除")
-    @ApiOperation(value = "多数据源管理-通过id删除", notes = "多数据源管理-通过id删除")
+    @AutoLog(value = "Multi-data source management-Delete by ID")
+    @ApiOperation(value = "Multi-data source management-Delete by ID", notes = "Multi-data source management-Delete by ID")
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id") String id) {
         return sysDataSourceService.deleteDataSource(id);
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
      */
-    @AutoLog(value = "多数据源管理-批量删除")
-    @ApiOperation(value = "多数据源管理-批量删除", notes = "多数据源管理-批量删除")
+    @AutoLog(value = "Multi-data source management-Delete in bulk")
+    @ApiOperation(value = "Multi-data source management-Delete in bulk", notes = "Multi-data source management-Delete in bulk")
     @DeleteMapping(value = "/deleteBatch")
     public Result<?> deleteBatch(@RequestParam(name = "ids") String ids) {
         List<String> idList = Arrays.asList(ids.split(","));
@@ -175,17 +175,17 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
             DataSourceCachePool.removeCache(sysDataSource.getCode());
         });
         this.sysDataSourceService.removeByIds(idList);
-        return Result.ok("批量删除成功！");
+        return Result.ok("The batch deletion is successful！");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "多数据源管理-通过id查询")
-    @ApiOperation(value = "多数据源管理-通过id查询", notes = "多数据源管理-通过id查询")
+    @AutoLog(value = "Multi-data source management-Query by ID")
+    @ApiOperation(value = "Multi-data source management-Query by ID", notes = "Multi-data source management-Query by ID")
     @GetMapping(value = "/queryById")
     public Result<?> queryById(@RequestParam(name = "id") String id) throws InterruptedException {
         SysDataSource sysDataSource = sysDataSourceService.getById(id);
@@ -199,7 +199,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      * @param sysDataSource
@@ -207,16 +207,16 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, SysDataSource sysDataSource) {
         //------------------------------------------------------------------------------------------------
-        //是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+        //WHETHER TO ENABLE MULTI-TENANT DATA ISOLATION IN THE SYSTEM MANAGEMENT MODULE [SAAS MULTI-TENANT MODE]
         if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
             sysDataSource.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(), 0));
         }
         //------------------------------------------------------------------------------------------------
-        return super.exportXls(request, sysDataSource, SysDataSource.class, "多数据源管理");
+        return super.exportXls(request, sysDataSource, SysDataSource.class, "Multi-data source management");
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response

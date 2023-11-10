@@ -50,7 +50,7 @@ import java.util.*;
 
 /**
  * <p>
- * 字典表 前端控制器
+ * Dictionary table Front-end controllers
  * </p>
  *
  * @Author zhangweijian
@@ -75,7 +75,7 @@ public class SysDictController {
 									  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,HttpServletRequest req) {
 		Result<IPage<SysDict>> result = new Result<IPage<SysDict>>();
 		//------------------------------------------------------------------------------------------------
-		//是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+		//WHETHER TO ENABLE MULTI-TENANT DATA ISOLATION IN THE SYSTEM MANAGEMENT MODULE [SAAS MULTI-TENANT MODE]
 		if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
 			sysDict.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(),0));
 		}
@@ -83,17 +83,17 @@ public class SysDictController {
 		QueryWrapper<SysDict> queryWrapper = QueryGenerator.initQueryWrapper(sysDict, req.getParameterMap());
 		Page<SysDict> page = new Page<SysDict>(pageNo, pageSize);
 		IPage<SysDict> pageList = sysDictService.page(page, queryWrapper);
-		log.debug("查询当前页："+pageList.getCurrent());
-		log.debug("查询当前页数量："+pageList.getSize());
-		log.debug("查询结果数量："+pageList.getRecords().size());
-		log.debug("数据总数："+pageList.getTotal());
+		log.debug("Query the current page："+pageList.getCurrent());
+		log.debug("Query the number of current pages："+pageList.getSize());
+		log.debug("The number of query results："+pageList.getRecords().size());
+		log.debug("Total number of data："+pageList.getTotal());
 		result.setSuccess(true);
 		result.setResult(pageList);
 		return result;
 	}
 
 	/**
-	 * @功能：获取树形字典数据
+	 * @Function: Get tree dictionary data
 	 * @param sysDict
 	 * @param pageNo
 	 * @param pageSize
@@ -123,7 +123,7 @@ public class SysDictController {
 	}
 
 	/**
-	 * 获取全部字典数据
+	 * Get all dictionary data
 	 *
 	 * @return
 	 */
@@ -135,7 +135,7 @@ public class SysDictController {
 	}
 
 	/**
-	 * 获取字典数据
+	 * Get dictionary data
 	 * @param dictCode
 	 * @return
 	 */
@@ -150,7 +150,7 @@ public class SysDictController {
 			 result.setResult(text);
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 			return result;
 		}
 		return result;
@@ -158,9 +158,9 @@ public class SysDictController {
 
 
 	/**
-	 * 获取字典数据 【接口签名验证】
-	 * @param dictCode 字典code
-	 * @param dictCode 表名,文本字段,code字段  | 举例：sys_user,realname,id
+	 * Get dictionary data 【Verify the signature of the interface】
+	 * @param dictCode Dictionary code
+	 * @param dictCode Table name, text field, code field  | Examples: sys user, realname, id
 	 * @return
 	 */
 	@RequestMapping(value = "/getDictItems/{dictCode}", method = RequestMethod.GET)
@@ -170,7 +170,7 @@ public class SysDictController {
 		try {
 			List<DictModel> ls = sysDictService.getDictItems(dictCode);
 			if (ls == null) {
-				result.error500("字典Code格式不正确！");
+				result.error500("The dictionary Code is formatted incorrectly！");
 				return result;
 			}
 			result.setSuccess(true);
@@ -178,18 +178,18 @@ public class SysDictController {
 			log.debug(result.toString());
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 			return result;
 		}
 		return result;
 	}
 
 	/**
-	 * 【接口签名验证】
-	 * 【JSearchSelectTag下拉搜索组件专用接口】
-	 * 大数据量的字典表 走异步加载  即前端输入内容过滤数据
-	 * @param dictCode 字典code格式：table,text,code
-	 * @return
+	 * [Interface Signature Verification]
+	 * [JSearchSelectTag drop-down search component dedicated interface]
+	 * Dictionaries for large data volumes are loaded asynchronously, i.e. the front-end input content filters the data
+	 * @param dictCode dictionary code format: table, text, code
+     * @return
 	 */
 	@RequestMapping(value = "/loadDict/{dictCode}", method = RequestMethod.GET)
 	public Result<List<DictModel>> loadDict(@PathVariable("dictCode") String dictCode,
@@ -202,17 +202,17 @@ public class SysDictController {
 			try {
 				keyword = URLDecoder.decode(keyword, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				log.error("下拉搜索关键字解码失败", e);
+				log.error("Failed to decode the drop-down search keyword", e);
 			}
 		}
 		//update-end-author:taoyan date:2023-5-22 for: /issues/4905 因为中括号(%5)的问题导致的  表单生成器字段配置时，选择关联字段，在进行高级配置时，无法加载数据库列表，提示 Sgin签名校验错误！ #4905
-		
-		log.info(" 加载字典表数据,加载关键字: "+ keyword);
+
+		log.info(" Load dictionary table data and load keywords: "+ keyword);
 		Result<List<DictModel>> result = new Result<List<DictModel>>();
 		try {
 			List<DictModel> ls = sysDictService.loadDict(dictCode, keyword, pageSize);
 			if (ls == null) {
-				result.error500("字典Code格式不正确！");
+				result.error500("The dictionary Code is formatted incorrectly！");
 				return result;
 			}
 			result.setSuccess(true);
@@ -221,16 +221,16 @@ public class SysDictController {
 			return result;
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败：" + e.getMessage());
+			result.error500("The operation failed：" + e.getMessage());
 			return result;
 		}
 	}
 
 	/**
-	 * 【接口签名验证】
-	 * 【给表单设计器的表字典使用】下拉搜索模式，有值时动态拼接数据
+	 * [Interface Signature Verification]
+	 * [Use for the table dictionary of the form designer] drop-down search mode, and dynamically splice the data when there is a value
 	 * @param dictCode
-	 * @param keyword 当前控件的值，可以逗号分割
+	 * @param keyword The value of the current control, which can be separated by a comma
 	 * @param sign
 	 * @param pageSize
 	 * @return
@@ -241,25 +241,25 @@ public class SysDictController {
 			@RequestParam(name = "keyword") String keyword,
 			@RequestParam(value = "sign", required = false) String sign,
 			@RequestParam(value = "pageSize", required = false) Integer pageSize) {
-		// 首次查询查出来用户选中的值，并且不分页
+		// The first query finds out the value selected by the user and is not pagination
 		Result<List<DictModel>> firstRes = this.loadDict(dictCode, keyword, sign, null);
 		if (!firstRes.isSuccess()) {
 			return firstRes;
 		}
-		// 然后再查询出第一页的数据
+		// Then query out the data on the first page
 		Result<List<DictModel>> result = this.loadDict(dictCode, "", sign, pageSize);
 		if (!result.isSuccess()) {
 			return result;
 		}
-		// 合并两次查询的数据
+		// Merge the data from the two queries
 		List<DictModel> firstList = firstRes.getResult();
 		List<DictModel> list = result.getResult();
 		for (DictModel firstItem : firstList) {
-			// anyMatch 表示：判断的条件里，任意一个元素匹配成功，返回true
-			// allMatch 表示：判断条件里的元素，所有的都匹配成功，返回true
-			// noneMatch 跟 allMatch 相反，表示：判断条件里的元素，所有的都匹配失败，返回true
+			// anyMatch indicates that if any element is successfully matched within the judgment condition, true will be returned
+			// allMatch means that all elements in the condition are successfully matched, and true is returned
+			// noneMatch is the opposite of allMatch, which means that all elements in the condition fail to match and return true
 			boolean none = list.stream().noneMatch(item -> item.getValue().equals(firstItem.getValue()));
-			// 当元素不存在时，再添加到集合里
+			// When an element does not exist, it is added to the collection
 			if (none) {
 				list.add(0, firstItem);
 			}
@@ -268,12 +268,12 @@ public class SysDictController {
 	}
 
 	/**
-	 * 【接口签名验证】
-	 * 根据字典code加载字典text 返回
-	 * @param dictCode 顺序：tableName,text,code
-	 * @param keys 要查询的key
+	 * [Interface Signature Verification]
+	 * Load the dictionary text according to the dictionary code return
+	 * @param dictCode Order：tableName,text,code
+	 * @param keys The key to be queried
 	 * @param sign
-	 * @param delNotExist 是否移除不存在的项，默认为true，设为false如果某个key不存在数据库中，则直接返回key本身
+	 * @param delNotExist Whether to remove non-existent items, which is set to true by default and set to falseIf a key does not exist in the database, the key itself is returned
 	 * @param request
 	 * @return
 	 */
@@ -284,7 +284,7 @@ public class SysDictController {
 			if(dictCode.indexOf(SymbolConstant.COMMA)!=-1) {
 				String[] params = dictCode.split(SymbolConstant.COMMA);
 				if(params.length!=3) {
-					result.error500("字典Code格式不正确！");
+					result.error500("The dictionary Code is formatted incorrectly！");
 					return result;
 				}
 				List<String> texts = sysDictService.queryTableDictByKeys(params[0], params[1], params[2], keys, delNotExist);
@@ -293,11 +293,11 @@ public class SysDictController {
 				result.setResult(texts);
 				log.info(result.toString());
 			}else {
-				result.error500("字典Code格式不正确！");
+				result.error500("The dictionary Code is formatted incorrectly！");
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 			return result;
 		}
 
@@ -305,14 +305,14 @@ public class SysDictController {
 	}
 
 	/**
-	 * 【接口签名验证】
-	 * 根据表名——显示字段-存储字段 pid 加载树形数据
-	 * @param hasChildField 是否叶子节点字段
-	 * @param converIsLeafVal 是否需要系统转换 是否叶子节点的值 (0标识不转换、1标准系统自动转换)
-	 * @param tableName 表名
-	 * @param text label字段
-	 * @param code value 字段
-	 * @param condition  查询条件  ？
+	 * 【Verify the signature of the interface】
+	 * Load tree data based on table name - display field - store field pid
+	 * @param hasChildField Whether or not the leaf node field
+	 * @param converIsLeafVal Whether system conversion is required Whether the value of the leaf node (0 indicates no conversion, 1 standard system automatic conversion.))
+	 * @param tableName Table name
+	 * @param text label field
+	 * @param code value field
+	 * @param condition  Query criteria  ？
 	 *            
 	 */
 	@SuppressWarnings("unchecked")
@@ -340,7 +340,7 @@ public class SysDictController {
 	}
 
 	/**
-	 * 【APP接口】根据字典配置查询表字典数据（目前暂未找到调用的地方）
+	 * 【APP interface】Configure the dictionary data of the query table according to the dictionary (no place to call is currently found)
 	 * @param query
 	 * @param pageNo
 	 * @param pageSize
@@ -360,7 +360,7 @@ public class SysDictController {
 	}
 
 	/**
-	 * @功能：新增
+	 * @Feature: New dictionary data
 	 * @param sysDict
 	 * @return
 	 */
@@ -372,16 +372,16 @@ public class SysDictController {
 			sysDict.setCreateTime(new Date());
 			sysDict.setDelFlag(CommonConstant.DEL_FLAG_0);
 			sysDictService.save(sysDict);
-			result.success("保存成功！");
+			result.success("Save successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 
 	/**
-	 * @功能：编辑
+	 * @Function: Editing
 	 * @param sysDict
 	 * @return
 	 */
@@ -391,19 +391,19 @@ public class SysDictController {
 		Result<SysDict> result = new Result<SysDict>();
 		SysDict sysdict = sysDictService.getById(sysDict.getId());
 		if(sysdict==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			sysDict.setUpdateTime(new Date());
 			boolean ok = sysDictService.updateById(sysDict);
 			if(ok) {
-				result.success("编辑成功!");
+				result.success("Edited successfully!");
 			}
 		}
 		return result;
 	}
 
 	/**
-	 * @功能：删除
+	 * @Feature: Delete
 	 * @param id
 	 * @return
 	 */
@@ -414,15 +414,15 @@ public class SysDictController {
 		Result<SysDict> result = new Result<SysDict>();
 		boolean ok = sysDictService.removeById(id);
 		if(ok) {
-			result.success("删除成功!");
+			result.success("The deletion is successful!");
 		}else{
-			result.error500("删除失败!");
+			result.error500("Deletion failed!");
 		}
 		return result;
 	}
 
 	/**
-	 * @功能：批量删除
+	 * @Function: Batch deletion
 	 * @param ids
 	 * @return
 	 */
@@ -432,16 +432,16 @@ public class SysDictController {
 	public Result<SysDict> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		Result<SysDict> result = new Result<SysDict>();
 		if(oConvertUtils.isEmpty(ids)) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized！");
 		}else {
 			sysDictService.removeByIds(Arrays.asList(ids.split(",")));
-			result.success("删除成功!");
+			result.success("The deletion is successful!");
 		}
 		return result;
 	}
 
 	/**
-	 * @功能：刷新缓存
+	 * @Function: Refresh cache
 	 * @return
 	 */
 	@RequestMapping(value = "/refleshCache")
@@ -479,14 +479,14 @@ public class SysDictController {
 	}
 
 	/**
-	 * 导出excel
+	 * Export to Excel
 	 *
 	 * @param request
 	 */
 	@RequestMapping(value = "/exportXls")
 	public ModelAndView exportXls(SysDict sysDict,HttpServletRequest request) {
 		//------------------------------------------------------------------------------------------------
-		//是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+		//WHETHER TO ENABLE MULTI-TENANT DATA ISOLATION IN THE SYSTEM MANAGEMENT MODULE [SAAS MULTI-TENANT MODE]
 		if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
 			sysDict.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(), 0));
 		}
@@ -508,20 +508,20 @@ public class SysDictController {
 			pageList.add(vo);
 		}
 
-		// 导出文件名称
-		mv.addObject(NormalExcelConstants.FILE_NAME, "数据字典");
-		// 注解对象Class
+		// The name of the export file
+		mv.addObject(NormalExcelConstants.FILE_NAME, "Data Dictionary");
+		// Annotation object Class
 		mv.addObject(NormalExcelConstants.CLASS, SysDictPage.class);
 		// 自定义表格参数
 		LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-		mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("数据字典列表", "导出人:"+user.getRealname(), "数据字典"));
-		// 导出数据列表
+		mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("A list of data dictionaries", "Exporter:"+user.getRealname(), "Data Dictionary"));
+		// Export a list of data
 		mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
 		return mv;
 	}
 
 	/**
-	 * 通过excel导入数据
+	 * Import data via Excel
 	 *
 	 * @param request
 	 * @param
@@ -540,10 +540,10 @@ public class SysDictController {
 			params.setHeadRows(2);
 			params.setNeedSave(true);
 			try {
-				//导入Excel格式校验，看匹配的字段文本概率
+				//Import Excel format to check the probability of matching field text
 				Boolean t = ExcelImportCheckUtil.check(file.getInputStream(), SysDictPage.class, params);
 				if(t!=null && !t){
-					throw new RuntimeException("导入Excel校验失败 ！");
+					throw new RuntimeException("Failed to import Excel for verification ！");
 				}
 				List<SysDictPage> list = ExcelImportUtil.importExcel(file.getInputStream(), SysDictPage.class, params);
 				// 错误信息
@@ -560,29 +560,29 @@ public class SysDictController {
                         //update-begin---author:wangshuai ---date:20220211  for：[JTC-1168]如果字典项值为空，则字典项忽略导入------------
 						}else if(integer == -1){
                             errorLines++;
-                            errorMessage.add("字典名称：" + po.getDictName() + "，对应字典列表的字典项值不能为空，忽略导入。");
+                            errorMessage.add("Dictionary name：" + po.getDictName() + "，The dictionary item value of the corresponding dictionary list cannot be empty, ignore the import.");
                         }else{
                         //update-end---author:wangshuai ---date:20220211  for：[JTC-1168]如果字典项值为空，则字典项忽略导入------------
 							errorLines++;
 							int lineNumber = i + 1;
                             //update-begin---author:wangshuai ---date:20220209  for：[JTC-1168]字典编号不能为空------------
                             if(oConvertUtils.isEmpty(po.getDictCode())){
-                                errorMessage.add("第 " + lineNumber + " 行：字典编码不能为空，忽略导入。");
+                                errorMessage.add("Clause " + lineNumber + "Line: The dictionary encoding cannot be empty, ignore the import.");
                             }else{
-                                errorMessage.add("第 " + lineNumber + " 行：字典编码已经存在，忽略导入。");
+                                errorMessage.add("Clause " + lineNumber + "Line: The dictionary encoding already exists, ignore the import.");
                             }
                             //update-end---author:wangshuai ---date:20220209  for：[JTC-1168]字典编号不能为空------------
                         }
 					}  catch (Exception e) {
 						errorLines++;
 						int lineNumber = i + 1;
-						errorMessage.add("第 " + lineNumber + " 行：字典编码已经存在，忽略导入。");
+						errorMessage.add("Clause " + lineNumber + "Line: The dictionary encoding already exists, ignore the import.");
 					}
 				}
 				return ImportExcelUtil.imporReturnRes(errorLines,successLines,errorMessage);
 			} catch (Exception e) {
 				log.error(e.getMessage(),e);
-				return Result.error("文件导入失败:"+e.getMessage());
+				return Result.error("File import failed:"+e.getMessage());
 			} finally {
 				try {
 					file.getInputStream().close();
@@ -591,12 +591,12 @@ public class SysDictController {
 				}
 			}
 		}
-		return Result.error("文件导入失败！");
+		return Result.error("File import failed！");
 	}
 
 
 	/**
-	 * 查询被删除的列表
+	 * Query the list that was deleted
 	 * @return
 	 */
 	@RequestMapping(value = "/deleteList", method = RequestMethod.GET)
@@ -609,7 +609,7 @@ public class SysDictController {
 	}
 
 	/**
-	 * 物理删除
+	 * Physical deletion
 	 * @param id
 	 * @return
 	 */
@@ -617,15 +617,15 @@ public class SysDictController {
 	public Result<?> deletePhysic(@PathVariable("id") String id) {
 		try {
 			sysDictService.deleteOneDictPhysically(id);
-			return Result.ok("删除成功!");
+			return Result.ok("The deletion is successful!");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Result.error("删除失败!");
+			return Result.error("Deletion failed!");
 		}
 	}
 
 	/**
-	 * 逻辑删除的字段，进行取回
+	 * TOMBSTONED FIELDS TO RETRIEVE
 	 * @param id
 	 * @return
 	 */
@@ -633,17 +633,16 @@ public class SysDictController {
 	public Result<?> back(@PathVariable("id") String id) {
 		try {
 			sysDictService.updateDictDelFlag(0,id);
-			return Result.ok("操作成功!");
+			return Result.ok("The operation was successful!");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Result.error("操作失败!");
+			return Result.error("Operation failed!");
 		}
 	}
 
 	/**
-	 * VUEN-2584【issue】平台sql注入漏洞几个问题
-	 * 部分特殊函数 可以将查询结果混夹在错误信息中，导致数据库的信息暴露
-	 * @param e
+	 * VUEN-2584【issue】There are several problems with the SQL injection vulnerability of the platform
+	 * Some special functions can mix query results with error messages, resulting in database information being exposed	 * @param e
 	 * @return
 	 */
 	@ExceptionHandler(java.sql.SQLException.class)
@@ -652,13 +651,13 @@ public class SysDictController {
 		String extractvalue = "extractvalue";
 		String updatexml = "updatexml";
 		if(msg!=null && (msg.toLowerCase().indexOf(extractvalue)>=0 || msg.toLowerCase().indexOf(updatexml)>=0)){
-			return Result.error("校验失败，sql解析异常！");
+			return Result.error("The verification fails, and the SQL parsing is abnormal！");
 		}
-		return Result.error("校验失败，sql解析异常！" + msg);
+		return Result.error("The verification fails, and the SQL parsing is abnormal！" + msg);
 	}
 
 	/**
-	 * 根据应用id获取字典列表和详情
+	 * Obtain the dictionary list and details based on the application ID
 	 * @param request
 	 */
 	@GetMapping("/getDictListByLowAppId")
@@ -669,7 +668,7 @@ public class SysDictController {
 	}
 
 	/**
-	 * 添加字典
+	 * Add a dictionary
 	 * @param sysDictVo
 	 * @param request
 	 * @return
@@ -681,7 +680,7 @@ public class SysDictController {
 		sysDictVo.setLowAppId(lowAppId);
 		sysDictVo.setTenantId(oConvertUtils.getInteger(tenantId, null));
 		sysDictService.addDictByLowAppId(sysDictVo);
-		return Result.ok("添加成功");
+		return Result.ok("The addition was successful");
 	}
 
 	@PutMapping("/editDictByLowAppId")
@@ -689,6 +688,6 @@ public class SysDictController {
 		String lowAppId = oConvertUtils.getString(TokenUtils.getLowAppIdByRequest(request));
 		sysDictVo.setLowAppId(lowAppId);
 		sysDictService.editDictByLowAppId(sysDictVo);
-		return Result.ok("编辑成功");
+		return Result.ok("Edited successfully");
 	}
 }

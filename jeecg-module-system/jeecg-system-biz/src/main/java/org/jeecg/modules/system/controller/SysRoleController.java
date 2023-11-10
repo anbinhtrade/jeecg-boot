@@ -57,7 +57,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
- * 角色表 前端控制器
+ * Role table Front-end controllers
  * </p>
  *
  * @Author scott
@@ -85,7 +85,7 @@ public class SysRoleController {
 	private BaseCommonService baseCommonService;
 	
 	/**
-	  * 分页列表查询 【系统角色，不做租户隔离】
+	  * Paginated list queries [System roles, no tenant isolation]
 	 * @param role
 	 * @param pageNo
 	 * @param pageSize
@@ -110,7 +110,7 @@ public class SysRoleController {
 	}
 	
 	/**
-	 * 分页列表查询【租户角色，做租户隔离】
+	 * Paginated List Query [Tenant Role, Do Tenant Isolation]
 	 * @param role
 	 * @param pageNo
 	 * @param pageSize
@@ -136,7 +136,7 @@ public class SysRoleController {
 	}
 	
 	/**
-	  *   添加
+	  *   Add to
 	 * @param role
 	 * @return
 	 */
@@ -151,16 +151,16 @@ public class SysRoleController {
 			}
 			role.setCreateTime(new Date());
 			sysRoleService.save(role);
-			result.success("添加成功！");
+			result.success("Added successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 	
 	/**
-	  *  编辑
+	  *  EDIT
 	 * @param role
 	 * @return
 	 */
@@ -170,7 +170,7 @@ public class SysRoleController {
 		Result<SysRole> result = new Result<SysRole>();
 		SysRole sysrole = sysRoleService.getById(role.getId());
 		if(sysrole==null) {
-			result.error500("未找到对应角色！");
+			result.error500("No character found!");
 		}else {
 			role.setUpdateTime(new Date());
 
@@ -182,22 +182,22 @@ public class SysRoleController {
 				Integer tenantId = oConvertUtils.getInt(TenantContext.getTenant(), 0);
 				String username = "admin";
 				if (!tenantId.equals(role.getTenantId()) && !username.equals(sysUser.getUsername())) {
-					baseCommonService.addLog("未经授权，修改非本租户下的角色ID：" + role.getId() + "，操作人：" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_3);
-					return Result.error("修改角色失败,当前角色不在此租户中。");
+					baseCommonService.addLog("Modify the role ID of a non-tenant without authorization:" + role.getId() + ", Operated by:" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_3);
+					return Result.error("The modification of the role failed, and the current role is not in this tenant.");
 				}
 			}
 			//------------------------------------------------------------------
 			
 			boolean ok = sysRoleService.updateById(role);
 			if(ok) {
-				result.success("修改成功!");
+				result.success("Modification successful!");
 			}
 		}
 		return result;
 	}
 	
 	/**
-	  *   通过id删除
+	  *   Delete by ID
 	 * @param id
 	 * @return
 	 */
@@ -212,26 +212,26 @@ public class SysRoleController {
 			Long getRoleCount = sysRoleService.getRoleCountByTenantId(id, tenantId);
 			String username = "admin";
 			if(getRoleCount == 0 && !username.equals(sysUser.getUsername())){
-				baseCommonService.addLog("未经授权，删除非本租户下的角色ID：" + id + "，操作人：" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_4);
-				return Result.error("删除角色失败,当前角色不在此租户中。");
+				baseCommonService.addLog("To delete a role ID that is not a tenant without authorization:" + id + ", Operated by:" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_4);
+				return Result.error("Deleting the role failed, and the current role is not in this tenant.");
 			}
 		}
 		sysRoleService.deleteRole(id);
-		return Result.ok("删除角色成功");
+		return Result.ok("The role was deleted");
 	}
 	
 	/**
-	  *  批量删除
+	  *  Delete in bulk
 	 * @param ids
 	 * @return
 	 */
     @RequiresPermissions("system:role:deleteBatch")
 	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
 	public Result<SysRole> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-		baseCommonService.addLog("删除角色操作，角色ids：" + ids, CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_4);
+		baseCommonService.addLog("To delete a role, the role IDS:" + ids, CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_4);
 		Result<SysRole> result = new Result<SysRole>();
 		if(oConvertUtils.isEmpty(ids)) {
-			result.error500("未选中角色！");
+			result.error500("Unchecked!");
 		}else {
 			//如果是saas隔离的情况下，判断当前租户id是否是当前租户下的
 			if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
@@ -243,19 +243,19 @@ public class SysRoleController {
 					Long getRoleCount = sysRoleService.getRoleCountByTenantId(id, tenantId);
 					//如果存在角色id为0，即不存在，则删除角色
 					if(getRoleCount == 0 && !username.equals(sysUser.getUsername()) ){
-						baseCommonService.addLog("未经授权，删除非本租户下的角色ID：" + id + "，操作人：" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_4);
-						return Result.error("批量删除角色失败,存在角色不在此租户中，禁止批量删除");
+						baseCommonService.addLog("To delete a role ID that is not a tenant without authorization:" + id + ", Operated by:" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_4);
+						return Result.error("If the bulk deletion of a role fails, and the existing roles are not in this tenant, the bulk deletion is prohibited");
 					}
 				}
 			}
 			sysRoleService.deleteBatchRole(ids.split(","));
-			result.success("删除角色成功!");
+			result.success("Character deletion successful!");
 		}
 		return result;
 	}
 	
 	/**
-	  * 通过id查询
+	  * Query by ID
 	 * @param id
 	 * @return
 	 */
@@ -264,7 +264,7 @@ public class SysRoleController {
 		Result<SysRole> result = new Result<SysRole>();
 		SysRole sysrole = sysRoleService.getById(id);
 		if(sysrole==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			result.setResult(sysrole);
 			result.setSuccess(true);
@@ -273,7 +273,7 @@ public class SysRoleController {
 	}
 
 	/**
-	 * 查询全部角色（参与租户隔离）
+	 * Querying All Roles (Participating in Tenant Isolation)
 	 * 
 	 * @return
 	 */
@@ -289,7 +289,7 @@ public class SysRoleController {
 		//------------------------------------------------------------------------------------------------
 		List<SysRole> list = sysRoleService.list(query);
 		if(list==null||list.size()<=0) {
-			result.error500("未找到角色信息");
+			result.error500("No role information found");
 		}else {
 			result.setResult(list);
 			result.setSuccess(true);
@@ -298,7 +298,7 @@ public class SysRoleController {
 	}
 
 	/**
-	 * 查询全部系统角色（不做租户隔离）
+	 * Querying All System Roles (Without Tenant Isolation)
 	 *
 	 * @return
 	 */
@@ -309,7 +309,7 @@ public class SysRoleController {
 		LambdaQueryWrapper<SysRole> query = new LambdaQueryWrapper<SysRole>();
 		List<SysRole> list = sysRoleService.list(query);
 		if(list==null||list.size()<=0) {
-			result.error500("未找到角色信息");
+			result.error500("No role information found");
 		}else {
 			result.setResult(list);
 			result.setSuccess(true);
@@ -318,14 +318,14 @@ public class SysRoleController {
 	}
 	
 	/**
-	  * 校验角色编码唯一
+	  * The verification role code is unique
 	 */
 	@RequestMapping(value = "/checkRoleCode", method = RequestMethod.GET)
 	public Result<Boolean> checkUsername(String id,String roleCode) {
 		Result<Boolean> result = new Result<>();
         //如果此参数为false则程序发生异常
 		result.setResult(true);
-		log.info("--验证角色编码是否唯一---id:"+id+"--roleCode:"+roleCode);
+		log.info("--Verify that the role code is unique --- ID:"+id+"--roleCode:"+roleCode);
 		try {
 			SysRole role = null;
 			if(oConvertUtils.isNotEmpty(id)) {
@@ -338,12 +338,12 @@ public class SysRoleController {
 				if(role==null) {
 					//role为空=>新增模式=>只要roleCode存在则返回false
 					result.setSuccess(false);
-					result.setMessage("角色编码已存在");
+					result.setMessage("The role code already exists");
 					return result;
 				}else if(!id.equals(newRole.getId())) {
 					//否则=>编辑模式=>判断两者ID是否一致-
 					result.setSuccess(false);
-					result.setMessage("角色编码已存在");
+					result.setMessage("The role code already exists");
 					return result;
 				}
 			}
@@ -358,7 +358,7 @@ public class SysRoleController {
 	}
 
 	/**
-	 * 导出excel
+	 * Export to Excel
 	 * @param request
 	 */
 	@RequestMapping(value = "/exportXls")
@@ -376,16 +376,16 @@ public class SysRoleController {
 		ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
 		List<SysRole> pageList = sysRoleService.list(queryWrapper);
 		//导出文件名称
-		mv.addObject(NormalExcelConstants.FILE_NAME,"角色列表");
+		mv.addObject(NormalExcelConstants.FILE_NAME,"List of roles");
 		mv.addObject(NormalExcelConstants.CLASS,SysRole.class);
 		LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-		mv.addObject(NormalExcelConstants.PARAMS,new ExportParams("角色列表数据","导出人:"+user.getRealname(),"导出信息"));
+		mv.addObject(NormalExcelConstants.PARAMS,new ExportParams("Role list data","Exporter:"+user.getRealname(),"Export information"));
 		mv.addObject(NormalExcelConstants.DATA_LIST,pageList);
 		return mv;
 	}
 
 	/**
-	 * 通过excel导入数据
+	 * Import data via Excel
 	 * @param request
 	 * @param response
 	 * @return
@@ -405,7 +405,7 @@ public class SysRoleController {
 				return sysRoleService.importExcelCheckRoleCode(file, params);
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
-				return Result.error("文件导入失败:" + e.getMessage());
+				return Result.error("File import failed:" + e.getMessage());
 			} finally {
 				try {
 					file.getInputStream().close();
@@ -414,17 +414,17 @@ public class SysRoleController {
 				}
 			}
 		}
-		return Result.error("文件导入失败！");
+		return Result.error("File import failed!");
 	}
 	
 	/**
-	 * 查询数据规则数据
+	 * Query data rule data
 	 */
 	@GetMapping(value = "/datarule/{permissionId}/{roleId}")
 	public Result<?> loadDatarule(@PathVariable("permissionId") String permissionId,@PathVariable("roleId") String roleId) {
 		List<SysPermissionDataRule> list = sysPermissionDataRuleService.getPermRuleListByPermId(permissionId);
 		if(list==null || list.size()==0) {
-			return Result.error("未找到权限配置信息");
+			return Result.error("Permission configuration information not found");
 		}else {
 			Map<String,Object> map = new HashMap(5);
 			map.put("datarule", list);
@@ -442,12 +442,12 @@ public class SysRoleController {
 				}
 			}
 			return Result.ok(map);
-			//TODO 以后按钮权限的查询也走这个请求 无非在map中多加两个key
+			//TODO Later the query of the button permission also goes to this request It's nothing more than adding two more keys to the map
 		}
 	}
 	
 	/**
-	 * 保存数据规则至角色菜单关联表
+	 * Save the data rule to the role menu association table
 	 */
 	@PostMapping(value = "/datarule")
 	public Result<?> saveDatarule(@RequestBody JSONObject jsonObject) {
@@ -455,27 +455,27 @@ public class SysRoleController {
 			String permissionId = jsonObject.getString("permissionId");
 			String roleId = jsonObject.getString("roleId");
 			String dataRuleIds = jsonObject.getString("dataRuleIds");
-			log.info("保存数据规则>>"+"菜单ID:"+permissionId+"角色ID:"+ roleId+"数据权限ID:"+dataRuleIds);
+			log.info("Save the data rule >>"+"Menu ID:"+permissionId+"Role ID:"+ roleId+"Data Permission ID:"+dataRuleIds);
 			LambdaQueryWrapper<SysRolePermission> query = new LambdaQueryWrapper<SysRolePermission>()
 					.eq(SysRolePermission::getPermissionId, permissionId)
 					.eq(SysRolePermission::getRoleId,roleId);
 			SysRolePermission sysRolePermission = sysRolePermissionService.getOne(query);
 			if(sysRolePermission==null) {
-				return Result.error("请先保存角色菜单权限!");
+				return Result.error("Please save the role menu permissions first!");
 			}else {
 				sysRolePermission.setDataRuleIds(dataRuleIds);
 				this.sysRolePermissionService.updateById(sysRolePermission);
 			}
 		} catch (Exception e) {
-			log.error("SysRoleController.saveDatarule()发生异常：" + e.getMessage(),e);
-			return Result.error("保存失败");
+			log.error("SysRoleController.saveDatarule()An exception has occurred：" + e.getMessage(),e);
+			return Result.error("Save failed");
 		}
-		return Result.ok("保存成功!");
+		return Result.ok("Saved successfully!");
 	}
 	
 	
 	/**
-	 * 用户角色授权功能，查询菜单权限树
+	 * User role authorization function, query menu permission tree
 	 * @param request
 	 * @return
 	 */
@@ -528,7 +528,7 @@ public class SysRoleController {
 
     /**
      * TODO 权限未完成（敲敲云接口，租户应用）
-     * 分页获取全部角色列表（包含每个角色的数量）
+     * Paginate to get the full list of roles (including the number of each role)
      * @return
      */
     @RequestMapping(value = "/queryPageRoleCount", method = RequestMethod.GET)

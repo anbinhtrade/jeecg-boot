@@ -121,7 +121,7 @@ public class SysMessageController extends JeecgController<SysMessage, ISysMessag
 	}
 
 	/**
-	 * 导出excel
+	 * Export to Excel
 	 *
 	 * @param request
 	 */

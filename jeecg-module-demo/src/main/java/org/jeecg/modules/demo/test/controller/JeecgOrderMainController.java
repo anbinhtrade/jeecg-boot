@@ -173,7 +173,7 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      */
@@ -213,7 +213,7 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param

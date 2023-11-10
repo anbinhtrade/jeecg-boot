@@ -197,7 +197,7 @@ public class QuartzJobController {
 	}
 
 	/**
-	 * 导出excel
+	 * Export to Excel
 	 * 
 	 * @param request
 	 * @param quartzJob
@@ -222,7 +222,7 @@ public class QuartzJobController {
 	}
 
 	/**
-	 * 通过excel导入数据
+	 * Import data via Excel
 	 * 
 	 * @param request
 	 * @param response

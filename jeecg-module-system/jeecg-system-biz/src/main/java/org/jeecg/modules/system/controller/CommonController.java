@@ -26,7 +26,7 @@ import java.io.*;
 
 /**
  * <p>
- * 用户表 前端控制器
+ * User table front controller
  * </p>
  *
  * @Author scott
@@ -47,16 +47,16 @@ public class CommonController {
     private String uploadType;
 
     /**
-     * @Author 政辉
+     * @Author Zhenghui
      * @return
      */
     @GetMapping("/403")
     public Result<?> noauth()  {
-        return Result.error("没有权限，请联系管理员授权");
+        return Result.error("No permission, please contact the administrator for authorization");
     }
 
     /**
-     * 文件上传统一方法
+     * Unified method for file upload
      * @param request
      * @param response
      * @return
@@ -70,7 +70,7 @@ public class CommonController {
         //LOWCOD-2580 sys/common/upload接口存在任意文件上传漏洞
         if (oConvertUtils.isNotEmpty(bizPath)) {
             if(bizPath.contains(SymbolConstant.SPOT_SINGLE_SLASH) || bizPath.contains(SymbolConstant.SPOT_DOUBLE_BACKSLASH)){
-                throw new JeecgBootException("上传目录bizPath，格式非法！");
+                throw new JeecgBootException("Upload directory biz Path, the format is illegal!");
             }
         }
 
@@ -115,16 +115,16 @@ public class CommonController {
             result.setMessage(savePath);
             result.setSuccess(true);
         }else {
-            result.setMessage("上传失败！");
+            result.setMessage("Upload failed!");
             result.setSuccess(false);
         }
         return result;
     }
 
     /**
-     * 本地文件上传
-     * @param mf 文件
-     * @param bizPath  自定义路径
+     * Local file upload
+     * @param mf file
+     * @param bizPath custom path
      * @return
      */
     private String uploadLocal(MultipartFile mf,String bizPath){
@@ -201,8 +201,8 @@ public class CommonController {
 //	}
 
     /**
-     * 预览图片&下载文件
-     * 请求地址：http://localhost:8080/common/static/{user/20190119/e1fe9925bc315c60addea1b98eb1cb1349547719_1547866868179.jpg}
+     * Preview pictures & download files
+     * Request address: http://localhost:8080/common/static/{user/20190119/e 1 fe 9925 bc 315 c 60 addea 1 b 98 eb 1 cb 1349547719_1547866868179.jpg}
      *
      * @param request
      * @param response
@@ -230,7 +230,7 @@ public class CommonController {
             File file = new File(filePath);
             if(!file.exists()){
                 response.setStatus(404);
-                log.error("文件["+imgPath+"]不存在..");
+                log.error("File ["+ imgPath  +"] does not exist..");
                 return;
                 //throw new RuntimeException();
             }
@@ -246,7 +246,7 @@ public class CommonController {
             }
             response.flushBuffer();
         } catch (IOException e) {
-            log.error("预览文件失败" + e.getMessage());
+            log.error("Failed to preview file" + e.getMessage());
             response.setStatus(404);
             e.printStackTrace();
         } finally {
@@ -327,7 +327,7 @@ public class CommonController {
 //	}
 
     /**
-     * @功能：pdf预览Iframe
+     * @Function: pdf preview Iframe
      * @param modelAndView
      * @return
      */
@@ -338,9 +338,8 @@ public class CommonController {
     }
 
     /**
-     *  把指定URL后的字符串全部截断当成参数
-     *  这么做是为了防止URL中包含中文或者特殊字符（/等）时，匹配不了的问题
-     * @param request
+     * Truncate all strings after the specified URL and use them as parameters
+     * This is to prevent the problem of being unable to match when the URL contains Chinese or special characters (/, etc.)     * @param request
      * @return
      */
     private static String extractPathFromPattern(final HttpServletRequest request) {

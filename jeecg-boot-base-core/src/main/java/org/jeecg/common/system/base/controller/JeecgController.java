@@ -44,7 +44,7 @@ public class JeecgController<T, S extends IService<T>> {
     private JeecgBaseConfig jeecgBaseConfig;
     
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      */
@@ -154,7 +154,7 @@ public class JeecgController<T, S extends IService<T>> {
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response

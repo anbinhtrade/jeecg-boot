@@ -34,13 +34,13 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
- *  前端控制器
+ *  Front-end controllers
  * </p>
  *
  * @Author zhangweijian
  * @since 2018-12-28
  */
-@Api(tags = "数据字典")
+@Api(tags = "Data Dictionary")
 @RestController
 @RequestMapping("/sys/dictItem")
 @Slf4j
@@ -50,7 +50,7 @@ public class SysDictItemController {
 	private ISysDictItemService sysDictItemService;
 	
 	/**
-	 * @功能：查询字典数据
+	 * @Function: Query dictionary data
 	 * @param sysDictItem
 	 * @param pageNo
 	 * @param pageSize
@@ -71,7 +71,7 @@ public class SysDictItemController {
 	}
 	
 	/**
-	 * @功能：新增
+	 * @Feature: New
 	 * @return
 	 */
     @RequiresPermissions("system:dict:item:add")
@@ -82,16 +82,16 @@ public class SysDictItemController {
 		try {
 			sysDictItem.setCreateTime(new Date());
 			sysDictItemService.save(sysDictItem);
-			result.success("保存成功！");
+			result.success("The save was successful！");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 	
 	/**
-	 * @功能：编辑
+	 * @Function: Editing
 	 * @param sysDictItem
 	 * @return
 	 */
@@ -102,20 +102,20 @@ public class SysDictItemController {
 		Result<SysDictItem> result = new Result<SysDictItem>();
 		SysDictItem sysdict = sysDictItemService.getById(sysDictItem.getId());
 		if(sysdict==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			sysDictItem.setUpdateTime(new Date());
 			boolean ok = sysDictItemService.updateById(sysDictItem);
-			//TODO 返回false说明什么？
+			//TODO returns false？
 			if(ok) {
-				result.success("编辑成功!");
+				result.success("Edited successfully!");
 			}
 		}
 		return result;
 	}
 	
 	/**
-	 * @功能：删除字典数据
+	 * @FUNCTION：Delete dictionary data
 	 * @param id
 	 * @return
 	 */
@@ -126,18 +126,18 @@ public class SysDictItemController {
 		Result<SysDictItem> result = new Result<SysDictItem>();
 		SysDictItem joinSystem = sysDictItemService.getById(id);
 		if(joinSystem==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			boolean ok = sysDictItemService.removeById(id);
 			if(ok) {
-				result.success("删除成功!");
+				result.success("The deletion is successful!");
 			}
 		}
 		return result;
 	}
 	
 	/**
-	 * @功能：批量删除字典数据
+	 * @Function: Delete dictionary data in batches
 	 * @param ids
 	 * @return
 	 */
@@ -147,39 +147,39 @@ public class SysDictItemController {
 	public Result<SysDictItem> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		Result<SysDictItem> result = new Result<SysDictItem>();
 		if(ids==null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized！");
 		}else {
 			this.sysDictItemService.removeByIds(Arrays.asList(ids.split(",")));
-			result.success("删除成功!");
+			result.success("The deletion is successful!");
 		}
 		return result;
 	}
 
 	/**
-	 * 字典值重复校验
+	 * Dictionary value is doubled
 	 * @param sysDictItem
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value = "/dictItemCheck", method = RequestMethod.GET)
-	@ApiOperation("字典重复校验接口")
+	@ApiOperation("Dictionary duplicate verification interface")
 	public Result<Object> doDictItemCheck(SysDictItem sysDictItem, HttpServletRequest request) {
 		Long num = Long.valueOf(0);
 		LambdaQueryWrapper<SysDictItem> queryWrapper = new LambdaQueryWrapper<SysDictItem>();
 		queryWrapper.eq(SysDictItem::getItemValue,sysDictItem.getItemValue());
 		queryWrapper.eq(SysDictItem::getDictId,sysDictItem.getDictId());
 		if (StringUtils.isNotBlank(sysDictItem.getId())) {
-			// 编辑页面校验
+			// Edit the page validation
 			queryWrapper.ne(SysDictItem::getId,sysDictItem.getId());
 		}
 		num = sysDictItemService.count(queryWrapper);
 		if (num == 0) {
 			// 该值可用
-			return Result.ok("该值可用！");
+			return Result.ok("This value is available！");
 		} else {
 			// 该值不可用
-			log.info("该值不可用，系统中已存在！");
-			return Result.error("该值不可用，系统中已存在！");
+			log.info("The value is not available and already exists in the system！");
+			return Result.error("The value is not available and already exists in the system！");
 		}
 	}
 	

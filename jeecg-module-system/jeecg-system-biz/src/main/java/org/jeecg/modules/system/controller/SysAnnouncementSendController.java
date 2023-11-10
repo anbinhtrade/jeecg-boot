@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 
  /**
  * @Title: Controller
- * @Description: 用户通告阅读标记表
+ * @Description: User Advertisement Read Tag Table
  * @Author: jeecg-boot
  * @Date:  2019-02-21
  * @Version: V1.0
@@ -53,7 +53,7 @@ public class SysAnnouncementSendController {
 	private WebSocket webSocket;
 
 	/**
-	  * 分页列表查询
+	  * Paginated list queries
 	 * @param sysAnnouncementSend
 	 * @param pageNo
 	 * @param pageSize
@@ -80,17 +80,17 @@ public class SysAnnouncementSendController {
 			}
 		}
 		IPage<SysAnnouncementSend> pageList = sysAnnouncementSendService.page(page, queryWrapper);
-		//log.info("查询当前页："+pageList.getCurrent());
-		//log.info("查询当前页数量："+pageList.getSize());
-		//log.info("查询结果数量："+pageList.getRecords().size());
-		//log.info("数据总数："+pageList.getTotal());
+		//log.info("Query the current page："+pageList.getCurrent());
+		//log.info("Query the number of current pages："+pageList.getSize());
+		//log.info("The number of query results："+pageList.getRecords().size());
+		//log.info("Total number of data："+pageList.getTotal());
 		result.setSuccess(true);
 		result.setResult(pageList);
 		return result;
 	}
 	
 	/**
-	  *   添加
+	  *   Add to
 	 * @param sysAnnouncementSend
 	 * @return
 	 */
@@ -99,16 +99,16 @@ public class SysAnnouncementSendController {
 		Result<SysAnnouncementSend> result = new Result<SysAnnouncementSend>();
 		try {
 			sysAnnouncementSendService.save(sysAnnouncementSend);
-			result.success("添加成功！");
+			result.success("The addition was successful！");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 	
 	/**
-	  *  编辑
+	  *  Edit
 	 * @param sysAnnouncementSend
 	 * @return
 	 */
@@ -117,12 +117,12 @@ public class SysAnnouncementSendController {
 		Result<SysAnnouncementSend> result = new Result<SysAnnouncementSend>();
 		SysAnnouncementSend sysAnnouncementSendEntity = sysAnnouncementSendService.getById(sysAnnouncementSend.getId());
 		if(sysAnnouncementSendEntity==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			boolean ok = sysAnnouncementSendService.updateById(sysAnnouncementSend);
-			//TODO 返回false说明什么？
+			//TODO What does returning false mean？
 			if(ok) {
-				result.success("操作成功!");
+				result.success("The operation was successful!");
 			}
 		}
 		
@@ -130,7 +130,7 @@ public class SysAnnouncementSendController {
 	}
 	
 	/**
-	  *   通过id删除
+	  *   Delete by ID
 	 * @param id
 	 * @return
 	 */
@@ -139,11 +139,11 @@ public class SysAnnouncementSendController {
 		Result<SysAnnouncementSend> result = new Result<SysAnnouncementSend>();
 		SysAnnouncementSend sysAnnouncementSend = sysAnnouncementSendService.getById(id);
 		if(sysAnnouncementSend==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			boolean ok = sysAnnouncementSendService.removeById(id);
 			if(ok) {
-				result.success("删除成功!");
+				result.success("The deletion is successful!");
 			}
 		}
 		
@@ -151,7 +151,7 @@ public class SysAnnouncementSendController {
 	}
 	
 	/**
-	  *  批量删除
+	  *  Delete in bulk
 	 * @param ids
 	 * @return
 	 */
@@ -159,16 +159,16 @@ public class SysAnnouncementSendController {
 	public Result<SysAnnouncementSend> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		Result<SysAnnouncementSend> result = new Result<SysAnnouncementSend>();
 		if(ids==null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized！");
 		}else {
 			this.sysAnnouncementSendService.removeByIds(Arrays.asList(ids.split(",")));
-			result.success("删除成功!");
+			result.success("The deletion is successful!");
 		}
 		return result;
 	}
 	
 	/**
-	  * 通过id查询
+	  * Query by ID
 	 * @param id
 	 * @return
 	 */
@@ -177,7 +177,7 @@ public class SysAnnouncementSendController {
 		Result<SysAnnouncementSend> result = new Result<SysAnnouncementSend>();
 		SysAnnouncementSend sysAnnouncementSend = sysAnnouncementSendService.getById(id);
 		if(sysAnnouncementSend==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			result.setResult(sysAnnouncementSend);
 			result.setSuccess(true);
@@ -186,7 +186,7 @@ public class SysAnnouncementSendController {
 	}
 	
 	/**
-	 * @功能：更新用户系统消息阅读状态
+	 * @Function：Update the reading status of the user's system messages
 	 * @param json
 	 * @return
 	 */
@@ -202,7 +202,7 @@ public class SysAnnouncementSendController {
 		//update-begin-author:liusq date:2023-09-04 for:系统模块存在的sql漏洞写法
 		updateWrapper.eq(SysAnnouncementSend::getAnntId,anntId);
 		updateWrapper.eq(SysAnnouncementSend::getUserId,userId);
-		//update-end-author:liusq date:2023-09-04 for: 系统模块存在的sql漏洞写法
+		//update-end-author:liusq date:2023-09-04 for: How to write SQL vulnerabilities in system modules
 		//updateWrapper.last("where annt_id ='"+anntId+"' and user_id ='"+userId+"'");
 		SysAnnouncementSend announcementSend = new SysAnnouncementSend();
 		sysAnnouncementSendService.update(announcementSend, updateWrapper);
@@ -211,7 +211,7 @@ public class SysAnnouncementSendController {
 	}
 	
 	/**
-	 * @功能：获取我的消息
+	 * @Function: Get My Messages
 	 * @return
 	 */
 	@GetMapping(value = "/getMyAnnouncementSend")
@@ -232,7 +232,7 @@ public class SysAnnouncementSendController {
 	}
 
 	/**
-	 * @功能：一键已读
+	 * @Function: One-click read
 	 * @return
 	 */
 	@PutMapping(value = "/readAll")
@@ -251,13 +251,13 @@ public class SysAnnouncementSendController {
 		socketParams.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_TOPIC);
 		webSocket.sendMessage(socketParams.toJSONString());
 		result.setSuccess(true);
-		result.setMessage("全部已读");
+		result.setMessage("All read");
 		return result;
 	}
 
 
 	 /**
-	  * 根据消息发送记录ID获取消息内容
+	  * Obtain the message content based on the ID of the message sending record
 	  * @param sendId
 	  * @return
 	  */

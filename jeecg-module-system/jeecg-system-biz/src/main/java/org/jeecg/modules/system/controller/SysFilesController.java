@@ -21,13 +21,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 /**
- * @Description: 知识库-文档管理
+ * @Description: Knowledge Base - Document Management
  * @Author: jeecg-boot
  * @Date: 2022-07-21
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "知识库-文档管理")
+@Api(tags = "Knowledge Base - Document Management")
 @RestController
 @RequestMapping("/sys/files")
 public class SysFilesController extends JeecgController<SysFiles, ISysFilesService> {
@@ -35,7 +35,7 @@ public class SysFilesController extends JeecgController<SysFiles, ISysFilesServi
     private ISysFilesService sysFilesService;
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param sysFiles
      * @param pageNo
@@ -43,8 +43,8 @@ public class SysFilesController extends JeecgController<SysFiles, ISysFilesServi
      * @param req
      * @return
      */
-    @AutoLog(value = "知识库-文档管理-分页列表查询")
-    @ApiOperation(value = "知识库-文档管理-分页列表查询", notes = "知识库-文档管理-分页列表查询")
+    @AutoLog(value = "Knowledge Base - Document Management - Paginated List Query")
+    @ApiOperation(value = "Knowledge Base - Document Management - Paginated List Query", notes = "Knowledge Base - Document Management - Paginated List Query")
     @GetMapping(value = "/list")
     public Result<?> queryPageList(SysFiles sysFiles,
                                    @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
@@ -57,69 +57,69 @@ public class SysFilesController extends JeecgController<SysFiles, ISysFilesServi
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param sysFiles
      * @return
      */
-    @AutoLog(value = "知识库-文档管理-添加")
-    @ApiOperation(value = "知识库-文档管理-添加", notes = "知识库-文档管理-添加")
+    @AutoLog(value = "Knowledge Base - Document Management - Add")
+    @ApiOperation(value = "Knowledge Base - Document Management - Add", notes = "Knowledge Base - Document Management - Add")
     @PostMapping(value = "/add")
     public Result<?> add(@RequestBody SysFiles sysFiles) {
         sysFilesService.save(sysFiles);
-        return Result.OK("添加成功！");
+        return Result.OK("The addition was successful！");
     }
 
     /**
-     * 编辑
+     * Edit
      *
      * @param sysFiles
      * @return
      */
-    @AutoLog(value = "知识库-文档管理-编辑")
-    @ApiOperation(value = "知识库-文档管理-编辑", notes = "知识库-文档管理-编辑")
+    @AutoLog(value = "Knowledge Base - Document Management - Editing")
+    @ApiOperation(value = "Knowledge Base - Document Management - Editing", notes = "Knowledge Base - Document Management - Editing")
     @RequestMapping(value = "/edit", method = {RequestMethod.PUT, RequestMethod.POST})
     public Result<?> edit(@RequestBody SysFiles sysFiles) {
         sysFilesService.updateById(sysFiles);
-        return Result.OK("编辑成功!");
+        return Result.OK("Edited successfully!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "知识库-文档管理-通过id删除")
-    @ApiOperation(value = "知识库-文档管理-通过id删除", notes = "知识库-文档管理-通过id删除")
+    @AutoLog(value = "Knowledge Base - Document Management - Deletion by ID")
+    @ApiOperation(value = "Knowledge Base - Document Management - Deletion by ID", notes = "Knowledge Base - Document Management - Deletion by ID")
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         sysFilesService.removeById(id);
-        return Result.OK("删除成功!");
+        return Result.OK("The deletion is successful!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
      */
-    @AutoLog(value = "知识库-文档管理-批量删除")
-    @ApiOperation(value = "知识库-文档管理-批量删除", notes = "知识库-文档管理-批量删除")
+    @AutoLog(value = "Knowledge Base - Document Management - Batch Deletion")
+    @ApiOperation(value = "Knowledge Base - Document Management - Batch Deletion", notes = "Knowledge Base - Document Management - Batch Deletion")
     @DeleteMapping(value = "/deleteBatch")
     public Result<?> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         this.sysFilesService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.OK("批量删除成功！");
+        return Result.OK("The batch deletion is successful！");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "知识库-文档管理-通过id查询")
-    @ApiOperation(value = "知识库-文档管理-通过id查询", notes = "知识库-文档管理-通过id查询")
+    @AutoLog(value = "Knowledge Base - Document Management - Query by ID")
+    @ApiOperation(value = "Knowledge Base - Document Management - Query by ID", notes = "Knowledge Base - Document Management - Query by ID")
     @GetMapping(value = "/queryById")
     public Result<?> queryById(@RequestParam(name = "id", required = true) String id) {
         SysFiles sysFiles = sysFilesService.getById(id);
@@ -127,7 +127,7 @@ public class SysFilesController extends JeecgController<SysFiles, ISysFilesServi
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      * @param sysFiles
@@ -138,7 +138,7 @@ public class SysFilesController extends JeecgController<SysFiles, ISysFilesServi
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response

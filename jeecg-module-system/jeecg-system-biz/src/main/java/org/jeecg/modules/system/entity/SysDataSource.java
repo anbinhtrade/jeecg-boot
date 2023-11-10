@@ -14,7 +14,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * @Description: 多数据源管理
+ * @Description: Multi-data source management
  * @Author: jeecg-boot
  * @Date: 2019-12-25
  * @Version: V1.0
@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @TableName("sys_data_source")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "sys_data_source对象", description = "多数据源管理")
+@ApiModel(value = "sys_data_source对象", description = "Multi-data source management")
 public class SysDataSource {
 
     /**

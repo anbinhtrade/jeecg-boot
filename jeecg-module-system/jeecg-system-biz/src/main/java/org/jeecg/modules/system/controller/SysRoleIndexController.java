@@ -32,7 +32,7 @@ import io.swagger.annotations.ApiOperation;
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "角色首页配置")
+@Api(tags = "Character home page configuration")
 @RestController
 @RequestMapping("/sys/sysRoleIndex")
 public class SysRoleIndexController extends JeecgController<SysRoleIndex, ISysRoleIndexService> {
@@ -40,7 +40,7 @@ public class SysRoleIndexController extends JeecgController<SysRoleIndex, ISysRo
     private ISysRoleIndexService sysRoleIndexService;
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param sysRoleIndex
      * @param pageNo
@@ -48,8 +48,8 @@ public class SysRoleIndexController extends JeecgController<SysRoleIndex, ISysRo
      * @param req
      * @return
      */
-    @AutoLog(value = "角色首页配置-分页列表查询")
-    @ApiOperation(value = "角色首页配置-分页列表查询", notes = "角色首页配置-分页列表查询")
+    @AutoLog(value = "Role Home Page Configuration - Paginated List Query")
+    @ApiOperation(value = "Role Home Page Configuration - Paginated List Query", notes = "Role Home Page Configuration - Paginated List Query")
     @GetMapping(value = "/list")
     public Result<?> queryPageList(SysRoleIndex sysRoleIndex,
                                    @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
@@ -62,73 +62,73 @@ public class SysRoleIndexController extends JeecgController<SysRoleIndex, ISysRo
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param sysRoleIndex
      * @return
      */
     @RequiresPermissions("system:roleindex:add")
-    @AutoLog(value = "角色首页配置-添加")
-    @ApiOperation(value = "角色首页配置-添加", notes = "角色首页配置-添加")
+    @AutoLog(value = "Role Home Configuration - Add")
+    @ApiOperation(value = "Role Home Configuration - Add", notes = "Role Home Configuration - Add")
     @PostMapping(value = "/add")
     //@DynamicTable(value = DynamicTableConstant.SYS_ROLE_INDEX)
     public Result<?> add(@RequestBody SysRoleIndex sysRoleIndex,HttpServletRequest request) {
         sysRoleIndexService.save(sysRoleIndex);
-        return Result.OK("添加成功！");
+        return Result.OK("Added successfully!");
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param sysRoleIndex
      * @return
      */
     @RequiresPermissions("system:roleindex:edit")
-    @AutoLog(value = "角色首页配置-编辑")
-    @ApiOperation(value = "角色首页配置-编辑", notes = "角色首页配置-编辑")
+    @AutoLog(value = "Role Home Configuration - Edit")
+    @ApiOperation(value = "Role Home Configuration - Edit", notes = "Role Home Configuration - Edit")
     @RequestMapping(value = "/edit", method = {RequestMethod.PUT, RequestMethod.POST})
     //@DynamicTable(value = DynamicTableConstant.SYS_ROLE_INDEX)
     public Result<?> edit(@RequestBody SysRoleIndex sysRoleIndex,HttpServletRequest request) {
         sysRoleIndexService.updateById(sysRoleIndex);
-        return Result.OK("编辑成功!");
+        return Result.OK("Edit successful!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "角色首页配置-通过id删除")
-    @ApiOperation(value = "角色首页配置-通过id删除", notes = "角色首页配置-通过id删除")
+    @AutoLog(value = "Role Home Configuration - Delete by ID")
+    @ApiOperation(value = "Role Home Configuration - Delete by ID", notes = "Role Home Configuration - Delete by ID")
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         sysRoleIndexService.removeById(id);
-        return Result.OK("删除成功!");
+        return Result.OK("Deleted successfully!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
      */
-    @AutoLog(value = "角色首页配置-批量删除")
-    @ApiOperation(value = "角色首页配置-批量删除", notes = "角色首页配置-批量删除")
+    @AutoLog(value = "Configure the role home page - delete it in batches")
+    @ApiOperation(value = "Configure the role home page - delete it in batches", notes = "Configure the role home page - delete it in batches")
     @DeleteMapping(value = "/deleteBatch")
     public Result<?> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         this.sysRoleIndexService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.OK("批量删除成功！");
+        return Result.OK("Batch deletion successful!");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "角色首页配置-通过id查询")
-    @ApiOperation(value = "角色首页配置-通过id查询", notes = "角色首页配置-通过id查询")
+    @AutoLog(value = "Character Home Configuration - Query by ID")
+    @ApiOperation(value = "Character Home Configuration - Query by ID", notes = "Character Home Configuration - Query by ID")
     @GetMapping(value = "/queryById")
     public Result<?> queryById(@RequestParam(name = "id", required = true) String id) {
         SysRoleIndex sysRoleIndex = sysRoleIndexService.getById(id);
@@ -136,18 +136,18 @@ public class SysRoleIndexController extends JeecgController<SysRoleIndex, ISysRo
     }
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      * @param sysRoleIndex
      */
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, SysRoleIndex sysRoleIndex) {
-        return super.exportXls(request, sysRoleIndex, SysRoleIndex.class, "角色首页配置");
+        return super.exportXls(request, sysRoleIndex, SysRoleIndex.class, "Character home page configuration");
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response
@@ -159,13 +159,13 @@ public class SysRoleIndexController extends JeecgController<SysRoleIndex, ISysRo
     }
 
     /**
-     * 通过code查询
+     * Query by code
      *
      * @param roleCode
      * @return
      */
-    @AutoLog(value = "角色首页配置-通过code查询")
-    @ApiOperation(value = "角色首页配置-通过code查询", notes = "角色首页配置-通过code查询")
+    @AutoLog(value = "Character Home Configuration - Query by code")
+    @ApiOperation(value = "Character Home Configuration - Query by code", notes = "Character Home Configuration - Query by code")
     @GetMapping(value = "/queryByCode")
     //@DynamicTable(value = DynamicTableConstant.SYS_ROLE_INDEX)
     public Result<?> queryByCode(@RequestParam(name = "roleCode", required = true) String roleCode,HttpServletRequest request) {

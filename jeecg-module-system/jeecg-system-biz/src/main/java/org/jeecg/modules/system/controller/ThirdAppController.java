@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 第三方App对接
+ * Third-party app docking
  * @author: jeecg-boot
  */
 @Slf4j
@@ -53,18 +53,18 @@ public class ThirdAppController {
     private ISysThirdAccountService sysThirdAccountService;
 
     /**
-     * 获取启用的系统
+     * Get the enabled system
      */
     @GetMapping("/getEnabledType")
     public Result getEnabledType() {
         Map<String, Boolean> enabledMap = new HashMap(5);
-        //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]通过租户模式隔离 ------------
+        //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]Isolation through tenant mode ------------
         int tenantId = oConvertUtils.getInt(TenantContext.getTenant(), 0);
-        //查询当前租户下的第三方配置
+        //Query the third-party configurations of the current tenant
         List<SysThirdAppConfig> list = appConfigService.getThirdConfigListByThirdType(tenantId);
-        //钉钉是否已配置
+        //Whether DingTalk is configured
         boolean dingConfig = false;
-        //企业微信是否已配置
+        //Whether WeCom has been configured
         boolean qywxConfig = false;
         if(null != list && list.size()>0){
             for (SysThirdAppConfig config:list) {
@@ -80,43 +80,43 @@ public class ThirdAppController {
         }
         enabledMap.put("wechatEnterprise", qywxConfig);
         enabledMap.put("dingtalk", dingConfig);
-        //update-end---author:wangshuai ---date:20230224  for：[QQYUN-3440]通过租户模式隔离------------
+        //update-end---author:wangshuai ---date:20230224  for：[QQYUN-3440]Isolation through tenant mode------------
         return Result.OK(enabledMap);
     }
 
     /**
-     * 同步本地[用户]到【企业微信】
+     * Sync local [user] to [WeCom]
      *
      * @param ids
      * @return
      */
     @GetMapping("/sync/wechatEnterprise/user/toApp")
     public Result syncWechatEnterpriseUserToApp(@RequestParam(value = "ids", required = false) String ids) {
-        //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]通过租户模式隔离 ------------
-        //获取企业微信配置
+        //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]Isolation through tenant mode ------------
+        //Obtain the WeCom configuration
         Integer tenantId = oConvertUtils.getInt(TenantContext.getTenant(),0);
         SysThirdAppConfig config = appConfigService.getThirdConfigByThirdType(tenantId, MessageTypeEnum.QYWX.getType());
         if (null != config) {
         //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]通过租户模式隔离 ------------
             SyncInfoVo syncInfo = wechatEnterpriseService.syncLocalUserToThirdApp(ids);
             if (syncInfo.getFailInfo().size() == 0) {
-                return Result.OK("同步成功", syncInfo);
+                return Result.OK("Synchronization succeeded", syncInfo);
             } else {
-                return Result.error("同步失败", syncInfo);
+                return Result.error("Synchronization failed", syncInfo);
             }
         }
-        return Result.error("企业微信尚未配置,请配置企业微信");
+        return Result.error("WeCom has not been configured, please configure WeCom");
     }
 
     /**
-     * 同步【企业微信】[用户]到本地
+     * Synchronize [WeCom] [user] to the local computer
      *
-     * @param ids 作废
+     * @param ids VOID
      * @return
      */
     @GetMapping("/sync/wechatEnterprise/user/toLocal")
     public Result syncWechatEnterpriseUserToLocal(@RequestParam(value = "ids", required = false) String ids) {
-        return Result.error("由于企业微信接口调整，同步到本地功能已失效");
+        return Result.error("Due to the adjustment of the WeCom interface, the synchronization to local function has become invalid");
 
 //        if (thirdAppConfig.isWechatEnterpriseEnabled()) {
 //            SyncInfoVo syncInfo = wechatEnterpriseService.syncThirdAppUserToLocal();
@@ -130,7 +130,7 @@ public class ThirdAppController {
     }
 
     /**
-     * 同步本地[部门]到【企业微信】
+     * Sync the local [department] to [WeCom]
      *
      * @param ids
      * @return
@@ -143,23 +143,23 @@ public class ThirdAppController {
         if (null != config) {
             SyncInfoVo syncInfo = wechatEnterpriseService.syncLocalDepartmentToThirdApp(ids);
             if (syncInfo.getFailInfo().size() == 0) {
-                return Result.OK("同步成功", null);
+                return Result.OK("Synchronization succeeded", null);
             } else {
-                return Result.error("同步失败", syncInfo);
+                return Result.error("Synchronization failed", syncInfo);
             }
         }
-        return Result.error("企业微信尚未配置,请配置企业微信");
+        return Result.error("WeCom has not been configured, please configure WeCom");
     }
 
     /**
-     * 同步【企业微信】[部门]到本地
+     * Synchronize [WeCom] [Department] to the local area
      *
      * @param ids
      * @return
      */
     @GetMapping("/sync/wechatEnterprise/depart/toLocal")
     public Result syncWechatEnterpriseDepartToLocal(@RequestParam(value = "ids", required = false) String ids) {
-        return Result.error("由于企业微信接口调整，企业微信同步本地部门失效");
+        return Result.error("Due to the adjustment of the WeCom interface, the synchronization of the local department of WeCom is invalid");
 //        //获取企业微信配置
 //        Integer tenantId = oConvertUtils.getInt(TenantContext.getTenant(),0);
 //        SysThirdAppConfig config = appConfigService.getThirdConfigByThirdType(tenantId, MessageTypeEnum.QYWX.getType());
@@ -175,7 +175,7 @@ public class ThirdAppController {
     }
 
     /**
-     * 同步本地[部门]到【钉钉】
+     * Synchronizing the local [department] to [DingTalk]
      *
      * @param ids
      * @return
@@ -188,12 +188,12 @@ public class ThirdAppController {
         if (null != config) {
             SyncInfoVo syncInfo = dingtalkService.syncLocalDepartmentToThirdApp(ids);
             if (syncInfo.getFailInfo().size() == 0) {
-                return Result.OK("同步成功", null);
+                return Result.OK("Synchronization succeeded", null);
             } else {
-                return Result.error("同步失败", syncInfo);
+                return Result.error("Synchronization failed", syncInfo);
             }
         }
-        return Result.error("钉钉尚未配置,请配置钉钉");
+        return Result.error("DingTalk has not been configured, please configure DingTalk");
     }
 
 //    /**
@@ -219,7 +219,7 @@ public class ThirdAppController {
 //    }
 
     /**
-     * 同步本地[用户]到【钉钉】
+     * Synchronizing Local [Users] to [DingTalk]
      *
      * @param ids
      * @return
@@ -233,12 +233,12 @@ public class ThirdAppController {
         if(null != appConfig){
             SyncInfoVo syncInfo = dingtalkService.syncLocalUserToThirdApp(ids);
             if (syncInfo.getFailInfo().size() == 0) {
-                return Result.OK("同步成功", syncInfo);
+                return Result.OK("Synchronization succeeded", syncInfo);
             } else {
-                return Result.error("同步失败", syncInfo);
+                return Result.error("Synchronization failed", syncInfo);
             }
         }
-        return Result.error("钉钉尚未配置,请配置钉钉");
+        return Result.error("DingTalk has not been configured, please configure DingTalk");
     }
 
 //    /**
@@ -264,7 +264,7 @@ public class ThirdAppController {
 //    }
 
     /**
-     * 发送消息测试
+     * Send a message test
      *
      * @return
      */
@@ -283,7 +283,7 @@ public class ThirdAppController {
         int tenantId = oConvertUtils.getInt(TenantContext.getTenant(),0);
 
         String fromUser = JwtUtil.getUserNameByToken(request);
-        String title = "第三方APP消息测试";
+        String title = "Third-party APP message testing";
         MessageDTO message = new MessageDTO(fromUser, receiver, title, content);
         message.setToAll(sendAll);
         //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]钉钉、企业微信通过租户模式隔离 ------------
@@ -296,7 +296,7 @@ public class ThirdAppController {
                 JSONObject response = wechatEnterpriseService.sendMessageResponse(message, false);
                 return Result.OK(response);
             }
-            return Result.error("企业微信尚未配置,请配置企业微信");
+            return Result.error("WeCom has not been configured, please configure WeCom");
             //update-begin---author:wangshuai ---date:20230224  for：[QQYUN-3440]钉钉、企业微信通过租户模式隔离 ------------
         } else if (dingType.toUpperCase().equals(app)) {
             SysThirdAppConfig config = appConfigService.getThirdConfigByThirdType(tenantId, dingType);
@@ -305,13 +305,13 @@ public class ThirdAppController {
                 Response<String> response = dingtalkService.sendMessageResponse(message, false);
                 return Result.OK(response);
             }
-            return Result.error("钉钉尚未配置,请配置钉钉");
+            return Result.error("DingTalk has not been configured, please configure DingTalk");
         }
-        return Result.error("不识别的第三方APP");
+        return Result.error("Third-party apps that are not recognized");
     }
 
     /**
-     * 撤回消息测试
+     * Retract message test
      *
      * @return
      */
@@ -327,27 +327,27 @@ public class ThirdAppController {
         if (CommonConstant.WECHAT_ENTERPRISE.equals(app)) {
             SysThirdAppConfig config = appConfigService.getThirdConfigByThirdType(tenantId, MessageTypeEnum.QYWX.getType());
             if (null != config) {
-                return Result.error("企业微信不支持撤回消息");
+                return Result.error("WeCom does not support retracting messages");
             }
-            return Result.error("企业微信尚未配置,请配置企业微信");
+            return Result.error("WeCom has not been configured, please configure WeCom");
         } else if (CommonConstant.DINGTALK.equals(app)) {
             SysThirdAppConfig config = appConfigService.getThirdConfigByThirdType(tenantId, MessageTypeEnum.DD.getType());
             if (null != config) {
                 Response<JSONObject> response = dingtalkService.recallMessageResponse(msgTaskId);
                 if (response.isSuccess()) {
-                    return Result.OK("撤回成功", response);
+                    return Result.OK("The withdrawal was successful", response);
                 } else {
-                    return Result.error("撤回失败：" + response.getErrcode() + "——" + response.getErrmsg(), response);
+                    return Result.error("Withdrawal failed:" + response.getErrcode() + "——" + response.getErrmsg(), response);
                 }
             }
-            return Result.error("钉钉尚未配置,请配置钉钉");
+            return Result.error("DingTalk has not been configured, please configure DingTalk");
         }
-        return Result.error("不识别的第三方APP");
+        return Result.error("Third-party apps that are not recognized");
     }
 
     //========================begin 应用低代码钉钉/企业微信同步用户部门专用 =============================
     /**
-     * 添加第三方app配置
+     * Add third-party app configurations
      *
      * @param appConfig
      * @return
@@ -355,33 +355,33 @@ public class ThirdAppController {
     @RequestMapping(value = "/addThirdAppConfig", method = RequestMethod.POST)
     public Result<String> addThirdAppConfig(@RequestBody SysThirdAppConfig appConfig) {
         Result<String> result = new Result<>();
-        //根据当前登录租户id和第三方类别判断是否已经创建
+        //Determine whether the tenant ID and third-party category have been created
         Integer tenantId = oConvertUtils.isNotEmpty(appConfig.getTenantId()) ? appConfig.getTenantId() : oConvertUtils.getInt(TenantContext.getTenant(), 0);
         SysThirdAppConfig config = appConfigService.getThirdConfigByThirdType(tenantId, appConfig.getThirdType());
         if (null != config) {
-            result.error500("操作失败,同一个租户下只允许绑定一个钉钉或者企业微信");
+            result.error500("If the operation fails, only one DingTalk or WeCom can be bound to the same tenant");
             return result;
         }
         String clientId = appConfig.getClientId();
         //通过应用key获取第三方配置
         List<SysThirdAppConfig> thirdAppConfigByClientId = appConfigService.getThirdAppConfigByClientId(clientId);
         if(CollectionUtil.isNotEmpty(thirdAppConfigByClientId)){
-            result.error500("AppKey已存在，请勿重复添加");
+            result.error500("The App Key already exists, please do not add it repeatedly");
             return result;
         }
         try {
             appConfig.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(),0));
             appConfigService.save(appConfig);
-            result.success("添加成功！");
+            result.success("Added successfully!");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            result.error500("操作失败");
+            result.error500("The operation failed");
         }
         return result;
     }
 
     /**
-     * 编辑第三方app配置
+     * Edit the configuration of a third-party app
      *
      * @param appConfig
      * @return
@@ -391,7 +391,7 @@ public class ThirdAppController {
         Result<String> result = new Result<>();
         SysThirdAppConfig config = appConfigService.getById(appConfig.getId());
         if (null == config) {
-            result.error500("数据不存在");
+            result.error500("The data does not exist");
             return result;
         }
         String clientId = appConfig.getClientId();
@@ -400,22 +400,22 @@ public class ThirdAppController {
             //通过应用key获取第三方配置
             List<SysThirdAppConfig> thirdAppConfigByClientId = appConfigService.getThirdAppConfigByClientId(clientId);
             if(CollectionUtil.isNotEmpty(thirdAppConfigByClientId)){
-                result.error500("AppKey已存在，请勿重复添加");
+                result.error500("The App Key already exists, please do not add it repeatedly");
                 return result;
             }
         }
         try {
             appConfigService.updateById(appConfig);
-            result.success("修改成功！");
+            result.success("Modification successful!");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            result.error500("操作失败");
+            result.error500("The operation failed");
         }
         return result;
     }
 
     /**
-     * 根据租户id和第三方类型获取第三方app配置信息
+     * Obtain third-party app configuration information based on tenant ID and third-party type
      *
      * @param tenantId
      * @param thirdType
@@ -430,7 +430,7 @@ public class ThirdAppController {
 
         if (MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL) {
             if (tenantId == null) {
-                return Result.error("开启多租户模式，租户ID参数不允许为空！");
+                return Result.error("If you enable multi-tenant mode, the tenant ID parameter cannot be empty.");
             }
         } else {
             //租户未传递，则采用平台的
@@ -447,7 +447,7 @@ public class ThirdAppController {
     }
 
     /**
-     * 同步【钉钉】[部门和用户]到本地
+     * Synchronize DingTalk [departments and users] to the local computer
      *
      * @param ids
      * @return
@@ -459,19 +459,19 @@ public class ThirdAppController {
         if (null != config) {
             SyncInfoVo syncInfo = dingtalkService.syncThirdAppDepartmentUserToLocal();
             if (syncInfo.getFailInfo().size() == 0) {
-                return Result.OK("同步成功", syncInfo);
+                return Result.OK("Synchronization succeeded", syncInfo);
             } else {
-                return Result.error("同步失败", syncInfo);
+                return Result.error("Synchronization failed", syncInfo);
             }
         }
-        return Result.error("钉钉尚未配置,请配置钉钉");
+        return Result.error("DingTalk has not been configured, please configure DingTalk");
     }
     //========================end 应用低代码钉钉/企业微信同步用户部门专用 ========================
 
 
     //========================begin 应用低代码账号设置第三方账号绑定 ================================
     /**
-     * 获取第三方账号
+     * Get a third-party account
      * @param thirdType
      * @return
      */
@@ -492,7 +492,7 @@ public class ThirdAppController {
     }
 
     /**
-     * 绑定第三方账号
+     * Bind a third-party account
      * @return
      */
     @PostMapping("/bindThirdAppAccount")
@@ -502,7 +502,7 @@ public class ThirdAppController {
     }
 
     /**
-     * 删除第三方用户信息
+     * Deletion of third-party user information
      * @param sysThirdAccount
      * @return
      */
@@ -510,14 +510,14 @@ public class ThirdAppController {
     public Result<String> deleteThirdAccountById(@RequestBody SysThirdAccount sysThirdAccount){
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         if(!sysUser.getId().equals(sysThirdAccount.getSysUserId())){
-            return Result.error("无权修改他人信息");
+            return Result.error("There is no right to modify the information of others");
         }
         SysThirdAccount thirdAccount = sysThirdAccountService.getById(sysThirdAccount.getId());
         if(null == thirdAccount){
-            return Result.error("未找到改第三方账户信息");
+            return Result.error("The third-party account information could not be found");
         }
         sysThirdAccountService.removeById(thirdAccount.getId());
-        return Result.ok("解绑成功");
+        return Result.ok("The unbinding is successful");
     }
-    //========================end 应用低代码账号设置第三方账号绑定 ================================
+    //========================end Apply a low-code account to set up a third-party account binding ================================
 }

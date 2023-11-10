@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
- * 租户配置信息
+ * Tenant configuration information
  * @author: jeecg-boot
  */
 @Slf4j
@@ -66,7 +66,7 @@ public class SysTenantController {
     private ISysDepartService sysDepartService;
 
     /**
-     * 获取列表数据
+     * Get list data
      * @param sysTenant
      * @param pageNo
      * @param pageSize
@@ -79,7 +79,7 @@ public class SysTenantController {
 	public Result<IPage<SysTenant>> queryPageList(SysTenant sysTenant,@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 									  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,HttpServletRequest req) {
 		Result<IPage<SysTenant>> result = new Result<IPage<SysTenant>>();
-        //---author:zhangyafei---date:20210916-----for: 租户管理添加日期范围查询---
+        //---author:zhangyafei---date:20210916-----for: Add a date range query --- for tenant management
         Date beginDate=null;
         Date endDate=null;
         if(oConvertUtils.isNotEmpty(sysTenant)) {
@@ -104,7 +104,7 @@ public class SysTenantController {
 	}
 
     /**
-     * 获取租户删除的列表
+     * Get a list of tenant deletions
      * @param sysTenant
      * @param pageNo
      * @param pageSize
@@ -124,7 +124,7 @@ public class SysTenantController {
     }
     
     /**
-     *   添加
+     *   Add to
      * @param
      * @return
      */
@@ -133,22 +133,22 @@ public class SysTenantController {
     public Result<SysTenant> add(@RequestBody SysTenant sysTenant) {
         Result<SysTenant> result = new Result();
         if(sysTenantService.getById(sysTenant.getId())!=null){
-            return result.error500("该编号已存在!");
+            return result.error500("The number already exists!");
         }
         try {
             sysTenantService.saveTenant(sysTenant);
-            //添加默认产品包
+            // Add a default package
             sysTenantPackService.addTenantDefaultPack(sysTenant.getId());
-            result.success("添加成功！");
+            result.success("Added successfully!");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            result.error500("操作失败");
+            result.error500("The operation failed");
         }
         return result;
     }
 
     /**
-     *  编辑
+     *  EDIT
      * @param
      * @return
      */
@@ -158,20 +158,20 @@ public class SysTenantController {
         Result<SysTenant> result = new Result();
         SysTenant sysTenant = sysTenantService.getById(tenant.getId());
         if(sysTenant==null) {
-           return result.error500("未找到对应实体");
+           return result.error500("No corresponding entity found");
         }
         if(oConvertUtils.isEmpty(sysTenant.getHouseNumber())){
             tenant.setHouseNumber(RandomUtil.randomStringUpper(6));
         }
         boolean ok = sysTenantService.updateById(tenant);
         if(ok) {
-            result.success("修改成功!");
+            result.success("Modification successful!");
         }
         return result;
     }
 
     /**
-     *   通过id删除
+     *   Delete by ID
      * @param id
      * @return
      */
@@ -188,18 +188,18 @@ public class SysTenantController {
             String username = "admin";
             String createdBy = sysUser.getUsername();
             if (!sysTenant.getCreateBy().equals(createdBy) && !username.equals(createdBy)) {
-                baseCommonService.addLog("未经授权，不能删除非自己创建的租户，租户ID：" + id + "，操作人：" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_3);
-                return Result.error("删除租户失败,当前操作人不是租户的创建人！");
+                baseCommonService.addLog("Tenants that are not created by you cannot be deleted without authorization, and the tenant ID:" + id + ", Operated by:" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_3);
+                return Result.error("Failed to delete a tenant, and the current operator is not the creator of the tenant.");
             }
         }
         //------------------------------------------------------------------
                 
         sysTenantService.removeTenantById(id);
-        return Result.ok("删除成功");
+        return Result.ok("The deletion is successful");
     }
 
     /**
-     *  批量删除
+     *  Delete in bulk
      * @param ids
      * @return
      */
@@ -208,24 +208,24 @@ public class SysTenantController {
     public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
         Result<?> result = new Result<>();
         if(oConvertUtils.isEmpty(ids)) {
-            result.error500("未选中租户！");
+            result.error500("Tenant unchecked!");
         }else {
             String[] ls = ids.split(",");
-            // 过滤掉已被引用的租户
+            // Filter out tenants that have been referenced
             List<Integer> idList = new ArrayList<>();
             for (String id : ls) {
                 //------------------------------------------------------------------
-                //如果是saas隔离的情况下，判断当前租户id是否是当前租户下的
+                //If SaaS is isolated, check whether the current tenant ID belongs to the current tenant
                 if (MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL) {
-                    //获取当前用户
+                    // Get the current user
                     LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
                     SysTenant sysTenant = sysTenantService.getById(id);
 
                     String username = "admin";
                     String createdBy = sysUser.getUsername();
                     if (!sysTenant.getCreateBy().equals(createdBy) && !username.equals(createdBy)) {
-                        baseCommonService.addLog("未经授权，不能删除非自己创建的租户，租户ID：" + id + "，操作人：" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_3);
-                        return Result.error("删除租户失败,当前操作人不是租户的创建人！");
+                        baseCommonService.addLog("Tenants that are not created by you cannot be deleted without authorization, and the tenant ID:" + id + ", Operated by:" + sysUser.getUsername(), CommonConstant.LOG_TYPE_2, CommonConstant.OPERATE_TYPE_3);
+                        return Result.error("Failed to delete a tenant, and the current operator is not the creator of the tenant.");
                     }
                 }
                 //------------------------------------------------------------------
@@ -234,14 +234,14 @@ public class SysTenantController {
             }
             //update-begin---author:wangshuai ---date:20230710  for：【QQYUN-5723】3、租户删除直接删除，不删除中间表------------
             sysTenantService.removeByIds(idList);
-            result.success("删除成功！");
+            result.success("Deleted successfully!");
             //update-end---author:wangshuai ---date:20220523  for：【QQYUN-5723】3、租户删除直接删除，不删除中间表------------
         }
         return result;
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      * @param id
      * @return
      */
@@ -249,23 +249,23 @@ public class SysTenantController {
     public Result<SysTenant> queryById(@RequestParam(name="id",required=true) String id) {
         Result<SysTenant> result = new Result<SysTenant>();
         if(oConvertUtils.isEmpty(id)){
-            result.error500("参数为空！");
+            result.error500("The argument is empty!");
         }
         //------------------------------------------------------------------------------------------------
-        //获取登录用户信息
+        //Obtain the logged-in user information
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         //是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】, admin给特权可以管理所有租户
         if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL && !"admin".equals(sysUser.getUsername())){
             Integer loginSessionTenant = oConvertUtils.getInt(TenantContext.getTenant());
             if(loginSessionTenant!=null && !loginSessionTenant.equals(Integer.valueOf(id))){
-                result.error500("无权限访问他人租户！");
+                result.error500("No access to other tenants!");
                 return result;
             }
         }
         //------------------------------------------------------------------------------------------------
         SysTenant sysTenant = sysTenantService.getById(id);
         if(sysTenant==null) {
-            result.error500("未找到对应实体");
+            result.error500("No corresponding entity found");
         }else {
             result.setResult(sysTenant);
             result.setSuccess(true);
@@ -275,7 +275,7 @@ public class SysTenantController {
 
 
     /**
-     * 查询有效的 租户数据
+     * Query valid tenant data
      * @return
      */
     @RequiresPermissions("system:tenant:queryList")
@@ -295,7 +295,7 @@ public class SysTenantController {
     }
 
     /**
-     * 产品包分页列表查询
+     * Query the pagination list of product packages
      *
      * @param sysTenantPack
      * @param pageNo
@@ -320,7 +320,7 @@ public class SysTenantController {
     }
 
     /**
-     * 创建租户产品包
+     * Create a tenant package
      *
      * @param sysTenantPack
      * @return
@@ -329,11 +329,11 @@ public class SysTenantController {
     @RequiresPermissions("system:tenant:add:pack")
     public Result<String> addPackPermission(@RequestBody SysTenantPack sysTenantPack) {
         sysTenantPackService.addPackPermission(sysTenantPack);
-        return Result.ok("创建租户产品包成功");
+        return Result.ok("The tenant package is created");
     }
 
     /**
-     * 创建租户产品包
+     * Create a tenant package
      *
      * @param sysTenantPack
      * @return
@@ -342,11 +342,11 @@ public class SysTenantController {
     @RequiresPermissions("system:tenant:edit:pack")
     public Result<String> editPackPermission(@RequestBody SysTenantPack sysTenantPack) {
         sysTenantPackService.editPackPermission(sysTenantPack);
-        return Result.ok("修改租户产品包成功");
+        return Result.ok("The tenant package was modified");
     }
 
     /**
-     * 批量删除用户菜单
+     * Delete user menus in bulk
      *
      * @param ids
      * @return
@@ -355,14 +355,14 @@ public class SysTenantController {
     @RequiresPermissions("system:tenant:delete:pack")
     public Result<String> deletePackPermissions(@RequestParam(value = "ids") String ids) {
         sysTenantPackService.deletePackPermissions(ids);
-        return Result.ok("删除租户产品包成功");
+        return Result.ok("The tenant package was deleted");
     }
     
 
 
     //===========【低代码应用，前端专用接口 —— 加入限制只能维护和查看自己拥有的租户】==========================================================
     /**
-     *  查询当前用户的所有有效租户【低代码应用专用接口】
+     *  Query all active tenants for the current user【Dedicated interfaces for low-code applications】
      * @return
      */
     @RequestMapping(value = "/getCurrentUserTenant", method = RequestMethod.GET)
@@ -383,13 +383,13 @@ public class SysTenantController {
             result.setResult(map);
         }catch(Exception e) {
             log.error(e.getMessage(), e);
-            result.error500("查询失败！");
+            result.error500("Query failed!");
         }
         return result;
     }
 
     /**
-     * 邀请用户【低代码应用专用接口】
+     * Invite users to [low-code application specific interface]
      * @param ids
      * @param phone
      * @return
@@ -398,11 +398,11 @@ public class SysTenantController {
     @RequiresPermissions("system:tenant:invitation:user")
     public Result<String> invitationUserJoin(@RequestParam("ids") String ids,@RequestParam("phone") String phone){
         sysTenantService.invitationUserJoin(ids,phone);
-        return Result.ok("邀请用户成功");
+        return Result.ok("The user was successfully invited");
     }
 
     /**
-     * 获取用户列表数据【低代码应用专用接口】
+     * Get user list data [low-code application dedicated interface]
      * @param user
      * @param pageNo
      * @param pageSize
@@ -425,7 +425,7 @@ public class SysTenantController {
     }
 
     /**
-     * 请离用户租户【低代码应用专用接口】
+     * Please leave the user tenant [low-code application dedicated interface]
      * @param userIds
      * @param tenantId
      * @return
@@ -440,16 +440,16 @@ public class SysTenantController {
         if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL && !"admin".equals(sysUser.getUsername())){
             Integer loginSessionTenant = oConvertUtils.getInt(TenantContext.getTenant());
             if(loginSessionTenant!=null && !loginSessionTenant.equals(Integer.valueOf(tenantId))){
-                result.error500("无权限访问他人租户！");
+                result.error500("No access to other tenants!");
                 return result;
             }
         }
         sysTenantService.leaveTenant(userIds,tenantId);
-        return Result.ok("请离成功");
+        return Result.ok("Please leave the success");
     }
 
     /**
-     *  编辑（只允许修改自己拥有的租户）【低代码应用专用接口】
+     *  Editing (only allowed to modify tenants owned by oneself) [low-code application-specific interface]
      * @param
      * @return
      */
@@ -458,25 +458,25 @@ public class SysTenantController {
         Result<SysTenant> result = new Result();
         String tenantId = TokenUtils.getTenantIdByRequest(req);
         if(!tenantId.equals(tenant.getId().toString())){
-            return result.error500("无权修改他人租户！");
+            return result.error500("No right to modify other tenants!");
         }
 
         SysTenant sysTenant = sysTenantService.getById(tenant.getId());
         if(sysTenant==null) {
-            return result.error500("未找到对应实体");
+            return result.error500("No corresponding entity found");
         }
         if(oConvertUtils.isEmpty(sysTenant.getHouseNumber())){
             tenant.setHouseNumber(RandomUtil.randomStringUpper(6));
         }
         boolean ok = sysTenantService.updateById(tenant);
         if(ok) {
-            result.success("修改成功!");
+            result.success("Modification successful!");
         }
         return result;
     }
     
     /**
-     * 创建租户并且将用户保存到中间表【低代码应用专用接口】
+     * Create a tenant and save users to an intermediate table [low-code application-specific interface]
      * @param sysTenant
      */
     @PostMapping("/saveTenantJoinUser")
@@ -485,13 +485,13 @@ public class SysTenantController {
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         Integer tenantId = sysTenantService.saveTenantJoinUser(sysTenant, sysUser.getId());
         result.setSuccess(true);
-        result.setMessage("创建成功");
+        result.setMessage("The creation is successful");
         result.setResult(tenantId);
         return result;
     }
 
     /**
-     * 加入租户通过门牌号【低代码应用专用接口】
+     * Join a tenant through the house number [low-code application dedicated interface]
      * @param sysTenant
      */
     @PostMapping("/joinTenantByHouseNumber")
@@ -500,12 +500,12 @@ public class SysTenantController {
         Integer tenantId = sysTenantService.joinTenantByHouseNumber(sysTenant, sysUser.getId());
         Result<Integer> result = new Result<>();
         if(tenantId != 0){
-            result.setMessage("申请租户成功");
+            result.setMessage("The tenant application is successful");
             result.setSuccess(true);
             result.setResult(tenantId);
             return result;
         }else{
-            result.setMessage("该门牌号不存在");
+            result.setMessage("The house number does not exist");
             result.setSuccess(false);
             return result;
         }
@@ -513,7 +513,7 @@ public class SysTenantController {
     
     //update-begin---author:wangshuai ---date:20230107  for：[QQYUN-3725]申请加入租户，审核中状态增加接口------------
     /**
-     * 分页获取租户用户数据(vue3用户租户页面)【低代码应用专用接口】
+     * Get tenant user data by page (vue 3 user tenant page) [low-code application dedicated interface]
      *
      * @param pageNo
      * @param pageSize
@@ -538,9 +538,9 @@ public class SysTenantController {
     }
 
     /**
-     * 通过用户id获取租户列表【低代码应用专用接口】
+     * Obtaining the Tenant List by User ID [Low-Code Application Dedicated Interface]
      *
-     * @param userTenantStatus 关系表的状态
+     * @param userTenantStatus The status of the relationship table
      * @return
      */
     @GetMapping("/getTenantListByUserId")
@@ -557,21 +557,21 @@ public class SysTenantController {
     }
 
     /**
-     * 更新用户租户关系状态【低代码应用专用接口】
+     * Update User Tenant Relationship Status [Low-Code Application Dedicated Interface]
      */
     @PutMapping("/updateUserTenantStatus")
     //@RequiresPermissions("system:tenant:updateUserTenantStatus")
     public Result<String> updateUserTenantStatus(@RequestBody SysUserTenant userTenant) {
         String tenantId = TenantContext.getTenant();
         if (oConvertUtils.isEmpty(tenantId)) {
-            return Result.error("未找到当前租户信息"); 
+            return Result.error("The current tenant information was not found");
         }
         relationService.updateUserTenantStatus(userTenant.getUserId(), tenantId, userTenant.getStatus());
-        return Result.ok("更新用户租户状态成功");
+        return Result.ok("The update of the user's tenant status is successful");
     }
 
     /**
-     * 注销租户【低代码应用专用接口】
+     * Deregistering a Tenant [Low-Code Application Dedicated Interface]
      *
      * @param sysTenant
      * @return
@@ -582,31 +582,31 @@ public class SysTenantController {
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         SysTenant tenant = sysTenantService.getById(sysTenant.getId());
         if (null == tenant) {
-            return Result.error("未找到当前租户信息");
+            return Result.error("The current tenant information was not found");
         }
         if (!sysUser.getUsername().equals(tenant.getCreateBy())) {
-            return Result.error("无权限，只能注销自己创建的租户！");
+            return Result.error("You have no permissions, you can only log out of the tenant you created!");
         }
         SysUser userById = sysUserService.getById(sysUser.getId());
         String loginPassword = request.getParameter("loginPassword");
         String passwordEncode = PasswordUtil.encrypt(sysUser.getUsername(),loginPassword, userById.getSalt());
         if (!passwordEncode.equals(userById.getPassword())) {
-            return Result.error("密码不正确");
+            return Result.error("The password is incorrect");
         }
         sysTenantService.removeById(sysTenant.getId());
-        return Result.ok("注销成功");
+        return Result.ok("The logout is successful");
     }
     //update-end---author:wangshuai ---date:20230107  for：[QQYUN-3725]申请加入租户，审核中状态增加接口------------
 
     /**
-     * 获取租户用户不同状态下的数量【低代码应用专用接口】
+     * Obtaining the Number of Tenant Users in Different States [Low-Code Application Dedicated Interface]
      * @return
      */
     @GetMapping("/getTenantStatusCount")
     public Result<Long> getTenantStatusCount(@RequestParam(value = "status",defaultValue = "1") String status, HttpServletRequest req){
         String tenantId = TokenUtils.getTenantIdByRequest(req);
         if (null == tenantId) {
-            return Result.error("未找到当前租户信息");
+            return Result.error("The current tenant information was not found");
         }
         LambdaQueryWrapper<SysUserTenant> query = new LambdaQueryWrapper<>();
         query.eq(SysUserTenant::getTenantId,tenantId);
@@ -616,7 +616,7 @@ public class SysTenantController {
     }
 
     /**
-     * 用户取消租户申请【低代码应用专用接口】
+     * The user cancels the tenant application [low-code application dedicated interface]
      * @param tenantId
      * @return
      */
@@ -624,13 +624,13 @@ public class SysTenantController {
     public Result<String> cancelApplyTenant(@RequestParam("tenantId") String tenantId){
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         sysTenantService.leaveTenant(sysUser.getId(),tenantId);
-        return Result.ok("取消申请成功");
+        return Result.ok("The cancellation application was successful");
     }
 
     //===========【低代码应用，前端专用接口 —— 加入限制只能维护和查看自己拥有的租户】==========================================================
 
     /**
-     * 彻底删除租户
+     * Delete the tenant completely
      * @param ids
      * @return
      */
@@ -638,11 +638,11 @@ public class SysTenantController {
     @RequiresPermissions("system:tenant:deleteTenantLogic")
     public Result<String> deleteTenantLogic(@RequestParam("ids") String ids){
         sysTenantService.deleteTenantLogic(ids);
-        return Result.ok("彻底删除成功");
+        return Result.ok("The deletion was successful");
     }
 
     /**
-     * 还原删除的租户
+     * Restore a deleted tenant
      * @param ids
      * @return
      */
@@ -650,11 +650,11 @@ public class SysTenantController {
     @RequiresPermissions("system:tenant:revertTenantLogic")
     public Result<String> revertTenantLogic(@RequestParam("ids") String ids){
         sysTenantService.revertTenantLogic(ids);
-        return Result.ok("还原成功");
+        return Result.ok("The restore was successful");
     }
 
     /**
-     * 退出租户【低代码应用专用接口】
+     * Exiting a Tenant [Low-Code Application Dedicated Interface]
      * @param sysTenant
      * @param request
      * @return
@@ -665,22 +665,22 @@ public class SysTenantController {
         //验证用户是否已存在
         Integer count = relationService.userTenantIzExist(sysUser.getId(),sysTenant.getId());
         if (count == 0) {
-            return Result.error("此租户下没有当前用户");
+            return Result.error("There are no current users under this tenant");
         }
         //验证密码
         String loginPassword = request.getParameter("loginPassword");
         SysUser userById = sysUserService.getById(sysUser.getId());
         String passwordEncode = PasswordUtil.encrypt(sysUser.getUsername(),loginPassword, userById.getSalt());
         if (!passwordEncode.equals(userById.getPassword())) {
-            return Result.error("密码不正确");
+            return Result.error("The password is incorrect");
         }
         //退出登录
         sysTenantService.exitUserTenant(sysUser.getId(),sysUser.getUsername(),String.valueOf(sysTenant.getId()));
-        return Result.ok("退出租户成功");
+        return Result.ok("The tenant exit is successful");
     }
 
     /**
-     * 变更租户拥有者【低代码应用专用接口】
+     * Changing the Tenant Owner [Low-Code Application Dedicated Interface]
      * @param userId
      * @return
      */
@@ -688,11 +688,11 @@ public class SysTenantController {
     public Result<String> changeOwenUserTenant(@RequestParam("userId") String userId,
                                                @RequestParam("tenantId") String tenantId){
         sysTenantService.changeOwenUserTenant(userId,tenantId);
-        return Result.ok("退出租户成功");
+        return Result.ok("The tenant exit is successful");
     }
 
     /**
-     * 邀请用户到租户,通过手机号匹配 【低代码应用专用接口】
+     * Invite users to tenants and match them with mobile phone numbers [Low-code application dedicated interface]
      * @param phone
      * @param departId
      * @return
@@ -705,7 +705,7 @@ public class SysTenantController {
 
 
     /**
-     * 获取 租户产品包-3个默认admin的人员数量
+     * FETCH Tenant Package - The number of people with 3 default admins
      * @param tenantId
      * @return
      */
@@ -716,7 +716,7 @@ public class SysTenantController {
     }
 
     /**
-     * 查询租户产品包信息
+     * Query tenant package information
      * @param packModel
      * @return
      */
@@ -728,30 +728,30 @@ public class SysTenantController {
 
 
     /**
-     * 添加用户和产品包的关系数据
+     * Add relational data for users and packages
      * @param sysTenantPackUser
      * @return
      */
     @PostMapping("/addTenantPackUser")
     public Result<?> addTenantPackUser(@RequestBody SysTenantPackUser sysTenantPackUser){
         sysTenantService.addBatchTenantPackUser(sysTenantPackUser);
-        return Result.ok("操作成功！");
+        return Result.ok("Operation successful!");
     }
 
     /**
-     * 从产品包移除用户
+     * Remove a user from a package
      * @param sysTenantPackUser
      * @return
      */
     @PutMapping("/deleteTenantPackUser")
     public Result<?> deleteTenantPackUser(@RequestBody SysTenantPackUser sysTenantPackUser){
         sysTenantService.deleteTenantPackUser(sysTenantPackUser);
-        return Result.ok("操作成功！");
+        return Result.ok("Operation successful!");
     }
 
 
     /**
-     * 修改申请状态
+     * Modify the status of the request
      * @param sysTenant
      * @return
      */
@@ -759,7 +759,7 @@ public class SysTenantController {
     public Result<?> updateApplyStatus(@RequestBody SysTenant sysTenant){
         SysTenant entity = this.sysTenantService.getById(sysTenant.getId());
         if(entity==null){
-            return Result.error("租户不存在!");
+            return Result.error("The tenant does not exist!");
         }
         entity.setApplyStatus(sysTenant.getApplyStatus());
         sysTenantService.updateById(entity);
@@ -768,7 +768,7 @@ public class SysTenantController {
 
 
     /**
-     * 获取产品包人员申请列表
+     * Get a list of package personnel requests
      * @param tenantId
      * @return
      */
@@ -779,29 +779,29 @@ public class SysTenantController {
     }
 
     /**
-     * 个人 申请成为管理员
+     * INDIVIDUAL Apply to become an administrator
      * @param sysTenantPackUser
      * @return
      */
     @PostMapping("/doApplyTenantPackUser")
     public Result<?> doApplyTenantPackUser(@RequestBody SysTenantPackUser sysTenantPackUser){
         sysTenantService.doApplyTenantPackUser(sysTenantPackUser);
-        return Result.ok("申请成功！");
+        return Result.ok("Successful application!");
     }
 
     /**
-     * 申请通过 成为管理员
+     * The application is approved Become an administrator
      * @param sysTenantPackUser
      * @return
      */
     @PutMapping("/passApply")
     public Result<?> passApply(@RequestBody SysTenantPackUser sysTenantPackUser){
         sysTenantService.passApply(sysTenantPackUser);
-        return Result.ok("操作成功！");
+        return Result.ok("Operation successful!");
     }
 
     /**
-     *  拒绝申请 成为管理员
+     *  Rejection of the application Become an administrator
      * @param sysTenantPackUser
      * @return
      */
@@ -812,7 +812,7 @@ public class SysTenantController {
     }
 
     /**
-     * 查看是否已经申请过了超级管理员
+     * Check to see if you've already applied for a super administrator
      * @return
      */
     @GetMapping("/getApplySuperAdminCount")
@@ -822,7 +822,7 @@ public class SysTenantController {
     }
 
     /**
-     * 进入应用组织页面 查询租户信息及当前用户是否有 管理员的权限--
+     * Go to the Application Organization page Query the tenant information and whether the current user exists Administrator Privileges--
      * @param id
      * @return
      */
@@ -833,7 +833,7 @@ public class SysTenantController {
     }
 
     /**
-     * 获取产品包下的用户列表(分页)
+     * Get the list of users under a product package (pagination)
      * @param tenantId
      * @param packId
      * @param status
@@ -853,7 +853,7 @@ public class SysTenantController {
     }
 
     /**
-     * 获取当前租户下的部门和成员数量
+     * Get the number of departments and members under the current tenant
      */
     @GetMapping("/getTenantCount")
     public Result<Map<String,Long>> getTenantCount(HttpServletRequest request){
@@ -874,7 +874,7 @@ public class SysTenantController {
     }
 
     /**
-     * 通过用户id获取租户列表（分页）
+     * Get the list of tenants by user ID (pagination)
      *
      * @param sysUserTenantVo
      * @return
@@ -895,7 +895,7 @@ public class SysTenantController {
     }
 
     /**
-     * 同意或拒绝加入租户
+     * Agree or decline to join the tenant
      */
     @PutMapping("/agreeOrRefuseJoinTenant")
     public Result<String> agreeOrRefuseJoinTenant(@RequestParam("tenantId") Integer tenantId, 
@@ -905,11 +905,11 @@ public class SysTenantController {
         String userId = sysUser.getId();
         SysTenant tenant = sysTenantService.getById(tenantId);
         if(null == tenant){
-            return Result.error("不存在该组织");
+            return Result.error("The organization does not exist");
         }
         SysUserTenant sysUserTenant = relationService.getUserTenantByTenantId(userId, tenantId);
         if (null == sysUserTenant) {
-            return Result.error("该用户不存在该组织中，无权修改");
+            return Result.error("The user does not exist in the organization and does not have the right to modify it");
         }
         String content = "";
         SysUser user = new SysUser();
@@ -919,17 +919,17 @@ public class SysTenantController {
         if(CommonConstant.USER_TENANT_NORMAL.equals(status)){
             //修改租户状态
             relationService.agreeJoinTenant(userId,tenantId);
-            content = content + realname + "已同意您发送的加入 " + tenant.getName() + " 的邀请";
+            content = content + realname + "The join you sent has been approved " + tenant.getName() + " INVITATIONS";
             sysTenantService.sendMsgForAgreeAndRefuseJoin(user, content);
-            return Result.OK("您已同意该组织的邀请");
+            return Result.OK("You have agreed to the organization's invitation");
         }else if(CommonConstant.USER_TENANT_REFUSE.equals(status)){
             //直接删除关系表即可
             relationService.refuseJoinTenant(userId,tenantId);
-            content = content + realname + "拒绝了您发送的加入 " + tenant.getName() + " 的邀请";
+            content = content + realname + "The join you sent was declined " + tenant.getName() + " INVITATIONS";
             sysTenantService.sendMsgForAgreeAndRefuseJoin(user, content);
-            return Result.OK("您已成功拒绝该组织的邀请");
+            return Result.OK("You have successfully declined the invitation from the organization");
         }
-        return Result.error("类型不匹配，禁止修改数据");
+        return Result.error("If the types do not match, the data cannot be modified");
     }
     
 }

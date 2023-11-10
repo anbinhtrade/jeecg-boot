@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 通用api
+ * Generic APIs
  * @author: jeecg-boot
  */
 public interface CommonAPI {
 
     /**
-     * 1查询用户角色信息
+     * 1. Query user role information
      * @param username
      * @return
      */
@@ -21,14 +21,14 @@ public interface CommonAPI {
 
 
     /**
-     * 2查询用户权限信息
+     * 2. Query user permission information
      * @param username
      * @return
      */
     Set<String> queryUserAuths(String username);
 
     /**
-     * 3根据 id 查询数据库中存储的 DynamicDataSourceModel
+     * 3 according to id Query the data stored in the database DynamicDataSourceModel
      *
      * @param dbSourceId
      * @return
@@ -36,7 +36,7 @@ public interface CommonAPI {
     DynamicDataSourceModel getDynamicDbSourceById(String dbSourceId);
 
     /**
-     * 4根据 code 查询数据库中存储的 DynamicDataSourceModel
+     * 4 according to code Query the data stored in the database DynamicDataSourceModel
      *
      * @param dbSourceCode
      * @return
@@ -44,7 +44,7 @@ public interface CommonAPI {
     DynamicDataSourceModel getDynamicDbSourceByCode(String dbSourceCode);
 
     /**
-     * 5根据用户账号查询用户信息
+     * 5. Query user information according to user account
      * @param username
      * @return
      */
@@ -52,7 +52,7 @@ public interface CommonAPI {
 
 
     /**
-     * 6字典表的 翻译
+     * 6. Dictionary table TRANSLATION
      * @param table
      * @param text
      * @param code
@@ -62,7 +62,7 @@ public interface CommonAPI {
     String translateDictFromTable(String table, String text, String code, String key);
 
     /**
-     * 7普通字典的翻译
+     * 7. Translation of common dictionaries
      * @param code
      * @param key
      * @return
@@ -70,38 +70,38 @@ public interface CommonAPI {
     String translateDict(String code, String key);
 
     /**
-     * 8查询数据权限
-     * @param component 组件
-     * @param username 用户名
-     * @param requestPath 前段请求地址
+     * 8. Permission to query data
+     * @param component SUBASSEMBLY
+     * @param username USERNAME
+     * @param requestPath The address of the previous request
      * @return
      */
     List<SysPermissionDataRuleModel> queryPermissionDataRule(String component, String requestPath, String username);
 
 
     /**
-     * 9查询用户信息
+     * 9. Query user information
      * @param username
      * @return
      */
     SysUserCacheInfo getCacheUser(String username);
 
     /**
-     * 10获取数据字典
+     * 10. Get a data dictionary
      * @param code
      * @return
      */
     public List<DictModel> queryDictItemsByCode(String code);
 
     /**
-     * 获取有效的数据字典项
+     * Get a valid data dictionary entry
      * @param code
      * @return
      */
     public List<DictModel> queryEnableDictItemsByCode(String code);
 
     /**
-     * 13获取表数据字典
+     * 13. Get a table data dictionary
      * @param tableFilterSql
      * @param text
      * @param code
@@ -110,7 +110,7 @@ public interface CommonAPI {
     List<DictModel> queryTableDictItemsByCode(String tableFilterSql, String text, String code);
 
     /**
-     * 14 普通字典的翻译，根据多个dictCode和多条数据，多个以逗号分割
+     * 14 The translation of a common dictionary is based on multiple dict codes and multiple pieces of data, which are separated by commas
      * @param dictCodes 例如：user_status,sex
      * @param keys 例如：1,2,0
      * @return
@@ -118,11 +118,11 @@ public interface CommonAPI {
     Map<String, List<DictModel>> translateManyDict(String dictCodes, String keys);
 
     /**
-     * 15 字典表的 翻译，可批量
+     * 15 Dictionary table Translation, can be in batches
      * @param table
      * @param text
      * @param code
-     * @param keys 多个用逗号分割
+     * @param keys Multiple are separated by commas
      * @return
      */
     List<DictModel> translateDictFromTableByKeys(String table, String text, String code, String keys);

@@ -33,13 +33,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
  /**
- * @Description: 部门角色
+ * @Description: Department roles
  * @Author: jeecg-boot
  * @Date:   2020-02-12
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags="部门角色")
+@Api(tags="Department roles")
 @RestController
 @RequestMapping("/sys/sysDepartRole")
 public class SysDepartRoleController extends JeecgController<SysDepartRole, ISysDepartRoleService> {
@@ -62,7 +62,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
      private BaseCommonService baseCommonService;
      
 	/**
-	 * 分页列表查询
+	 * Paginated list queries
 	 *
 	 * @param sysDepartRole
 	 * @param pageNo
@@ -70,7 +70,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	 * @param req
 	 * @return
 	 */
-	@ApiOperation(value="部门角色-分页列表查询", notes="部门角色-分页列表查询")
+	@ApiOperation(value="Department Roles - Paginated List Query", notes="Department Roles - Paginated List Query")
 	@GetMapping(value = "/list")
 	public Result<?> queryPageList(SysDepartRole sysDepartRole,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -99,13 +99,13 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	}
 	
 	/**
-	 * 添加
+	 * Add to
 	 *
 	 * @param sysDepartRole
 	 * @return
 	 */
     @RequiresPermissions("system:depart:role:add")
-	@ApiOperation(value="部门角色-添加", notes="部门角色-添加")
+	@ApiOperation(value="Department Roles - Add", notes="Department Roles - Add")
 	@PostMapping(value = "/add")
 	public Result<?> add(@RequestBody SysDepartRole sysDepartRole) {
 		sysDepartRoleService.save(sysDepartRole);
@@ -113,56 +113,56 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	}
 	
 	/**
-	 * 编辑
+	 * Edit
 	 *
 	 * @param sysDepartRole
 	 * @return
 	 */
-	@ApiOperation(value="部门角色-编辑", notes="部门角色-编辑")
+	@ApiOperation(value="Department Role - Editor", notes="Department Role - Editor")
     @RequiresPermissions("system:depart:role:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<?> edit(@RequestBody SysDepartRole sysDepartRole) {
 		sysDepartRoleService.updateById(sysDepartRole);
-		return Result.ok("编辑成功!");
+		return Result.ok("Edited successfully!");
 	}
 	
 	/**
-	 * 通过id删除
+	 * Delete by ID
 	 *
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "部门角色-通过id删除")
-	@ApiOperation(value="部门角色-通过id删除", notes="部门角色-通过id删除")
+	@AutoLog(value = "Department Role - Removed by ID")
+	@ApiOperation(value="Department Role - Removed by ID", notes="Department Role - Removed by ID")
     @RequiresPermissions("system:depart:role:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		sysDepartRoleService.removeById(id);
-		return Result.ok("删除成功!");
+		return Result.ok("The deletion is successful!");
 	}
 	
 	/**
-	 * 批量删除
+	 * Delete in bulk
 	 *
 	 * @param ids
 	 * @return
 	 */
-	@AutoLog(value = "部门角色-批量删除")
-	@ApiOperation(value="部门角色-批量删除", notes="部门角色-批量删除")
+	@AutoLog(value = "Department Roles - Delete in bulk")
+	@ApiOperation(value="Department Roles - Delete in bulk", notes="Department Roles - Delete in bulk")
     @RequiresPermissions("system:depart:role:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.sysDepartRoleService.removeByIds(Arrays.asList(ids.split(",")));
-		return Result.ok("批量删除成功！");
+		return Result.ok("The batch deletion is successful！");
 	}
 	
 	/**
-	 * 通过id查询
+	 * Query by ID
 	 *
 	 * @param id
 	 * @return
 	 */
-	@ApiOperation(value="部门角色-通过id查询", notes="部门角色-通过id查询")
+	@ApiOperation(value="Department Role - Query by ID", notes="Department Role - Query by ID")
 	@GetMapping(value = "/queryById")
 	public Result<?> queryById(@RequestParam(name="id",required=true) String id) {
 		SysDepartRole sysDepartRole = sysDepartRoleService.getById(id);
@@ -170,14 +170,14 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	}
 
 	 /**
-	  * 获取部门下角色
+	  * Obtain the role under the department
 	  * @param departId
 	  * @return
 	  */
 	@RequestMapping(value = "/getDeptRoleList", method = RequestMethod.GET)
 	public Result<List<SysDepartRole>> getDeptRoleList(@RequestParam(value = "departId") String departId,@RequestParam(value = "userId") String userId){
 		Result<List<SysDepartRole>> result = new Result<>();
-		//查询选中部门的角色
+		//Query the role of the selected department
 		List<SysDepartRole> deptRoleList = sysDepartRoleService.list(new LambdaQueryWrapper<SysDepartRole>().eq(SysDepartRole::getDepartId,departId));
 		result.setSuccess(true);
 		result.setResult(deptRoleList);
@@ -185,7 +185,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	}
 
 	 /**
-	  * 设置
+	  * Set up
 	  * @param json
 	  * @return
 	  */
@@ -198,23 +198,23 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 		 departRoleUserService.deptRoleUserAdd(userId,newRoleId,oldRoleId);
          //update-begin---author:wangshuai ---date:20220316  for：[VUEN-234]部门角色分配添加敏感日志------------
          LoginUser loginUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-         baseCommonService.addLog("给部门用户ID："+userId+"分配角色，操作人： " +loginUser.getUsername() ,CommonConstant.LOG_TYPE_2, 2);
+         baseCommonService.addLog("Give the department user ID："+userId+"Assign roles and operate people： " +loginUser.getUsername() ,CommonConstant.LOG_TYPE_2, 2);
          //update-end---author:wangshuai ---date:20220316  for：[VUEN-234]部门角色分配添加敏感日志------------
-         return Result.ok("添加成功！");
+         return Result.ok("The addition was successful！");
 	 }
 
 	 /**
-	  * 根据用户id获取已设置部门角色
+	  * Obtain the configured department role based on the user ID
 	  * @param userId
 	  * @return
 	  */
 	 @RequestMapping(value = "/getDeptRoleByUserId", method = RequestMethod.GET)
 	 public Result<List<SysDepartRoleUser>> getDeptRoleByUserId(@RequestParam(value = "userId") String userId,@RequestParam(value = "departId") String departId){
 		 Result<List<SysDepartRoleUser>> result = new Result<>();
-		 //查询部门下角色
+		 //Query the roles of the department
 		 List<SysDepartRole> roleList = sysDepartRoleService.list(new QueryWrapper<SysDepartRole>().eq("depart_id",departId));
 		 List<String> roleIds = roleList.stream().map(SysDepartRole::getId).collect(Collectors.toList());
-		 //根据角色id,用户id查询已授权角色
+		 //Query the authorized role based on the user ID of the role
 		 List<SysDepartRoleUser> roleUserList = null;
 		 if(roleIds!=null && roleIds.size()>0){
 			 roleUserList = departRoleUserService.list(new QueryWrapper<SysDepartRoleUser>().eq("user_id",userId).in("drole_id",roleIds));
@@ -225,14 +225,14 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	 }
 
 	 /**
-	  * 查询数据规则数据
+	  * Query data rule data
 	  */
 	 @GetMapping(value = "/datarule/{permissionId}/{departId}/{roleId}")
 	 public Result<?> loadDatarule(@PathVariable("permissionId") String permissionId,@PathVariable("departId") String departId,@PathVariable("roleId") String roleId) {
-		//查询已授权的部门规则
+		//Query authorized department rules
 	 	List<SysPermissionDataRule> list = sysDepartPermissionService.getPermRuleListByDeptIdAndPermId(departId,permissionId);
 		 if(list==null || list.size()==0) {
-			 return Result.error("未找到权限配置信息");
+			 return Result.error("Permission configuration information not found");
 		 }else {
 			 Map<String,Object> map = new HashMap(5);
 			 map.put("datarule", list);
@@ -241,7 +241,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 					 .eq(SysDepartRolePermission::getRoleId,roleId);
 			 SysDepartRolePermission sysRolePermission = sysDepartRolePermissionService.getOne(query);
 			 if(sysRolePermission==null) {
-				 //return Result.error("未找到角色菜单配置信息");
+				 //return Result.error("No role menu configuration information found");
 			 }else {
 				 String drChecked = sysRolePermission.getDataRuleIds();
 				 if(oConvertUtils.isNotEmpty(drChecked)) {
@@ -249,12 +249,12 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 				 }
 			 }
 			 return Result.ok(map);
-			 //TODO 以后按钮权限的查询也走这个请求 无非在map中多加两个key
+			 //TODO In the future, the query of the button authority will also go through this request, which is nothing more than adding two more keys in the map
 		 }
 	 }
 
 	 /**
-	  * 保存数据规则至角色菜单关联表
+	  * Save the data rule to the role menu association table
 	  */
 	 @PostMapping(value = "/datarule")
 	 public Result<?> saveDatarule(@RequestBody JSONObject jsonObject) {
@@ -262,37 +262,37 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 			 String permissionId = jsonObject.getString("permissionId");
 			 String roleId = jsonObject.getString("roleId");
 			 String dataRuleIds = jsonObject.getString("dataRuleIds");
-			 log.info("保存数据规则>>"+"菜单ID:"+permissionId+"角色ID:"+ roleId+"数据权限ID:"+dataRuleIds);
+			 log.info("Save data rules>>"+"Menu ID:"+permissionId+"Role ID:"+ roleId+"Data permission ID:"+dataRuleIds);
 			 LambdaQueryWrapper<SysDepartRolePermission> query = new LambdaQueryWrapper<SysDepartRolePermission>()
 					 .eq(SysDepartRolePermission::getPermissionId, permissionId)
 					 .eq(SysDepartRolePermission::getRoleId,roleId);
 			 SysDepartRolePermission sysRolePermission = sysDepartRolePermissionService.getOne(query);
 			 if(sysRolePermission==null) {
-				 return Result.error("请先保存角色菜单权限!");
+				 return Result.error("Please save the role menu permissions first!");
 			 }else {
 				 sysRolePermission.setDataRuleIds(dataRuleIds);
 				 this.sysDepartRolePermissionService.updateById(sysRolePermission);
 			 }
 		 } catch (Exception e) {
-			 log.error("SysRoleController.saveDatarule()发生异常：" + e.getMessage(),e);
-			 return Result.error("保存失败");
+			 log.error("SysRoleController.saveDatarule()An exception has occurred：" + e.getMessage(),e);
+			 return Result.error("Save failed");
 		 }
-		 return Result.ok("保存成功!");
+		 return Result.ok("The save was successful!");
 	 }
 
   /**
-   * 导出excel
+   * Export to Excel
    *
    * @param request
    * @param sysDepartRole
    */
   @RequestMapping(value = "/exportXls")
   public ModelAndView exportXls(HttpServletRequest request, SysDepartRole sysDepartRole) {
-      return super.exportXls(request, sysDepartRole, SysDepartRole.class, "部门角色");
+      return super.exportXls(request, sysDepartRole, SysDepartRole.class, "Department roles");
   }
 
   /**
-   * 通过excel导入数据
+   * Import data via Excel
    *
    * @param request
    * @param response

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
 
 /**
- * @Description: 多数据源管理
+ * @Description: Multi-data source management
  * @Author: jeecg-boot
  * @Date: 2019-12-25
  * @Version: V1.0

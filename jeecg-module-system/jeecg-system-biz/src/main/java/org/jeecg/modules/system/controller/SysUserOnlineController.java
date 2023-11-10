@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @Description: 在线用户
+ * @Description: Online users
  * @Author: chenli
  * @Date: 2020-06-07
  * @Version: V1.0
@@ -59,7 +59,7 @@ public class SysUserOnlineController {
             if (StringUtils.isNotEmpty(token)) {
                 SysUserOnlineVO online = new SysUserOnlineVO();
                 online.setToken(token);
-                //TODO 改成一次性查询
+                //TODO Change to a one-time query
                 LoginUser loginUser = sysBaseApi.getUserByName(JwtUtil.getUsername(token));
                 if (loginUser != null) {
                     //update-begin---author:wangshuai ---date:20220104  for：[JTC-382]在线用户查询无效------------
@@ -101,30 +101,30 @@ public class SysUserOnlineController {
     }
 
     /**
-     * 强退用户
+     * Force out of users
      */
     @RequestMapping(value = "/forceLogout",method = RequestMethod.POST)
     public Result<Object> forceLogout(@RequestBody SysUserOnlineVO online) {
-        //用户退出逻辑
+        //User exit logic
         if(oConvertUtils.isEmpty(online.getToken())) {
-            return Result.error("退出登录失败！");
+            return Result.error("Failed to log out!");
         }
         String username = JwtUtil.getUsername(online.getToken());
         LoginUser sysUser = sysBaseApi.getUserByName(username);
         if(sysUser!=null) {
-            baseCommonService.addLog("强制: "+sysUser.getRealname()+"退出成功！", CommonConstant.LOG_TYPE_1, null,sysUser);
-            log.info(" 强制  "+sysUser.getRealname()+"退出成功！ ");
-            //清空用户登录Token缓存
+            baseCommonService.addLog("Compulsion: "+sysUser.getRealname()+"Exit Successful!", CommonConstant.LOG_TYPE_1, null,sysUser);
+            log.info(" COMPULSION  "+sysUser.getRealname()+"Exit Successful! ");
+            //Clear the login token cache of the user
             redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + online.getToken());
-            //清空用户登录Shiro权限缓存
+            //Clear the user login permission cache for Shiro
             redisUtil.del(CommonConstant.PREFIX_USER_SHIRO_CACHE + sysUser.getId());
-            //清空用户的缓存信息（包括部门信息），例如sys:cache:user::<username>
+            //Clear the user's cache information（Include departmental information），例如sys:cache:user::<username>
             redisUtil.del(String.format("%s::%s", CacheConstant.SYS_USERS_CACHE, sysUser.getUsername()));
-            //调用shiro的logout
+            //Call shiro's logout
             SecurityUtils.getSubject().logout();
-            return Result.ok("退出登录成功！");
+            return Result.ok("Logout successful!");
         }else {
-            return Result.error("Token无效!");
+            return Result.error("The token is invalid!");
         }
     }
 }

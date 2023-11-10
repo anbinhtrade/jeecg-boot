@@ -131,7 +131,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	}
 
 	/**
-	 * 导出excel
+	 * Export to Excel
 	 *
 	 * @param request
 	 */

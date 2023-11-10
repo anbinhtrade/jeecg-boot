@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @Description: 动态数据源测试
+ * @Description: Dynamic data source testing
  * @Author: zyf
  * @Date:2020-04-21
  */
 @Slf4j
-@Api(tags = "动态数据源测试")
+@Api(tags = "Dynamic data source testing")
 @RestController
 @RequestMapping("/test/dynamic")
 public class JeecgDynamicDataController extends JeecgController<JeecgDemo, IJeecgDemoService> {
@@ -36,8 +36,8 @@ public class JeecgDynamicDataController extends JeecgController<JeecgDemo, IJeec
      * @return
      */
     @PostMapping(value = "/test1")
-    @AutoLog(value = "动态切换数据源")
-    @ApiOperation(value = "动态切换数据源", notes = "动态切换数据源")
+    @AutoLog(value = "Dynamically switch data sources")
+    @ApiOperation(value = "Dynamically switch data sources", notes = "Dynamically switch data sources")
     public Result<List<JeecgDemo>> selectSpelByKey(@RequestParam(required = false) String dsName) {
         List<JeecgDemo> list = jeecgDynamicDataService.selectSpelByKey(dsName);
         return Result.OK(list);

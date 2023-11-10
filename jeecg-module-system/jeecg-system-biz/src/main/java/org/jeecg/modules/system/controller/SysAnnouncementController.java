@@ -62,7 +62,7 @@ import static org.jeecg.common.constant.CommonConstant.ANNOUNCEMENT_SEND_STATUS_
 
 /**
  * @Title: Controller
- * @Description: 系统通告表
+ * @Description: System notification table
  * @Author: jeecg-boot
  * @Date: 2019-01-02
  * @Version: V1.0
@@ -88,13 +88,13 @@ public class SysAnnouncementController {
 	private RedisUtil redisUtil;
 
 	/**
-	 * QQYUN-5072【性能优化】线上通知消息打开有点慢
+	 * QQYUN-5072[Performance Optimization] Online notification messages are a bit slow to open
 	 */
 	public static ExecutorService cachedThreadPool = new ThreadPoolExecutor(0, 1024,60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 	public static ExecutorService completeNoteThreadPool = new ThreadPoolExecutor(0, 1024,60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 
 	/**
-	  * 分页列表查询
+	  * Paginated list query
 	 * @param sysAnnouncement
 	 * @param pageNo
 	 * @param pageSize
@@ -107,7 +107,7 @@ public class SysAnnouncementController {
 									  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 									  HttpServletRequest req) {
 		//------------------------------------------------------------------------------------------------
-		//是否开启系统管理模块的多租户数据隔离【SAAS多租户模式】
+		//Whether to enable multi-tenant data isolation of the system management module [SAAS multi-tenant mode]
 		if(MybatisPlusSaasConfig.OPEN_SYSTEM_TENANT_CONTROL){
 			sysAnnouncement.setTenantId(oConvertUtils.getInt(TenantContext.getTenant(), 0));
 		}
@@ -123,7 +123,7 @@ public class SysAnnouncementController {
 	}
 
 	/**
-	  *   添加
+	  *   Add to
 	 * @param sysAnnouncement
 	 * @return
 	 */
@@ -139,16 +139,16 @@ public class SysAnnouncementController {
             //未发布
 			sysAnnouncement.setSendStatus(CommonSendStatus.UNPUBLISHED_STATUS_0);
 			sysAnnouncementService.saveAnnouncement(sysAnnouncement);
-			result.success("添加成功！");
+			result.success("Added successfully！");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("Operation failed");
 		}
 		return result;
 	}
 
 	/**
-	  *  编辑
+	 * Edit
 	 * @param sysAnnouncement
 	 * @return
 	 */
@@ -157,16 +157,16 @@ public class SysAnnouncementController {
 		Result<SysAnnouncement> result = new Result<SysAnnouncement>();
 		SysAnnouncement sysAnnouncementEntity = sysAnnouncementService.getById(sysAnnouncement.getId());
 		if(sysAnnouncementEntity==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			// update-begin-author:liusq date:20210804 for:标题处理xss攻击的问题
 			String title = XssUtils.scriptXss(sysAnnouncement.getTitile());
 			sysAnnouncement.setTitile(title);
 			// update-end-author:liusq date:20210804 for:标题处理xss攻击的问题
 			boolean ok = sysAnnouncementService.upDateAnnouncement(sysAnnouncement);
-			//TODO 返回false说明什么？
+			//TODO returns false？
 			if(ok) {
-				result.success("修改成功!");
+				result.success("The modification was successful!");
 			}
 		}
 
@@ -174,7 +174,7 @@ public class SysAnnouncementController {
 	}
 
 	/**
-	  *   通过id删除
+	  *   Delete by ID
 	 * @param id
 	 * @return
 	 */
@@ -183,12 +183,12 @@ public class SysAnnouncementController {
 		Result<SysAnnouncement> result = new Result<SysAnnouncement>();
 		SysAnnouncement sysAnnouncement = sysAnnouncementService.getById(id);
 		if(sysAnnouncement==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			sysAnnouncement.setDelFlag(CommonConstant.DEL_FLAG_1.toString());
 			boolean ok = sysAnnouncementService.updateById(sysAnnouncement);
 			if(ok) {
-				result.success("删除成功!");
+				result.success("The deletion is successful!");
 			}
 		}
 
@@ -196,7 +196,7 @@ public class SysAnnouncementController {
 	}
 
 	/**
-	  *  批量删除
+	  *  Delete in bulk
 	 * @param ids
 	 * @return
 	 */
@@ -204,7 +204,7 @@ public class SysAnnouncementController {
 	public Result<SysAnnouncement> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		Result<SysAnnouncement> result = new Result<SysAnnouncement>();
 		if(ids==null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized！");
 		}else {
 			String[] id = ids.split(",");
 			for(int i=0;i<id.length;i++) {
@@ -212,13 +212,13 @@ public class SysAnnouncementController {
 				announcement.setDelFlag(CommonConstant.DEL_FLAG_1.toString());
 				sysAnnouncementService.updateById(announcement);
 			}
-			result.success("删除成功!");
+			result.success("The deletion is successful!");
 		}
 		return result;
 	}
 
 	/**
-	  * 通过id查询
+	  * Query by ID
 	 * @param id
 	 * @return
 	 */
@@ -227,7 +227,7 @@ public class SysAnnouncementController {
 		Result<SysAnnouncement> result = new Result<SysAnnouncement>();
 		SysAnnouncement sysAnnouncement = sysAnnouncementService.getById(id);
 		if(sysAnnouncement==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			result.setResult(sysAnnouncement);
 			result.setSuccess(true);
@@ -236,7 +236,7 @@ public class SysAnnouncementController {
 	}
 
 	/**
-	 *	 更新发布操作
+	 *	 Update the publish action
 	 * @param id
 	 * @return
 	 */
@@ -245,7 +245,7 @@ public class SysAnnouncementController {
 		Result<SysAnnouncement> result = new Result<SysAnnouncement>();
 		SysAnnouncement sysAnnouncement = sysAnnouncementService.getById(id);
 		if(sysAnnouncement==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
             //发布中
 			sysAnnouncement.setSendStatus(CommonSendStatus.PUBLISHED_STATUS_1);
@@ -254,19 +254,19 @@ public class SysAnnouncementController {
 			sysAnnouncement.setSender(currentUserName);
 			boolean ok = sysAnnouncementService.updateById(sysAnnouncement);
 			if(ok) {
-				result.success("系统通知推送成功");
+				result.success("The system notifies that the push is successful");
 				if(sysAnnouncement.getMsgType().equals(CommonConstant.MSG_TYPE_ALL)) {
-					// 补全公告和用户之前的关系
+					// Complete the previous relationship between the announcement and the user
 					sysAnnouncementService.batchInsertSysAnnouncementSend(sysAnnouncement.getId(), sysAnnouncement.getTenantId());
 					
-					// 推送websocket通知
+					// Push websocket notifications
 					JSONObject obj = new JSONObject();
 			    	obj.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_TOPIC);
 					obj.put(WebsocketConst.MSG_ID, sysAnnouncement.getId());
 					obj.put(WebsocketConst.MSG_TXT, sysAnnouncement.getTitile());
 			    	webSocket.sendMessage(obj.toJSONString());
 				}else {
-					// 2.插入用户通告阅读标记表记录
+					// 2.Insert a User Advertisement Read Tag table record
 					String userId = sysAnnouncement.getUserIds();
 					String[] userIds = userId.substring(0, (userId.length()-1)).split(",");
 					String anntId = sysAnnouncement.getId();
@@ -278,7 +278,7 @@ public class SysAnnouncementController {
 			    	webSocket.sendMessage(userIds, obj.toJSONString());
 				}
 				try {
-					// 同步企业微信、钉钉的消息通知
+					// Synchronize WeCom and DingTalk message notifications
 					Response<String> dtResponse = dingtalkService.sendActionCardMessage(sysAnnouncement, null, true);
 					wechatEnterpriseService.sendTextCardMessage(sysAnnouncement, true);
 
@@ -288,7 +288,7 @@ public class SysAnnouncementController {
 						sysAnnouncementService.updateById(sysAnnouncement);
 					}
 				} catch (Exception e) {
-					log.error("同步发送第三方APP消息失败：", e);
+					log.error("Failed to send third-party APP messages synchronously：", e);
 				}
 			}
 		}
@@ -297,7 +297,7 @@ public class SysAnnouncementController {
 	}
 
 	/**
-	 *	 更新撤销操作
+	 *	 Update the undo action
 	 * @param id
 	 * @return
 	 */
@@ -306,19 +306,19 @@ public class SysAnnouncementController {
 		Result<SysAnnouncement> result = new Result<SysAnnouncement>();
 		SysAnnouncement sysAnnouncement = sysAnnouncementService.getById(id);
 		if(sysAnnouncement==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
             //撤销发布
 			sysAnnouncement.setSendStatus(CommonSendStatus.REVOKE_STATUS_2);
 			sysAnnouncement.setCancelTime(new Date());
 			boolean ok = sysAnnouncementService.updateById(sysAnnouncement);
 			if(ok) {
-				result.success("该系统通知撤销成功");
+				result.success("The system notifies that the revocation is successful");
 				if (oConvertUtils.isNotEmpty(sysAnnouncement.getDtTaskId())) {
 					try {
 						dingtalkService.recallMessage(sysAnnouncement.getDtTaskId());
 					} catch (Exception e) {
-						log.error("第三方APP撤回消息失败：", e);
+						log.error("The third-party app failed to withdraw the message：", e);
 					}
 				}
 			}
@@ -328,7 +328,7 @@ public class SysAnnouncementController {
 	}
 
 	/**
-	 * @功能：补充用户数据，并返回系统消息
+	 * @Function: Supplement user data and return system messages
 	 * @return
 	 */
 	@RequestMapping(value = "/listByUser", method = RequestMethod.GET)
@@ -338,12 +338,12 @@ public class SysAnnouncementController {
 		LoginUser sysUser = (LoginUser)SecurityUtils.getSubject().getPrincipal();
 		String userId = sysUser.getId();
 		
-//		//补推送数据（用户和通知的关系表）
+//		//Supplementary push data (the relationship table between users and notifications.)）
 //		completeNoteThreadPool.execute(()->{
 //			sysAnnouncementService.completeAnnouncementSendInfo();
 //		});
 		
-		// 2.查询用户未读的系统消息
+		// 2.Query system messages that are not read by the user
 		Page<SysAnnouncement> anntMsgList = new Page<SysAnnouncement>(0, pageSize);
         //通知公告消息
 		anntMsgList = sysAnnouncementService.querySysCementPageByUserId(anntMsgList,userId,"1");
@@ -363,7 +363,7 @@ public class SysAnnouncementController {
 
 
     /**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      */
@@ -376,16 +376,16 @@ public class SysAnnouncementController {
 		queryWrapper.eq(SysAnnouncement::getDelFlag,CommonConstant.DEL_FLAG_0.toString());
         List<SysAnnouncement> pageList = sysAnnouncementService.list(queryWrapper);
         //导出文件名称
-        mv.addObject(NormalExcelConstants.FILE_NAME, "系统通告列表");
+        mv.addObject(NormalExcelConstants.FILE_NAME, "List of system announcements");
         mv.addObject(NormalExcelConstants.CLASS, SysAnnouncement.class);
         LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("系统通告列表数据", "导出人:"+user.getRealname(), "导出信息"));
+        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("System advertisement list data", "Exporter:"+user.getRealname(), "Export information"));
         mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
         return mv;
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response
@@ -396,7 +396,7 @@ public class SysAnnouncementController {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-            // 获取上传文件对象
+            // Obtain the object to which the file was uploaded
             MultipartFile file = entity.getValue();
             ImportParams params = new ImportParams();
             params.setTitleRows(2);
@@ -410,10 +410,10 @@ public class SysAnnouncementController {
 					}
                     sysAnnouncementService.save(sysAnnouncementExcel);
                 }
-                return Result.ok("文件导入成功！数据行数：" + listSysAnnouncements.size());
+                return Result.ok("The file was imported successfully！Number of rows of data：" + listSysAnnouncements.size());
             } catch (Exception e) {
                 log.error(e.getMessage(),e);
-                return Result.error("文件导入失败！");
+                return Result.error("File import failed！");
             } finally {
                 try {
                     file.getInputStream().close();
@@ -422,10 +422,10 @@ public class SysAnnouncementController {
                 }
             }
         }
-        return Result.error("文件导入失败！");
+        return Result.error("File import failed！");
     }
 	/**
-	 *同步消息
+	 * Synchronize messages
 	 * @param anntId
 	 * @return
 	 */
@@ -436,7 +436,7 @@ public class SysAnnouncementController {
 		if(StringUtils.isNotBlank(anntId)){
 			SysAnnouncement sysAnnouncement = sysAnnouncementService.getById(anntId);
 			if(sysAnnouncement==null) {
-				result.error500("未找到对应实体");
+				result.error500("No corresponding entity found");
 			}else {
 				if(sysAnnouncement.getMsgType().equals(CommonConstant.MSG_TYPE_ALL)) {
 					obj.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_TOPIC);
@@ -444,7 +444,7 @@ public class SysAnnouncementController {
 					obj.put(WebsocketConst.MSG_TXT, sysAnnouncement.getTitile());
 					webSocket.sendMessage(obj.toJSONString());
 				}else {
-					// 2.插入用户通告阅读标记表记录
+					// 2.Insert a User Advertisement Read Tag table record
 					String userId = sysAnnouncement.getUserIds();
 					if(oConvertUtils.isNotEmpty(userId)){
 						String[] userIds = userId.substring(0, (userId.length()-1)).split(",");
@@ -457,14 +457,14 @@ public class SysAnnouncementController {
 			}
 		}else{
 			obj.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_TOPIC);
-			obj.put(WebsocketConst.MSG_TXT, "批量设置已读");
+			obj.put(WebsocketConst.MSG_TXT, "Set read in bulk");
 			webSocket.sendMessage(obj.toJSONString());
 		}
 		return result;
 	}
 
 	/**
-	 * 通告查看详情页面（用于第三方APP）
+	 * Notice view detail page (for third-party apps)
 	 * @param modelAndView
 	 * @param id
 	 * @return
@@ -475,12 +475,12 @@ public class SysAnnouncementController {
         if (announcement != null) {
             boolean tokenOk = false;
             try {
-                // 验证Token有效性
+                // Verify the validity of the token
                 tokenOk = TokenUtils.verifyToken(request, sysBaseApi, redisUtil);
             } catch (Exception ignored) {
             }
-            // 判断是否传递了Token，并且Token有效，如果传了就不做查看限制，直接返回
-            // 如果Token无效，就做查看限制：只能查看已发布的
+            // Determine whether the token is passed and the token is valid, if it is, it will not be restricted and will be returned directly
+            // If the token is invalid, you can only view the published token
             if (tokenOk || ANNOUNCEMENT_SEND_STATUS_1.equals(announcement.getSendStatus())) {
                 modelAndView.addObject("data", announcement);
                 modelAndView.setViewName("announcement/showContent");
@@ -492,7 +492,7 @@ public class SysAnnouncementController {
     }
 
 	/**
-	 * 【vue3用】 消息列表查询
+	 * vue3 uses the message list query
 	 * @param fromUser
 	 * @param beginDate
 	 * @param endDate
@@ -508,12 +508,12 @@ public class SysAnnouncementController {
 												  @RequestParam(name="endDate", required = false) String endDate,
 												  @RequestParam(name="pageNo", defaultValue="1") Integer pageNo, 
 												  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
-		long calStartTime = System.currentTimeMillis(); // 记录开始时间
+		long calStartTime = System.currentTimeMillis(); // Record the start time
 		
-		// 1、获取日期查询条件，开始时间和结束时间
+		// 1、Get the date query criteria, start time, and end time
 		Date beginTime = null, endTime = null;
 		if (RangeDateEnum.ZDY.getKey().equals(rangeDateKey)) {
-			// 自定义日期范围查询
+			// Custom date range queries
 			if (oConvertUtils.isNotEmpty(beginDate)) {
 				beginTime = DateUtils.parseDatetime(beginDate);
 			}
@@ -521,7 +521,7 @@ public class SysAnnouncementController {
 				endTime = DateUtils.parseDatetime(endDate);
 			}
 		} else {
-			// 日期段落查询
+			// Date Paragraph Query
 			Date[] arr = RangeDateEnum.getRangeArray(rangeDateKey);
 			if (arr != null) {
 				beginTime = arr[0];
@@ -529,10 +529,10 @@ public class SysAnnouncementController {
 			}
 		}
 		
-		// 2、根据条件查询用户的通知消息
+		// 2、Query the notification messages of users based on the conditions
 		List<SysAnnouncement> ls = this.sysAnnouncementService.querySysMessageList(pageSize, pageNo, fromUser, starFlag, beginTime, endTime);
 
-		// 3、设置当前页的消息为已读
+		// 3、Set the message on the current page to read
 		if (!CollectionUtils.isEmpty(ls)) {
 			// 设置已读
 			String readed = "1";
@@ -552,14 +552,14 @@ public class SysAnnouncementController {
 		// 4、性能统计耗时
 		long calEndTime = System.currentTimeMillis(); // 记录结束时间
 		long duration = calEndTime - calStartTime; // 计算耗时
-		System.out.println("耗时：" + duration + " 毫秒");
+		System.out.println("Take：" + duration + " Millisecond");
 		
 		return Result.ok(ls);
 	}
 
 
     /**
-     * 根据用户id获取最新一条消息发送时间(创建时间)
+     * Obtain the latest message sent time based on user ID (creation time)
      * @param userId
      * @return
      */
@@ -578,12 +578,12 @@ public class SysAnnouncementController {
     }
 
 	/**
-	 * 清除当前用户所有未读消息
+	 * Clear all unread messages for the current user
 	 * @return
 	 */
 	@PostMapping("/clearAllUnReadMessage")
     public Result<String> clearAllUnReadMessage(){
 		sysAnnouncementService.clearAllUnReadMessage();
-		return Result.ok("清除未读消息成功");
+		return Result.ok("The unread messages were cleared successfully");
 	}
 }

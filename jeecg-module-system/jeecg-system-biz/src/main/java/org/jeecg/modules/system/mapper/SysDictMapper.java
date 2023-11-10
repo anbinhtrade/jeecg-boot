@@ -36,7 +36,7 @@ public interface SysDictMapper extends BaseMapper<SysDict> {
 	public Long duplicateCheckCountSql(DuplicateCheckVo duplicateCheckVo);
 
     /**
-     * 重复校验 sql语句
+     * Repeat check sql语句
      * @param duplicateCheckVo
      * @return
      */
