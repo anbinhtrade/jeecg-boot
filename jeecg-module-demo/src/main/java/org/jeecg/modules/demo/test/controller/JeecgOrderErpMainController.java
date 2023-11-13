@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * @Description: 一对多示例（ERP TAB风格）
+ * @Description: One-to-many example (ERP TAB style)
  * @Author: ZhiLin
  * @Date: 2019-02-20
  * @Version: v2.0
@@ -39,7 +39,7 @@ public class JeecgOrderErpMainController {
     private IJeecgOrderTicketService jeecgOrderTicketService;
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param jeecgOrderMain
      * @param pageNo
@@ -59,7 +59,7 @@ public class JeecgOrderErpMainController {
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param jeecgOrderMainPage
      * @return
@@ -73,7 +73,7 @@ public class JeecgOrderErpMainController {
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param jeecgOrderMainPage
      * @return
@@ -83,11 +83,11 @@ public class JeecgOrderErpMainController {
         JeecgOrderMain jeecgOrderMain = new JeecgOrderMain();
         BeanUtils.copyProperties(jeecgOrderMainPage, jeecgOrderMain);
         jeecgOrderMainService.updateById(jeecgOrderMain);
-        return Result.ok("编辑成功!");
+        return Result.ok("Edited successfully!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
@@ -95,11 +95,11 @@ public class JeecgOrderErpMainController {
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         jeecgOrderMainService.delMain(id);
-        return Result.ok("删除成功!");
+        return Result.ok("The deletion is successful!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
@@ -107,11 +107,11 @@ public class JeecgOrderErpMainController {
     @DeleteMapping(value = "/deleteBatch")
     public Result<?> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         this.jeecgOrderMainService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.ok("批量删除成功!");
+        return Result.ok("The batch deletion is successful!");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
@@ -124,7 +124,7 @@ public class JeecgOrderErpMainController {
 
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param jeecgOrderCustomer
      * @return
@@ -141,7 +141,7 @@ public class JeecgOrderErpMainController {
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param jeecgOrderTicket
      * @return
@@ -158,7 +158,7 @@ public class JeecgOrderErpMainController {
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param jeecgOrderCustomer
      * @return
@@ -166,11 +166,11 @@ public class JeecgOrderErpMainController {
     @PostMapping(value = "/addCustomer")
     public Result<?> addCustomer(@RequestBody JeecgOrderCustomer jeecgOrderCustomer) {
         jeecgOrderCustomerService.save(jeecgOrderCustomer);
-        return Result.ok("添加成功!");
+        return Result.ok("The addition was successful!");
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param jeecgOrderCustomer
      * @return
@@ -178,11 +178,11 @@ public class JeecgOrderErpMainController {
     @RequestMapping(value = "/editCustomer", method = {RequestMethod.PUT,RequestMethod.POST})
     public Result<?> editCustomer(@RequestBody JeecgOrderCustomer jeecgOrderCustomer) {
         jeecgOrderCustomerService.updateById(jeecgOrderCustomer);
-        return Result.ok("添加成功!");
+        return Result.ok("The addition was successful!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
@@ -190,11 +190,11 @@ public class JeecgOrderErpMainController {
     @DeleteMapping(value = "/deleteCustomer")
     public Result<?> deleteCustomer(@RequestParam(name = "id", required = true) String id) {
         jeecgOrderCustomerService.removeById(id);
-        return Result.ok("删除成功!");
+        return Result.ok("The deletion is successful!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
@@ -202,11 +202,11 @@ public class JeecgOrderErpMainController {
     @DeleteMapping(value = "/deleteBatchCustomer")
     public Result<?> deleteBatchCustomer(@RequestParam(name = "ids", required = true) String ids) {
         this.jeecgOrderCustomerService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.ok("批量删除成功!");
+        return Result.ok("The batch deletion is successful!");
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param jeecgOrderTicket
      * @return
@@ -214,11 +214,11 @@ public class JeecgOrderErpMainController {
     @PostMapping(value = "/addTicket")
     public Result<?> addTicket(@RequestBody JeecgOrderTicket jeecgOrderTicket) {
         jeecgOrderTicketService.save(jeecgOrderTicket);
-        return Result.ok("添加成功!");
+        return Result.ok("Added successfully!");
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param jeecgOrderTicket
      * @return
@@ -226,11 +226,11 @@ public class JeecgOrderErpMainController {
     @RequestMapping(value = "/editTicket", method = {RequestMethod.PUT,RequestMethod.POST})
     public Result<?> editTicket(@RequestBody JeecgOrderTicket jeecgOrderTicket) {
         jeecgOrderTicketService.updateById(jeecgOrderTicket);
-        return Result.ok("编辑成功!");
+        return Result.ok("Edit successful!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
@@ -238,11 +238,11 @@ public class JeecgOrderErpMainController {
     @DeleteMapping(value = "/deleteTicket")
     public Result<?> deleteTicket(@RequestParam(name = "id", required = true) String id) {
         jeecgOrderTicketService.removeById(id);
-        return Result.ok("删除成功!");
+        return Result.ok("Deleted successfully!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
@@ -250,7 +250,7 @@ public class JeecgOrderErpMainController {
     @DeleteMapping(value = "/deleteBatchTicket")
     public Result<?> deleteBatchTicket(@RequestParam(name = "ids", required = true) String ids) {
         this.jeecgOrderTicketService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.ok("批量删除成功!");
+        return Result.ok("Batch deletion successful!");
     }
 
 }

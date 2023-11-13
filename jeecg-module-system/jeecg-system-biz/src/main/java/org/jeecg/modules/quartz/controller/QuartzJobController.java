@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description: 定时任务在线管理
+ * @Description: Online management of scheduled tasks
  * @Author: jeecg-boot
  * @Date: 2019-01-02
  * @Version:V1.0
@@ -47,7 +47,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys/quartzJob")
 @Slf4j
-@Api(tags = "定时任务接口")
+@Api(tags = "Scheduled task interface")
 public class QuartzJobController {
 	@Autowired
 	private IQuartzJobService quartzJobService;
@@ -55,7 +55,7 @@ public class QuartzJobController {
 	private Scheduler scheduler;
 
 	/**
-	 * 分页列表查询
+	 * Paginated list queries
 	 * 
 	 * @param quartzJob
 	 * @param pageNo
@@ -204,15 +204,15 @@ public class QuartzJobController {
 	 */
 	@RequestMapping(value = "/exportXls")
 	public ModelAndView exportXls(HttpServletRequest request, QuartzJob quartzJob) {
-		// Step.1 组装查询条件
+		// Step.1 Assemble query criteria
 		QueryWrapper<QuartzJob> queryWrapper = QueryGenerator.initQueryWrapper(quartzJob, request.getParameterMap());
-		// Step.2 AutoPoi 导出Excel
+		// Step.2 AutoPoi Export to Excel
 		ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
 		List<QuartzJob> pageList = quartzJobService.list(queryWrapper);
-		// 导出文件名称
+		// The name of the export file
 		mv.addObject(NormalExcelConstants.FILE_NAME, "A list of scheduled tasks");
 		mv.addObject(NormalExcelConstants.CLASS, QuartzJob.class);
-        //获取当前登录用户
+        //Obtain the current logged-in user
         //update-begin---author:wangshuai ---date:20211227  for：[JTC-116]导出人写死了------------
         LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 		mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("Scheduled task list data", "Exporter:"+user.getRealname(), "Export information"));
@@ -232,7 +232,7 @@ public class QuartzJobController {
 	public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-		// 错误信息
+		// Error Message
 		List<String> errorMessage = new ArrayList<>();
 		int successLines = 0, errorLines = 0;
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
- * @Description: 流程测试
+ * @Description: Process testing
  * @Author: jeecg-boot
  * @Date:   2019-05-14
  * @Version: V1.0
@@ -26,42 +26,42 @@ public class JoaDemo implements Serializable {
 	/**ID*/
 	@TableId(type = IdType.ASSIGN_ID)
 	private java.lang.String id;
-	/**请假人*/
-	@Excel(name = "请假人", width = 15)
+	/**Leave of absence*/
+	@Excel(name = "Leave of absence", width = 15)
 	private java.lang.String name;
-	/**请假天数*/
-	@Excel(name = "请假天数", width = 15)
+	/**Number of days off leave*/
+	@Excel(name = "Number of days off leave", width = 15)
 	private java.lang.Integer days;
-	/**开始时间*/
-	@Excel(name = "开始时间", width = 20, format = "yyyy-MM-dd")
+	/**Start time*/
+	@Excel(name = "Start time", width = 20, format = "yyyy-MM-dd")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
 	private java.util.Date beginDate;
-	/**请假结束时间*/
-	@Excel(name = "请假结束时间", width = 20, format = "yyyy-MM-dd")
+	/**The end time of the leave of absence*/
+	@Excel(name = "The end time of the leave of absence", width = 20, format = "yyyy-MM-dd")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
 	private java.util.Date endDate;
-	/**请假原因*/
-	@Excel(name = "请假原因", width = 15)
+	/**Reason for leave*/
+	@Excel(name = "Reason for leave", width = 15)
 	private java.lang.String reason;
-	/**流程状态*/
-	@Excel(name = "流程状态", width = 15)
+	/**Process status*/
+	@Excel(name = "Process status", width = 15)
 	private java.lang.String bpmStatus;
-	/**创建人id*/
-	@Excel(name = "创建人id", width = 15)
+	/**The ID of the person who created it*/
+	@Excel(name = "The ID of the person who created it", width = 15)
 	private java.lang.String createBy;
-	/**创建时间*/
-	@Excel(name = "创建时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Creation time*/
+	@Excel(name = "Creation time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date createTime;
-	/**修改时间*/
-	@Excel(name = "修改时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Modify time*/
+	@Excel(name = "Modify time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date updateTime;
-	/**修改人id*/
-	@Excel(name = "修改人id", width = 15)
+	/**Modify the ID of the person*/
+	@Excel(name = "Modify the ID of the person", width = 15)
 	private java.lang.String updateBy;
 }

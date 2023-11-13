@@ -50,7 +50,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Description: 一对多示例（JEditableTable行编辑）
+ * @Description: One-to-many examples（JEditableTable Row editing）
  * @Author: jeecg-boot
  * @Date:2019-02-15
  * @Version: V2.0
@@ -68,7 +68,7 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
     private IJeecgOrderTicketService jeecgOrderTicketService;
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param jeecgOrderMain
      * @param pageNo
@@ -85,7 +85,7 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param jeecgOrderMainPage
      * @return
@@ -95,11 +95,11 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
         JeecgOrderMain jeecgOrderMain = new JeecgOrderMain();
         BeanUtils.copyProperties(jeecgOrderMainPage, jeecgOrderMain);
         jeecgOrderMainService.saveMain(jeecgOrderMain, jeecgOrderMainPage.getJeecgOrderCustomerList(), jeecgOrderMainPage.getJeecgOrderTicketList());
-        return Result.ok("添加成功！");
+        return Result.ok("Added successfully!");
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param jeecgOrderMainPage
      * @return
@@ -109,11 +109,11 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
         JeecgOrderMain jeecgOrderMain = new JeecgOrderMain();
         BeanUtils.copyProperties(jeecgOrderMainPage, jeecgOrderMain);
         jeecgOrderMainService.updateCopyMain(jeecgOrderMain, jeecgOrderMainPage.getJeecgOrderCustomerList(), jeecgOrderMainPage.getJeecgOrderTicketList());
-        return Result.ok("编辑成功！");
+        return Result.ok("Edit successful!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
@@ -121,11 +121,11 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         jeecgOrderMainService.delMain(id);
-        return Result.ok("删除成功!");
+        return Result.ok("Deleted successfully!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
@@ -133,11 +133,11 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
     @DeleteMapping(value = "/deleteBatch")
     public Result<?> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         this.jeecgOrderMainService.delBatchMain(Arrays.asList(ids.split(",")));
-        return Result.ok("批量删除成功!");
+        return Result.ok("Batch deletion successful!");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
@@ -149,7 +149,7 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
@@ -161,7 +161,7 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
@@ -179,11 +179,11 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
      */
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, JeecgOrderMain jeecgOrderMain) {
-        // Step.1 组装查询条件
+        // Step.1 Assemble query criteria
         QueryWrapper<JeecgOrderMain> queryWrapper = QueryGenerator.initQueryWrapper(jeecgOrderMain, request.getParameterMap());
         //Step.2 AutoPoi 导出Excel
         ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
-        //获取当前用户
+        //Get the current user
         LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 
         List<JeecgOrderMainPage> pageList = new ArrayList<JeecgOrderMainPage>();
@@ -192,22 +192,22 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
         for (JeecgOrderMain orderMain : jeecgOrderMainList) {
             JeecgOrderMainPage vo = new JeecgOrderMainPage();
             BeanUtils.copyProperties(orderMain, vo);
-            // 查询机票
+            // Find your ticket
             List<JeecgOrderTicket> jeecgOrderTicketList = jeecgOrderTicketService.selectTicketsByMainId(orderMain.getId());
             vo.setJeecgOrderTicketList(jeecgOrderTicketList);
-            // 查询客户
+            // Inquire about the customer
             List<JeecgOrderCustomer> jeecgOrderCustomerList = jeecgOrderCustomerService.selectCustomersByMainId(orderMain.getId());
             vo.setJeecgOrderCustomerList(jeecgOrderCustomerList);
             pageList.add(vo);
         }
 
-        // 导出文件名称
-        mv.addObject(NormalExcelConstants.FILE_NAME, "一对多订单示例");
-        // 注解对象Class
+        // The name of the export file
+        mv.addObject(NormalExcelConstants.FILE_NAME, "Example of a one-to-many order");
+        // Annotation object Class
         mv.addObject(NormalExcelConstants.CLASS, JeecgOrderMainPage.class);
-        // 自定义表格参数
-        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("自定义导出Excel内容标题", "导出人:" + sysUser.getRealname(), "自定义Sheet名字"));
-        // 导出数据列表
+        // Customize table parameters
+        mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("Customize the Excel content title", "Exporter:" + sysUser.getRealname(), "Customize the name of the sheet"));
+        // Export a list of data
         mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
         return mv;
     }
@@ -237,10 +237,10 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
                     BeanUtils.copyProperties(page, po);
                     jeecgOrderMainService.saveMain(po, page.getJeecgOrderCustomerList(), page.getJeecgOrderTicketList());
                 }
-                return Result.ok("文件导入成功！");
+                return Result.ok("The file was imported successfully!");
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
-                return Result.error("文件导入失败：" + e.getMessage());
+                return Result.error("File import failed:" + e.getMessage());
             } finally {
                 try {
                     file.getInputStream().close();
@@ -249,7 +249,7 @@ public class JeecgOrderMainController extends JeecgController<JeecgOrderMain, IJ
                 }
             }
         }
-        return Result.error("文件导入失败！");
+        return Result.error("File import failed!");
     }
 
 }

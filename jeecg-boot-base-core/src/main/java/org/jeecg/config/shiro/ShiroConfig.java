@@ -36,7 +36,7 @@ import java.util.*;
 /**
  * @author: Scott
  * @date: 2018/2/7
- * @description: shiro 配置类
+ * @description: shiro Configure the class
  */
 
 @Slf4j
@@ -51,20 +51,20 @@ public class ShiroConfig {
     private JeecgBaseConfig jeecgBaseConfig;
 
     /**
-     * Filter Chain定义说明
+     * Filter Chain definition
      *
-     * 1、一个URL可以配置多个Filter，使用逗号分隔
-     * 2、当设置多个过滤器时，全部验证通过，才视为通过
-     * 3、部分过滤器可指定参数，如perms，roles
+     * 1. Multiple filters can be configured for a URL, separated by commas
+     * 2. When multiple filters are set, all of them are verified before they are deemed to have passed
+     * 3. Some filters can specify parameters, such as perms and roles
      */
     @Bean("shiroFilterFactoryBean")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         CustomShiroFilterFactoryBean shiroFilterFactoryBean = new CustomShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        // 拦截器
+        // INTERCEPTOR
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
-        //支持yml方式，配置拦截排除
+        // YML mode is supported, and interception and exclusion are configured
         if(jeecgBaseConfig!=null && jeecgBaseConfig.getShiro()!=null){
             String shiroExcludeUrls = jeecgBaseConfig.getShiro().getExcludeUrls();
             if(oConvertUtils.isNotEmpty(shiroExcludeUrls)){
@@ -74,29 +74,29 @@ public class ShiroConfig {
                 }
             }
         }
-        // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/sys/cas/client/validateLogin", "anon"); //cas验证登录
-        filterChainDefinitionMap.put("/sys/randomImage/**", "anon"); //登录验证码接口排除
-        filterChainDefinitionMap.put("/sys/checkCaptcha", "anon"); //登录验证码接口排除
-        filterChainDefinitionMap.put("/sys/login", "anon"); //登录接口排除
-        filterChainDefinitionMap.put("/sys/mLogin", "anon"); //登录接口排除
-        filterChainDefinitionMap.put("/sys/logout", "anon"); //登出接口排除
-        filterChainDefinitionMap.put("/sys/thirdLogin/**", "anon"); //第三方登录
-        filterChainDefinitionMap.put("/sys/getEncryptedString", "anon"); //获取加密串
-        filterChainDefinitionMap.put("/sys/sms", "anon");//短信验证码
-        filterChainDefinitionMap.put("/sys/phoneLogin", "anon");//手机登录
-        filterChainDefinitionMap.put("/sys/user/checkOnlyUser", "anon");//校验用户是否存在
-        filterChainDefinitionMap.put("/sys/user/register", "anon");//用户注册
-        filterChainDefinitionMap.put("/sys/user/phoneVerification", "anon");//用户忘记密码验证手机号
-        filterChainDefinitionMap.put("/sys/user/passwordChange", "anon");//用户更改密码
-        filterChainDefinitionMap.put("/auth/2step-code", "anon");//登录验证码
-        filterChainDefinitionMap.put("/sys/common/static/**", "anon");//图片预览 &下载文件不限制token
-        filterChainDefinitionMap.put("/sys/common/pdf/**", "anon");//pdf预览
-        filterChainDefinitionMap.put("/generic/**", "anon");//pdf预览需要文件
+        // Configure the order of links that will not be blocked
+        filterChainDefinitionMap.put("/sys/cas/client/validateLogin", "anon"); //CAS authentication login
+        filterChainDefinitionMap.put("/sys/randomImage/**", "anon"); //The login verification code interface is excluded
+        filterChainDefinitionMap.put("/sys/checkCaptcha", "anon"); //The login verification code interface is excluded
+        filterChainDefinitionMap.put("/sys/login", "anon"); //Login API exclusion
+        filterChainDefinitionMap.put("/sys/mLogin", "anon"); //Login API exclusion
+        filterChainDefinitionMap.put("/sys/logout", "anon"); //Logout interface exclusion
+        filterChainDefinitionMap.put("/sys/thirdLogin/**", "anon"); //Third-party logins
+        filterChainDefinitionMap.put("/sys/getEncryptedString", "anon"); //Get the encrypted string
+        filterChainDefinitionMap.put("/sys/sms", "anon");//SMS verification code
+        filterChainDefinitionMap.put("/sys/phoneLogin", "anon");//Mobile phone login
+        filterChainDefinitionMap.put("/sys/user/checkOnlyUser", "anon");//Verify whether the user exists
+        filterChainDefinitionMap.put("/sys/user/register", "anon");//User Registration
+        filterChainDefinitionMap.put("/sys/user/phoneVerification", "anon");//The user forgot the password to verify the mobile phone number
+        filterChainDefinitionMap.put("/sys/user/passwordChange", "anon");//The user changes the password
+        filterChainDefinitionMap.put("/auth/2step-code", "anon");//Login verification code
+        filterChainDefinitionMap.put("/sys/common/static/**", "anon");//There is no restriction on the token of the image preview > download file
+        filterChainDefinitionMap.put("/sys/common/pdf/**", "anon");//PDF preview
+        filterChainDefinitionMap.put("/generic/**", "anon");//A file is required for PDF preview
 
-        filterChainDefinitionMap.put("/sys/getLoginQrcode/**", "anon"); //登录二维码
-        filterChainDefinitionMap.put("/sys/getQrcodeToken/**", "anon"); //监听扫码
-        filterChainDefinitionMap.put("/sys/checkAuth", "anon"); //授权接口排除
+        filterChainDefinitionMap.put("/sys/getLoginQrcode/**", "anon"); //Login QR code
+        filterChainDefinitionMap.put("/sys/getQrcodeToken/**", "anon"); //Listen and scan the code
+        filterChainDefinitionMap.put("/sys/checkAuth", "anon"); //Authorization interface exclusions
 
 
         filterChainDefinitionMap.put("/", "anon");
@@ -122,18 +122,18 @@ public class ShiroConfig {
         
         filterChainDefinitionMap.put("/sys/annountCement/show/**", "anon");
 
-        //积木报表排除
+        //Blocks report exclusions
         filterChainDefinitionMap.put("/jmreport/**", "anon");
         filterChainDefinitionMap.put("/**/*.js.map", "anon");
         filterChainDefinitionMap.put("/**/*.css.map", "anon");
         
-        //拖拽仪表盘设计器排除
+        //Drag and drop the dashboard designer to exclude
         filterChainDefinitionMap.put("/drag/view", "anon");
         filterChainDefinitionMap.put("/drag/page/queryById", "anon");
         filterChainDefinitionMap.put("/drag/onlDragDatasetHead/getAllChartData", "anon");
         filterChainDefinitionMap.put("/drag/onlDragDatasetHead/getTotalData", "anon");
         filterChainDefinitionMap.put("/drag/mock/json/**", "anon");
-        //大屏模板例子
+        //Example of a large-screen template
         filterChainDefinitionMap.put("/test/bigScreen/**", "anon");
         filterChainDefinitionMap.put("/bigscreen/template1/**", "anon");
         filterChainDefinitionMap.put("/bigscreen/template1/**", "anon");
@@ -141,31 +141,31 @@ public class ShiroConfig {
         //filterChainDefinitionMap.put("/test/jeecgDemo/html", "anon"); //模板页面
         //filterChainDefinitionMap.put("/test/jeecgDemo/redis/**", "anon"); //redis测试
 
-        //websocket排除
-        filterChainDefinitionMap.put("/websocket/**", "anon");//系统通知和公告
+        //WebSocket Exclusion
+        filterChainDefinitionMap.put("/websocket/**", "anon");//System notifications and announcements
         filterChainDefinitionMap.put("/newsWebsocket/**", "anon");//CMS模块
         filterChainDefinitionMap.put("/vxeSocket/**", "anon");//JVxeTable无痕刷新示例
 
-        //性能监控——安全隐患泄露TOEKN（durid连接池也有）
+        //Performance Monitoring - Vulnerability Leak TOEKN (DAID Connection Pool also has)
         //filterChainDefinitionMap.put("/actuator/**", "anon");
-        //测试模块排除
+        //Test module exclusions
         filterChainDefinitionMap.put("/test/seata/**", "anon");
 
-        // update-begin--author:liusq Date:20230522 for：[issues/4829]访问不存在的url时会提示Token失效，请重新登录呢
-        //错误路径排除
+        // update-begin--author:liusq Date:20230522 for：[issues/4829]When you access a URL that does not exist, you will be prompted that the token is invalid, so please log in again
+        // Error path exclusion
         filterChainDefinitionMap.put("/error", "anon");
-        // update-end--author:liusq Date:20230522 for：[issues/4829]访问不存在的url时会提示Token失效，请重新登录呢
+        // update-end--author:liusq Date:20230522 for：[issues/4829]When you access a URL that does not exist, you will be prompted that the token is invalid, so please log in again
 
-        // 添加自己的过滤器并且取名为jwt
+        // Add your own filter and name it jwt
         Map<String, Filter> filterMap = new HashMap<String, Filter>(1);
-        //如果cloudServer为空 则说明是单体 需要加载跨域配置【微服务跨域切换】
+        //If the cloudServer is empty, it means that it is a monolithic and needs to load the cross-domain configuration [microservice cross-domain switching]
         Object cloudServer = env.getProperty(CommonConstant.CLOUD_SERVER_KEY);
         filterMap.put("jwt", new JwtFilter(cloudServer==null));
         shiroFilterFactoryBean.setFilters(filterMap);
-        // <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边
+        // <!-- The filter chain definition is executed in order from top to bottom, with /** at the bottom
         filterChainDefinitionMap.put("/**", "jwt");
 
-        // 未授权界面返回JSON
+        // The unauthorized interface returns JSON
         shiroFilterFactoryBean.setUnauthorizedUrl("/sys/common/403");
         shiroFilterFactoryBean.setLoginUrl("/sys/common/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -187,13 +187,13 @@ public class ShiroConfig {
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
         subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
         securityManager.setSubjectDAO(subjectDAO);
-        //自定义缓存实现,使用redis
+        //Custom caching implementation, using Redis
         securityManager.setCacheManager(redisCacheManager());
         return securityManager;
     }
 
     /**
-     * 下面的代码是添加注解支持
+     * The code below is to add annotation support
      * @return
      */
     @Bean
@@ -202,8 +202,8 @@ public class ShiroConfig {
         DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
         /**
-         * 解决重复代理问题 github#994
-         * 添加前缀判断 不匹配 任何Advisor
+         * Resolve duplicate proxy issues github#994
+         * Add a prefix to determine that it does not match any Advisor
          */
         defaultAdvisorAutoProxyCreator.setUsePrefix(true);
         defaultAdvisorAutoProxyCreator.setAdvisorBeanNamePrefix("_no_advisor");
@@ -223,16 +223,16 @@ public class ShiroConfig {
     }
 
     /**
-     * cacheManager 缓存 redis实现
-     * 使用的是shiro-redis开源插件
+     * cacheManager CACHE REDIS IMPLEMENTATION
+     * The shiro-redis open-source plugin is used
      *
      * @return
      */
     public RedisCacheManager redisCacheManager() {
-        log.info("===============(1)创建缓存管理器RedisCacheManager");
+        log.info("===============(1)Create a cache manager RedisCacheManager");
         RedisCacheManager redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(redisManager());
-        //redis中针对不同用户缓存(此处的id需要对应user实体中的id字段,用于唯一标识)
+        //Redis caches for different users (the ID here needs to correspond to the ID field in the user entity for unique identification)
         redisCacheManager.setPrincipalIdFieldName("id");
         //用户权限信息缓存时间
         redisCacheManager.setExpire(200000);
@@ -240,16 +240,16 @@ public class ShiroConfig {
     }
 
     /**
-     * 配置shiro redisManager
-     * 使用的是shiro-redis开源插件
+     * Configure shiro redisManager
+     * It is a shiro that is used-Redis open-source plugin
      *
      * @return
      */
     @Bean
     public IRedisManager redisManager() {
-        log.info("===============(2)创建RedisManager,连接Redis..");
+        log.info("===============(2)Create a Redis Manager and connect to ApsaraDB for Redis..");
         IRedisManager manager;
-        // redis 单机支持，在集群为空，或者集群无机器时候使用 add by jzyadmin@163.com
+        // redis Stand-alone support, used when the cluster is empty or the cluster does not have machines add by jzyadmin@163.com
         if (lettuceConnectionFactory.getClusterConfiguration() == null || lettuceConnectionFactory.getClusterConfiguration().getClusterNodes().isEmpty()) {
             RedisManager redisManager = new RedisManager();
             redisManager.setHost(lettuceConnectionFactory.getHostName() + ":" + lettuceConnectionFactory.getPort());
@@ -261,7 +261,7 @@ public class ShiroConfig {
             }
             manager = redisManager;
         }else{
-            // redis集群支持，优先使用集群配置
+            // Redis clusters are supported, and cluster configurations are preferred
             RedisClusterManager redisManager = new RedisClusterManager();
             Set<HostAndPort> portSet = new HashSet<>();
             lettuceConnectionFactory.getClusterConfiguration().getClusterNodes().forEach(node -> portSet.add(new HostAndPort(node.getHost() , node.getPort())));

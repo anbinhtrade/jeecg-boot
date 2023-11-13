@@ -77,26 +77,26 @@ public class ShiroRealm extends AuthorizingRealm {
         Set<String> permissionSet = commonApi.queryUserAuths(username);
         info.addStringPermissions(permissionSet);
         //System.out.println(permissionSet);
-        log.info("===============Shiro权限认证成功==============");
+        log.info("===============Shiro Permission Authentication Successful================");
         return info;
     }
 
     /**
-     * 用户信息认证是在用户进行登录的时候进行验证(不存redis)
-     * 也就是说验证用户输入的账号和密码是否正确，错误抛出异常
+     * User information authentication is performed when the user logs in (Redis is not saved)
+     * That is to say, verify whether the account and password entered by the user are correct, and throw an exception incorrectly
      *
-     * @param auth 用户登录的账号密码信息
-     * @return 返回封装了用户信息的 AuthenticationInfo 实例
+     * @param auth The account and password of the user login
+     * @return Returns encapsulated user information AuthenticationInfo INSTANCE
      * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
-        log.debug("===============Shiro身份认证开始============doGetAuthenticationInfo==========");
+        log.debug("==============Shiro Authentication Start=============do Get Authentication Info============");
         String token = (String) auth.getCredentials();
         if (token == null) {
             HttpServletRequest req = SpringContextUtils.getHttpServletRequest();
-            log.info("————————身份认证失败——————————IP地址:  "+ oConvertUtils.getIpAddrByRequest(req) +"，URL:"+req.getRequestURI());
-            throw new AuthenticationException("token为空!");
+            log.info("———————— IP address —————————— authentication failure:  "+ oConvertUtils.getIpAddrByRequest(req) +"，URL:"+req.getRequestURI());
+            throw new AuthenticationException("The token is empty!");
         }
         // 校验token有效性
         LoginUser loginUser = null;

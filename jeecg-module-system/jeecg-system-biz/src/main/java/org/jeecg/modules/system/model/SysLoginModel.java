@@ -9,15 +9,15 @@ import io.swagger.annotations.ApiModelProperty;
  * @Author scott
  * @since  2019-01-18
  */
-@ApiModel(value="登录对象", description="登录对象")
+@ApiModel(value="Login object", description="Login object")
 public class SysLoginModel {
-	@ApiModelProperty(value = "账号")
+	@ApiModelProperty(value = "Account")
     private String username;
-	@ApiModelProperty(value = "密码")
+	@ApiModelProperty(value = "Password")
     private String password;
-	@ApiModelProperty(value = "验证码")
+	@ApiModelProperty(value = "Captcha")
     private String captcha;
-	@ApiModelProperty(value = "验证码key")
+	@ApiModelProperty(value = "Captcha key")
     private String checkKey;
 
     public String getUsername() {

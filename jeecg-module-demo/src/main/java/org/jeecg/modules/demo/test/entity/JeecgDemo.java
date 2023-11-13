@@ -29,7 +29,7 @@ import lombok.experimental.Accessors;
 @TableName("demo")
 public class JeecgDemo extends JeecgEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-	/** 姓名 */
+	/** NAME */
 	@Excel(name="姓名",width=25)
 	@ApiModelProperty(value = "姓名")
 	private java.lang.String name;

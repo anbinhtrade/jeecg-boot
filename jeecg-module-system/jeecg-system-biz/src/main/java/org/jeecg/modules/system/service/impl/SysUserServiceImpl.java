@@ -349,17 +349,17 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	 */
 	@Override
 	public Set<String> getUserRolesSet(String username) {
-		// 查询用户拥有的角色集合
+		// Query the collection of roles owned by the user
 		List<String> roles = sysUserRoleMapper.getRoleByUserName(username);
-		log.info("-------通过数据库读取用户拥有的角色Rules------username： " + username + ",Roles size: " + (roles == null ? 0 : roles.size()));
+		log.info("------- read the Rules------username of the user's role through the database: " + username + ",Roles size: " + (roles == null ? 0 : roles.size()));
 		return new HashSet<>(roles);
 	}
 
 	/**
-	 * 通过用户名获取用户权限集合
+	 * Get a collection of user permissions by username
 	 *
-	 * @param username 用户名
-	 * @return 权限集合
+	 * @param username USERNAME
+	 * @return Permission collection
 	 */
 	@Override
 	public Set<String> getUserPermissionsSet(String username) {
@@ -383,12 +383,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 				permissionSet.add(po.getPerms());
 			}
 		}
-		log.info("-------通过数据库读取用户拥有的权限Perms------username： "+ username+",Perms size: "+ (permissionSet==null?0:permissionSet.size()) );
+		log.info("------- read the permissions that the user has through the databasePerms------username: "+ username+",Perms size: "+ (permissionSet==null?0:permissionSet.size()) );
 		return permissionSet;
 	}
 
 	/**
-	 * 升级SpringBoot2.6.6,不允许循环依赖
+	 * Upgraded Spring Boot 2.6.6 to allow cyclic dependencies
 	 * @author:qinfeng
 	 * @update: 2022-04-07
 	 * @param username

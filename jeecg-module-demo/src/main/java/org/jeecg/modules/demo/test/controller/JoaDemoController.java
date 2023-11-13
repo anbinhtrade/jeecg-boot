@@ -42,7 +42,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 
  /**
- * @Description: 流程测试
+ * @Description: Process testing
  * @Author: jeecg-boot
  * @Date:   2019-05-14
  * @Version: V1.0
@@ -55,7 +55,7 @@ public class JoaDemoController {
 	private IJoaDemoService joaDemoService;
 	
 	/**
-	  * 分页列表查询
+	  * Paginated list queries
 	 * @param joaDemo
 	 * @param pageNo
 	 * @param pageSize
@@ -77,7 +77,7 @@ public class JoaDemoController {
 	}
 	
 	/**
-	  *   添加
+	  *   Add to
 	 * @param joaDemo
 	 * @return
 	 */
@@ -86,16 +86,16 @@ public class JoaDemoController {
 		Result<JoaDemo> result = new Result<JoaDemo>();
 		try {
 			joaDemoService.save(joaDemo);
-			result.success("添加成功！");
+			result.success("Added successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
-			result.error500("操作失败");
+			result.error500("The operation failed");
 		}
 		return result;
 	}
 	
 	/**
-	  *  编辑
+	  *  EDIT
 	 * @param joaDemo
 	 * @return
 	 */
@@ -104,12 +104,12 @@ public class JoaDemoController {
 		Result<JoaDemo> result = new Result<JoaDemo>();
 		JoaDemo joaDemoEntity = joaDemoService.getById(joaDemo.getId());
 		if(joaDemoEntity==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			boolean ok = joaDemoService.updateById(joaDemo);
-			//TODO 返回false说明什么？
+			//TODO What does returning false mean?
 			if(ok) {
-				result.success("修改成功!");
+				result.success("Modification successful!");
 			}
 		}
 		
@@ -117,7 +117,7 @@ public class JoaDemoController {
 	}
 	
 	/**
-	  *   通过id删除
+	  *   Delete by ID
 	 * @param id
 	 * @return
 	 */
@@ -126,11 +126,11 @@ public class JoaDemoController {
 		Result<JoaDemo> result = new Result<JoaDemo>();
 		JoaDemo joaDemo = joaDemoService.getById(id);
 		if(joaDemo==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			boolean ok = joaDemoService.removeById(id);
 			if(ok) {
-				result.success("删除成功!");
+				result.success("Deleted successfully!");
 			}
 		}
 		
@@ -138,7 +138,7 @@ public class JoaDemoController {
 	}
 	
 	/**
-	  *  批量删除
+	  *  Delete in bulk
 	 * @param ids
 	 * @return
 	 */
@@ -146,16 +146,16 @@ public class JoaDemoController {
 	public Result<JoaDemo> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		Result<JoaDemo> result = new Result<JoaDemo>();
 		if(ids==null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			result.error500("The parameter is not recognized!");
 		}else {
 			this.joaDemoService.removeByIds(Arrays.asList(ids.split(",")));
-			result.success("删除成功!");
+			result.success("Deleted successfully!");
 		}
 		return result;
 	}
 	
 	/**
-	  * 通过id查询
+	  * Query by ID
 	 * @param id
 	 * @return
 	 */
@@ -164,7 +164,7 @@ public class JoaDemoController {
 		Result<JoaDemo> result = new Result<JoaDemo>();
 		JoaDemo joaDemo = joaDemoService.getById(id);
 		if(joaDemo==null) {
-			result.error500("未找到对应实体");
+			result.error500("No corresponding entity found");
 		}else {
 			result.setResult(joaDemo);
 			result.setSuccess(true);
@@ -180,7 +180,7 @@ public class JoaDemoController {
    */
   @RequestMapping(value = "/exportXls")
   public ModelAndView exportXls(HttpServletRequest request, HttpServletResponse response) {
-      // Step.1 组装查询条件
+      // Step.1 Assemble query criteria
       QueryWrapper<JoaDemo> queryWrapper = null;
       try {
           String paramsStr = request.getParameter("paramsStr");
@@ -193,13 +193,13 @@ public class JoaDemoController {
           e.printStackTrace();
       }
 
-      //Step.2 AutoPoi 导出Excel
+      //Step.2 AutoPoi Export to Excel
       ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
       List<JoaDemo> pageList = joaDemoService.list(queryWrapper);
-      //导出文件名称
-      mv.addObject(NormalExcelConstants.FILE_NAME, "流程测试列表");
+      //The name of the export file
+      mv.addObject(NormalExcelConstants.FILE_NAME, "A list of process tests");
       mv.addObject(NormalExcelConstants.CLASS, JoaDemo.class);
-      mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("流程测试列表数据", "导出人:Jeecg", "导出信息"));
+      mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("Process test list data", "Exporter: Jeecg", "Export information"));
       mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
       return mv;
   }
@@ -216,7 +216,7 @@ public class JoaDemoController {
       MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
       Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
       for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-          // 获取上传文件对象
+          // Obtain the object to which the file was uploaded
           MultipartFile file = entity.getValue();
           ImportParams params = new ImportParams();
           params.setTitleRows(2);
@@ -227,10 +227,10 @@ public class JoaDemoController {
               for (JoaDemo joaDemoExcel : listJoaDemos) {
                   joaDemoService.save(joaDemoExcel);
               }
-              return Result.ok("文件导入成功！数据行数:" + listJoaDemos.size());
+              return Result.ok("The file was imported successfully！Number of rows of data:" + listJoaDemos.size());
           } catch (Exception e) {
               log.error(e.getMessage(),e);
-              return Result.error("文件导入失败:"+e.getMessage());
+              return Result.error("File import failed:"+e.getMessage());
           } finally {
               try {
                   file.getInputStream().close();
@@ -239,7 +239,7 @@ public class JoaDemoController {
               }
           }
       }
-      return Result.ok("文件导入失败！");
+      return Result.ok("File import failed！");
   }
 
 }

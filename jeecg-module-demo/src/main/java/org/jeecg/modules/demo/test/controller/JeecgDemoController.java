@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -38,13 +36,13 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description: 单表示例
+ * @Description: Singular examples
  * @Author: jeecg-boot
  * @Date:2018-12-29
  * @Version:V2.0
  */
 @Slf4j
-@Api(tags = "单表DEMO")
+@Api(tags = "Single Table Demo")
 @RestController
 @RequestMapping("/test/jeecgDemo")
 public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoService> {
@@ -55,7 +53,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     private RedisUtil redisUtil;
 
     /**
-     * 分页列表查询
+     * Paginated list queries
      *
      * @param jeecgDemo
      * @param pageNo
@@ -63,7 +61,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
      * @param req
      * @return
      */
-    @ApiOperation(value = "获取Demo数据列表", notes = "获取所有Demo数据列表")
+    @ApiOperation(value = "Obtain the demo data list", notes = "Obtain a list of all demo data")
     @GetMapping(value = "/list")
     @PermissionData(pageComponent = "jeecg/JeecgDemoList")
     public Result<?> list(JeecgDemo jeecgDemo, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
@@ -73,77 +71,77 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         Page<JeecgDemo> page = new Page<JeecgDemo>(pageNo, pageSize);
 
         IPage<JeecgDemo> pageList = jeecgDemoService.page(page, queryWrapper);
-        log.info("查询当前页：" + pageList.getCurrent());
-        log.info("查询当前页数量：" + pageList.getSize());
-        log.info("查询结果数量：" + pageList.getRecords().size());
-        log.info("数据总数：" + pageList.getTotal());
+        log.info("To query the current page:" + pageList.getCurrent());
+        log.info("Query the current number of pages:" + pageList.getSize());
+        log.info("Number of query results:" + pageList.getRecords().size());
+        log.info("Total number of data:" + pageList.getTotal());
         return Result.OK(pageList);
     }
 
     /**
-     * 添加
+     * Add to
      *
      * @param jeecgDemo
      * @return
      */
     @PostMapping(value = "/add")
-    @AutoLog(value = "添加测试DEMO")
-    @ApiOperation(value = "添加DEMO", notes = "添加DEMO")
+    @AutoLog(value = "Add A Test Demo")
+    @ApiOperation(value = "Add A Demo", notes = "Add A Demo")
     public Result<?> add(@RequestBody JeecgDemo jeecgDemo) {
         jeecgDemoService.save(jeecgDemo);
-        return Result.OK("添加成功！");
+        return Result.OK("Added successfully!");
     }
 
     /**
-     * 编辑
+     * EDIT
      *
      * @param jeecgDemo
      * @return
      */
-    @AutoLog(value = "编辑DEMO", operateType = CommonConstant.OPERATE_TYPE_3)
-    @ApiOperation(value = "编辑DEMO", notes = "编辑DEMO")
+    @AutoLog(value = "Edit the demo", operateType = CommonConstant.OPERATE_TYPE_3)
+    @ApiOperation(value = "Edit the demo", notes = "Edit the demo")
     @RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
     public Result<?> edit(@RequestBody JeecgDemo jeecgDemo) {
         jeecgDemoService.updateById(jeecgDemo);
-        return Result.OK("更新成功！");
+        return Result.OK("Update Success!");
     }
 
     /**
-     * 通过id删除
+     * Delete by ID
      *
      * @param id
      * @return
      */
-    @AutoLog(value = "删除测试DEMO")
+    @AutoLog(value = "Delete The Test Demo")
     @DeleteMapping(value = "/delete")
-    @ApiOperation(value = "通过ID删除DEMO", notes = "通过ID删除DEMO")
+    @ApiOperation(value = "Delete A Demo By Id", notes = "Delete A Demo By Id")
     public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
         jeecgDemoService.removeById(id);
-        return Result.OK("删除成功!");
+        return Result.OK("Deleted successfully!");
     }
 
     /**
-     * 批量删除
+     * Delete in bulk
      *
      * @param ids
      * @return
      */
     @DeleteMapping(value = "/deleteBatch")
-    @ApiOperation(value = "批量删除DEMO", notes = "批量删除DEMO")
+    @ApiOperation(value = "Delete Demos In Batches", notes = "Delete Demos In Batches")
     public Result<?> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
         this.jeecgDemoService.removeByIds(Arrays.asList(ids.split(",")));
-        return Result.OK("批量删除成功！");
+        return Result.OK("Batch deletion successful!");
     }
 
     /**
-     * 通过id查询
+     * Query by ID
      *
      * @param id
      * @return
      */
     @GetMapping(value = "/queryById")
-    @ApiOperation(value = "通过ID查询DEMO", notes = "通过ID查询DEMO")
-    public Result<?> queryById(@ApiParam(name = "id", value = "示例id", required = true) @RequestParam(name = "id", required = true) String id) {
+    @ApiOperation(value = "Query The Demo By Id", notes = "QUERY THE DEMO BY ID")
+    public Result<?> queryById(@ApiParam(name = "id", value = "Example ID", required = true) @RequestParam(name = "id", required = true) String id) {
         JeecgDemo jeecgDemo = jeecgDemoService.getById(id);
         return Result.OK(jeecgDemo);
     }
@@ -156,10 +154,10 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     @RequestMapping(value = "/exportXls")
     @PermissionData(pageComponent = "jeecg/JeecgDemoList")
     public ModelAndView exportXls(HttpServletRequest request, JeecgDemo jeecgDemo) {
-        //获取导出表格字段
+        //Get the export table fields
         String exportFields = jeecgDemoService.getExportFields();
-        //分sheet导出表格字段
-        return super.exportXlsSheet(request, jeecgDemo, JeecgDemo.class, "单表模型",exportFields,500);
+        //Export table fields in sheets
+        return super.exportXlsSheet(request, jeecgDemo, JeecgDemo.class, "Single-table model",exportFields,500);
     }
 
     /**
@@ -174,18 +172,18 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         return super.importExcel(request, response, JeecgDemo.class);
     }
 
-    // =====Redis 示例===============================================================================================
+    // =====Redis EXAMPLE===============================================================================================
 
     /**
-     * redis操作 -- set
+     * redisOPERATE -- set
      */
     @GetMapping(value = "/redisSet")
     public void redisSet() {
-        redisUtil.set("name", "张三" + DateUtils.now());
+        redisUtil.set("name", "TOM" + DateUtils.now());
     }
 
     /**
-     * redis操作 -- get
+     * redisOPERATE -- get
      */
     @GetMapping(value = "/redisGet")
     public String redisGet() {
@@ -193,7 +191,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * redis操作 -- setObj
+     * redisOPERATE -- setObj
      */
     @GetMapping(value = "/redisSetObj")
     public void redisSetObj() {
@@ -201,13 +199,13 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         p.setAge(10);
         p.setBirthday(new Date());
         p.setContent("hello");
-        p.setName("张三");
-        p.setSex("男");
+        p.setName("TOM");
+        p.setSex("MAN");
         redisUtil.set("user-zdh", p);
     }
 
     /**
-     * redis操作 -- setObj
+     * redisOPERATE -- setObj
      */
     @GetMapping(value = "/redisGetObj")
     public Object redisGetObj() {
@@ -215,7 +213,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * redis操作 -- get
+     * redisOPERATE -- get
      */
     @GetMapping(value = "/redis/{id}")
     public JeecgDemo redisGetJeecgDemo(@PathVariable("id") String id) {
@@ -227,7 +225,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     // ===Freemaker示例================================================================================
 
     /**
-     * freemaker方式 【页面路径： src/main/resources/templates】
+     * freemakerMANNER 【Page Path: src/main/resources/templates】
      *
      * @param modelAndView
      * @return
@@ -247,18 +245,18 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
 
     // ==========================================动态表单 JSON接收测试===========================================
     /**
-     * online新增数据
+     * online Added data
      */
     @PostMapping(value = "/testOnlineAdd")
     public Result<?> testOnlineAdd(@RequestBody JSONObject json) {
         log.info(json.toJSONString());
-        return Result.OK("添加成功！");
+        return Result.OK("The addition was successful！");
     }
 
-    /*----------------------------------------外部获取权限示例------------------------------------*/
+    /*----------------------------------------Example of obtaining permissions from outside------------------------------------*/
 
     /**
-     * 【数据权限示例 - 编程】mybatisPlus java类方式加载权限
+     * [Examples of data permissions - Programming] mybatis Plus Java-like loading permissions
      *
      * @param pageNo
      * @param pageSize
@@ -270,7 +268,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     public Result<?> loadMpPermissonList(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
                                          HttpServletRequest req) {
         QueryWrapper<JeecgDemo> queryWrapper = new QueryWrapper<JeecgDemo>();
-        //编程方式，给queryWrapper装载数据权限规则
+        //Programmatically, load data permission rules to the query wrapper
         QueryGenerator.installAuthMplus(queryWrapper, JeecgDemo.class);
         Page<JeecgDemo> page = new Page<JeecgDemo>(pageNo, pageSize);
         IPage<JeecgDemo> pageList = jeecgDemoService.page(page, queryWrapper);
@@ -278,7 +276,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * 【数据权限示例 - 编程】mybatis xml方式加载权限
+     * 【Data Permission Example - Programming】Mybatis XML Loading Permissions
      *
      * @param jeecgDemo
      * @param pageNo
@@ -293,10 +291,10 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         IPage<JeecgDemo> pageList = jeecgDemoService.queryListWithPermission(pageSize, pageNo);
         return Result.OK(pageList);
     }
-    /*----------------------------------------外部获取权限示例------------------------------------*/
+    /*----------------------------------------Example of obtaining permissions from outside------------------------------------*/
 
     /**
-     * online api增强 列表
+     * online api Enhance the list
      * @param params
      * @return
      */
@@ -313,7 +311,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * online api增强 表单
+     * online apiEnhance the form
      * @param params
      * @return
      */
@@ -332,7 +330,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         return "hello world!";
     }
 
-    // =====Vue3 Native  原生页面示例===============================================================================================
+    // =====Vue3 Native  Example of a native page===============================================================================================
     @GetMapping(value = "/oneNative/list")
     public Result oneNativeList(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize){
         Object oneNative = redisUtil.get("one-native");
@@ -358,7 +356,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         data.add(jsonObject);
         nativeObject.put("data",data);
         redisUtil.set("one-native",nativeObject);
-        return Result.OK("添加成功");
+        return Result.OK("The addition was successful");
     }
     
     @PutMapping("/oneNative/edit")
@@ -368,7 +366,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         data = getNativeById(data,jsonObject);
         oneNative.put("data", data);
         redisUtil.set("one-native", oneNative);
-        return Result.OK("修改成功");
+        return Result.OK("The modification was successful");
     }
 
     @DeleteMapping("/oneNative/delete")
@@ -381,11 +379,11 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
             nativeObject.put("data",data);
             redisUtil.set("one-native",nativeObject);
         }
-        return Result.OK("删除成功");
+        return Result.OK("The deletion is successful");
     }
     
     /**
-     * 获取redis对应id的数据
+     * Obtain the data of the corresponding Redis ID
      * @param data
      * @param jsonObject
      * @return
@@ -403,7 +401,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * 删除redis中包含的id数据
+     * Delete the ID data contained in Redis
      * @param data
      * @param ids
      * @return
@@ -424,7 +422,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * 模拟查询数据，可以根据父ID查询，可以分页
+     * Simulating query data, which can be queried based on the parent ID, can be paginated
      *
      * @param dataList 数据列表
      * @param pageNo   页码
@@ -432,13 +430,13 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
      * @return
      */
     private IPage<JSONObject> queryDataPage(JSONArray dataList, Integer pageNo, Integer pageSize) {
-        // 根据父级id查询子级
+        // Query children based on their parent IDs
         JSONArray dataDb = dataList;
-        // 模拟分页（实际中应用SQL自带的分页）
+        // Simulated pagination (pagination that comes with SQL is actually applied)
         List<JSONObject> records = new ArrayList<>();
         IPage<JSONObject> page;
         long beginIndex, endIndex;
-        // 如果任意一个参数为null，则不分页
+        // If any parameter is null, it is not paged
         if (pageNo == null || pageSize == null) {
             page = new Page<>(0, dataDb.size());
             beginIndex = 0;
@@ -451,7 +449,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         for (long i = beginIndex; (i < endIndex && i < dataDb.size()); i++) {
             JSONObject data = dataDb.getJSONObject((int) i);
             data = JSON.parseObject(data.toJSONString());
-            // 不返回 children
+            // No return children
             data.remove("children");
             records.add(data);
         }
@@ -459,11 +457,11 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         page.setTotal(dataDb.size());
         return page;
     }
-    // =====Vue3 Native  原生页面示例===============================================================================================
+    // =====Vue3 Native  Example of a native page===============================================================================================
 
 
     /**
-     * 获取创建人
+     * Get the creator
      * @return
      */
     @GetMapping(value = "/groupList")
@@ -472,10 +470,10 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
     }
 
     /**
-     * 测试Mono对象
+     * Test the Mono object
      * @return
      */
-    @ApiOperation("Mono测试")
+    @ApiOperation("MonoTEST")
     @GetMapping(value ="/test")
     public Mono<String> test() {
         //解决shiro报错No SecurityManager accessible to the calling code, either bound to the org.apache.shiro
@@ -483,7 +481,7 @@ public class JeecgDemoController extends JeecgController<JeecgDemo, IJeecgDemoSe
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
         SecurityUtils.setSecurityManager(securityManager);
         
-        return Mono.just("测试");
+        return Mono.just("TEST");
     }
 
 }

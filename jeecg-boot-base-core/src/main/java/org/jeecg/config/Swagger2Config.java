@@ -39,14 +39,14 @@ import java.util.stream.Collectors;
  * @Author scott
  */
 @Configuration
-@EnableSwagger2    //开启 Swagger2
-@EnableKnife4j     //开启 knife4j，可以不写
+@EnableSwagger2    //OPEN Swagger2
+@EnableKnife4j     //OPEN knife4j，It is possible not to write
 @Import(BeanValidatorPluginsConfiguration.class)
 public class Swagger2Config implements WebMvcConfigurer {
 
     /**
      *
-     * 显示swagger-ui.html文档展示页，还必须注入swagger资源：
+     * To display the swagger-ui .html document display page, swagger resources must also be injected：
      *
      * @param registry
      */
@@ -58,7 +58,7 @@ public class Swagger2Config implements WebMvcConfigurer {
     }
 
     /**
-     * swagger2的配置文件，这里可以配置swagger2的一些基本的内容，比如扫描的包等等
+     * Swagger 2 configuration file, where you can configure some basic content of Swagger 2, such as scanned packages, etc
      *
      * @return Docket
      */
@@ -67,9 +67,9 @@ public class Swagger2Config implements WebMvcConfigurer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                //此包路径下的类，才生成接口文档
+                //The class under the path of this package generates the interface document
                 .apis(RequestHandlerSelectors.basePackage("org.jeecg"))
-                //加了ApiOperation注解的类，才生成接口文档
+                //Classes with API Operation annotations are added to generate interface documentation
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
@@ -80,8 +80,8 @@ public class Swagger2Config implements WebMvcConfigurer {
     }
 
     /***
-     * oauth2配置
-     * 需要增加swagger授权回调地址
+     * OAuth 2 configuration
+     * You need to add the swagger authorization callback address
      * http://localhost:8888/webjars/springfox-swagger-ui/o2c.html
      * @return
      */
@@ -102,28 +102,28 @@ public class Swagger2Config implements WebMvcConfigurer {
     }
 
     /**
-     * api文档的详细信息函数,注意这里的注解引用的是哪个
+     * API documentation details function, note which annotation here refers to
      *
      * @return
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                // //大标题
-                .title("JeecgBoot 后台服务API接口文档")
-                // 版本号
+                // //Big headline
+                .title("JeecgBoot Documentation of the API interface for backend services")
+                // Version number
                 .version("1.0")
 //				.termsOfServiceUrl("NO terms of service")
-                // 描述
-                .description("后台API接口")
-                // 作者
-                .contact(new Contact("北京国炬信息技术有限公司","www.jeccg.com","jeecgos@163.com"))
+                // DESCRIPTION
+                .description("Background API interfaces")
+                // AUTHOR
+                .contact(new Contact("Beijing Guoju Information Technology Co., Ltd","www.jeccg.com","jeecgos@163.com"))
                 .license("The Apache License, Version 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .build();
     }
 
     /**
-     * 新增 securityContexts 保持登录状态
+     * NEW securityContexts Stay signed in
      */
     private List<SecurityContext> securityContexts() {
         return new ArrayList(
@@ -143,7 +143,7 @@ public class Swagger2Config implements WebMvcConfigurer {
     }
 
     /**
-     * 解决springboot2.6 和springfox不兼容问题
+     * Addressing SpringBoot 2.6 Incompatibility with Springfox
      * @return
      */
     @Bean

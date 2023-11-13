@@ -19,22 +19,22 @@ import java.net.URLDecoder;
 import java.util.*;
 
 /**
- * 通用情况的白名单处理，若有无法处理的情况，可以单独写实现类
+ * For the whitelist processing of general cases, if there are cases that cannot be handled, you can write a separate implementation class
  */
 @Slf4j
 @Component("dictTableWhiteListHandlerImpl")
 public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler {
 
     /**
-     * key-表名
-     * value-字段名，多个逗号隔开
-     * 两种配置方式-- 全部配置成小写
-     * whiteTablesRuleMap.put("sys_user", "*")  sys_user所有的字段都支持查询
-     * whiteTablesRuleMap.put("sys_user", "username,password")  sys_user中的username和password支持查询
+     * key—the name of the table
+     * value-Field name, separated by multiple commas
+     * Two configurations -- all in lowercase
+     * whiteTablesRuleMap.put("sys_user", "*")  sys_user All fields can be queried
+     * whiteTablesRuleMap.put("sys_user", "username,password")  The username and password in sys user can be queried
      */
     private static final Map<String, String> whiteTablesRuleMap = new HashMap<>();
     /**
-     * LowCode 是否为 dev 模式
+     * LowCode Whether it's dev mode
      */
     private static Boolean LOW_CODE_IS_DEV = null;
 
@@ -46,17 +46,17 @@ public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler
 
     
     /**
-     * 初始化 whiteTablesRuleMap 方法
+     * INITIALIZE whiteTablesRuleMap METHOD
      */
     private void init() {
-        // 如果当前为dev模式，则每次都查询数据库，防止缓存
+        // If the current dev mode is used, the database is queried every time to prevent caching
         if (this.isDev()) {
             DictTableWhiteListHandlerImpl.whiteTablesRuleMap.clear();
         }
-        // 如果map为空，则从数据库中查询
+        // If the map is empty, it is queried from the database
         if (DictTableWhiteListHandlerImpl.whiteTablesRuleMap.isEmpty()) {
             Map<String, String> ruleMap = sysTableWhiteListService.getAllConfigMap();
-            log.info("表字典白名单初始化完成：{}", ruleMap);
+            log.info("Table Dictionary Whitelist Initialization Completed: {}", ruleMap);
             DictTableWhiteListHandlerImpl.whiteTablesRuleMap.putAll(ruleMap);
         }
     }
@@ -67,18 +67,18 @@ public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler
         try {
             parsedMap = JSqlParserUtils.parseAllSelectTable(sql);
         } catch (Exception e) {
-            log.warn("校验sql语句，解析报错：{}", e.getMessage());
+            log.warn("Verify the SQL statement and parse the error：{}", e.getMessage());
         }
         // 如果sql有问题，则肯定执行不了，所以直接返回true
         if (parsedMap == null) {
             return true;
         }
-        log.info("获取select sql信息 ：{} ", parsedMap);
+        log.info("Obtain the Select SQL information ：{} ", parsedMap);
         // 遍历当前sql中的所有表名，如果有其中一个表或表的字段不在白名单中，则不通过
         for (Map.Entry<String, SelectSqlInfo> entry : parsedMap.entrySet()) {
             SelectSqlInfo sqlInfo = entry.getValue();
             if (sqlInfo.isSelectAll()) {
-                log.warn("查询语句中包含 * 字段，暂时先通过");
+                log.warn("The query statement contains an * field, which is passed for the time being");
                 continue;
             }
             Set<String> queryFields = sqlInfo.getAllRealSelectFields();
@@ -101,7 +101,7 @@ public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler
             dictCodeString = URLDecoder.decode(dictCodeString, "UTF-8");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            this.throwException("字典code解码失败，可能是使用了非法字符，请检查！");
+            this.throwException("The dictionary code failed to be decoded, and it may have used illegal characters！");
         }
         dictCodeString = dictCodeString.trim();
         String[] arr = dictCodeString.split(SymbolConstant.COMMA);
@@ -124,7 +124,7 @@ public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler
             fields = new String[]{"*"};
         }
         String sql = "select " + String.join(",", fields) + " from " + tableName;
-        log.info("字典拼接的查询SQL：{}", sql);
+        log.info("Dictionary concatenation query SQL: {}", sql);
         try {
             // 进行SQL解析
             JSqlParserUtils.parseSelectSqlInfo(sql);
@@ -147,7 +147,7 @@ public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler
         this.init();
         // 1、判断“表名”是否通过校验，如果为空则未通过校验
         if (oConvertUtils.isEmpty(tableName)) {
-            log.error("白名单校验：表名为空");
+            log.error("Whitelist check: The table name is empty");
             this.throwException();
         }
         // 统一转成小写

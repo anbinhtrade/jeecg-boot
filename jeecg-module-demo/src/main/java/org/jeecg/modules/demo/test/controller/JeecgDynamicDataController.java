@@ -31,7 +31,7 @@ public class JeecgDynamicDataController extends JeecgController<JeecgDemo, IJeec
 
 
     /**
-     * 动态切换数据源
+     * Dynamically switch data sources
 
      * @return
      */

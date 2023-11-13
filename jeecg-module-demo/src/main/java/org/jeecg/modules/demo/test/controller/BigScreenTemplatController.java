@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Description: 大屏预览入口
+ * @Description: Preview the entrance on the large screen
  * @Author: scott
  * @Date:2019-12-12
  * @Version:V1.0
@@ -39,7 +39,7 @@ public class BigScreenTemplatController extends JeecgController<JeecgDemo, IJeec
     }
 
     /**
-     * 生产销售监控模版
+     * Production and sales monitoring templates
      * @param modelAndView
      * @return
      */
@@ -50,7 +50,7 @@ public class BigScreenTemplatController extends JeecgController<JeecgDemo, IJeec
     }
 
     /**
-     * 智慧物流监控模版
+     * Smart logistics monitoring template
      * @param modelAndView
      * @return
      */

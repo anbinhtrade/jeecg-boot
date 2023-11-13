@@ -14,9 +14,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 /**
- * 自动初始化代码生成器模板
+ * Automatically initialize code generator templates
  * <p>
- * 解决JAR发布需要手工配置代码生成器模板问题
+ * Fixed the issue that the code generator template needs to be manually configured for JAR release
  * @author zhang
  */
 @Slf4j
@@ -26,7 +26,7 @@ public class CodeTemplateInitListener implements ApplicationListener<Application
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         try {
-            log.info(" Init Code Generate Template [ 检测如果是JAR启动环境，Copy模板到config目录 ] ");
+            log.info(" Init Code Generate Template [ If the GAR is booted in the environment, copy the template to the config directory ] ");
             this.initJarConfigCodeGeneratorTemplate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,8 +34,8 @@ public class CodeTemplateInitListener implements ApplicationListener<Application
     }
 
     /**
-     * ::Jar包启动模式下::
-     * 初始化代码生成器模板文件
+     * ::The JAR package is started in the startup mode::
+     * Initialize the code generator template file
      */
     private void initJarConfigCodeGeneratorTemplate() throws Exception {
         //1.获取jar同级下的config路径
@@ -52,8 +52,8 @@ public class CodeTemplateInitListener implements ApplicationListener<Application
             //2.在config下，创建jeecg/code-template-online/*模板
             String createFilePath = configPath + filepath.substring(filepath.indexOf("jeecg/code-template-online"));
 
-            // 非jar模式不生成模板
-            // 不生成目录，只生成具体模板文件
+            // Templates are not generated in non-JAR mode
+            // No directory is generated, only specific template files are generated
             if (!filepath.contains(".jar!/BOOT-INF/lib/") || !createFilePath.contains(".")) {
                 continue;
             }
