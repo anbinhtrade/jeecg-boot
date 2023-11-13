@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 /**
- * @Description: 数据源
+ * @Description: Data sources
  * @author: jeecg-boot
  */
 @Data
@@ -25,33 +25,33 @@ public class DynamicDataSourceModel {
      */
     private java.lang.String id;
     /**
-     * 数据源编码
+     * Data source encoding
      */
     private java.lang.String code;
     /**
-     * 数据库类型
+     * Database type
      */
     private java.lang.String dbType;
     /**
-     * 驱动类
+     * Driver class
      */
     private java.lang.String dbDriver;
     /**
-     * 数据源地址
+     * The address of the data source
      */
     private java.lang.String dbUrl;
 
 //    /**
-//     * 数据库名称
+//     * The name of the database
 //     */
 //    private java.lang.String dbName;
 
     /**
-     * 用户名
+     * USERNAME
      */
     private java.lang.String dbUsername;
     /**
-     * 密码
+     * PASSWORD
      */
     private java.lang.String dbPassword;
 

@@ -4,7 +4,7 @@ package org.jeecg.common.constant;
  * @author: jeecg-boot
  */
 public interface DataBaseConstant {
-	//*********数据库类型****************************************
+	//*********Database type****************************************
 
     /**MYSQL数据库*/
 	public static final String DB_TYPE_MYSQL = "MYSQL";
@@ -30,7 +30,7 @@ public interface DataBaseConstant {
     /**HSQL 数据库*/
 	public static final String DB_TYPE_HSQL = "HSQL";
 
-//	// 数据库类型，对应 database_type 字典
+//	// Database type，对应 database_type 字典
 //	public static final String DB_TYPE_MYSQL_NUM = "1";
 //	public static final String DB_TYPE_MYSQL7_NUM = "6";
 //	public static final String DB_TYPE_ORACLE_NUM = "2";

@@ -307,8 +307,8 @@ public class CommonUtils {
                 }else if(dbType.indexOf(DataBaseConstant.DB_TYPE_MARIADB)>=0) {
                     DB_TYPE = DataBaseConstant.DB_TYPE_MARIADB;
                 }else {
-                    log.error("数据库类型:[" + dbType + "]不识别!");
-                    //throw new JeecgBootException("数据库类型:["+dbType+"]不识别!");
+                    log.error("Database type:[" + dbType + "]Not recognized!");
+                    //throw new JeecgBootException("Database type:["+dbType+"]Not recognized!");
                 }
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
