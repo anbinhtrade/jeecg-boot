@@ -25,117 +25,117 @@ import java.util.Date;
 @TableName("sys_files")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="sys_files对象", description="知识库-文档管理")
+@ApiModel(value="sys_filesOBJECT", description="Knowledge Base - Document Management")
 public class SysFiles {
     
-	/**主键id*/
+	/**Primary key ID*/
 	@TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "Primary key ID")
 	private String id;
-	/**文件名称*/
-	@Excel(name = "文件名称", width = 15)
-    @ApiModelProperty(value = "文件名称")
+	/**The name of the file*/
+	@Excel(name = "The name of the file", width = 15)
+    @ApiModelProperty(value = "The name of the file")
 	private String fileName;
-	/**文件地址*/
-	@Excel(name = "文件地址", width = 15)
-    @ApiModelProperty(value = "文件地址")
+	/**File address*/
+	@Excel(name = "File address", width = 15)
+    @ApiModelProperty(value = "File address")
 	private String url;
-	/**创建人登录名称*/
-	@Excel(name = "创建人登录名称", width = 15)
+	/**Creator login name*/
+	@Excel(name = "Creator login name", width = 15)
     @Dict(dicCode = "username",dicText = "realname",dictTable = "sys_user")
-    @ApiModelProperty(value = "创建人登录名称")
+    @ApiModelProperty(value = "Creator login name")
 	private String createBy;
-	/**创建日期*/
-	@Excel(name = "创建日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Date of creation*/
+	@Excel(name = "Date of creation", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Date of creation")
 	private Date createTime;
-	/**更新人登录名称*/
-	@Excel(name = "更新人登录名称", width = 15)
-    @ApiModelProperty(value = "更新人登录名称")
+	/**The login name of the person who updated it*/
+	@Excel(name = "The login name of the person who updated it", width = 15)
+    @ApiModelProperty(value = "The login name of the person who updated it")
 	private String updateBy;
-	/**更新日期*/
-	@Excel(name = "更新日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Updated date*/
+	@Excel(name = "Updated date", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "更新日期")
+    @ApiModelProperty(value = "Updated date")
 	private Date updateTime;
-	/**文档类型（folder:文件夹 excel:excel doc:word pp:ppt image:图片  archive:其他文档 video:视频）*/
-	@Excel(name = "文档类型（folder:文件夹 excel:excel doc:word pp:ppt image:图片  archive:其他文档 video:视频）", width = 15)
-    @ApiModelProperty(value = "文档类型（folder:文件夹 excel:excel doc:word pp:ppt image:图片  archive:其他文档 video:视频）")
+	/**Document type (folder: folder excel:excel doc:word pp:ppt image:IMAGE  archive:Additional Documentation video:VIDEO）*/
+	@Excel(name = "Document type（folder:FOLDER excel:excel doc:word pp:ppt image:IMAGE  archive:Additional Documentation video:VIDEO）", width = 15)
+    @ApiModelProperty(value = "Document type（folder:FOLDER excel:excel doc:word pp:ppt image:IMAGE  archive:Additional Documentation video:视频）")
 	private String fileType;
-	/**文件上传类型(temp/本地上传(临时文件) manage/知识库 comment)*/
-	@Excel(name = "文件上传类型(temp/本地上传(临时文件) manage/知识库 common(通用上传))", width = 15)
-    @ApiModelProperty(value = "文件上传类型(temp/本地上传(临时文件) manage/知识库)")
+	/**File Upload Type (temp/Local Upload (Temp) manage/KNOWLEDGE BASE comment)*/
+	@Excel(name = "File Upload Type (temp/Local Upload (Temp) manage/KNOWLEDGE BASE common(Universal uploads))", width = 15)
+    @ApiModelProperty(value = "File Upload Type (temp/Local Upload (Temp) manage/KNOWLEDGE BASE)")
 	private String storeType;
-	/**父级id*/
-	@Excel(name = "父级id", width = 15)
-    @ApiModelProperty(value = "父级id")
+	/**Parent ID*/
+	@Excel(name = "Parent ID", width = 15)
+    @ApiModelProperty(value = "Parent ID")
 	private String parentId;
-	/**租户id*/
-	@Excel(name = "租户id", width = 15)
-    @ApiModelProperty(value = "租户id")
+	/**Tenant ID*/
+	@Excel(name = "Tenant ID", width = 15)
+    @ApiModelProperty(value = "Tenant ID")
 	private String tenantId;
-	/**文件大小（kb）*/
-	@Excel(name = "文件大小（kb）", width = 15)
-    @ApiModelProperty(value = "文件大小（kb）")
+	/**File size（kb）*/
+	@Excel(name = "File size（kb）", width = 15)
+    @ApiModelProperty(value = "File size（kb）")
 	private Double fileSize;
-	/**是否文件夹(1：是  0：否)*/
-	@Excel(name = "是否文件夹(1：是  0：否)", width = 15)
-    @ApiModelProperty(value = "是否文件夹(1：是  0：否)")
+	/**Whether or not to folders(1：BE  0：NOT)*/
+	@Excel(name = "Whether the folder (1: Yes.)  0：NOT)", width = 15)
+    @ApiModelProperty(value = "Whether the folder (1: Yes.)  0: No)")
 	private String izFolder;
-	/**是否为1级文件夹，允许为空 (1：是 )*/
-	@Excel(name = "是否为1级文件夹，允许为空 (1：是 )", width = 15)
-    @ApiModelProperty(value = "是否为1级文件夹，允许为空 (1：是 )")
+	/**Whether it is a Level 1 folder and allowed to be empty (1：BE )*/
+	@Excel(name = "Whether it is a Level 1 folder and allowed to be empty (1: Yes.) )", width = 15)
+    @ApiModelProperty(value = "Whether it is a Level 1 folder and allowed to be empty (1: Yes.) )")
 	private String izRootFolder;
-	/**是否标星(1：是  0：否)*/
-	@Excel(name = "是否标星(1：是  0：否)", width = 15)
-    @ApiModelProperty(value = "是否标星(1：是  0：否)")
+	/**Star (1: Yes.)  0：NOT)*/
+	@Excel(name = "Star (1: Yes.)  0: No)", width = 15)
+    @ApiModelProperty(value = "Star (1: Yes.)  0: No)")
 	private String izStar;
-	/**下载次数*/
-	@Excel(name = "下载次数", width = 15)
-    @ApiModelProperty(value = "下载次数")
+	/**Number of downloads*/
+	@Excel(name = "Number of downloads", width = 15)
+    @ApiModelProperty(value = "Number of downloads")
 	private Integer downCount;
-	/**阅读次数*/
-	@Excel(name = "阅读次数", width = 15)
-    @ApiModelProperty(value = "阅读次数")
+	/**Readings*/
+	@Excel(name = "Readings", width = 15)
+    @ApiModelProperty(value = "Readings")
 	private Integer readCount;
-	/**分享链接*/
-	@Excel(name = "分享链接", width = 15)
-    @ApiModelProperty(value = "分享链接")
+	/**Share the link*/
+	@Excel(name = "Share the link", width = 15)
+    @ApiModelProperty(value = "Share the link")
 	private String shareUrl;
-	/**分享权限(1.关闭分享 2.允许所有联系人查看 3.允许任何人查看)*/
-	@Excel(name = "分享权限(1.关闭分享 2.允许所有联系人查看 3.允许任何人查看)", width = 15)
-    @ApiModelProperty(value = "分享权限(1.关闭分享 2.允许所有联系人查看 3.允许任何人查看)")
+	/**Sharing permissions (1. Turn off sharing.) 2. Allow all contacts to view 3.Allow anyone to view it)*/
+	@Excel(name = "Sharing permissions (1. Turn off sharing.) 2. Allow all contacts to view 3. Allow anyone to view)", width = 15)
+    @ApiModelProperty(value = "Sharing permissions (1. Turn off sharing.) 2. Allow all contacts to view 3. Allow anyone to view)")
 	private String sharePerms;
-	/**是否允许下载(1：是  0：否)*/
-	@Excel(name = "是否允许下载(1：是  0：否)", width = 15)
-    @ApiModelProperty(value = "是否允许下载(1：是  0：否)")
+	/**Downloads are allowed or not (1: Yes.)  0: No)*/
+	@Excel(name = "Downloads are allowed or not (1: Yes.)  0：NOT)", width = 15)
+    @ApiModelProperty(value = "Downloads are allowed or not (1: Yes.)  0：NOT)")
 	private String enableDown;
-	/**是否允许修改(1：是  0：否)*/
-	@Excel(name = "是否允许修改(1：是  0：否)", width = 15)
-    @ApiModelProperty(value = "是否允许修改(1：是  0：否)")
+	/**Modification is allowed (1: Yes.)  0: No)*/
+	@Excel(name = "Modification is allowed (1: Yes.)  0: No)", width = 15)
+    @ApiModelProperty(value = "Modification is allowed (1: Yes.)  0: No)")
 	private String enableUpdat;
-	/**删除状态(0-正常,1-删除至回收站)*/
-	@Excel(name = "删除状态(0-正常,1-删除至回收站)", width = 15)
-    @ApiModelProperty(value = "删除状态(0-正常,1-删除至回收站)")
+	/**Deletion Status (0-Normal, 1-Delete to Recycle Bin)*/
+	@Excel(name = "Deletion Status (0-Normal, 1-Delete to Recycle Bin)", width = 15)
+    @ApiModelProperty(value = "Deletion Status (0-Normal, 1-Delete to Recycle Bin)")
 	private String delFlag;
 
     /**
-     * 文件表不存在的字段：用户数据集合
+     * Field that does not exist in the file table: User data collection
      */
 	@TableField(exist=false)
     private String userData;
 
     /**
-     * 文件表不存在的字段：用户真实姓名
+     * Field that does not exist in the file table: the user's real name
      */
     @TableField(exist=false)
     private String realname;
 
     /**
-     * 文件表不存在的字段：压缩名称
+     * Field that does not exist in the file table: Compressed name
      */
     @TableField(exist=false)
     private String zipName;

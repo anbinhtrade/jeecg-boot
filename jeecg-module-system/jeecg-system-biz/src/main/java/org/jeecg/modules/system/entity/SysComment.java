@@ -17,7 +17,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: 系统评论回复表
+ * @Description: System comment response form
  * @Author: jeecg-boot
  * @Date:   2022-07-19
  * @Version: V1.0
@@ -26,7 +26,7 @@ import java.util.Date;
 @TableName("sys_comment")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="sys_comment对象", description="系统评论回复表")
+@ApiModel(value="sys_comment OBJECT", description="System comment response form")
 public class SysComment implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -35,46 +35,46 @@ public class SysComment implements Serializable {
     @ApiModelProperty(value = "id")
     private String id;
 	/**表名*/
-	@Excel(name = "表名", width = 15)
-    @ApiModelProperty(value = "表名")
+	@Excel(name = "Table name", width = 15)
+    @ApiModelProperty(value = "Table name")
     private String tableName;
 	/**数据id*/
-	@Excel(name = "数据id", width = 15)
-    @ApiModelProperty(value = "数据id")
+	@Excel(name = "Data ID", width = 15)
+    @ApiModelProperty(value = "Data ID")
     private String tableDataId;
 	/**来源用户id*/
-	@Excel(name = "来源用户id", width = 15)
-    @ApiModelProperty(value = "来源用户id")
+	@Excel(name = "Source user ID", width = 15)
+    @ApiModelProperty(value = "Source user ID")
     @Dict(dictTable = "sys_user", dicCode = "id", dicText = "realname")
     private String fromUserId;
 	/**发送给用户id(允许为空)*/
-	@Excel(name = "发送给用户id(允许为空)", width = 15)
-    @ApiModelProperty(value = "发送给用户id(允许为空)")
+	@Excel(name = "Send User ID (Allowed to be empty)", width = 15)
+    @ApiModelProperty(value = "Send User ID (Allowed to be empty)")
     @Dict(dictTable = "sys_user", dicCode = "id", dicText = "realname")
     private String toUserId;
-	/**评论id(允许为空，不为空时，则为回复)*/
-	@Excel(name = "评论id(允许为空，不为空时，则为回复)", width = 15)
-    @ApiModelProperty(value = "评论id(允许为空，不为空时，则为回复)")
+	/**Comment ID (allowed to be empty, not empty, then reply)*/
+	@Excel(name = "Comment ID (allowed to be empty, not empty, then reply)", width = 15)
+    @ApiModelProperty(value = "Comment ID (allowed to be empty, not empty, then reply)")
     @Dict(dictTable = "sys_comment", dicCode = "id", dicText = "comment_content")
     private String commentId;
-	/**回复内容*/
-	@Excel(name = "回复内容", width = 15)
-    @ApiModelProperty(value = "回复内容")
+	/**Reply to the content*/
+	@Excel(name = "Reply to the content", width = 15)
+    @ApiModelProperty(value = "Reply to the content")
     private String commentContent;
-	/**创建人*/
-    @ApiModelProperty(value = "创建人")
+	/**Created by*/
+    @ApiModelProperty(value = "Created by")
     private String createBy;
-	/**创建日期*/
+	/**Date of creation*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Date of creation")
     private Date createTime;
-	/**更新人*/
-    @ApiModelProperty(value = "更新人")
+	/**UPDATER*/
+    @ApiModelProperty(value = "UPDATER")
     private String updateBy;
-	/**更新日期*/
+	/**Updated date*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "更新日期")
+    @ApiModelProperty(value = "Updated date")
     private Date updateTime;
 }

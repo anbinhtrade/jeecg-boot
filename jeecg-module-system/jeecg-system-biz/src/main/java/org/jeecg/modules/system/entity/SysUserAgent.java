@@ -11,7 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**
- * @Description: 用户代理人设置
+ * @Description: User Proxy Settings
  * @Author: jeecg-boot
  * @Date:  2019-04-17
  * @Version: V1.0
@@ -21,54 +21,54 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 public class SysUserAgent implements Serializable {
     private static final long serialVersionUID = 1L;
     
-	/**序号*/
+	/**Serial Number*/
 	@TableId(type = IdType.ASSIGN_ID)
 	private java.lang.String id;
-	/**用户名*/
-	@Excel(name = "用户名", width = 15)
+	/**Username*/
+	@Excel(name = "Username", width = 15)
 	private java.lang.String userName;
-	/**代理人用户名*/
-	@Excel(name = "代理人用户名", width = 15)
+	/**Proxy username*/
+	@Excel(name = "Proxy username", width = 15)
 	private java.lang.String agentUserName;
-	/**代理开始时间*/
-	@Excel(name = "代理开始时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Agent start time*/
+	@Excel(name = "Agent start time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date startTime;
-	/**代理结束时间*/
-	@Excel(name = "代理结束时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Agent end time*/
+	@Excel(name = "Agent end time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date endTime;
-	/**状态0无效1有效*/
-	@Excel(name = "状态0无效1有效", width = 15)
+	/**Status 0 is invalid and 1 is valid*/
+	@Excel(name = "Status 0 is invalid and 1 is valid", width = 15)
 	private java.lang.String status;
-	/**创建人名称*/
-	@Excel(name = "创建人名称", width = 15)
+	/**The name of the creator*/
+	@Excel(name = "The name of the creator", width = 15)
 	private java.lang.String createName;
-	/**创建人登录名称*/
-	@Excel(name = "创建人登录名称", width = 15)
+	/**Creator login name*/
+	@Excel(name = "Creator login name", width = 15)
 	private java.lang.String createBy;
-	/**创建日期*/
-	@Excel(name = "创建日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Date of creation*/
+	@Excel(name = "Date of creation", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date createTime;
-	/**更新人名称*/
-	@Excel(name = "更新人名称", width = 15)
+	/**The name of the person who updated it*/
+	@Excel(name = "The name of the person who updated it", width = 15)
 	private java.lang.String updateName;
-	/**更新人登录名称*/
-	@Excel(name = "更新人登录名称", width = 15)
+	/**The login name of the person who updated it*/
+	@Excel(name = "The login name of the person who updated it", width = 15)
 	private java.lang.String updateBy;
-	/**更新日期*/
-	@Excel(name = "更新日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Updated date*/
+	@Excel(name = "Updated date", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date updateTime;
-	/**所属部门*/
-	@Excel(name = "所属部门", width = 15)
+	/**Affiliation*/
+	@Excel(name = "Affiliation", width = 15)
 	private java.lang.String sysOrgCode;
-	/**所属公司*/
-	@Excel(name = "所属公司", width = 15)
+	/**Affiliation*/
+	@Excel(name = "Affiliation", width = 15)
 	private java.lang.String sysCompanyCode;
 }

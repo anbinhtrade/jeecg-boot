@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
- * CAS单点登录客户端登录认证
+ * CAS single sign-on client login authentication
  * </p>
  *
  * @Author zhoujf
@@ -98,7 +98,7 @@ public class CasClientController {
 			obj.put("token", token);
 			obj.put("userInfo", sysUser);
 			result.setResult(obj);
-			result.success("登录成功");
+			result.success("Login successful");
 	  		
 		} catch (Exception e) {
 			//e.printStackTrace();

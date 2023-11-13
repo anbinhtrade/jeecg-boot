@@ -15,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serializable;
 
 /**
- * @Description: 租户产品包用户关系表
+ * @Description: Tenant package user relationship table
  * @Author: jeecg-boot
  * @Date:   2023-02-16
  * @Version: V1.0
@@ -24,7 +24,7 @@ import java.io.Serializable;
 @TableName("sys_tenant_pack_user")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="sys_tenant_pack_user对象", description="租户产品包用户关系表")
+@ApiModel(value="sys_tenant_pack_userOBJECT", description="Tenant package user relationship table")
 public class SysTenantPackUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -32,33 +32,33 @@ public class SysTenantPackUser implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "id")
     private java.lang.String id;
-    /**租户产品包ID*/
-    @Excel(name = "租户产品包ID", width = 15)
-    @ApiModelProperty(value = "租户产品包ID")
+    /**Tenant package ID*/
+    @Excel(name = "Tenant package ID", width = 15)
+    @ApiModelProperty(value = "Tenant package ID")
     private java.lang.String packId;
-    /**用户ID*/
-    @Excel(name = "用户ID", width = 15)
-    @ApiModelProperty(value = "用户ID")
+    /**User ID*/
+    @Excel(name = "User ID", width = 15)
+    @ApiModelProperty(value = "User ID")
     private java.lang.String userId;
-    /**租户ID*/
-    @Excel(name = "租户ID", width = 15)
-    @ApiModelProperty(value = "租户ID")
+    /**Tenant ID*/
+    @Excel(name = "Tenant ID", width = 15)
+    @ApiModelProperty(value = "Tenant ID")
     private java.lang.Integer tenantId;
-    /**创建人*/
-    @ApiModelProperty(value = "创建人")
+    /**Created by*/
+    @ApiModelProperty(value = "Created by")
     private java.lang.String createBy;
-    /**创建时间*/
+    /**Creation time*/
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Creation time")
     private java.util.Date createTime;
-    /**更新人*/
-    @ApiModelProperty(value = "更新人")
+    /**UPDATER*/
+    @ApiModelProperty(value = "UPDATER")
     private java.lang.String updateBy;
-    /**更新时间*/
+    /**UPDATED*/
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "UPDATED")
     private java.util.Date updateTime;
 
     private transient String realname;
@@ -68,7 +68,7 @@ public class SysTenantPackUser implements Serializable {
     private transient String packCode;
 
     /**
-     * 状态(1 正常 2 离职 3 待审核 4 拒绝 5 邀请加入)
+     * State (1 NORMAL 2 DIMISSION 3 To be reviewed 4 REFUSE 5 Invitation to join)
      */
     private Integer status;
 

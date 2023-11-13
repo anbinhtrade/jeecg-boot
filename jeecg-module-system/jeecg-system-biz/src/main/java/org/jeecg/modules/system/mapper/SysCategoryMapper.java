@@ -13,7 +13,7 @@ import org.jeecg.modules.system.model.TreeSelectModel;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * @Description: 分类字典
+ * @Description: Classification dictionary
  * @Author: jeecg-boot
  * @Date:   2019-05-29
  * @Version: V1.0
@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface SysCategoryMapper extends BaseMapper<SysCategory> {
 	
 	/**
-	 * 根据父级ID查询树节点数据
+	 * Query tree node data based on the parent ID
 	 * @param pid
      * @param query
 	 * @return
@@ -29,7 +29,7 @@ public interface SysCategoryMapper extends BaseMapper<SysCategory> {
 	public List<TreeSelectModel> queryListByPid(@Param("pid")  String pid,@Param("query") Map<String, String> query);
 
     /**
-     * 通过code查询分类字典表
+     * Use code to query the classification dictionary table
      * @param code
      * @return
      */
@@ -37,7 +37,7 @@ public interface SysCategoryMapper extends BaseMapper<SysCategory> {
 	public String queryIdByCode(@Param("code")  String code);
 	
 	/**
-	 * 获取分类字典最大的code
+	 * Get the largest code in the classification dictionary
 	 * @param page
 	 * @return
 	 */

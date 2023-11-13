@@ -24,40 +24,40 @@ import lombok.experimental.Accessors;
 @TableName("sys_user_tenant")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="sys_user_tenant对象", description="sys_user_tenant")
+@ApiModel(value="sys_user_tenantOBJECT", description="sys_user_tenant")
 public class SysUserTenant implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	/**主键id*/
+	/**Primary key ID*/
 	@TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "Primary key ID")
     private String id;
-	/**用户id*/
-	@Excel(name = "用户id", width = 15)
-    @ApiModelProperty(value = "用户id")
+	/**User ID*/
+	@Excel(name = "User ID", width = 15)
+    @ApiModelProperty(value = "User ID")
     private String userId;
-	/**租户id*/
-	@Excel(name = "租户id", width = 15)
-    @ApiModelProperty(value = "租户id")
+	/**Tenant ID*/
+	@Excel(name = "Tenant ID", width = 15)
+    @ApiModelProperty(value = "Tenant ID")
     private Integer tenantId;
-	/**状态(1 正常 2 冻结 3 待审核 4 拒绝)*/
-	@Excel(name = "状态(1 正常 2 冻结 3 待审核 4 拒绝)", width = 15)
-    @ApiModelProperty(value = "状态(1 正常 2 冻结 3 待审核 4 拒绝)")
+	/**State (1 NORMAL 2 FREEZE 3 To be reviewed 4 Refusal)*/
+	@Excel(name = "State (1 NORMAL 2 FREEZE 3 To be reviewed 4 Refusal)", width = 15)
+    @ApiModelProperty(value = "State (1 NORMAL 2 FREEZE 3 To be reviewed 4 Refusal)")
     private String status;
-	/**创建人登录名称*/
-    @ApiModelProperty(value = "创建人登录名称")
+	/**Creator login name*/
+    @ApiModelProperty(value = "Creator login name")
     private String createBy;
-	/**创建日期*/
+	/**Date of creation*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Date of creation")
     private Date createTime;
-	/**更新人登录名称*/
-    @ApiModelProperty(value = "更新人登录名称")
+	/**The login name of the person who updated it*/
+    @ApiModelProperty(value = "The login name of the person who updated it")
     private String updateBy;
-	/**更新日期*/
+	/**Updated date*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "更新日期")
+    @ApiModelProperty(value = "Updated date")
     private Date updateTime;
 }

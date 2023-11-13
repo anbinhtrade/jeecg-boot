@@ -35,37 +35,37 @@ public class SysDictItem implements Serializable {
     private String id;
 
     /**
-     * 字典id
+     * Dictionary ID
      */
     private String dictId;
 
     /**
-     * 字典项文本
+     * Dictionary item text
      */
-    @Excel(name = "字典项文本", width = 20)
+    @Excel(name = "Dictionary item text", width = 20)
     private String itemText;
 
     /**
-     * 字典项值
+     * Dictionary item value
      */
-    @Excel(name = "字典项值", width = 30)
+    @Excel(name = "Dictionary item value", width = 30)
     private String itemValue;
 
     /**
-     * 描述
+     * Description
      */
-    @Excel(name = "描述", width = 40)
+    @Excel(name = "Description", width = 40)
     private String description;
 
     /**
-     * 排序
+     * Sort
      */
-    @Excel(name = "排序", width = 15,type=4)
+    @Excel(name = "Sort", width = 15,type=4)
     private Integer sortOrder;
 
 
     /**
-     * 状态（1启用 0不启用）
+     * Status(1 Enabled.) 0 is not enabled)
      */
     @Dict(dicCode = "dict_item_status")
     private Integer status;
@@ -79,7 +79,7 @@ public class SysDictItem implements Serializable {
     private Date updateTime;
 
     /**
-     * 字典项颜色 
+     * Dictionary item color
      */
     private String itemColor;
 

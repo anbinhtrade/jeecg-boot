@@ -33,7 +33,7 @@ public class CasServiceUtil {
 	
 	
 	/**
-     * 验证ST
+     * Verify ST
      */
     public static String getStValidate(String url, String st, String service){
 		try {
@@ -51,7 +51,7 @@ public class CasServiceUtil {
 
     
     /**
-     * 读取 response body 内容为字符串
+     * READ response body The content is a string
      *
      * @param response
      * @return
@@ -69,9 +69,9 @@ public class CasServiceUtil {
     
     
     /**
-     * 创建模拟客户端（针对 https 客户端禁用 SSL 验证）
+     * Create a simulated client (for https Client disabled SSL Validation)
      *
-     * @param cookieStore 缓存的 Cookies 信息
+     * @param cookieStore CACHED Cookies INFORMATION
      * @return
      * @throws Exception
      */

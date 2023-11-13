@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: 系统数据日志
+ * @Description: System data log
  * @author: jeecg-boot
  */
 @Data
@@ -32,71 +32,71 @@ public class SysDataLog implements Serializable {
 	private String id;
 
     /**
-     * 创建人登录名称
+     * Creator login name
      */
 	private String createBy;
 
     /**
-     * 创建人真实名称
+     * Creator’s real name
      */
 	private String createName;
 
     /**
-     * 创建日期
+     * Creation date
      */
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 
     /**
-     * 更新人登录名称
+     * Updater login name
      */
 	private String updateBy;
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 
     /**
-     * 更新日期
+     * Updated
      */
     private Date updateTime;
 
     /**
-     * 表名
+     * Table Name
      */
     private String dataTable;
 
     /**
-     * 数据ID
+     * Data ID
      */
     private String dataId;
 
     /**
-     * 数据内容
+     * Data content
      */
     private String dataContent;
 
     /**
-     * 版本号
+     * Version Number
      */
     private String dataVersion;
 
 
-    //update-begin-author:taoyan date:2022-7-26 for: 用于表单评论记录日志 区分数据
+    //update-begin-author:taoyan date:2022-7-26 for: Used to log form comments Distinguish data
     /**
-     * 类型
+     * Stamp
      */
     private String type;
-    //update-end-author:taoyan date:2022-7-26 for: 用于表单评论记录日志 区分数据
+    //update-end-author:taoyan date:2022-7-26 for: Used to log form comments Distinguish data
 
     /**
-     * 通过 loginUser 设置 createName
+     * By Way Of Login User Put Up Create Name
      */
     public void autoSetCreateName() {
         try {
             LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
             this.setCreateName(sysUser.getRealname());
         } catch (Exception e) {
-            log.warn("SecurityUtils.getSubject() 获取用户信息异常：" + e.getMessage());
+            log.warn("SecurityUtils.getSubject() Exception in obtaining user information:" + e.getMessage());
         }
     }
 

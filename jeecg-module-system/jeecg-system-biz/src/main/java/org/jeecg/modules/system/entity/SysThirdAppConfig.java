@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * @Description: 第三方配置表
+ * @Description: Third-party configuration tables
  * @Author: jeecg-boot
  * @Date:   2023-02-03
  * @Version: V1.0
@@ -26,54 +26,54 @@ import java.util.Date;
 @ApiModel(value="sys_third_app_config对象", description="第三方配置表")
 public class SysThirdAppConfig {
 
-    /**编号*/
+    /**Numbering*/
     @TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "编号")
+    @ApiModelProperty(value = "Numbering")
     private String id;
 
-    /**租户id*/
-    @Excel(name = "租户id", width = 15)
-    @ApiModelProperty(value = "租户id")
+    /**Tenant ID*/
+    @Excel(name = "Tenant ID", width = 15)
+    @ApiModelProperty(value = "Tenant ID")
     private Integer tenantId;
 
-    /**钉钉/企业微信第三方企业应用标识*/
-    @Excel(name = "钉钉/企业微信第三方企业应用标识", width = 15)
-    @ApiModelProperty(value = "钉钉/企业微信第三方企业应用标识")
+    /**DingTalk/WeCom third-party enterprise application logo*/
+    @Excel(name = "DingTalk/WeCom third-party enterprise application logo", width = 15)
+    @ApiModelProperty(value = "DingTalk/WeCom third-party enterprise application logo")
     private String agentId;
 
-    /**钉钉/企业微信 应用id*/
-    @Excel(name = "钉钉/企业微信 应用id", width = 15)
-    @ApiModelProperty(value = "钉钉/企业微信 应用id")
+    /**DingTalk/WeChat App ID*/
+    @Excel(name = "DingTalk/WeChat App ID", width = 15)
+    @ApiModelProperty(value = "DingTalk/WeChat App ID")
     private String clientId;
 
-    /**钉钉/企业微信应用id对应的秘钥*/
-    @Excel(name = "钉钉/企业微信应用id对应的秘钥", width = 15)
-    @ApiModelProperty(value = "钉钉/企业微信应用id对应的秘钥")
+    /**The key corresponding to the DingTalk/WeCom application ID*/
+    @Excel(name = "The key corresponding to the DingTalk/WeCom application ID", width = 15)
+    @ApiModelProperty(value = "The key corresponding to the DingTalk/WeCom application ID")
     private String clientSecret;
 
-    /**企业微信自建应用Secret*/
-    @Excel(name = "企业微信自建应用Secret", width = 15)
-    @ApiModelProperty(value = "企业微信自建应用Secret")
+    /**WeCom's self-built application secret*/
+    @Excel(name = "WeCom's self-built application secret", width = 15)
+    @ApiModelProperty(value = "WeCom's self-built application secret")
     private String agentAppSecret;
 
-    /**第三方类别(dingtalk 钉钉 wechat_enterprise 企业微信)*/
-    @Excel(name = "第三方类别(dingtalk 钉钉 wechat_enterprise 企业微信)", width = 15)
-    @ApiModelProperty(value = "第三方类别(dingtalk 钉钉 wechat_enterprise 企业微信)")
+    /**Third-party categories (dingtalk DINGTALK wechat_enterprise WeCom)*/
+    @Excel(name = "Third-party categories (dingtalk 钉钉 wechat_enterprise WeCom)", width = 15)
+    @ApiModelProperty(value = "Third-party categories (dingtalk 钉钉 wechat_enterprise WeCom)")
     private String thirdType;
 
-    /**是否启用(0-否,1-是)*/
-    @Excel(name = "是否启用(0-否,1-是)", width = 15)
-    @ApiModelProperty(value = "是否启用(0-否,1-是)")
+    /**Enabled or not (0-no, 1-yes)*/
+    @Excel(name = "Enabled or not (0-no, 1-yes)", width = 15)
+    @ApiModelProperty(value = "Enabled or not (0-no, 1-yes)")
     private Integer status;
 
-    /**创建日期*/
-    @Excel(name = "创建日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    /**Date of creation*/
+    @Excel(name = "Date of creation", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    /**修改日期*/
-    @Excel(name = "修改日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    /**Date modified*/
+    @Excel(name = "Date modified", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;

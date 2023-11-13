@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @Description: 租户产品包
+ * @Description: Tenant packages
  * @Author: jeecg-boot
  * @Date:   2022-12-31
  * @Version: V1.0
@@ -23,58 +23,58 @@ import lombok.experimental.Accessors;
 @TableName("sys_tenant_pack")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="sys_tenant_pack对象", description="租户产品包")
+@ApiModel(value="sys_tenant_packOBJECT", description="Tenant packages")
 public class SysTenantPack implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	/**主键id*/
+	/**Primary key ID*/
 	@TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "Primary key ID")
     private String id;
-	/**租户id*/
-	@Excel(name = "租户id", width = 15)
-    @ApiModelProperty(value = "租户id")
+	/**Tenant ID*/
+	@Excel(name = "Tenant ID", width = 15)
+    @ApiModelProperty(value = "Tenant ID")
     private Integer tenantId;
-	/**产品包名*/
-	@Excel(name = "产品包名", width = 15)
-    @ApiModelProperty(value = "产品包名")
+	/**The package name*/
+	@Excel(name = "The package name", width = 15)
+    @ApiModelProperty(value = "The package name")
     private String packName;
-	/**开启状态(0 未开启 1开启)*/
-	@Excel(name = "开启状态(0 未开启 1开启)", width = 15)
-    @ApiModelProperty(value = "开启状态(0 未开启 1开启)")
+	/**Open (0.) Not turned on 1 on)*/
+	@Excel(name = "Open (0.) Not turned on 1 on)", width = 15)
+    @ApiModelProperty(value = "Open (0.) Not turned on 1 on)")
     private String status;
-	/**备注*/
-	@Excel(name = "备注", width = 15)
-    @ApiModelProperty(value = "备注")
+	/**REMARK*/
+	@Excel(name = "REMARK", width = 15)
+    @ApiModelProperty(value = "REMARK")
     private String remarks;
-	/**创建人*/
-    @ApiModelProperty(value = "创建人")
+	/**Created by*/
+    @ApiModelProperty(value = "Created by")
     private String createBy;
-	/**创建时间*/
+	/**Creation time*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Creation time")
     private Date createTime;
-	/**更新人*/
-    @ApiModelProperty(value = "更新人")
+	/**UPDATER*/
+    @ApiModelProperty(value = "UPDATER")
     private String updateBy;
-	/**更新时间*/
+	/**UPDATED*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "UPDATED")
     private Date updateTime;
-    /**产品包类型(default 默认产品包 custom 自定义产品包)*/
-    @Excel(name = "产品包类型", width = 15)
-    @ApiModelProperty(value = "产品包类型")
+    /**Package Type (default.) Default package custom Custom product packages)*/
+    @Excel(name = "The type of package", width = 15)
+    @ApiModelProperty(value = "The type of package")
 	private String packType;
     
-    /**菜单id 临时字段用于新增编辑菜单id传递*/
+    /**Menu ID The temporary field is used to add the edit menu ID passing*/
     @TableField(exist = false)
     private String permissionIds;
     
     
     /**
-     * 编码
+     * ENCODE
      */
     private String packCode;
     

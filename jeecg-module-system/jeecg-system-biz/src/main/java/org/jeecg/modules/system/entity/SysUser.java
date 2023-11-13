@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户表
+ * User table
  * </p>
  *
  * @Author scott
@@ -41,173 +41,173 @@ public class SysUser implements Serializable {
     private String id;
 
     /**
-     * 登录账号
+     * Log in to your account
      */
-    @Excel(name = "登录账号", width = 15)
+    @Excel(name = "Log in to your account", width = 15)
     private String username;
 
     /**
-     * 真实姓名
+     * Real name
      */
-    @Excel(name = "真实姓名", width = 15)
+    @Excel(name = "Real name", width = 15)
     private String realname;
 
     /**
-     * 密码
+     * Password
      */
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     /**
-     * md5密码盐
+     * Md 5 Cipher Salt
      */
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String salt;
 
     /**
-     * 头像
+     * Avatar
      */
-    @Excel(name = "头像", width = 15,type = 2)
+    @Excel(name = "Avatar", width = 15,type = 2)
     private String avatar;
 
     /**
-     * 生日
+     * Birthday
      */
-    @Excel(name = "生日", width = 15, format = "yyyy-MM-dd")
+    @Excel(name = "Birthday", width = 15, format = "yyyy-MM-dd")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     /**
-     * 性别（1：男 2：女）
+     * Gender (1: Male 2: Woman)
      */
-    @Excel(name = "性别", width = 15,dicCode="sex")
+    @Excel(name = "Gender", width = 15,dicCode="sex")
     @Dict(dicCode = "sex")
     private Integer sex;
 
     /**
-     * 电子邮件
+     * Email
      */
-    @Excel(name = "电子邮件", width = 15)
+    @Excel(name = "Email", width = 15)
     private String email;
 
     /**
-     * 电话
+     * Phone
      */
-    @Excel(name = "电话", width = 15)
+    @Excel(name = "Phone", width = 15)
     private String phone;
 
     /**
-     * 登录选择部门编码
+     * Log in and select the department code
      */
     private String orgCode;
     /**
-     * 登录选择租户ID
+     * Log in and select the tenant ID
      */
     private Integer loginTenantId;
 
-    /**部门名称*/
+    /**Department name*/
     private transient String orgCodeTxt;
 
     /**
-     * 状态(1：正常  2：冻结 ）
+     * Status (1: Normal  2：Freeze ）
      */
-    @Excel(name = "状态", width = 15,dicCode="user_status")
+    @Excel(name = "State", width = 15,dicCode="user_status")
     @Dict(dicCode = "user_status")
     private Integer status;
 
     /**
-     * 删除状态（0，正常，1已删除）
+     * Deleted Status (0, Normal, 1 Deleted)
      */
-    @Excel(name = "删除状态", width = 15,dicCode="del_flag")
+    @Excel(name = "Delete the status", width = 15,dicCode="del_flag")
     @TableLogic
     private Integer delFlag;
 
     /**
-     * 工号，唯一键
+     * Job number, unique key
      */
-    @Excel(name = "工号", width = 15)
+    @Excel(name = "Construction No.", width = 15)
     private String workNo;
 
     /**
-     * 职务，关联职务表
+     * Job title, associated job list
      */
-    @Excel(name = "职务", width = 15)
+    @Excel(name = "Office", width = 15)
     @Dict(dictTable ="sys_position",dicText = "name",dicCode = "id")
     @TableField(exist = false)
     private String post;
 
     /**
-     * 座机号
+     * Landline number
      */
-    @Excel(name = "座机号", width = 15)
+    @Excel(name = "Landline number", width = 15)
     private String telephone;
 
     /**
-     * 创建人
+     * Created by
      */
     private String createBy;
 
     /**
-     * 创建时间
+     * Creation time
      */
     private Date createTime;
 
     /**
-     * 更新人
+     * Updater
      */
     private String updateBy;
 
     /**
-     * 更新时间
+     * Updated
      */
     private Date updateTime;
     /**
-     * 同步工作流引擎1同步0不同步
+     * Synchronization workflow engine 1 synchronization 0 is not synchronized
      */
     private Integer activitiSync;
 
     /**
-     * 身份（0 普通成员 1 上级）
+     * Identity (0 Ordinary members 1 Superior)
      */
-    @Excel(name="（1普通成员 2上级）",width = 15)
+    @Excel(name="(1 ordinary member.) 2 Superior)",width = 15)
     private Integer userIdentity;
 
     /**
-     * 负责部门
+     * Responsible department
      */
-    @Excel(name="负责部门",width = 15,dictTable ="sys_depart",dicText = "depart_name",dicCode = "id")
+    @Excel(name="Responsible department",width = 15,dictTable ="sys_depart",dicText = "depart_name",dicCode = "id")
     @Dict(dictTable ="sys_depart",dicText = "depart_name",dicCode = "id")
     private String departIds;
 
     /**
-     * 多租户ids临时用，不持久化数据库(数据库字段不存在)
+     * Multi-tenant IDS is used temporarily, but the database is not persisted (database fields do not exist)
      */
     @TableField(exist = false)
     private String relTenantIds;
 
-    /**设备id uniapp推送用*/
+    /**Device ID uniapp For Thrusting*/
     private String clientId;
 
     /**
-     * 登录首页地址
+     * Login home address
      */
     @TableField(exist = false)
     private String homePath;
 
     /**
-     * 职位名称
+     * Job Title:
      */
     @TableField(exist = false)
     private String postText;
 
     /**
-     * 流程状态
+     * Process status
      */
     private String bpmStatus;
 
     /**
-     * 是否已经绑定第三方
+     * Whether a third party has been bound
      */
     @TableField(exist = false)
     private boolean izBindThird;

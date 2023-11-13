@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**
- * @Description: 部门角色人员信息
+ * @Description: Department role personnel information
  * @Author: jeecg-boot
  * @Date:   2020-02-13
  * @Version: V1.0
@@ -25,20 +25,20 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @TableName("sys_depart_role_user")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="sys_depart_role_user对象", description="部门角色人员信息")
+@ApiModel(value="sys_depart_role_userOBJECT", description="Department role personnel information")
 public class SysDepartRoleUser {
     
-	/**主键id*/
+	/**Primary key ID*/
 	@TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "Primary key ID")
 	private java.lang.String id;
-	/**用户id*/
-	@Excel(name = "用户id", width = 15)
-    @ApiModelProperty(value = "用户id")
+	/**User ID*/
+	@Excel(name = "User ID", width = 15)
+    @ApiModelProperty(value = "User ID")
 	private java.lang.String userId;
-	/**角色id*/
-	@Excel(name = "角色id", width = 15)
-    @ApiModelProperty(value = "角色id")
+	/**Character ID*/
+	@Excel(name = "Character ID", width = 15)
+    @ApiModelProperty(value = "Character ID")
 	private java.lang.String droleId;
 
 	public SysDepartRoleUser() {

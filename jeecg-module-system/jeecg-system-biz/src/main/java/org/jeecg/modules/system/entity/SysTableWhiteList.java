@@ -22,59 +22,59 @@ import org.springframework.format.annotation.DateTimeFormat;
 @TableName("sys_table_white_list")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "sys_table_white_list对象", description = "系统表白名单")
+@ApiModel(value = "sys_table_white_listOBJECT", description = "The system whitelist")
 public class SysTableWhiteList {
 
     /**
-     * 主键id
+     * Primary key ID
      */
     @TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "Primary key ID")
     private java.lang.String id;
     /**
-     * 允许的表名
+     * Allowed table names
      */
-    @Excel(name = "允许的表名", width = 15)
-    @ApiModelProperty(value = "允许的表名")
+    @Excel(name = "Allowed table names", width = 15)
+    @ApiModelProperty(value = "Allowed table names")
     private java.lang.String tableName;
     /**
-     * 允许的字段名，多个用逗号分割
+     * Allowed field names, multiple separated by a comma
      */
-    @Excel(name = "允许的字段名", width = 15)
-    @ApiModelProperty(value = "允许的字段名")
+    @Excel(name = "Allowed field names", width = 15)
+    @ApiModelProperty(value = "Allowed field names")
     private java.lang.String fieldName;
     /**
-     * 状态，1=启用，0=禁用
+     * Status, 1=Enabled, 0=Disabled
      */
-    @Excel(name = "状态", width = 15)
-    @ApiModelProperty(value = "状态")
+    @Excel(name = "STATE", width = 15)
+    @ApiModelProperty(value = "STATE")
     private java.lang.String status;
     /**
-     * 创建人
+     * Created by
      */
-    @Excel(name = "创建人", width = 15)
-    @ApiModelProperty(value = "创建人")
+    @Excel(name = "Created by", width = 15)
+    @ApiModelProperty(value = "Created by")
     private java.lang.String createBy;
     /**
-     * 创建时间
+     * Creation time
      */
-    @Excel(name = "创建时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "Creation time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Creation time")
     private java.util.Date createTime;
     /**
-     * 更新人
+     * UPDATER
      */
-    @Excel(name = "更新人", width = 15)
-    @ApiModelProperty(value = "更新人")
+    @Excel(name = "UPDATER", width = 15)
+    @ApiModelProperty(value = "UPDATER")
     private java.lang.String updateBy;
     /**
-     * 更新时间
+     * UPDATED
      */
-    @Excel(name = "更新时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "UPDATED", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "UPDATED")
     private java.util.Date updateTime;
 }

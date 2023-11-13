@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**
- * @Description: 部门角色权限
+ * @Description: Department role permissions
  * @Author: jeecg-boot
  * @Date:   2020-02-12
  * @Version: V1.0
@@ -25,7 +25,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @TableName("sys_depart_role_permission")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="sys_depart_role_permission对象", description="部门角色权限")
+@ApiModel(value="sys_depart_role_permissionOBJECT", description="Department role permissions")
 public class SysDepartRolePermission {
     
 	/**id*/

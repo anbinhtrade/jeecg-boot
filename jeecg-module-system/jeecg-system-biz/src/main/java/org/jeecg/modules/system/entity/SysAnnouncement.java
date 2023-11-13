@@ -12,7 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serializable;
 
 /**
- * @Description: 系统通告表
+ * @Description: System Notification Table
  * @Author: jeecg-boot
  * @Date:  2019-01-02
  * @Version: V1.0
@@ -28,147 +28,147 @@ public class SysAnnouncement implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
     private java.lang.String id;
     /**
-     * 标题
+     * Title
      */
-    @Excel(name = "标题", width = 15)
+    @Excel(name = "Title", width = 15)
     private java.lang.String titile;
     /**
-     * 内容
+     * Content
      */
-    @Excel(name = "内容", width = 30)
+    @Excel(name = "Content", width = 30)
     private java.lang.String msgContent;
     /**
-     * 开始时间
+     * Start time
      */
-    @Excel(name = "开始时间", width = 15, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "Start time", width = 15, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private java.util.Date startTime;
     /**
-     * 结束时间
+     * End time
      */
-    @Excel(name = "结束时间", width = 15, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "End time", width = 15, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private java.util.Date endTime;
     /**
-     * 发布人
+     * Sender
      */
-    @Excel(name = "发布人", width = 15)
+    @Excel(name = "Sender", width = 15)
     private java.lang.String sender;
     /**
-     * 优先级（L低，M中，H高）
+     * Priority (Low L, Medium M, High H)
      */
-    @Excel(name = "优先级", width = 15, dicCode = "priority")
+    @Excel(name = "Priority", width = 15, dicCode = "priority")
     @Dict(dicCode = "priority")
     private java.lang.String priority;
     
     /**
-     * 消息类型1:通知公告2:系统消息
+     * Message Type 1: Notification Announcement 2: System Message
      */
-    @Excel(name = "消息类型", width = 15, dicCode = "msg_category")
+    @Excel(name = "Message type", width = 15, dicCode = "msg_category")
     @Dict(dicCode = "msg_category")
     private java.lang.String msgCategory;
     /**
-     * 通告对象类型（USER:指定用户，ALL:全体用户）
+     * Notification object type (USER: specified user, ALL: all users)
      */
-    @Excel(name = "通告对象类型", width = 15, dicCode = "msg_type")
+    @Excel(name = "Notification object type", width = 15, dicCode = "msg_type")
     @Dict(dicCode = "msg_type")
     private java.lang.String msgType;
     /**
-     * 发布状态（0未发布，1已发布，2已撤销）
+     * Release status (0 not released, 1 released, 2 withdrawn)
      */
-    @Excel(name = "发布状态", width = 15, dicCode = "send_status")
+    @Excel(name = "Post status", width = 15, dicCode = "send_status")
     @Dict(dicCode = "send_status")
     private java.lang.String sendStatus;
     /**
-     * 发布时间
+     * Release Time
      */
-    @Excel(name = "发布时间", width = 15, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "Release Time", width = 15, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private java.util.Date sendTime;
     /**
-     * 撤销时间
+     * Undo time
      */
-    @Excel(name = "撤销时间", width = 15, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "Undo time", width = 15, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private java.util.Date cancelTime;
     /**
-     * 删除状态（0，正常，1已删除）
+     * Deletion status (0, normal, 1 deleted)
      */
     private java.lang.String delFlag;
     /**
-     * 创建人
+     * Founder
      */
     private java.lang.String createBy;
     /**
-     * 创建时间
+     * Creation Time
      */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private java.util.Date createTime;
     /**
-     * 更新人
+     * Updater
      */
     private java.lang.String updateBy;
     /**
-     * 更新时间
+     * Update time
      */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private java.util.Date updateTime;
     /**
-     * 指定用户
+     * Specify user
      **/
     private java.lang.String userIds;
     /**
-     * 业务类型(email:邮件 bpm:流程 tenant_invite:租户邀请)
+     * Business type (email: mail bpm: process tenant invite: tenant invite)
      */
     private java.lang.String busType;
     /**
-     * 业务id
+     * Business Id
      */
     private java.lang.String busId;
     /**
-     * 打开方式 组件：component 路由：url
+     * Open method Component: component Route: url
      */
     private java.lang.String openType;
     /**
-     * 组件/路由 地址
+     * component/routeAddress
      */
     private java.lang.String openPage;
     /**
-     * 摘要/扩展业务参数
+     * Summary/extended business parameters
      * 
-     * 示例：
-     * 1 摘要值
-     *  放假安排
-     * 2 跳转流程的参数值
+     * Example:
+     * 1 Summary Value
+     *  Holiday arrangements
+     * 2 Parameter value of jump process
      * {"taskDetail":true,"procInsId":"1706547306004377602","taskId":"task630958764530507776"}
      */
     private java.lang.String msgAbstract;
     /**
-     * 钉钉task_id，用于撤回消息
+     * DingTalk task id, used to withdraw messages
      */
     private String dtTaskId;
 
     /**
-     * 阅读状态 1表示已经阅读
+     * Reading Status 1 Means Read
      */
     private transient String readFlag;
 
     /**
-     * 标星状态 1表示标星
+     * Star Status 1 Means Star
      */
     private transient String starFlag;
 
     /**
-     * 发送记录ID
+     * Send record ID
      */
     private transient String sendId;
 
-    /**租户ID*/
+    /**Tenant ID*/
     private java.lang.Integer tenantId;
 }

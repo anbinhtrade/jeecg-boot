@@ -17,7 +17,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: gateway路由管理
+ * @Description: Gateway route management
  * @Author: jeecg-boot
  * @Date:   2020-05-26
  * @Version: V1.0
@@ -26,86 +26,86 @@ import java.util.Date;
 @TableName("sys_gateway_route")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="sys_gateway_route对象", description="gateway路由管理")
+@ApiModel(value="sys_gateway_route对象", description="Gateway route management")
 public class SysGatewayRoute implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /**主键*/
+    /**Primary key*/
     @TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键")
+    @ApiModelProperty(value = "Primary key")
     private String id;
 
     /**routerKEy*/
-    @ApiModelProperty(value = "路由ID")
+    @ApiModelProperty(value = "Route ID")
     private String routerId;
 
-    /**服务名*/
-    @Excel(name = "服务名", width = 15)
-    @ApiModelProperty(value = "服务名")
+    /**Service name*/
+    @Excel(name = "Service name", width = 15)
+    @ApiModelProperty(value = "Service name")
     private String name;
 
-    /**服务地址*/
-    @Excel(name = "服务地址", width = 15)
-    @ApiModelProperty(value = "服务地址")
+    /**Service address*/
+    @Excel(name = "Service address", width = 15)
+    @ApiModelProperty(value = "Service address")
     private String uri;
 
     /**
-     * 断言配置
+     * Assertion configuration
      */
     private String predicates;
 
     /**
-     * 过滤配置
+     * Filtering configuration
      */
     private String filters;
 
-    /**是否忽略前缀0-否 1-是*/
-    @Excel(name = "忽略前缀", width = 15)
-    @ApiModelProperty(value = "忽略前缀")
+    /**Whether to ignore the prefix 0-no 1 - Yes*/
+    @Excel(name = "Ignore prefixes", width = 15)
+    @ApiModelProperty(value = "Ignore prefixes")
     @Dict(dicCode = "yn")
     private Integer stripPrefix;
 
-    /**是否重试0-否 1-是*/
-    @Excel(name = "是否重试", width = 15)
-    @ApiModelProperty(value = "是否重试")
+    /**Retry 0-No 1 - Yes*/
+    @Excel(name = "Whether to try again", width = 15)
+    @ApiModelProperty(value = "Whether to try again")
     @Dict(dicCode = "yn")
     private Integer retryable;
 
-    /**是否为保留数据:0-否 1-是*/
-    @Excel(name = "保留数据", width = 15)
-    @ApiModelProperty(value = "保留数据")
+    /**Retained data: 0-No 1-是*/
+    @Excel(name = "Retention of data", width = 15)
+    @ApiModelProperty(value = "Retention of data")
     @Dict(dicCode = "yn")
     private Integer persistable;
 
-    /**是否在接口文档中展示:0-否 1-是*/
-    @Excel(name = "在接口文档中展示", width = 15)
-    @ApiModelProperty(value = "在接口文档中展示")
+    /**Whether it is displayed in the interface documentation: 0-No 1 - Yes*/
+    @Excel(name = "This is shown in the API documentation", width = 15)
+    @ApiModelProperty(value = "This is shown in the API documentation")
     @Dict(dicCode = "yn")
     private Integer showApi;
 
-    /**状态 1有效 0无效*/
-    @Excel(name = "状态", width = 15)
-    @ApiModelProperty(value = "状态")
+    /**STATE 1 Effective 0 invalid*/
+    @Excel(name = "STATE", width = 15)
+    @ApiModelProperty(value = "STATE")
     @Dict(dicCode = "yn")
     private Integer status;
 
-    /**创建人*/
-    @ApiModelProperty(value = "创建人")
+    /**Created by*/
+    @ApiModelProperty(value = "Created by")
     private String createBy;
-    /**创建日期*/
+    /**Date of creation*/
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Date of creation")
     private Date createTime;
-    /*    *//**更新人*//*
+    /*    *//**UPDATER*//*
     @ApiModelProperty(value = "更新人")
     private String updateBy;
-    *//**更新日期*//*
+    *//**Updated date*//*
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "更新日期")
     private Date updateTime;
-    *//**所属部门*//*
+    *//**AFFILIATION*//*
     @ApiModelProperty(value = "所属部门")
     private String sysOrgCode;*/
 }

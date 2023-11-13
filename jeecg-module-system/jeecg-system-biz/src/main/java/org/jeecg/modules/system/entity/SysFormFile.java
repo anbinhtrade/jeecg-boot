@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * @Description: 表单评论文件
+ * @Description: Form comment file
  * @Author: jeecg-boot
  * @Date:   2022-07-21
  * @Version: V1.0
@@ -31,29 +31,29 @@ public class SysFormFile {
     @ApiModelProperty(value = "id")
 	private String id;
 	/**表名*/
-	@Excel(name = "表名", width = 15)
-    @ApiModelProperty(value = "表名")
+	@Excel(name = "Table name", width = 15)
+    @ApiModelProperty(value = "Table name")
 	private String tableName;
 	/**数据id*/
-	@Excel(name = "数据id", width = 15)
-    @ApiModelProperty(value = "数据id")
+	@Excel(name = "Data ID", width = 15)
+    @ApiModelProperty(value = "Data ID")
 	private String tableDataId;
-	/**关联文件id*/
-	@Excel(name = "关联文件id", width = 15)
-    @ApiModelProperty(value = "关联文件id")
+	/**The ID of the associated file*/
+	@Excel(name = "The ID of the associated file", width = 15)
+    @ApiModelProperty(value = "The ID of the associated file")
 	private String fileId;
-	/**文档类型（folder:文件夹 excel:excel doc:word pp:ppt image:图片  archive:其他文档 video:视频）*/
-	@Excel(name = "文档类型（folder:文件夹 excel:excel doc:word pp:ppt image:图片  archive:其他文档 video:视频）", width = 15)
-	@ApiModelProperty(value = "文档类型（folder:文件夹 excel:excel doc:word pp:ppt image:图片  archive:其他文档 video:视频）")
+	/**Document type (folder: folder excel:excel doc:word pp:ppt image: an image  archive:Additional Documentation video:VIDEO）*/
+	@Excel(name = "Document type (folder: folder excel:excel doc:word pp:ppt image: an image  archive: other documents video: video)", width = 15)
+	@ApiModelProperty(value = "Document type (folder: folder excel:excel doc:word pp:ppt image: an image  archive:其他文档 video: video)")
 	private String fileType;
-	/**创建人登录名称*/
-	@Excel(name = "创建人登录名称", width = 15)
-    @ApiModelProperty(value = "创建人登录名称")
+	/**Creator login name*/
+	@Excel(name = "Creator login name", width = 15)
+    @ApiModelProperty(value = "Creator login name")
 	private String createBy;
-	/**创建日期*/
-	@Excel(name = "创建日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Date of creation*/
+	@Excel(name = "Date of creation", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Date of creation")
 	private Date createTime;
 }

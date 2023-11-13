@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * @Description: 用户通告阅读标记表
+ * @Description: User Announcement Reading Mark Sheet
  * @Author: jeecg-boot
  * @Date:  2019-02-21
  * @Version: V1.0
@@ -23,31 +23,31 @@ public class SysAnnouncementSend implements Serializable {
 	/**id*/
 	@TableId(type = IdType.ASSIGN_ID)
 	private java.lang.String id;
-	/**通告id*/
+	/**Notification Id*/
 	private java.lang.String anntId;
-	/**用户id*/
+	/**User Id*/
 	private java.lang.String userId;
-	/**阅读状态（0未读，1已读）*/
+	/**Reading status (0 unread, 1 read)*/
 	private java.lang.Integer readFlag;
-	/**阅读时间*/
+	/**Reading Time*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date readTime;
-	/**创建人*/
+	/**Founder*/
 	private java.lang.String createBy;
-	/**创建时间*/
+	/**Creation Time*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date createTime;
-	/**更新人*/
+	/**Updater*/
 	private java.lang.String updateBy;
-	/**更新时间*/
+	/**Update time*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date updateTime;
 
 	/**
-	 * 是否标星 当值为1是标星消息
+	 * Whether to mark a star. When the value is 1, it is a star message.
 	 */
 	private String starFlag;
 }

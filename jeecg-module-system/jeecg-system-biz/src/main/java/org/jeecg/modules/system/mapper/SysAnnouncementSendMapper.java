@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
- * @Description: 用户通告阅读标记表
+ * @Description: User Advertisement Read Tag Table
  * @Author: jeecg-boot
  * @Date:  2019-02-21
  * @Version: V1.0
@@ -18,7 +18,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 public interface SysAnnouncementSendMapper extends BaseMapper<SysAnnouncementSend> {
 
 	/**
-	 * 获取我的消息
+	 * Get my messages
 	 * @param announcementSendModel
 	 * @param page
 	 * @return
@@ -26,7 +26,7 @@ public interface SysAnnouncementSendMapper extends BaseMapper<SysAnnouncementSen
 	public List<AnnouncementSendModel> getMyAnnouncementSendList(Page<AnnouncementSendModel> page,@Param("announcementSendModel") AnnouncementSendModel announcementSendModel);
 
 	/**
-	 * 获取一条记录
+	 * Get a record
 	 * @param sendId
 	 * @return
 	 */
@@ -34,12 +34,12 @@ public interface SysAnnouncementSendMapper extends BaseMapper<SysAnnouncementSen
 
 
 	/**
-	 * 修改为已读消息
+	 * Modified to Read Message
 	 */
 	void updateReaded(@Param("userId") String userId, @Param("annoceIdList") List<String> annoceIdList);
 
 	/**
-	 * 清除所有未读消息
+	 * Clear all unread messages
 	 * @param userId
 	 */
 	void clearAllUnReadMessage(@Param("userId") String userId);

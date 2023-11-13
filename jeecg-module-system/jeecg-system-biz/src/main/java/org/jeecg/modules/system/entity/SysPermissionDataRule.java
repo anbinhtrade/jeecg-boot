@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 菜单权限规则表
+ * Menu permission rule table
  * </p>
  *
  * @Author huangzhilin
@@ -32,52 +32,52 @@ public class SysPermissionDataRule implements Serializable {
 	private String id;
 	
 	/**
-	 * 对应的菜单id
+	 * The corresponding menu ID
 	 */
 	private String permissionId;
 	
 	/**
-	 * 规则名称
+	 * The name of the rule
 	 */
 	private String ruleName;
 	
 	/**
-	 * 字段
+	 * FIELD
 	 */
 	private String ruleColumn;
 	
 	/**
-	 * 条件
+	 * CONDITION
 	 */
 	private String ruleConditions;
 	
 	/**
-	 * 规则值
+	 * Rule value
 	 */
 	private String ruleValue;
 	
 	/**
-	 * 状态值 1有效 0无效
+	 * Status value 1 Effective 0 invalid
 	 */
 	private String status;
 	
 	/**
-	 * 创建时间
+	 * Creation time
 	 */
 	private Date createTime;
 	
 	/**
-	 * 创建人
+	 * Created by
 	 */
 	private String createBy;
 	
 	/**
-	 * 修改时间
+	 * Modify time
 	 */
 	private Date updateTime;
 	
 	/**
-	 * 修改人
+	 * Modified by
 	 */
 	private String updateBy;
 }

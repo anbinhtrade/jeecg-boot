@@ -26,61 +26,61 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class SysFillRule {
 
     /**
-     * 主键ID
+     * Primary key ID
      */
     @TableId(type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键ID")
     private java.lang.String id;
     /**
-     * 规则名称
+     * The name of the rule
      */
-    @Excel(name = "规则名称", width = 15)
-    @ApiModelProperty(value = "规则名称")
+    @Excel(name = "The name of the rule", width = 15)
+    @ApiModelProperty(value = "The name of the rule")
     private java.lang.String ruleName;
     /**
-     * 规则Code
+     * Rule Code
      */
-    @Excel(name = "规则Code", width = 15)
-    @ApiModelProperty(value = "规则Code")
+    @Excel(name = "Rule Code", width = 15)
+    @ApiModelProperty(value = "Rule Code")
     private java.lang.String ruleCode;
     /**
-     * 规则实现类
+     * Rule implementation classes
      */
-    @Excel(name = "规则实现类", width = 15)
-    @ApiModelProperty(value = "规则实现类")
+    @Excel(name = "Rule implementation classes", width = 15)
+    @ApiModelProperty(value = "Rule implementation classes")
     private java.lang.String ruleClass;
     /**
-     * 规则参数
+     * Rule parameters
      */
-    @Excel(name = "规则参数", width = 15)
-    @ApiModelProperty(value = "规则参数")
+    @Excel(name = "Rule parameters", width = 15)
+    @ApiModelProperty(value = "Rule parameters")
     private java.lang.String ruleParams;
     /**
-     * 修改人
+     * Modified by
      */
-    @Excel(name = "修改人", width = 15)
-    @ApiModelProperty(value = "修改人")
+    @Excel(name = "Modified by", width = 15)
+    @ApiModelProperty(value = "Modified by")
     private java.lang.String updateBy;
     /**
-     * 修改时间
+     * Modify time
      */
-    @Excel(name = "修改时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "Modify time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty(value = "Modify time")
     private java.util.Date updateTime;
     /**
-     * 创建人
+     * Created by
      */
-    @Excel(name = "创建人", width = 15)
-    @ApiModelProperty(value = "创建人")
+    @Excel(name = "Created by", width = 15)
+    @ApiModelProperty(value = "Created by")
     private java.lang.String createBy;
     /**
-     * 创建时间
+     * Creation time
      */
-    @Excel(name = "创建时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "Creation time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Creation time")
     private java.util.Date createTime;
 }

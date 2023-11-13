@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 角色表
+ * Role table
  * </p>
  *
  * @Author scott
@@ -37,47 +37,47 @@ public class SysRole implements Serializable {
     private String id;
     
     /**
-     * 角色名称
+     * The name of the role
      */
     @Excel(name="角色名",width=15)
     private String roleName;
     
     /**
-     * 角色编码
+     * Role coding
      */
-    @Excel(name="角色编码",width=15)
+    @Excel(name="Role coding",width=15)
     private String roleCode;
     
     /**
-          * 描述
+          * DESCRIPTION
      */
-    @Excel(name="描述",width=60)
+    @Excel(name="DESCRIPTION",width=60)
     private String description;
 
     /**
-     * 创建人
+     * Created by
      */
     private String createBy;
 
     /**
-     * 创建时间
+     * Creation time
      */
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
-     * 更新人
+     * UPDATER
      */
     private String updateBy;
 
     /**
-     * 更新时间
+     * UPDATED
      */
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    /**租户ID*/
+    /**Tenant ID*/
     private java.lang.Integer tenantId;
 }

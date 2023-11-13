@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**
- * @Description: 角色首页配置
+ * @Description: Character home page configuration
  * @Author: liusq
  * @Date:   2022-03-25
  * @Version: V1.0
@@ -25,63 +25,63 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @TableName("sys_role_index")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="sys_role_index对象", description="角色首页配置")
+@ApiModel(value="sys_role_indexOBJECT", description="Character home page configuration")
 public class SysRoleIndex {
     
 	/**id*/
 	@TableId(type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "id")
 	private java.lang.String id;
-	/**角色编码*/
-	@Excel(name = "角色编码", width = 15)
-    @ApiModelProperty(value = "角色编码")
+	/**Role coding*/
+	@Excel(name = "Role coding", width = 15)
+    @ApiModelProperty(value = "Role coding")
 	private java.lang.String roleCode;
-	/**路由地址*/
-	@Excel(name = "路由地址", width = 15)
-    @ApiModelProperty(value = "路由地址")
+	/**Routing address*/
+	@Excel(name = "Routing address", width = 15)
+    @ApiModelProperty(value = "Routing address")
 	private java.lang.String url;
-	/**路由地址*/
-	@Excel(name = "路由地址", width = 15)
-    @ApiModelProperty(value = "组件")
+	/**Routing address*/
+	@Excel(name = "Routing address", width = 15)
+    @ApiModelProperty(value = "SUBASSEMBLY")
 	private java.lang.String component;
 	/**
-	 * 是否路由菜单: 0:不是  1:是（默认值1）
+	 * Whether to route the menu: 0: No  1: Yes (default value 1)
 	 */
-	@Excel(name = "是否路由菜单", width = 15)
-	@ApiModelProperty(value = "是否路由菜单")
+	@Excel(name = "Whether to route the menu", width = 15)
+	@ApiModelProperty(value = "Whether to route the menu")
 	@TableField(value="is_route")
 	private boolean route;
-	/**优先级*/
-	@Excel(name = "优先级", width = 15)
-    @ApiModelProperty(value = "优先级")
+	/**PRIORITY*/
+	@Excel(name = "PRIORITY", width = 15)
+    @ApiModelProperty(value = "PRIORITY")
 	private java.lang.Integer priority;
-	/**路由地址*/
-	@Excel(name = "状态", width = 15)
-	@ApiModelProperty(value = "状态")
+	/**Routing address*/
+	@Excel(name = "STATE", width = 15)
+	@ApiModelProperty(value = "STATE")
 	private java.lang.String status;
-	/**创建人登录名称*/
-	@Excel(name = "创建人登录名称", width = 15)
-    @ApiModelProperty(value = "创建人登录名称")
+	/**Creator login name*/
+	@Excel(name = "Creator login name", width = 15)
+    @ApiModelProperty(value = "Creator login name")
 	private java.lang.String createBy;
-	/**创建日期*/
-	@Excel(name = "创建日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Date of creation*/
+	@Excel(name = "Date of creation", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "Date of creation")
 	private java.util.Date createTime;
-	/**更新人登录名称*/
-	@Excel(name = "更新人登录名称", width = 15)
-    @ApiModelProperty(value = "更新人登录名称")
+	/**The login name of the person who updated it*/
+	@Excel(name = "The login name of the person who updated it", width = 15)
+    @ApiModelProperty(value = "The login name of the person who updated it")
 	private java.lang.String updateBy;
-	/**更新日期*/
-	@Excel(name = "更新日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Updated date*/
+	@Excel(name = "Updated date", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "更新日期")
+    @ApiModelProperty(value = "Updated date")
 	private java.util.Date updateTime;
-	/**所属部门*/
-	@Excel(name = "所属部门", width = 15)
-    @ApiModelProperty(value = "所属部门")
+	/**AFFILIATION*/
+	@Excel(name = "AFFILIATION", width = 15)
+    @ApiModelProperty(value = "AFFILIATION")
 	private java.lang.String sysOrgCode;
 
 

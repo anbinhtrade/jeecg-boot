@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @Description: 产品包菜单关系表
+ * @Description: Package menu relationship table
  * @Author: jeecg-boot
  * @Date:   2022-12-31
  * @Version: V1.0
@@ -24,36 +24,36 @@ import lombok.experimental.Accessors;
 @TableName("sys_tenant_pack_perms")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="sys_tenant_pack_perms对象", description="产品包菜单关系表")
+@ApiModel(value="sys_tenant_pack_permsOBJECT", description="Package menu relationship table")
 public class SysPackPermission implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	/**主键编号*/
+	/**Primary key number*/
 	@TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键编号")
+    @ApiModelProperty(value = "Primary key number")
     private String id;
-	/**租户产品包名称*/
-	@Excel(name = "租户产品包名称", width = 15)
-    @ApiModelProperty(value = "租户产品包名称")
+	/**The name of the tenant package*/
+	@Excel(name = "The name of the tenant package", width = 15)
+    @ApiModelProperty(value = "The name of the tenant package")
     private String packId;
-	/**菜单id*/
-	@Excel(name = "菜单id", width = 15)
-    @ApiModelProperty(value = "菜单id")
+	/**Menu ID*/
+	@Excel(name = "Menu ID", width = 15)
+    @ApiModelProperty(value = "Menu ID")
     private String permissionId;
-	/**创建人*/
-    @ApiModelProperty(value = "创建人")
+	/**Created by*/
+    @ApiModelProperty(value = "Created by")
     private String createBy;
-	/**创建时间*/
+	/**Creation time*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Creation time")
     private Date createTime;
-	/**更新人*/
-    @ApiModelProperty(value = "更新人")
+	/**UPDATER*/
+    @ApiModelProperty(value = "UPDATER")
     private String updateBy;
-	/**更新时间*/
+	/**UPDATED*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "UPDATED")
     private Date updateTime;
 }

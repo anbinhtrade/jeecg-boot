@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
- * @Description: 系统通告表
+ * @Description: System Notification Table
  * @Author: jeecg-boot
  * @Date:  2019-01-02
  * @Version: V1.0
@@ -20,16 +20,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 public interface SysAnnouncementMapper extends BaseMapper<SysAnnouncement> {
 
     /**
-     * 通过消息类型和用户id获取系统通告
+     * Get system announcements by message type and user ID
      * @param page
-     * @param userId 用户id
-     * @param msgCategory 消息类型
+     * @param userId User ID
+     * @param msgCategory The type of message
      * @return
      */
 	List<SysAnnouncement> querySysCementListByUserId(Page<SysAnnouncement> page, @Param("userId")String userId,@Param("msgCategory")String msgCategory);
 
     /**
-     * 分页查询全部消息列表
+     * Paginate the list of all messages
      * @param page
      * @param userId
      * @param fromUser
@@ -40,7 +40,7 @@ public interface SysAnnouncementMapper extends BaseMapper<SysAnnouncement> {
 	List<SysAnnouncement> queryAllMessageList(Page<SysAnnouncement> page, @Param("userId")String userId, @Param("fromUser")String fromUser, @Param("starFlag")String starFlag, @Param("beginDate")Date beginDate, @Param("endDate")Date endDate);
    
     /**
-     * 查询用户未阅读的通知公告
+     * Query notifications that have not been read by the user
      * @param currDate
      * @param userId
      * @return

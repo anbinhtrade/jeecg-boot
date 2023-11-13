@@ -24,65 +24,65 @@ import java.util.Date;
 @TableName("sys_check_rule")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "sys_check_rule对象", description = "编码校验规则")
+@ApiModel(value = "sys_check_rule对象", description = "Coding verification rules")
 public class SysCheckRule {
 
     /**
-     * 主键id
+     * Primary Key Id
      */
     @TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "Primary Key Id")
     private String id;
     /**
-     * 规则名称
+     * Rule name
      */
-    @Excel(name = "规则名称", width = 15)
-    @ApiModelProperty(value = "规则名称")
+    @Excel(name = "Rule name", width = 15)
+    @ApiModelProperty(value = "Rule name")
     private String ruleName;
     /**
-     * 规则Code
+     * Rule Code
      */
-    @Excel(name = "规则Code", width = 15)
-    @ApiModelProperty(value = "规则Code")
+    @Excel(name = "Rule Code", width = 15)
+    @ApiModelProperty(value = "Rule Code")
     private String ruleCode;
     /**
-     * 规则JSON
+     * Rulesjson
      */
-    @Excel(name = "规则JSON", width = 15)
-    @ApiModelProperty(value = "规则JSON")
+    @Excel(name = "Rulesjson", width = 15)
+    @ApiModelProperty(value = "Rulesjson")
     private String ruleJson;
     /**
-     * 规则描述
+     * Rule description
      */
-    @Excel(name = "规则描述", width = 15)
-    @ApiModelProperty(value = "规则描述")
+    @Excel(name = "Rule description", width = 15)
+    @ApiModelProperty(value = "Rule description")
     private String ruleDescription;
     /**
-     * 更新人
+     * Updater
      */
-    @Excel(name = "更新人", width = 15)
-    @ApiModelProperty(value = "更新人")
+    @Excel(name = "Updater", width = 15)
+    @ApiModelProperty(value = "Updater")
     private String updateBy;
     /**
-     * 更新时间
+     * Update time
      */
-    @Excel(name = "更新时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "Update time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "Update time")
     private Date updateTime;
     /**
-     * 创建人
+     * Founder
      */
-    @Excel(name = "创建人", width = 15)
-    @ApiModelProperty(value = "创建人")
+    @Excel(name = "Founder", width = 15)
+    @ApiModelProperty(value = "Founder")
     private String createBy;
     /**
-     * 创建时间
+     * Creation Time
      */
-    @Excel(name = "创建时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "Creation Time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Creation Time")
     private Date createTime;
 }

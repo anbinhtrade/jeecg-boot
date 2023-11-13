@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
- * 角色权限表
+ * Role permission table
  * </p>
  *
  * @Author scott
@@ -34,29 +34,29 @@ public class SysRolePermission implements Serializable {
     private String id;
     
     /**
-     * 角色id
+     * Character ID
      */
     private String roleId;
 
     /**
-     * 权限id
+     * Permission ID
      */
     private String permissionId;
     
     /**
-     * 数据权限
+     * Data Permissions
      */
     private String dataRuleIds;
 
     /**
-     * 操作时间
+     * Operating time
      */
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date operateDate;
 
     /**
-     * 操作ip
+     * Operational IP
      */
     private String operateIp;
 

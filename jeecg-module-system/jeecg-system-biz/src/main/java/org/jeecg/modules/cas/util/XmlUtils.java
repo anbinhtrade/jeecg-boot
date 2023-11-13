@@ -25,7 +25,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 解析cas,ST验证后的xml
+ * Parse the xml after CAS, ST validation
  * @author: jeecg-boot
  */
 @Slf4j

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * @Description: 用户部门
+ * @Description: User department
  * @author: jeecg-boot
  */
 @Data
@@ -17,12 +17,12 @@ import lombok.Data;
 public class SysUserDepart implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	/**主键id*/
+	/**Primary key ID*/
     @TableId(type = IdType.ASSIGN_ID)
 	private String id;
-	/**用户id*/
+	/**User ID*/
 	private String userId;
-	/**部门id*/
+	/**Department ID*/
 	private String depId;
 	public SysUserDepart(String id, String userId, String depId) {
 		super();

@@ -22,62 +22,62 @@ import org.springframework.format.annotation.DateTimeFormat;
 @TableName("sys_third_account")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="sys_third_account对象", description="第三方登录账号表")
+@ApiModel(value="sys_third_accountOBJECT", description="Third-party login account form")
 public class SysThirdAccount {
  
-	/**编号*/
+	/**Numbering*/
 	@TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "编号")
+    @ApiModelProperty(value = "Numbering")
 	private java.lang.String id;
-	/**第三方登录id*/
-	@Excel(name = "第三方登录id", width = 15)
-	@ApiModelProperty(value = "第三方登录id")
+	/**Third-party login ID*/
+	@Excel(name = "Third-party login ID", width = 15)
+	@ApiModelProperty(value = "Third-party login ID")
 	private java.lang.String sysUserId;
-	/**登录来源*/
-	@Excel(name = "登录来源", width = 15)
-	@ApiModelProperty(value = "登录来源")
+	/**Sign-in source*/
+	@Excel(name = "Sign-in source", width = 15)
+	@ApiModelProperty(value = "Sign-in source")
 	private java.lang.String thirdType;
-	/**头像*/
-	@Excel(name = "头像", width = 15)
-	@ApiModelProperty(value = "头像")
+	/**Avatar*/
+	@Excel(name = "Avatar", width = 15)
+	@ApiModelProperty(value = "Avatar")
 	private java.lang.String avatar;
-	/**状态(1-正常,2-冻结)*/
-	@Excel(name = "状态(1-正常,2-冻结)", width = 15)
-	@ApiModelProperty(value = "状态(1-正常,2-冻结)")
+	/**Status (1-Normal, 2-Frozen)*/
+	@Excel(name = "Status (1-Normal, 2-Frozen)", width = 15)
+	@ApiModelProperty(value = "Status (1-Normal, 2-Frozen)")
 	private java.lang.Integer status;
-	/**删除状态(0-正常,1-已删除)*/
-	@Excel(name = "删除状态(0-正常,1-已删除)", width = 15)
-	@ApiModelProperty(value = "删除状态(0-正常,1-已删除)")
+	/**Deleted Status (0 - Normal, 1 - Deleted)*/
+	@Excel(name = "Deleted Status (0 - Normal, 1 - Deleted)", width = 15)
+	@ApiModelProperty(value = "Deleted Status (0 - Normal, 1 - Deleted)")
 	private java.lang.Integer delFlag;
-	/**真实姓名*/
-	@Excel(name = "真实姓名", width = 15)
-	@ApiModelProperty(value = "真实姓名")
+	/**Real name*/
+	@Excel(name = "Real name", width = 15)
+	@ApiModelProperty(value = "Real name")
 	private java.lang.String realname;
-	/**第三方用户uuid*/
-	@Excel(name = "第三方用户uuid", width = 15)
-	@ApiModelProperty(value = "第三方用户uuid")
+	/**Third-Party User UUIDs*/
+	@Excel(name = "Third-Party User UUIDs", width = 15)
+	@ApiModelProperty(value = "Third-Party User UUIDs")
 	private java.lang.String thirdUserUuid;
-	/**第三方用户账号*/
-	@Excel(name = "第三方用户账号", width = 15)
-	@ApiModelProperty(value = "第三方用户账号")
+	/**Third-Party User Accounts*/
+	@Excel(name = "Third-Party User Accounts", width = 15)
+	@ApiModelProperty(value = "Third-Party User Accounts")
 	private java.lang.String thirdUserId;
-    /**创建人*/
-    @Excel(name = "创建人", width = 15)
+    /**Created by*/
+    @Excel(name = "Created by", width = 15)
     private java.lang.String createBy;
-    /**创建日期*/
-    @Excel(name = "创建日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    /**Date of creation*/
+    @Excel(name = "Date of creation", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private java.util.Date createTime;
-    /**修改人*/
-    @Excel(name = "修改人", width = 15)
+    /**Modified by*/
+    @Excel(name = "Modified by", width = 15)
     private java.lang.String updateBy;
-    /**修改日期*/
-    @Excel(name = "修改日期", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+    /**Date modified*/
+    @Excel(name = "Date modified", width = 20, format = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private java.util.Date updateTime;
 
-	/**租户id*/
+	/**Tenant ID*/
 	private java.lang.Integer tenantId;
 }

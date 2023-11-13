@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 系统日志表
+ * Syslog table
  * </p>
  *
  * @Author zhangweijian
@@ -34,29 +34,29 @@ public class SysLog implements Serializable {
 	private String id;
 
 	/**
-	 * 创建人
+	 * Created by
 	 */
 	private String createBy;
 
 	/**
-	 * 创建时间
+	 * Creation time
 	 */
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 
 	/**
-	 * 更新人
+	 * UPDATER
 	 */
 	private String updateBy;
 
 	/**
-	 * 更新时间
+	 * UPDATED
 	 */
 	private Date updateTime;
 
 	/**
-	 * 耗时
+	 * TAKE
 	 */
 	private Long costTime;
 
@@ -66,51 +66,51 @@ public class SysLog implements Serializable {
 	private String ip;
 
 	/**
-	 * 请求参数
+	 * Request parameters
 	 */
 	private String requestParam;
 
 	/**
-	 * 请求类型
+	 * The type of request
 	 */
 	private String requestType;
 
 	/**
-	 * 请求路径
+	 * The path of the request
 	 */
 	private String requestUrl;
 	/**
-	 * 请求方法
+	 * Request method
 	 */
 	private String method;
 
 	/**
-	 * 操作人用户名称
+	 * The name of the operator's user
 	 */
 	private String username;
 	/**
-	 * 操作人用户账户
+	 * Operator user account
 	 */
 	private String userid;
 	/**
-	 * 操作详细日志
+	 * Detailed logs of operations
 	 */
 	private String logContent;
 
 	/**
-	 * 日志类型（1登录日志，2操作日志）
+	 * Log Type (1 Login Log, 2 Operation Logs)
 	 */
 	@Dict(dicCode = "log_type")
 	private Integer logType;
 
 	/**
-	 * 操作类型（1查询，2添加，3修改，4删除,5导入，6导出）
+	 * Operation Type (1 Query, 2 Add, 3 Modify, 4 Delete, 5 Import, 6 Export)
 	 */
 	@Dict(dicCode = "operate_type")
 	private Integer operateType;
 
 	/**
-	 * 租户ID
+	 * Tenant ID
 	 */
 	private Integer tenantId;
 

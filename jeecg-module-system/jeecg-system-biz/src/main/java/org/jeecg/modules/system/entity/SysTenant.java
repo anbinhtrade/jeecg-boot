@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 租户信息
+ * Tenant information
  * @author: jeecg-boot
  */
 @Data
@@ -21,99 +21,99 @@ public class SysTenant implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 编码
+     * ENCODE
      */
     private Integer id;
     
     /**
-     * 名称
+     * NAME
      */
     private String name;
     
 
     /**
-     * 创建人
+     * Created by
      */
     @Dict(dictTable ="sys_user",dicText = "realname",dicCode = "username")
     private String createBy;
 
     /**
-     * 创建时间
+     * Creation time
      */
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
-     * 开始时间
+     * Start time
      */
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date beginDate;
 
     /**
-     * 结束时间
+     * End time
      */
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endDate;
 
     /**
-     * 状态 1正常 0冻结
+     * STATE 1 Normal 0 freezing
      */
     @Dict(dicCode = "tenant_status")
     private Integer status;
 
     /**
-     * 所属行业
+     * INDUSTRY
      */
     @Dict(dicCode = "trade")
     private String trade;
 
     /**
-     * 公司规模
+     * The size of the company
      */
     @Dict(dicCode = "company_size")
     private String companySize;
 
     /**
-     * 公司地址
+     * Company address
      */
     private String companyAddress;
 
     /**
-     * 公司logo
+     * Company logo
      */
     private String companyLogo;
 
     /**
-     * 门牌号
+     * NUMBER
      */
     private String houseNumber;
 
     /**
-     * 工作地点
+     * Place of work
      */
     private String workPlace;
 
     /**
-     * 二级域名(暂时无用,预留字段)
+     * Second-level domain name (temporarily unused, reserved field)
      */
     private String secondaryDomain;
 
     /**
-     * 登录背景图片(暂时无用，预留字段)
+     * Login background image (temporarily useless, reserved field)
      */
     private String loginBkgdImg;
 
     /**
-     * 职级
+     * RANK
      */
     @Dict(dicCode = "company_rank")
     private String position;
 
     /**
-     * 部门
+     * DEPARTMENT
      */
     @Dict(dicCode = "company_department")
     private String department;
@@ -121,16 +121,16 @@ public class SysTenant implements Serializable {
     @TableLogic
     private Integer delFlag;
 
-    /**更新人登录名称*/
+    /**The login name of the person who updated it*/
     private String updateBy;
     
-    /**更新日期*/
+    /**Updated date*/
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     /**
-     * 允许申请管理员 1允许 0不允许
+     * Allow application for administrators 1 Allowed 0 is not allowed
      */
     private Integer applyStatus;
     

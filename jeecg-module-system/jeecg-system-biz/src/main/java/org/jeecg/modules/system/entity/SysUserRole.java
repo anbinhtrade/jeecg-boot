@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户角色表
+ * User Role Table
  * </p>
  *
  * @Author scott
@@ -28,16 +28,16 @@ public class SysUserRole implements Serializable {
     private String id;
     
     /**
-     * 用户id
+     * User ID
      */
     private String userId;
 
     /**
-     * 角色id
+     * Character ID
      */
     private String roleId;
     
-    /**租户ID*/
+    /**Tenant ID*/
     private java.lang.Integer tenantId;
     
 	public SysUserRole() {

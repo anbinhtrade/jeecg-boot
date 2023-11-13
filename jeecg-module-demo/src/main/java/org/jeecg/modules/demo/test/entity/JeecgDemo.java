@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="测试DEMO对象", description="测试DEMO")
+@ApiModel(value="TEST THE DEMO OBJECT", description="Test the DEMO")
 @TableName("demo")
 public class JeecgDemo extends JeecgEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

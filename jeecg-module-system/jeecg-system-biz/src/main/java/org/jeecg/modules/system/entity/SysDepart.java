@@ -16,7 +16,7 @@ import java.util.Objects;
 
 /**
  * <p>
- * 部门表
+ * Department table
  * <p>
  * 
  * @Author Steve
@@ -30,79 +30,79 @@ public class SysDepart implements Serializable {
 	/**ID*/
 	@TableId(type = IdType.ASSIGN_ID)
 	private String id;
-	/**父机构ID*/
+	/**Parent organization ID*/
 	private String parentId;
-	/**机构/部门名称*/
-	@Excel(name="机构/部门名称",width=15)
+	/**Organization/department name*/
+	@Excel(name="Organization/department name",width=15)
 	private String departName;
-	/**英文名*/
-	@Excel(name="英文名",width=15)
+	/**English name*/
+	@Excel(name="English name",width=15)
 	private String departNameEn;
-	/**缩写*/
+	/**Abridge*/
 	private String departNameAbbr;
-	/**排序*/
-	@Excel(name="排序",width=15)
+	/**Sort*/
+	@Excel(name="Sort",width=15)
 	private Integer departOrder;
-	/**描述*/
-	@Excel(name="描述",width=15)
+	/**Bewrite*/
+	@Excel(name="Bewrite",width=15)
 	private String description;
-	/**机构类别 1=公司，2=组织机构，3=岗位*/
-	@Excel(name="机构类别",width=15,dicCode="org_category")
+	/**Institutions category 1=company, 2=organization, 3=position*/
+	@Excel(name="Institutions category",width=15,dicCode="org_category")
 	private String orgCategory;
-	/**机构类型*/
+	/**Organization Type*/
 	private String orgType;
-	/**机构编码*/
-	@Excel(name="机构编码",width=15)
+	/**Institution code*/
+	@Excel(name="Institution code",width=15)
 	private String orgCode;
-	/**手机号*/
-	@Excel(name="手机号",width=15)
+	/**Phone number*/
+	@Excel(name="Phone number",width=15)
 	private String mobile;
-	/**传真*/
-	@Excel(name="传真",width=15)
+	/**Portraiture*/
+	@Excel(name="Portraiture",width=15)
 	private String fax;
-	/**地址*/
-	@Excel(name="地址",width=15)
+	/**Address*/
+	@Excel(name="Address",width=15)
 	private String address;
-	/**备注*/
-	@Excel(name="备注",width=15)
+	/**Remark*/
+	@Excel(name="Remark",width=15)
 	private String memo;
-	/**状态（1启用，0不启用）*/
+	/**State（1 Enabled, 0 Not enabled)*/
 	@Dict(dicCode = "depart_status")
 	private String status;
-	/**删除状态（0，正常，1已删除）*/
+	/**Deleted Status (0, Normal, 1 Deleted)*/
 	@Dict(dicCode = "del_flag")
 	private String delFlag;
-	/**对接企业微信的ID*/
+	/**The ID of the WeCom*/
 	private String qywxIdentifier;
-	/**创建人*/
+	/**Created by*/
 	private String createBy;
-	/**创建日期*/
+	/**Date of creation*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
-	/**更新人*/
+	/**Updater*/
 	private String updateBy;
-	/**更新日期*/
+	/**Updated date*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;
-	/**租户ID*/
+	/**Tenant ID*/
 	private java.lang.Integer tenantId;
 
-	/**是否有叶子节点: 1是0否*/
+	/**Is there a leaf node: 1 Yes 0 No*/
 	private Integer izLeaf;
 
     //update-begin---author:wangshuai ---date:20200308  for：[JTC-119]在部门管理菜单下设置部门负责人，新增字段负责人ids和旧的负责人ids
-    /**部门负责人的ids*/
+    /**IDS of the head of the department*/
 	@TableField(exist = false)
 	private String directorUserIds;
-    /**旧的部门负责人的ids(用于比较删除和新增)*/
+    /**IDS of the old department head (for comparison of deleted and new)*/
 	@TableField(exist = false)
     private String oldDirectorUserIds;
     //update-end---author:wangshuai ---date:20200308  for：[JTC-119]新增字段负责人ids和旧的负责人ids
 	
 	/**
-	 * 重写equals方法
+	 * Rewrite the equals method
 	 */
     @Override
     public boolean equals(Object o) {
@@ -140,7 +140,7 @@ public class SysDepart implements Serializable {
     }
 
     /**
-     * 重写hashCode方法
+     * Rewrite the hash code method
      */
     @Override
     public int hashCode() {

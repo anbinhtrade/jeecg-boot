@@ -19,7 +19,7 @@ import java.util.Set;
 
 
 /**
- * 服务化 system模块 对外接口请求类
+ * Servitization SystemMODULE Requests For External Interfaces
  * @author: jeecg-boot
  */
 @Slf4j
@@ -33,8 +33,8 @@ public class SystemApiController {
     private ISysUserService sysUserService;
 
     /**
-     * 发送系统消息
-     * @param message 使用构造器赋值参数 如果不设置category(消息类型)则默认为2 发送系统消息
+     * Send a system message
+     * @param message Use the constructor to assign parameters 如果不设置category(消息类型)则默认为2If you do not set category (message type), it defaults to 2 Send a system message
      */
     @PostMapping("/sendSysAnnouncement")
     public void sendSysAnnouncement(@RequestBody MessageDTO message){
@@ -42,8 +42,8 @@ public class SystemApiController {
     }
 
     /**
-     * 发送消息 附带业务参数
-     * @param message 使用构造器赋值参数
+     * Send a message Comes with business parameters
+     * @param message Use the constructor to assign parameters
      */
     @PostMapping("/sendBusAnnouncement")
     public void sendBusAnnouncement(@RequestBody BusMessageDTO message){
@@ -51,8 +51,8 @@ public class SystemApiController {
     }
 
     /**
-     * 通过模板发送消息
-     * @param message 使用构造器赋值参数
+     * Send a message through a template
+     * @param message Use the constructor to assign parameters
      */
     @PostMapping("/sendTemplateAnnouncement")
     public void sendTemplateAnnouncement(@RequestBody TemplateMessageDTO message){
@@ -60,8 +60,8 @@ public class SystemApiController {
     }
 
     /**
-     * 通过模板发送消息 附带业务参数
-     * @param message 使用构造器赋值参数
+     * Send a message through a template Comes with business parameters
+     * @param message Use the constructor to assign parameters
      */
     @PostMapping("/sendBusTemplateAnnouncement")
     public void sendBusTemplateAnnouncement(@RequestBody BusTemplateMessageDTO message){
@@ -69,8 +69,8 @@ public class SystemApiController {
     }
 
     /**
-     * 通过消息中心模板，生成推送内容
-     * @param templateDTO 使用构造器赋值参数
+     * Use the Message Center template to generate push content
+     * @param templateDTO Use the constructor to assign parameters
      * @return
      */
     @PostMapping("/parseTemplateByCode")
@@ -79,7 +79,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据业务类型busType及业务busId修改消息已读
+     * Message Reads is modified based on the service type, bus type, and service bus ID
      */
     @GetMapping("/updateSysAnnounReadFlag")
     public void updateSysAnnounReadFlag(@RequestParam("busType") String busType, @RequestParam("busId")String busId){
@@ -87,7 +87,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据用户账号查询用户信息
+     * Query user information based on user account
      * @param username
      * @return
      */
@@ -104,14 +104,14 @@ public class SystemApiController {
     }
 
     /**
-     * 根据用户id查询用户信息
+     * Query user information based on user ID
      * @param id
      * @return
      */
     @GetMapping("/getUserById")
     LoginUser getUserById(@RequestParam("id") String id){
         LoginUser loginUser = sysBaseApi.getUserById(id);
-        //用户信息加密
+        //Encryption of user information
         try {
             SensitiveInfoUtil.handlerObject(loginUser, true);
         } catch (IllegalAccessException e) {
@@ -121,7 +121,7 @@ public class SystemApiController {
     }
 
     /**
-     * 通过用户账号查询角色集合
+     * Query the set of roles by using the user account
      * @param username
      * @return
      */
@@ -131,7 +131,7 @@ public class SystemApiController {
     }
 
     /**
-     * 通过用户账号查询部门集合
+     * You can query department collections by user account
      * @param username
      * @return 部门 id
      */
@@ -141,7 +141,7 @@ public class SystemApiController {
     }
 
     /**
-     * 通过用户账号查询部门 name
+     * Query the department through the user account name
      * @param username
      * @return 部门 name
      */
@@ -152,7 +152,7 @@ public class SystemApiController {
 
 
     /**
-     * 获取数据字典
+     * Get a data dictionary
      * @param code
      * @return
      */
@@ -162,7 +162,7 @@ public class SystemApiController {
     }
 
     /**
-     * 获取有效的数据字典
+     * Get a valid data dictionary
      * @param code
      * @return
      */
@@ -172,7 +172,7 @@ public class SystemApiController {
     }
 
 
-    /** 查询所有的父级字典，按照create_time排序 */
+    /** Query all parent dictionaries, sorted by create time */
     @GetMapping("/queryAllDict")
     List<DictModel> queryAllDict(){
 //        try{
@@ -182,12 +182,12 @@ public class SystemApiController {
 //            e.printStackTrace();
 //        }
 
-        log.info("--我是jeecg-system服务节点，微服务接口queryAllDict被调用--");
+        log.info("--I'm a jeecg-system service node, and the microservice interface query All Dict is called--");
         return sysBaseApi.queryAllDict();
     }
 
     /**
-     * 查询所有分类字典
+     * Query all classification dictionaries
      * @return
      */
     @GetMapping("/queryAllSysCategory")
@@ -197,7 +197,7 @@ public class SystemApiController {
 
 
     /**
-     * 查询所有部门 作为字典信息 id -->value,departName -->text
+     * Inquire about all departments AS DICTIONARY INFORMATION id -->value,departName -->text
      * @return
      */
     @GetMapping("/queryAllDepartBackDictModel")
@@ -206,8 +206,8 @@ public class SystemApiController {
     }
 
     /**
-     * 获取所有角色 带参
-     * roleIds 默认选中角色
+     * Get all the characters With ginseng
+     * roleIds The role is selected by default
      * @return
      */
     @GetMapping("/queryAllRole")
@@ -220,7 +220,7 @@ public class SystemApiController {
     }
 
     /**
-     * 通过用户账号查询角色Id集合
+     * Query the set of role IDs by using the user account
      * @param username
      * @return
      */
@@ -230,7 +230,7 @@ public class SystemApiController {
     }
 
     /**
-     * 通过部门编号查询部门id
+     * Search for department ID by department number
      * @param orgCode
      * @return
      */
@@ -240,7 +240,7 @@ public class SystemApiController {
     }
 
     /**
-     * 查询所有部门
+     * Inquire about all departments
      * @return
      */
     @GetMapping("/getAllSysDepart")
@@ -249,7 +249,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据 id 查询数据库中存储的 DynamicDataSourceModel
+     * ACCORDING TO id Query the data stored in the database DynamicDataSourceModel
      *
      * @param dbSourceId
      * @return
@@ -262,7 +262,7 @@ public class SystemApiController {
 
 
     /**
-     * 根据部门Id获取部门负责人
+     * Obtain the department head based on the department ID
      * @param deptId
      * @return
      */
@@ -272,7 +272,7 @@ public class SystemApiController {
     }
 
     /**
-     * 查找父级部门
+     * Find the parent department
      * @param departId
      * @return
      */
@@ -282,7 +282,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据 code 查询数据库中存储的 DynamicDataSourceModel
+     * ACCORDING TO code Query the data stored in the database DynamicDataSourceModel
      *
      * @param dbSourceCode
      * @return
@@ -293,7 +293,7 @@ public class SystemApiController {
     }
 
     /**
-     * 给指定用户发消息
+     * Send a message to a specified user
      * @param userIds
      * @param cmd
      */
@@ -304,7 +304,7 @@ public class SystemApiController {
 
 
     /**
-     * 根据id获取所有参与用户
+     * Get all participating users based on their IDs
      * userIds
      * @return
      */
@@ -314,7 +314,7 @@ public class SystemApiController {
     }
 
     /**
-     * 查询所有用户 返回ComboModel
+     * Query all users RETURN ComboModel
      * @return
      */
     @GetMapping("/queryAllUserBackCombo")
@@ -323,7 +323,7 @@ public class SystemApiController {
     }
 
     /**
-     * 分页查询用户 返回JSONObject
+     * Paginate the user RETURN JSONObject
      * @return
      */
     @GetMapping("/queryAllUser")
@@ -334,7 +334,7 @@ public class SystemApiController {
 
 
     /**
-     * 将会议签到信息推动到预览
+     * Push the meeting check-in information to the preview
      * userIds
      * @return
      * @param userId
@@ -345,7 +345,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据name获取所有参与用户
+     * Get all participating users based on name
      * userNames
      * @return
      */
@@ -355,7 +355,7 @@ public class SystemApiController {
     }
 
     /**
-     * 获取用户的角色集合
+     * Get a collection of the user's roles
      * @param username
      * @return
      */
@@ -365,7 +365,7 @@ public class SystemApiController {
     }
 
     /**
-     * 获取用户的权限集合
+     * Get a user's set of permissions
      * @param username
      * @return
      */
@@ -377,7 +377,7 @@ public class SystemApiController {
     //-----
 
     /**
-     * 判断是否有online访问的权限
+     * Check whether you have the online permission
      * @param onlineAuthDTO
      * @return
      */
@@ -387,7 +387,7 @@ public class SystemApiController {
     }
 
     /**
-     * 查询用户角色信息
+     * Query user role information
      * @param username
      * @return
      */
@@ -398,7 +398,7 @@ public class SystemApiController {
 
 
     /**
-     * 查询用户权限信息
+     * Query user permission information
      * @param username
      * @return
      */
@@ -408,7 +408,7 @@ public class SystemApiController {
     }
 
     /**
-     * 通过部门id获取部门全部信息
+     * Obtain all department information by department ID
      */
     @GetMapping("/selectAllById")
     public SysDepartModel selectAllById(@RequestParam("id") String id){
@@ -416,7 +416,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据用户id查询用户所属公司下所有用户ids
+     * Query all user IDs of the company to which the user belongs based on the user ID
      * @param userId
      * @return
      */
@@ -427,7 +427,7 @@ public class SystemApiController {
 
 
     /**
-     * 查询数据权限
+     * Query data permissions
      * @return
      */
     @GetMapping("/queryPermissionDataRule")
@@ -436,7 +436,7 @@ public class SystemApiController {
     }
 
     /**
-     * 查询用户信息
+     * Query user information
      * @param username
      * @return
      */
@@ -446,7 +446,7 @@ public class SystemApiController {
     }
 
     /**
-     * 普通字典的翻译
+     * Translation of ordinary dictionaries
      * @param code
      * @param key
      * @return
@@ -458,7 +458,7 @@ public class SystemApiController {
 
 
     /**
-     * 36根据多个用户账号(逗号分隔)，查询返回多个用户信息
+     * 36. According to multiple user accounts (comma separated), multiple user information is returned for query
      * @param usernames
      * @return
      */
@@ -468,7 +468,7 @@ public class SystemApiController {
     }
 
     /**
-     * 37根据多个用户id(逗号分隔)，查询返回多个用户信息
+     * 37 Query returns multiple user information based on multiple user IDs (separated by commas).
      * @param ids
      * @return
      */
@@ -478,7 +478,7 @@ public class SystemApiController {
     }
 
     /**
-     * 38根据多个部门编码(逗号分隔)，查询返回多个部门信息
+     * 38 According to the multiple department codes (comma separated), the query returns multiple department information
      * @param orgCodes
      * @return
      */
@@ -488,7 +488,7 @@ public class SystemApiController {
     }
 
     /**
-     * 39根据多个部门ID(逗号分隔)，查询返回多个部门信息
+     * 39 According to the multiple department IDs (comma separated), the query returns multiple department information
      * @param ids
      * @return
      */
@@ -498,7 +498,7 @@ public class SystemApiController {
     }
 
     /**
-     * 40发送邮件消息
+     * 40 Send mail messages
      * @param email
      * @param title
      * @param content
@@ -508,7 +508,7 @@ public class SystemApiController {
          this.sysBaseApi.sendEmailMsg(email,title,content);
     };
     /**
-     * 41 获取公司下级部门和公司下所有用户信息
+     * 41 Obtain information about the company's subordinate departments and all users under the company
      * @param orgCode
      */
     @GetMapping("/getDeptUserByOrgCode")
@@ -517,9 +517,9 @@ public class SystemApiController {
     }
 
     /**
-     * 查询分类字典翻译
+     * Query classification dictionary translations
      *
-     * @param ids 分类字典表id
+     * @param ids Classification dictionary table ID
      * @return
      */
     @GetMapping("/loadCategoryDictItem")
@@ -528,10 +528,10 @@ public class SystemApiController {
     }
 
     /**
-     * 根据字典code加载字典text
+     * Load the dictionary text based on the dictionary code
      *
-     * @param dictCode 顺序：tableName,text,code
-     * @param keys     要查询的key
+     * @param dictCode ORDER：tableName,text,code
+     * @param keys     The key to be queried
      * @return
      */
     @GetMapping("/loadDictItem")
@@ -540,12 +540,12 @@ public class SystemApiController {
     }
 
     /**
-     * 复制应用下的所有字典配置到新的租户下
+     * Copy all the dictionaries under the app to the new tenant
      *
-     * @param originalAppId 原始低代码应用ID
-     * @param appId         新的低代码应用ID
-     * @param tenantId      新的租户ID
-     * @return Map<String, String>  Map<原字典编码, 新字典编码>
+     * @param originalAppId Original low-code app ID
+     * @param appId         New low-code app IDs
+     * @param tenantId      The new tenant ID
+     * @return Map<String, String>  Map<Original dictionary encoding, New dictionary encoding>
      */
     @GetMapping("/sys/api/copyLowAppDict")
     Map<String, String> copyLowAppDict(@RequestParam("originalAppId") String originalAppId, @RequestParam("appId") String appId, @RequestParam("tenantId") String tenantId) {
@@ -553,10 +553,10 @@ public class SystemApiController {
     }
     
     /**
-     * 根据字典code查询字典项
+     * Query dictionary entries based on the dictionary code
      *
-     * @param dictCode 顺序：tableName,text,code
-     * @param dictCode 要查询的key
+     * @param dictCode ORDER：table Name,text,code
+     * @param dictCode The key to be queried
      * @return
      */
     @GetMapping("/getDictItems")
@@ -565,10 +565,10 @@ public class SystemApiController {
     }
 
     /**
-     * 根据多个字典code查询多个字典项
+     * Query multiple dictionary entries based on multiple dictionary codes
      *
      * @param dictCodeList
-     * @return key = dictCode ； value=对应的字典项
+     * @return key = dictCode ； value=corresponding dictionary item
      */
     @RequestMapping("/getManyDictItems")
     public Map<String, List<DictModel>> getManyDictItems(@RequestParam("dictCodeList") List<String> dictCodeList) {
@@ -576,11 +576,11 @@ public class SystemApiController {
     }
 
     /**
-     * 【下拉搜索】
-     * 大数据量的字典表 走异步加载，即前端输入内容过滤数据
+     * 【Drop-down search】
+     * Dictionary table of large data volumes Asynchronous loading is used, i.e., the front-end input content filters the data
      *
-     * @param dictCode 字典code格式：table,text,code
-     * @param keyword  过滤关键字
+     * @param dictCode Dictionary code format: table, text, code
+     * @param keyword  Filter keywords
      * @return
      */
     @GetMapping("/loadDictItemByKeyword")
@@ -589,7 +589,7 @@ public class SystemApiController {
     }
 
     /**
-     * 48 普通字典的翻译，根据多个dictCode和多条数据，多个以逗号分割
+     * 48 The translation of a common dictionary is based on multiple dict codes and multiple pieces of data, which are separated by commas
      * @param dictCodes
      * @param keys
      * @return
@@ -601,8 +601,8 @@ public class SystemApiController {
 
 
     /**
-     * 获取表数据字典 【接口签名验证】
-     * @param tableFilterSql 表名可以带where条件
+     * Obtain a table data dictionary [Interface Signature Verification]
+     * @param tableFilterSql The table name can have a where condition
      * @param text
      * @param code
      * @return
@@ -613,7 +613,7 @@ public class SystemApiController {
     }
 
     /**
-     * 查询表字典 支持过滤数据 【接口签名验证】
+     * Query table dictionary Data can be filtered [Interface Signature Verification]
      * @param table
      * @param text
      * @param code
@@ -626,8 +626,8 @@ public class SystemApiController {
     }
 
     /**
-     * 【接口签名验证】
-     * 查询指定table的 text code 获取字典，包含text和value
+     * [Interface Signature Verification]
+     * Query for a specified table text code Get a dictionary containing text and value
      * @param table
      * @param text
      * @param code
@@ -642,7 +642,7 @@ public class SystemApiController {
 
 
     /**
-     * 字典表的 翻译【接口签名验证】
+     * Dictionary table Translation [API Signature Verification]
      * @param table
      * @param text
      * @param code
@@ -656,13 +656,13 @@ public class SystemApiController {
 
 
     /**
-     * 【接口签名验证】
-     * 49 字典表的 翻译，可批量
+     * [Interface Signature Verification]
+     * 49 Dictionary table Translation, can be in batches
      *
      * @param table
      * @param text
      * @param code
-     * @param keys  多个用逗号分割
+     * @param keys  Multiple are separated by commas
      * @return
      */
     @GetMapping("/translateDictFromTableByKeys")
@@ -671,7 +671,7 @@ public class SystemApiController {
     }
 
     /**
-     * 发送模板信息
+     * Send template information
      * @param message
      */
     @PostMapping("/sendTemplateMessage")
@@ -680,7 +680,7 @@ public class SystemApiController {
     }
 
     /**
-     * 获取消息模板内容
+     * Get the message template content
      * @param code
      * @return
      */
@@ -690,7 +690,7 @@ public class SystemApiController {
     }
 
     /**
-     * 保存数据日志
+     * Save a data log
      * @param dataLogDto
      */
     @PostMapping("/saveDataLog")
@@ -707,7 +707,7 @@ public class SystemApiController {
     }
 
     /**
-     * 更新头像
+     * Update your profile picture
      * @param loginUser
      * @return
      */
@@ -717,7 +717,7 @@ public class SystemApiController {
     }
 
     /**
-     * 向app端 websocket推送聊天刷新消息
+     * TO THE APP WebSocket pushes chat refresh messages
      * @param userId
      * @return
      */
@@ -727,7 +727,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据roleCode查询角色信息，可逗号分隔多个
+     * You can query the role information based on the role code, which can be separated by commas
      *
      * @param roleCodes
      * @return
@@ -738,7 +738,7 @@ public class SystemApiController {
     }
 
     /**
-     * 获取消息模板内容
+     * Get the message template content
      * @param id
      * @return
      */
@@ -748,8 +748,8 @@ public class SystemApiController {
     }
     
     /**
-     * VUEN-2584【issue】平台sql注入漏洞几个问题
-     * 部分特殊函数 可以将查询结果混夹在错误信息中，导致数据库的信息暴露
+     * VUEN-2584【issue】There are several problems with the SQL injection vulnerability of the platform
+     * Some special functions You can mix the query results with error messages, exposing the information in the database
      * @param e
      * @return
      */
@@ -759,13 +759,13 @@ public class SystemApiController {
         String extractvalue = "extractvalue";
         String updatexml = "updatexml";
         if(msg!=null && (msg.toLowerCase().indexOf(extractvalue)>=0 || msg.toLowerCase().indexOf(updatexml)>=0)){
-            return Result.error("校验失败，sql解析异常！");
+            return Result.error("The verification fails, and the SQL parsing is abnormal!");
         }
-        return Result.error("校验失败，sql解析异常！" + msg);
+        return Result.error("The verification fails, and the SQL parsing is abnormal!" + msg);
     }
 
     /**
-     * 根据高级查询条件查询用户
+     * Query users based on advanced query criteria
      * @param superQuery
      * @param matchType
      * @return
@@ -776,7 +776,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据id条件查询用户
+     * Query users based on ID conditions
      * @param id
      * @return
      */
@@ -786,7 +786,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据高级查询条件查询部门
+     * Search for departments based on advanced search criteria
      * @param superQuery
      * @param matchType
      * @return
@@ -797,7 +797,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据高级查询条件查询角色
+     * Query roles based on advanced query criteria
      * @param superQuery
      * @param matchType
      * @return
@@ -809,7 +809,7 @@ public class SystemApiController {
 
 
     /**
-     * 根据租户ID查询用户ID
+     * Query the user ID based on the tenant ID
      * @param tenantId 租户ID
      * @return List<String>
      */
@@ -820,7 +820,7 @@ public class SystemApiController {
 
 
     /**
-     * 根据部门ID查询用户ID
+     * Query user IDs based on department IDs
      * @param deptIds
      * @return
      */
@@ -830,7 +830,7 @@ public class SystemApiController {
     }
     
     /**
-     * 根据部门ID查询用户ID
+     * Query user IDs based on department IDs
      * @param deptIds
      * @return
      */
@@ -840,7 +840,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据角色编码 查询用户ID
+     * Coded according to the role Query the user ID
      * @param roleCodes
      * @return
      */
@@ -850,7 +850,7 @@ public class SystemApiController {
     }
 
     /**
-     * 根据职务ID查询用户ID
+     * Query user IDs based on job IDs
      * @param positionIds
      * @return
      */
@@ -861,9 +861,9 @@ public class SystemApiController {
 
 
     /**
-     * 根据部门和子部门下的所有用户账号
+     * Based on all user accounts under the department and sub-department
      *
-     * @param orgCode 部门编码
+     * @param orgCode Department code
      * @return
      */
     @GetMapping("/sys/api/getUserAccountsByDepCode")
@@ -872,7 +872,7 @@ public class SystemApiController {
     }
 
     /**
-     * 检查查询sql的表和字段是否在白名单中
+     * Check whether the tables and fields of the query SQL statement are in the whitelist
      *
      * @param selectSql
      * @return
@@ -883,10 +883,10 @@ public class SystemApiController {
     }
 
     /**
-     * 根据字典表或者字典编码，校验是否在白名单中
+     * Check whether the dictionary is in the whitelist based on the dictionary table or dictionary encoding
      *
-     * @param tableOrDictCode 表名或dictCode
-     * @param fields          如果传的是dictCode，则该参数必须传null
+     * @param tableOrDictCode Table name or dict code
+     * @param fields          If you are passing a dict code, this parameter must be null
      * @return
      */
     @GetMapping("/sys/api/dictTableWhiteListCheckByDict")

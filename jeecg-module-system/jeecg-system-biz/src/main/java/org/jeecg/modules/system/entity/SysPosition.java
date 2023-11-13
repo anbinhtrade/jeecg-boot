@@ -14,7 +14,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * @Description: 职务表
+ * @Description: Job Title
  * @Author: jeecg-boot
  * @Date: 2019-09-19
  * @Version: V1.0
@@ -33,60 +33,60 @@ public class SysPosition {
     @ApiModelProperty(value = "id")
     private java.lang.String id;
     /**
-     * 职务编码
+     * Job title code
      */
-    @Excel(name = "职务编码", width = 15)
-    @ApiModelProperty(value = "职务编码")
+    @Excel(name = "Job title code", width = 15)
+    @ApiModelProperty(value = "Job title code")
     private java.lang.String code;
     /**
-     * 职务名称
+     * Job title
      */
-    @Excel(name = "职务名称", width = 15)
-    @ApiModelProperty(value = "职务名称")
+    @Excel(name = "Job title", width = 15)
+    @ApiModelProperty(value = "Job title")
     private java.lang.String name;
     /**
-     * 职级
+     * RANK
      */
-    @Excel(name = "职级", width = 15,dicCode ="position_rank")
-    @ApiModelProperty(value = "职级")
+    @Excel(name = "RANK", width = 15,dicCode ="position_rank")
+    @ApiModelProperty(value = "RANK")
     @Dict(dicCode = "position_rank")
     private java.lang.String postRank;
     /**
-     * 公司id
+     * Company ID
      */
-    @ApiModelProperty(value = "公司id")
+    @ApiModelProperty(value = "Company ID")
     private java.lang.String companyId;
     /**
-     * 创建人
+     * Created by
      */
-    @ApiModelProperty(value = "创建人")
+    @ApiModelProperty(value = "Created by")
     private java.lang.String createBy;
     /**
-     * 创建时间
+     * Creation time
      */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Creation time")
     private java.util.Date createTime;
     /**
-     * 修改人
+     * Modified by
      */
-    @ApiModelProperty(value = "修改人")
+    @ApiModelProperty(value = "Modified by")
     private java.lang.String updateBy;
     /**
-     * 修改时间
+     * Modify time
      */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty(value = "Modify time")
     private java.util.Date updateTime;
     /**
-     * 组织机构编码
+     * Organization code
      */
-    @ApiModelProperty(value = "组织机构编码")
+    @ApiModelProperty(value = "Organization code")
     private java.lang.String sysOrgCode;
 
-    /**租户ID*/
-    @ApiModelProperty(value = "租户ID")
+    /**Tenant ID*/
+    @ApiModelProperty(value = "Tenant ID")
     private java.lang.Integer tenantId;
 }

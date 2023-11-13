@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**
- * @Description: 部门角色
+ * @Description: Department roles
  * @Author: jeecg-boot
  * @Date:   2020-02-12
  * @Version: V1.0
@@ -26,49 +26,49 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @TableName("sys_depart_role")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="sys_depart_role对象", description="部门角色")
+@ApiModel(value="sys_depart_roleObject", description="Department roles")
 public class SysDepartRole {
     
 	/**id*/
 	@TableId(type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "id")
 	private java.lang.String id;
-	/**部门id*/
-	@Excel(name = "部门id", width = 15)
-	@ApiModelProperty(value = "部门id")
+	/**Department ID*/
+	@Excel(name = "Department ID", width = 15)
+	@ApiModelProperty(value = "Department ID")
 	@Dict(dictTable ="sys_depart",dicText = "depart_name",dicCode = "id")
 	private java.lang.String departId;
-	/**部门角色名称*/
-	@Excel(name = "部门角色名称", width = 15)
-    @ApiModelProperty(value = "部门角色名称")
+	/**The name of the department role*/
+	@Excel(name = "The name of the department role", width = 15)
+    @ApiModelProperty(value = "The name of the department role")
 	private java.lang.String roleName;
-	/**部门角色编码*/
-	@Excel(name = "部门角色编码", width = 15)
-    @ApiModelProperty(value = "部门角色编码")
+	/**Department role code*/
+	@Excel(name = "Department role code", width = 15)
+    @ApiModelProperty(value = "Department role code")
 	private java.lang.String roleCode;
-	/**描述*/
-	@Excel(name = "描述", width = 15)
-    @ApiModelProperty(value = "描述")
+	/**Description*/
+	@Excel(name = "Description", width = 15)
+    @ApiModelProperty(value = "Description")
 	private java.lang.String description;
-	/**创建人*/
-	@Excel(name = "创建人", width = 15)
-    @ApiModelProperty(value = "创建人")
+	/**Created by*/
+	@Excel(name = "Created by", width = 15)
+    @ApiModelProperty(value = "Created by")
 	private java.lang.String createBy;
-	/**创建时间*/
-	@Excel(name = "创建时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Creation time*/
+	@Excel(name = "Creation time", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "Creation time")
 	private java.util.Date createTime;
-	/**更新人*/
-	@Excel(name = "更新人", width = 15)
-    @ApiModelProperty(value = "更新人")
+	/**Updater*/
+	@Excel(name = "Updater", width = 15)
+    @ApiModelProperty(value = "Updater")
 	private java.lang.String updateBy;
-	/**更新时间*/
-	@Excel(name = "更新时间", width = 20, format = "yyyy-MM-dd HH:mm:ss")
+	/**Updated*/
+	@Excel(name = "Updated", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "Updated")
 	private java.util.Date updateTime;
 
 
