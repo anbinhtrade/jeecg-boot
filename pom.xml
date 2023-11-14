@@ -438,17 +438,17 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <!--当前环境-->
+                <!--Current environment-->
                 <profile.name>dev</profile.name>
-                <!--Nacos服务地址-->
+                <!--Nacos service address-->
                 <config.server-addr>jeecg-boot-nacos:8848</config.server-addr>
-				<!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+				<!--Nacos configures the central namespace to support multiple environments. The ID must be used here, not the name, which is empty by default-->
 				<config.namespace></config.namespace>
-				<!--Nacos配置分组名称-->
+				<!--Nacos configures the group name-->
 				<config.group>DEFAULT_GROUP</config.group>
-				<!--Nacos用户名-->
+				<!--Nacos username-->
 				<config.username></config.username>
-				<!--Nacos密码-->
+				<!--Nacos password-->
 				<config.password></config.password>
             </properties>
         </profile>

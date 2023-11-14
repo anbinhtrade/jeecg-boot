@@ -7,38 +7,38 @@ import lombok.Data;
 
 /**
  * @Title: DuplicateCheckVo
- * @Description: 重复校验VO
- * @Author 张代浩
+ * @Description: Repeat the verification of VO
+ * @Author Zhang Daihao
  * @Date 2019-03-25
  * @Version V1.0
  */
 @Data
-@ApiModel(value="重复校验数据模型",description="重复校验数据模型")
+@ApiModel(value="Duplicate validation of the data model",description="Duplicate validation of the data model")
 public class DuplicateCheckVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 表名
+	 * Table name
 	 */
-	@ApiModelProperty(value="表名",name="tableName",example="sys_log")
+	@ApiModelProperty(value="Table name",name="tableName",example="sys_log")
 	private String tableName;
 	
 	/**
-	 * 字段名
+	 * The name of the field
 	 */
-	@ApiModelProperty(value="字段名",name="fieldName",example="id")
+	@ApiModelProperty(value="The name of the field",name="fieldName",example="id")
 	private String fieldName;
 	
 	/**
-	 * 字段值
+	 * Field values
 	 */
-	@ApiModelProperty(value="字段值",name="fieldVal",example="1000")
+	@ApiModelProperty(value="Field values",name="fieldVal",example="1000")
 	private String fieldVal;
 	
 	/**
-	 * 数据ID
+	 * Data ID
 	*/
-	@ApiModelProperty(value="数据ID",name="dataId",example="2000")
+	@ApiModelProperty(value="Data ID",name="dataId",example="2000")
 	private String dataId;
 
 }

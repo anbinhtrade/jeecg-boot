@@ -241,16 +241,16 @@ jeecg:
     password:
     type: STANDALONE
     enabled: true
-#cas单点登录
+#cas Single sign-on
 cas:
   prefixUrl: http://cas.example.org:8443/cas
-#Mybatis输出sql日志
+#Mybatis输出sqlLOG
 logging:
   level:
     org.jeecg.modules.system.mapper: info
 #swagger
 knife4j:
-  #开启增强配置
+  #Enable enhanced configuration
   enable: true
   #开启生产环境屏蔽
   production: false

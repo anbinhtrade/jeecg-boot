@@ -10,9 +10,9 @@ spring:
   datasource:
     dynamic:
       primary: order
-      seata: true    # 开启对 seata的支持
+      seata: true    # Turn on the pair Seata's support
       datasource:
-        # 设置 账号数据源配置
+        # Set the account data source configuration
         order:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://127.0.0.1:3306/jeecg_order?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useSSL=false
@@ -26,5 +26,5 @@ seata:
       default: 127.0.0.1:8091
     vgroup-mapping:
       springboot-seata-group: default
-  # seata 事务组编号 用于TC集群名
+  # seata Transaction Group Number is used for the TC cluster name
   tx-service-group: springboot-seata-group

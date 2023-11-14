@@ -3,18 +3,18 @@ package org.jeecg.common.aspect;
 /**
  * @Author scott
  * @Date 2020/1/14 13:36
- * @Description: 请求URL与菜单路由URL转换规则（方便于采用菜单路由URL来配置数据权限规则）
+ * @Description: Conversion rules between request URLs and menu route URLs（It is convenient to use menu routing URLs to configure data permission rules）
  */
 public enum UrlMatchEnum {
-    /**求URL与菜单路由URL转换规则 /online/cgform/api/getData/ */
+    /**Find the URL and menu routing URL conversion rules /online/cgform/api/getData/ */
     CGFORM_DATA("/online/cgform/api/getData/", "/online/cgformList/"),
-    /**求URL与菜单路由URL转换规则 /online/cgform/api/exportXls/ */
+    /**Find the URL and menu routing URL conversion rules /online/cgform/api/exportXls/ */
     CGFORM_EXCEL_DATA("/online/cgform/api/exportXls/", "/online/cgformList/"),
-    /**求URL与菜单路由URL转换规则 /online/cgform/api/getTreeData/ */
+    /**Find the URL and menu routing URL conversion rules /online/cgform/api/getTreeData/ */
     CGFORM_TREE_DATA("/online/cgform/api/getTreeData/", "/online/cgformList/"),
-    /**求URL与菜单路由URL转换规则 /online/cgreport/api/getColumnsAndData/ */
+    /**Find the URL and menu routing URL conversion rules /online/cgreport/api/getColumnsAndData/ */
     CGREPORT_DATA("/online/cgreport/api/getColumnsAndData/", "/online/cgreport/"),
-    /** 求URL与菜单路由URL转换规则/online/cgreport/api/getData/ 【vue3报表数据请求地址】 */
+    /** Find the URL and menu routing URL conversion rules/online/cgreport/api/getData/ 【vue3报表数据请求地址】 */
     CGREPORT_ONLY_DATA("/online/cgreport/api/getData/", "/online/cgreport/"),
     /**求URL与菜单路由URL转换规则 /online/cgreport/api/exportXls/ */
     CGREPORT_EXCEL_DATA("/online/cgreport/api/exportXls/", "/online/cgreport/"),
@@ -27,11 +27,11 @@ public enum UrlMatchEnum {
     }
 
     /**
-     * Request 请求 URL前缀
+     * Request Request URL prefix
      */
     private String url;
     /**
-     * 菜单路由 URL前缀 (对应菜单路径)
+     * Menu routing URLPREFIX (Corresponding to the menu path)
      */
     private String matchUrl;
 

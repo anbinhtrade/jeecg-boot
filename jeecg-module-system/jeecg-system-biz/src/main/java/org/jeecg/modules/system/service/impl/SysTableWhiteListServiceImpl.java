@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * @Description: 系统表白名单
+ * @Description: The system whitelist
  * @Author: jeecg-boot
  * @Date: 2023-09-12
  * @Version: V1.0
@@ -34,7 +34,7 @@ public class SysTableWhiteListServiceImpl extends ServiceImpl<SysTableWhiteListM
     public boolean add(SysTableWhiteList sysTableWhiteList) {
         this.checkEntity(sysTableWhiteList);
         if (super.save(sysTableWhiteList)) {
-            // 清空缓存
+            // Clear the cache
             whiteListHandler.clear();
             return true;
         }
@@ -45,7 +45,7 @@ public class SysTableWhiteListServiceImpl extends ServiceImpl<SysTableWhiteListM
     public boolean edit(SysTableWhiteList sysTableWhiteList) {
         this.checkEntity(sysTableWhiteList);
         if (super.updateById(sysTableWhiteList)) {
-            // 清空缓存
+            // Clear the cache
             whiteListHandler.clear();
             return true;
         }
@@ -53,19 +53,19 @@ public class SysTableWhiteListServiceImpl extends ServiceImpl<SysTableWhiteListM
     }
 
     /**
-     * 检查需要新增或更新的实体是否符合规范
+     * Check that the entities that need to be added or updated are compliant
      *
      * @param sysTableWhiteList
      */
     private void checkEntity(SysTableWhiteList sysTableWhiteList) {
         if (sysTableWhiteList == null) {
-            throw new JeecgBootException("操作失败，实体为空！");
+            throw new JeecgBootException("The operation failed and the entity is empty!");
         }
         if (oConvertUtils.isEmpty(sysTableWhiteList.getTableName())) {
-            throw new JeecgBootException("操作失败，表名不能为空！");
+            throw new JeecgBootException("If the operation fails, the table name cannot be empty!");
         }
         if (oConvertUtils.isEmpty(sysTableWhiteList.getFieldName())) {
-            throw new JeecgBootException("操作失败，字段名不能为空！");
+            throw new JeecgBootException("The operation failed, and the field name cannot be empty!");
         }
         // 将表名和字段名转换成小写
         sysTableWhiteList.setTableName(sysTableWhiteList.getTableName().toLowerCase());
@@ -93,10 +93,10 @@ public class SysTableWhiteListServiceImpl extends ServiceImpl<SysTableWhiteListM
     @Override
     public SysTableWhiteList autoAdd(String tableName, String fieldName) {
         if (oConvertUtils.isEmpty(tableName)) {
-            throw new JeecgBootException("操作失败，表名不能为空！");
+            throw new JeecgBootException("If the operation fails, the table name cannot be empty!");
         }
         if (oConvertUtils.isEmpty(fieldName)) {
-            throw new JeecgBootException("操作失败，字段名不能为空！");
+            throw new JeecgBootException("The operation failed, and the field name cannot be empty!");
         }
         // 统一转换成小写
         tableName = tableName.toLowerCase();
@@ -108,7 +108,7 @@ public class SysTableWhiteListServiceImpl extends ServiceImpl<SysTableWhiteListM
         if (getEntity != null) {
             // 如果已经存在，并且已禁用，则抛出异常
             if (CommonConstant.STATUS_0.equals(getEntity.getStatus())) {
-                throw new JeecgBootException("[白名单] 表名已存在，但是已被禁用，请先启用！tableName=" + tableName);
+                throw new JeecgBootException("[Whitelist] The table name already exists, but it is disabled, please enable it first！tableName=" + tableName);
             }
             // 合并字段
             Set<String> oldFieldSet = new HashSet<>(Arrays.asList(getEntity.getFieldName().split(",")));
@@ -117,7 +117,7 @@ public class SysTableWhiteListServiceImpl extends ServiceImpl<SysTableWhiteListM
             getEntity.setFieldName(String.join(",", oldFieldSet));
             this.checkEntity(getEntity);
             super.updateById(getEntity);
-            log.info("修改表单白名单项，表名：{}，oldFieldSet： {}，newFieldSet：{}", tableName, oldFieldSet.toArray(), newFieldSet.toArray());
+            log.info("Modify the whitelist of the form item, the table name: {}, old field set: {}，newFieldSet：{}", tableName, oldFieldSet.toArray(), newFieldSet.toArray());
             return getEntity;
         } else {
             // 新增白名单项
@@ -127,7 +127,7 @@ public class SysTableWhiteListServiceImpl extends ServiceImpl<SysTableWhiteListM
             saveEntity.setStatus(CommonConstant.STATUS_1);
             this.checkEntity(saveEntity);
             super.save(saveEntity);
-            log.info("新增表单白名单项: 表名：{}，配置 > {}", tableName, saveEntity.toString());
+            log.info("Added form whitelist items: Table name: {}, configuration > {}", tableName, saveEntity.toString());
             return saveEntity;
         }
     }
@@ -137,7 +137,7 @@ public class SysTableWhiteListServiceImpl extends ServiceImpl<SysTableWhiteListM
         Map<String, String> map = new HashMap<>();
         List<SysTableWhiteList> allData = super.list();
         for (SysTableWhiteList item : allData) {
-            // 只有启用的才放入map
+            // Only enabled ones are put into the map
             if (CommonConstant.STATUS_1.equals(item.getStatus())) {
                 // 表名和字段名都转成小写，防止大小写不一致
                 map.put(item.getTableName().toLowerCase(), item.getFieldName().toLowerCase());

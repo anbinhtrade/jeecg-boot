@@ -21,19 +21,19 @@
    <BasicTable @register="registerTable" :rowSelection="rowSelection">
      <!--插槽:table标题-->
       <template #tableTitle>
-          <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined"> 新增</a-button>
-          <a-button  type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-          <j-upload-button  type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+          <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined"> New</a-button>
+          <a-button  type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> Export</a-button>
+          <j-upload-button  type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Import</j-upload-button>
           <a-dropdown v-if="selectedRowKeys.length > 0">
               <template #overlay>
                 <a-menu>
                   <a-menu-item key="1" @click="batchHandleDelete">
                     <Icon icon="ant-design:delete-outlined"></Icon>
-                    删除
+                    Delete
                   </a-menu-item>
                 </a-menu>
               </template>
-              <a-button>批量操作
+              <a-button>Bulk operations
                 <Icon icon="mdi:chevron-down"></Icon>
               </a-button>
         </a-dropdown>
@@ -48,24 +48,24 @@
         <#if po.classType=='umeditor' || po.classType=='pca' || po.classType=='file'>
         <template v-if="column.dataIndex==='${po.fieldName}'">
         <#if po.classType=='umeditor'>
-          <!--富文本件字段回显插槽-->
+          <-- Rich Text Item Field Echo Slot-->
           <div v-html="text"></div>
         </#if>
         <#if po.classType=='pca'>
-          <!--省市区字段回显插槽-->
+          <-- Provincial and Municipal Field Echo Slots-->
           {{ getAreaTextByCode(text) }}
         </#if>
         <#if po.classType=='file'>
-          <!--文件字段回显插槽-->
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
-          <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
+          <-- File Field Echo Slot-->
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">No files</span>
+          <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">Download</a-button>
         </#if>
         </template>
         </#if>
       </#list>
       </template>
     </BasicTable>
-    <!-- 表单区域 -->
+    <!-- Form area -->
     <${entityName}Modal @register="registerModal" @success="handleSuccess"></${entityName}Modal>
   </div>
 </template>

@@ -72,18 +72,18 @@ public class CasClientController {
 	            throw new Exception("No principal was found in the response from the CAS server.");
 	        }
 			log.info("-------token----username---"+principal);
-		    //1. 校验用户是否有效
+		    //1. Check whether the user is valid
 	  		SysUser sysUser = sysUserService.getUserByName(principal);
 	  		result = sysUserService.checkUserIsEffective(sysUser);
 	  		if(!result.isSuccess()) {
 	  			return result;
 	  		}
 	 		String token = JwtUtil.sign(sysUser.getUsername(), sysUser.getPassword());
-	 		// 设置超时时间
+	 		// Set the timeout period
 	 		redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
 	 		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME*2 / 1000);
 
-	 		//获取用户部门信息
+	 		//Obtain user department information
 			JSONObject obj = new JSONObject();
 			List<SysDepart> departs = sysDepartService.queryUserDeparts(sysUser.getId());
 			obj.put("departs", departs);

@@ -12,60 +12,60 @@ import java.util.stream.Collectors;
  */
 public enum LowCodeUrlsEnum {
     /**
-     * online表单配置请求 TODO 增改删
+     * Online form configuration request TODO Additions, changes and deletions
      */
-    NEW_LOW_APP_ADD_URL("/online/cgform/api/addAll", "添加online表单"),
-    NEW_LOW_APP_EDIT_URL("/online/cgform/api/editAll", "编辑online表单"),
-    ONLINE_DB_SYNC("/online/cgform/api/doDbSynch/**/**", "online表单同步数据库"),
-    ONLINE_DEL_BATCH("/online/cgform/head/deleteBatch", "online表单批量删除"),
-    ONLINE_DELETE("/online/cgform/head/delete", "online表单删除"),
-    ONLINE_REMOVE("/online/cgform/head/removeRecord", "online表单移除"),
-    ONLINE_COPY("/online/cgform/head/copyOnline", "online表单生成视图"),
-    ONLINE_TABLE("/online/cgform/head/copyOnlineTable", "online表单复制表"),
-    ONLINE_BUTTON_AI_TEST("/online/cgform/button/aitest", "online表单自定义按钮生成数据"),
-    ONLINE_BUTTON_ADD("/online/cgform/button/add", "online表单自定义按钮新增"),
-    ONLINE_BUTTON_EDIT("/online/cgform/button/edit", "online表单自定义按钮编辑"),
-    ONLINE_BUTTON_DEL("/online/cgform/button/deleteBatch", "online表单自定义按钮删除"),
-    ONLINE_ENHANCE_JS("/online/cgform/head/enhanceJs/**", "online表单JS增强"),
-    ONLINE_ENHANCE_JAVA("/online/cgform/head/enhanceJava/**", "online表单JAVA增强"),
+    NEW_LOW_APP_ADD_URL("/online/cgform/api/addAll", "Add an online form"),
+    NEW_LOW_APP_EDIT_URL("/online/cgform/api/editAll", "Edit the online form"),
+    ONLINE_DB_SYNC("/online/cgform/api/doDbSynch/**/**", "Online form synchronization database"),
+    ONLINE_DEL_BATCH("/online/cgform/head/deleteBatch", "Online forms are deleted in batches"),
+    ONLINE_DELETE("/online/cgform/head/delete", "Online form deletion"),
+    ONLINE_REMOVE("/online/cgform/head/removeRecord", "Online form removal"),
+    ONLINE_COPY("/online/cgform/head/copyOnline", "Online form generation view"),
+    ONLINE_TABLE("/online/cgform/head/copyOnlineTable", "Online form copy table"),
+    ONLINE_BUTTON_AI_TEST("/online/cgform/button/aitest", "Online form custom buttons generate data"),
+    ONLINE_BUTTON_ADD("/online/cgform/button/add", "Online form customization button added"),
+    ONLINE_BUTTON_EDIT("/online/cgform/button/edit", "Online form custom button editing"),
+    ONLINE_BUTTON_DEL("/online/cgform/button/deleteBatch", "Online form custom button removed"),
+    ONLINE_ENHANCE_JS("/online/cgform/head/enhanceJs/**", "Online Form JS enhancements"),
+    ONLINE_ENHANCE_JAVA("/online/cgform/head/enhanceJava/**", "ONLINE FORM JAVA ENHANCEMENTS"),
     /**
-     * online报表配置请求
+     * Online Report Configuration Request
      */
-    ONLINE_CG_REPORT_ADD("/online/cgreport/head/add", "online报表新增"),
-    ONLINE_CG_REPORT_EDIT("/online/cgreport/head/editAll", "online报表编辑"),
-    ONLINE_CG_REPORT_DEL("/online/cgreport/head/delete", "online报表删除"),
-    ONLINE_CG_REPORT_PARSE_SQL("/online/cgreport/head/parseSql", "online报表SQL解析"),
+    ONLINE_CG_REPORT_ADD("/online/cgreport/head/add", "Online reports are added"),
+    ONLINE_CG_REPORT_EDIT("/online/cgreport/head/editAll", "Online report editing"),
+    ONLINE_CG_REPORT_DEL("/online/cgreport/head/delete", "Online report deletion"),
+    ONLINE_CG_REPORT_PARSE_SQL("/online/cgreport/head/parseSql", "SQL parsing of online reports"),
     /**
-     * online图表配置请求
+     * Online Chart Configuration Request
      */
-    ONLINE_GRAPH_REPORT_ADD("/online/graphreport/head/add", "online图表新增"),
-    ONLINE_GRAPH_REPORT_EDIT("/online/graphreport/head/edit", "online图表编辑"),
-    ONLINE_GRAPH_REPORT_DEL("/online/graphreport/head/deleteBatch", "online图表删除"),
-    ONLINE_GRAPH_REPORT_PARSE_SQL("/online/cgreport/head/parseSql", "online图表解析SQL"),
+    ONLINE_GRAPH_REPORT_ADD("/online/graphreport/head/add", "Online charts have been added"),
+    ONLINE_GRAPH_REPORT_EDIT("/online/graphreport/head/edit", "Online Chart Editing"),
+    ONLINE_GRAPH_REPORT_DEL("/online/graphreport/head/deleteBatch", "Online charts are deleted"),
+    ONLINE_GRAPH_REPORT_PARSE_SQL("/online/cgreport/head/parseSql", "Online charts parse SQL statements"),
 
     /**
-     * 大屏配置请求
+     * Request for large screen configuration
      */
-    BIG_SCREEN_DB_ADD("/bigscreen/bigScreenDb/add", "大屏数据源新增"),
-    BIG_SCREEN_DB_EDIT("/bigscreen/bigScreenDb/edit", "大屏数据源编辑"),
-    BIG_SCREEN_DB_DEL("/bigscreen/bigScreenDb/delete", "大屏数据源删除"),
-    BIG_SCREEN_DB_TEST_CONNECTION("/bigscreen/bigScreenDb/testConnection", "大屏数据源连接测试"),
-//    BIG_SCREEN_SAVE("/bigscreen/visual/save", "大屏新增"),
-//    BIG_SCREEN_EDIT("/bigscreen/visual/update", "大屏编辑"),
-//    BIG_SCREEN_COPY("/bigscreen/visual/copy", "大屏复制"),
-//    BIG_SCREEN_REMOVE("/bigscreen/visual/remove", "大屏移除"),
-//    BIG_SCREEN_DEL("/bigscreen/visual/deleteById", "大屏删除"),
+    BIG_SCREEN_DB_ADD("/bigscreen/bigScreenDb/add", "Added a large screen data source"),
+    BIG_SCREEN_DB_EDIT("/bigscreen/bigScreenDb/edit", "Edit data sources on the large screen"),
+    BIG_SCREEN_DB_DEL("/bigscreen/bigScreenDb/delete", "Delete the dashboard data source"),
+    BIG_SCREEN_DB_TEST_CONNECTION("/bigscreen/bigScreenDb/testConnection", "Large-screen data source connection test"),
+//    BIG_SCREEN_SAVE("/bigscreen/visual/save", "Large screen added"),
+//    BIG_SCREEN_EDIT("/bigscreen/visual/update", "Large-screen editing"),
+//    BIG_SCREEN_COPY("/bigscreen/visual/copy", "Large-screen copying"),
+//    BIG_SCREEN_REMOVE("/bigscreen/visual/remove", "Screen Removal"),
+//    BIG_SCREEN_DEL("/bigscreen/visual/deleteById", "Delete the large screen"),
 
     /**
-     * 仪表盘配置请求
+     * Dashboard configuration requests
      */
-    DRAG_DB_ADD("/drag/onlDragDataSource/add", "仪表盘数据源新增"),
-    DRAG_DB_TEST_CONNECTION("/drag/onlDragDataSource/testConnection", "仪表盘数据源连接测试"),
-    DRAG_PARSE_SQL("/drag/onlDragDatasetHead/queryFieldBySql", "仪表盘数据集SQL解析"),
-    DRAG_DATASET_ADD("/drag/onlDragDatasetHead/add", "仪表盘数据集新增");
+    DRAG_DB_ADD("/drag/onlDragDataSource/add", "Dashboard data sources are added"),
+    DRAG_DB_TEST_CONNECTION("/drag/onlDragDataSource/testConnection", "Dashboard data source connection test"),
+    DRAG_PARSE_SQL("/drag/onlDragDatasetHead/queryFieldBySql", "SQL parsing of dashboard datasets"),
+    DRAG_DATASET_ADD("/drag/onlDragDatasetHead/add", "Dashboard datasets are added");
 
     /**
-     * 其他配置请求
+     * Other configuration requests
      */
 
     private String url;
@@ -93,7 +93,7 @@ public enum LowCodeUrlsEnum {
     }
 
     /**
-     * 根据code获取可用的数量
+     * Get the available quantity based on the code
      *
      * @return
      */
