@@ -824,7 +824,7 @@ public class SysPermissionController {
 
 	/**
 	 * Check whether the Internet URL is a public network URL For example: http://localhost:8080/jeecg-boot/swagger-ui.html#/ Special formats supported: {{
-	 * window._CONFIG['domianURL'] }}/druid/ {{ JS code snippet }}, the foreground parsing will automatically execute the JS code snippet
+	 * window._CONFIG['domainURL'] }}/druid/ {{ JS code snippet }}, the foreground parsing will automatically execute the JS code snippet
 	 *
 	 * @return
 	 */

@@ -686,7 +686,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 				return null;
 			}
 		} else {
-			//字典表
+			//Dictionary table
 			ls = this.queryDictItemsByCode(dictCode);
 		}
 		//update-begin-author:taoyan date:2022-8-30 for: 字典获取可以获取枚举类的数据
