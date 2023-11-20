@@ -8,30 +8,30 @@ import org.jeecgframework.codegenerate.generate.pojo.onetomany.MainTableVo;
 import org.jeecgframework.codegenerate.generate.pojo.onetomany.SubTableVo;
 
 /**
- * 代码生成器入口【一对多】
- * @Author 张代浩
+ * Code Generator Entry [One-to-Many]
+ * @Author Zhang Daihao
  * @site www.jeecg.com
  * 
  */
 public class JeecgOneToMainUtil {
 
 	/**
-	 * 一对多(父子表)数据模型，生成方法
+	 * One-to-many (parent-child table) data model, generation method
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//第一步：设置主表配置
+		//Step 1: Set the primary table configuration
 		MainTableVo mainTable = new MainTableVo();
-        //表名
+        //Table name
 		mainTable.setTableName("jeecg_order_main");
-        //实体名
+        //The entity name
 		mainTable.setEntityName("GuiTestOrderMain");
-        //包名
+        //Package name
 		mainTable.setEntityPackage("gui");
-        //描述
-		mainTable.setFtlDescription("GUI订单管理");
+        //DESCRIPTION
+		mainTable.setFtlDescription("GUI order management");
 		
-		//第二步：设置子表集合配置
+		//Step 2: Set the subtable collection configuration
 		List<SubTableVo> subTables = new ArrayList<SubTableVo>();
 		//[1].子表一
 		SubTableVo po = new SubTableVo();
@@ -42,7 +42,7 @@ public class JeecgOneToMainUtil {
         //包名
 		po.setEntityPackage("gui");
         //描述
-		po.setFtlDescription("客户明细");
+		po.setFtlDescription("Customer details");
 		//子表外键参数配置
 		/*说明: 
 		 * a) 子表引用主表主键ID作为外键，外键字段必须以_ID结尾;
@@ -60,12 +60,12 @@ public class JeecgOneToMainUtil {
         //包名
 		po2.setEntityPackage("gui");
         //描述
-		po2.setFtlDescription("产品明细");
-		//子表外键参数配置
+		po2.setFtlDescription("Product details");
+		//Configure foreign key parameters for a subtable
 		/*说明: 
-		 * a) 子表引用主表主键ID作为外键，外键字段必须以_ID结尾;
-		 * b) 主表和子表的外键字段名字，必须相同（除主键ID外）;
-		 * c) 多个外键字段，采用逗号分隔;
+		 * a) The child table refers to the primary key ID of the primary table as the foreign key，Foreign key fields must end with _ID;
+		 * b) The names of the foreign key fields of the primary and child tables，Must be the same (except for the primary key ID);
+		 * c) Multiple foreign key fields, separated by commas;
 		*/
 		po2.setForeignKeys(new String[]{"order_id"});
 		subTables.add(po2);

@@ -116,20 +116,20 @@ public class JeecgBootExceptionHandler {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public Result<?> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
     	log.error(e.getMessage(), e);
-        return Result.error("文件大小超出10MB限制, 请压缩或降低文件质量! ");
+        return Result.error("If the file size exceeds the 10MB limit, please compress or reduce the file quality! ");
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public Result<?> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
     	log.error(e.getMessage(), e);
     	//【issues/3624】数据库执行异常handleDataIntegrityViolationException提示有误 #3624
-        return Result.error("执行数据库异常,违反了完整性例如：违反惟一约束、违反非空限制、字段内容超出长度等");
+        return Result.error("Executing a database exception that violates integrity, such as a unique constraint violation, a non-null limit, a field content that exceeds its length, and so on");
     }
 
     @ExceptionHandler(PoolException.class)
     public Result<?> handlePoolException(PoolException e) {
     	log.error(e.getMessage(), e);
-        return Result.error("Redis 连接异常!");
+        return Result.error("The Redis connection is abnormal!");
     }
 
 

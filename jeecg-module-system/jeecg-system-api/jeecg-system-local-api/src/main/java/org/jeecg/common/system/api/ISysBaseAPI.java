@@ -13,17 +13,17 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @Description  底层共通业务API，提供其他独立模块调用
+ * @Description  Common service APIs at the bottom level，Provide additional independent module calls
  * @Author  scott
  * @Date 2019-4-20
  * @Version V1.0
  */
 public interface ISysBaseAPI extends CommonAPI {
 
-    //=======OLD 系统消息推送接口============================
+    //=======OLD System message push interface ===============================
     /**
-     * 1发送系统消息
-     * @param message 使用构造器赋值参数 如果不设置category(消息类型)则默认为2 发送系统消息
+     * 1. Send a system message
+     * @param message Use the constructor to assign parameters If you do not set category (message type), it defaults to 2 Send a system message
      */
     void sendSysAnnouncement(MessageDTO message);
 

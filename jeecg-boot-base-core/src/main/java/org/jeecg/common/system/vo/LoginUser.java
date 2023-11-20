@@ -82,13 +82,13 @@ public class LoginUser {
 	private String phone;
 
 	/**
-	 * 状态(1：正常 2：冻结 ）
+	 * Status (1: Normal 2: Frozen ）
 	 */
 	private Integer status;
 	
 	private Integer delFlag;
 	/**
-     * 同步工作流引擎1同步0不同步
+     * Synchronization workflow engine 1 synchronization 0 is not synchronized
      */
     private Integer activitiSync;
 

@@ -4872,9 +4872,9 @@ create table `sys_fill_rule`  (
 -- ----------------------------
 -- records of sys_fill_rule
 -- ----------------------------
-insert into `sys_fill_rule` values ('1202551334738382850', '机构编码生成', 'org_num_role', 'org.jeecg.modules.system.rule.orgcoderule', '{\"parentid\":\"c6d7cb4deeac411cb3384b1b31278596\"}', 'admin', '2019-12-09 10:37:06', 'admin', '2019-12-05 19:32:35');
-insert into `sys_fill_rule` values ('1202787623203065858', '分类字典编码生成', 'category_code_rule', 'org.jeecg.modules.system.rule.categorycoderule', '{\"pid\":\"\"}', 'admin', '2022-10-13 16:47:52', 'admin', '2019-12-06 11:11:31');
-insert into `sys_fill_rule` values ('1260134137920090113', '订单流水号', 'shop_order_num', 'org.jeecg.modules.online.cgform.rule.ordernumberrule', '{}', 'admin', '2020-12-07 18:29:50', 'admin', '2020-05-12 17:06:05');
+insert into `sys_fill_rule` values ('1202551334738382850', '机构编码生成', 'org_num_role', 'org.jeecg.modules.system.rule.OrgCodeRule', '{\"parentid\":\"c6d7cb4deeac411cb3384b1b31278596\"}', 'admin', '2019-12-09 10:37:06', 'admin', '2019-12-05 19:32:35');
+insert into `sys_fill_rule` values ('1202787623203065858', '分类字典编码生成', 'category_code_rule', 'org.jeecg.modules.system.rule.CategoryCodeRule', '{\"pid\":\"\"}', 'admin', '2022-10-13 16:47:52', 'admin', '2019-12-06 11:11:31');
+insert into `sys_fill_rule` values ('1260134137920090113', '订单流水号', 'shop_order_num', 'org.jeecg.modules.online.cgform.rule.OrderNumberRule', '{}', 'admin', '2020-12-07 18:29:50', 'admin', '2020-05-12 17:06:05');
 
 -- ----------------------------
 -- table structure for sys_form_file

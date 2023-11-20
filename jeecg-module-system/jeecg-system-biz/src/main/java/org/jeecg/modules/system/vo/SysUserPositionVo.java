@@ -11,12 +11,12 @@ import lombok.Data;
 @Data
 public class SysUserPositionVo {
     
-    /**职位id*/
+    /**Job ID*/
     private String id;
 
-    /**职务名称*/
+    /**Job title*/
     private String name;
     
-    /**用户id*/
+    /**User ID*/
     private String userId;
 }

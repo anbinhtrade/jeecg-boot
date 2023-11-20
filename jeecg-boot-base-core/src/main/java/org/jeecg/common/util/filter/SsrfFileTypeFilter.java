@@ -61,7 +61,7 @@ public class SsrfFileTypeFilter {
         FILE_TYPE_WHITE_LIST.add("7z");
         FILE_TYPE_WHITE_LIST.add("tar");
 
-        //设置禁止文件的头部标记
+        //Set the header tag for the prohibited file
         FILE_TYPE_MAP.put("3c25402070616765206c", "jsp");
         FILE_TYPE_MAP.put("3c3f7068700a0a2f2a2a0a202a205048", "php");
         FILE_TYPE_MAP.put("cafebabe0000002e0041", "class");
@@ -124,7 +124,7 @@ public class SsrfFileTypeFilter {
     /**
      * @param fileName
      * @return String
-     * @description 通过文件后缀名获取文件类型
+     * @description Get the file type by file extension
      */
     private static String getFileTypeBySuffix(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
@@ -132,24 +132,24 @@ public class SsrfFileTypeFilter {
 
 
     /**
-     * 下载文件类型过滤
+     * Download file type filtering
      *
      * @param filePath
      */
     public static void checkDownloadFileType(String filePath) throws IOException {
-        //文件后缀
+        //File suffix
         String suffix = getFileTypeBySuffix(filePath);
-        log.info("suffix:{}", suffix);
+        log.info("Suffix:{}", suffix);
         boolean isAllowExtension = FILE_TYPE_WHITE_LIST.contains(suffix.toLowerCase());
-        //是否允许下载的文件
+        //Whether or not to allow the downloaded file
         if (!isAllowExtension) {
-            throw new IOException("下载失败，存在非法文件类型：" + suffix);
+            throw new IOException("Failed to download, there is an illegal file type:" + suffix);
         }
     }
 
 
     /**
-     * 上传文件类型过滤
+     * Upload file type filtering
      *
      * @param file
      */
@@ -161,15 +161,15 @@ public class SsrfFileTypeFilter {
         boolean isAllowExtension = FILE_TYPE_WHITE_LIST.contains(suffix.toLowerCase());
         //是否允许下载的文件
         if (!isAllowExtension) {
-            throw new Exception("上传失败，存在非法文件类型：" + suffix);
+            throw new Exception("The upload failed and an invalid file type exists：" + suffix);
         }
     }
 
     /**
-     * 通过读取文件头部获得文件类型
+     * Get the file type by reading the file header
      *
      * @param file
-     * @return 文件类型
+     * @return FILE TYPE
      * @throws Exception
      */
 

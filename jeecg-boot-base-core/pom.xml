@@ -220,13 +220,13 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- mini文件存储服务 -->
+		<!-- MINI FILE STORAGE SERVICE -->
 		<dependency>
 			<groupId>io.minio</groupId>
 			<artifactId>minio</artifactId>
 		</dependency>
 
-		<!-- 阿里云短信 -->
+		<!-- Alibaba Cloud SMS -->
 		<dependency>
 			<groupId>com.aliyun</groupId>
 			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
@@ -238,7 +238,7 @@
 			<artifactId>aliyun-sdk-oss</artifactId>
 			<version>${aliyun.oss.version}</version>
 		</dependency>
-		<!-- 第三方登录  -->
+		<!-- Third-party logins  -->
 		<dependency>
 			<groupId>com.xkcoding.justauth</groupId>
 			<artifactId>justauth-spring-boot-starter</artifactId>

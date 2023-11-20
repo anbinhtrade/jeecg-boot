@@ -56,7 +56,7 @@ public class JeecgTestFeignController {
 
 
     @GetMapping("/fallback")
-    @ApiOperation(value = "测试熔断", notes = "测试熔断")
+    @ApiOperation(value = "Test circuit breakers", notes = "Test circuit breakers")
     @SentinelResource(value = "test_more_fallback", fallback = "getDefaultUser")
     public Result<Object> test(@RequestParam(value = "name", required = false) String name) {
         if (StringUtils.isEmpty(name)) {
@@ -66,13 +66,13 @@ public class JeecgTestFeignController {
     }
 
     /**
-     * 熔断，默认回调函数
+     * Circuit breaker, the default callback function
      *
      * @param name
      * @return
      */
     public Result<Object> getDefaultUser(String name) {
-        log.info("熔断，默认回调函数");
-        return Result.error(null, "访问超时, 自定义 @SentinelResource Fallback");
+        log.info("Circuit breaker, the default callback function");
+        return Result.error(null, "access timeout, CUSTOMIZE @SentinelResource Fallback");
     }
 }

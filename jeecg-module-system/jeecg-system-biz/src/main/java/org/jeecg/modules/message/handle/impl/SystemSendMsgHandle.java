@@ -106,7 +106,7 @@ public class SystemSendMsgHandle implements ISendMsgHandle {
         announcement.setMsgType(CommonConstant.MSG_TYPE_UESR);
         announcement.setSendStatus(CommonConstant.HAS_SEND);
         announcement.setSendTime(new Date());
-        //系统消息
+        //System messages
         announcement.setMsgCategory("2");
         announcement.setDelFlag(String.valueOf(CommonConstant.DEL_FLAG_0));
         sysAnnouncementMapper.insert(announcement);

@@ -222,9 +222,9 @@ public class CommonController {
             if (imgPath.endsWith(SymbolConstant.COMMA)) {
                 imgPath = imgPath.substring(0, imgPath.length() - 1);
             }
-            //update-begin---author:liusq ---date:20230912  for：检查下载文件类型--------------
+            //update-begin---author:liusq ---date:20230912  for: Check the download file type --------------
             SsrfFileTypeFilter.checkDownloadFileType(imgPath);
-            //update-end---author:liusq ---date:20230912  for：检查下载文件类型--------------
+            //update-end---author:liusq ---date:20230912  for：Check the download file type --------------
 
             String filePath = uploadpath + File.separator + imgPath;
             File file = new File(filePath);
@@ -234,7 +234,7 @@ public class CommonController {
                 return;
                 //throw new RuntimeException();
             }
-            // 设置强制下载不打开
+            // Set Force download not to turn on
             response.setContentType("application/force-download");
             response.addHeader("Content-Disposition", "attachment;fileName=" + new String(file.getName().getBytes("UTF-8"),"iso-8859-1"));
             inputStream = new BufferedInputStream(new FileInputStream(filePath));
