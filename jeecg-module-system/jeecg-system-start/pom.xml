@@ -24,6 +24,12 @@
             <artifactId>jeecg-module-demo</artifactId>
             <version>${jeecgboot.version}</version>
         </dependency>
+        <!-- ABS_ERP 业务模块 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-module-abs</artifactId>
+            <version>${jeecgboot.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -8,7 +8,7 @@
 
 	<developers>
 		<developer>
-			<name>北京国炬信息技术有限公司</name>
+			<name>Beijing Guoju Information Technology Co., Ltd</name>
 			<email>jeecgos@163.com</email>
 		</developer>
 	</developers>
@@ -80,7 +80,8 @@
         <module>jeecg-boot-base-core</module>
         <module>jeecg-module-demo</module>
         <module>jeecg-module-system</module>
-    </modules>
+		<module>jeecg-module-abs</module>
+	</modules>
 
 	<repositories>
 		<repository>
