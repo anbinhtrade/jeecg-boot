@@ -8,7 +8,7 @@
     @ok="handleOk"
     @cancel="handleCancel">
     <a-spin :spinning="confirmLoading">
-      <!-- 主表单区域 -->
+      <!-- Main form region -->
       <a-form :form="form">
 		<#list columns as po><#rt/>
         <#if po.fieldName !='id'><#rt/>
@@ -23,7 +23,7 @@
           <#elseif "int,decimal,double,"?contains(po.fieldType)>
           <a-input-number v-decorator="[ '${po.fieldName}', <#if po.nullable =='N'>validatorRules.${po.fieldName} <#else>{}</#if>]" />
           <#else>
-          <a-input placeholder="请输入${po.filedComment}" v-decorator="['${po.fieldName}', <#if po.nullable =='N'>validatorRules.${po.fieldName} <#else>{}</#if>]" />
+          <a-input placeholder="Please enter ${po.filedComment}" v-decorator="['${po.fieldName}', <#if po.nullable =='N'>validatorRules.${po.fieldName} <#else>{}</#if>]" />
           </#if>
         </a-form-item>
         </#if>
@@ -46,7 +46,7 @@
     },
     data() {
       return {
-        title: "操作",
+        title: "Action",
         visible: false,
         model: {},
         labelCol: {
@@ -63,7 +63,7 @@
 <#list columns as po>
   <#if po.fieldName !='id'>
     <#if po.nullable =='N'>
-          ${po.fieldName}: { rules: [{ required: true, message: '请输入${po.filedComment}!' }] },
+          ${po.fieldName}: { rules: [{ required: true, message: 'Please enter ${po.filedComment}!' }] },
     </#if>
   </#if>
 </#list>
@@ -84,12 +84,12 @@
       edit(record) {
         this.form.resetFields();
         this.model = Object.assign({}, record);
-        //初始化明细表数据
+        //Initialize detail table data
         console.log(this.model.id)
         this.visible = true;
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model, <#list columns as col>'${col.fieldName}', </#list>))
-          // 时间格式化
+          // Time formatting
 <#list columns as col><#rt/>
 	<#if col.fieldName !='id' && (col.fieldType =='date' || col.fieldType =='datetime')>
           this.form.setFieldsValue({ ${col.fieldName}: this.model.${col.fieldName} ? moment(this.model.${col.fieldName}) : null })
@@ -103,7 +103,7 @@
       },
       handleOk() {
         const that = this;
-        // 触发表单验证
+        // Trigger form validation
         this.form.validateFields((err, values) => {
           if (!err) {
             that.confirmLoading = true;
@@ -117,7 +117,7 @@
               method = 'put';
             }
             let formData = Object.assign(this.model, values);
-            //时间格式化
+            //Time formatting
             <#list columns as po>
             <#if po.fieldName !='id' && po.fieldType =='date'>
             formData.${po.fieldName} = formData.${po.fieldName}?formData.${po.fieldName}.format():null;
@@ -156,12 +156,12 @@
     line-height: 0px;
   }
 
-  /** 主表单行间距 */
+  /** Main form line spacing */
   .ant-form .ant-form-item {
     margin-bottom: 10px;
   }
 
-  /** Tab页面行间距 */
+  /** Tab page line spacing */
   .ant-tabs-content .ant-form-item {
     margin-bottom: 0px;
   }

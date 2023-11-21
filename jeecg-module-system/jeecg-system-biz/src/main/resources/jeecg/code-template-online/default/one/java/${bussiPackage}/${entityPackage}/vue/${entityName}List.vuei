@@ -124,10 +124,10 @@
 
     <!-- Action button area -->
     <div class="table-operator">
-      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus">New</a-button>
       <a-button type="primary" icon="download" @click="handleExportXls('${tableVo.ftlDescription}')">Export</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">Import</a-button>
       </a-upload>
       <!-- Advanced query area -->
       <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>
@@ -139,7 +139,7 @@
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- Table Area-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
         <i class="anticon anticon-info-circle ant-alert-icon"></i> Selected <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>item
@@ -245,8 +245,8 @@
     },
     data () {
       return {
-        description: '${tableVo.ftlDescription}管理页面',
-        // 表头
+        description: '${tableVo.ftlDescription} Manage Pages',
+        // Header
         columns: [
           {
             title: '#',

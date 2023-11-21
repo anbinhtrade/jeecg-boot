@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @Data
 @TableName("${tableName}")
-@ApiModel(value="${tableName}对象", description="${tableVo.ftlDescription}")
+@ApiModel(value="${tableName} Object", description="${tableVo.ftlDescription}")
 public class ${entityName} implements Serializable {
     private static final long serialVersionUID = 1L;
     

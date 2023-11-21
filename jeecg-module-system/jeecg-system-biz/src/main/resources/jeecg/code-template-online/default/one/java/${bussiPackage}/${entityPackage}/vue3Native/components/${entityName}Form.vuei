@@ -120,14 +120,14 @@
   </#if>
   
   /**
-   * 新增
+   * New
    */
   function add() {
     edit({});
   }
 
   /**
-   * 编辑
+   * Edit
    */
   function edit(record) {
     nextTick(() => {
@@ -141,11 +141,11 @@
    * 提交数据
    */
   async function submitForm() {
-    // 触发表单验证
+    // Trigger form validation
     await validate();
     confirmLoading.value = true;
     const isUpdate = ref<boolean>(false);
-    //时间格式化
+    //Time formatting
     let model = formData;
     if (model.id) {
       isUpdate.value = true;

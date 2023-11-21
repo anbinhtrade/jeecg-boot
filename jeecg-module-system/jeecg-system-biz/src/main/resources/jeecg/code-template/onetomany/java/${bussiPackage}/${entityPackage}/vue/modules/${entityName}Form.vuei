@@ -1,6 +1,6 @@
 <template>
  <a-spin :spinning="confirmLoading">
-      <!-- 主表单区域 -->
+      <!-- Main form region -->
       <a-form-model ref="form" :model="model" :rules="validatorRules">
 <#list columns as po><#rt/>
   <#if po_index % 2 == 0 ><#rt/>
@@ -11,13 +11,13 @@
           <a-col :xs="24" :sm="12">
             <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" prop="${columns[idx].fieldName}" label="${columns[idx].filedComment}">
             <#if columns[idx].fieldType =='date'>
-              <a-date-picker placeholder="请输入${columns[idx].filedComment}" style="width:100%" v-model="model.${columns[idx].fieldName}"/>
+              <a-date-picker placeholder="Please enter ${columns[idx].filedComment}" style="width:100%" v-model="model.${columns[idx].fieldName}"/>
             <#elseif columns[idx].fieldType =='datetime'>
-              <a-date-picker placeholder="请输入${columns[idx].filedComment}" style="width:100%" :showTime="true" valueFormat="YYYY-MM-DD HH:mm:ss" v-model="model.${columns[idx].fieldName}"/>
+              <a-date-picker placeholder="Please enter ${columns[idx].filedComment}" style="width:100%" :showTime="true" valueFormat="YYYY-MM-DD HH:mm:ss" v-model="model.${columns[idx].fieldName}"/>
             <#elseif "int,decimal,double,"?contains(columns[idx].fieldType)>
-              <a-input-number placeholder="请输入${columns[idx].filedComment}" style="width:100%" v-model="model.${columns[idx].fieldName}"/>
+              <a-input-number placeholder="Please enter ${columns[idx].filedComment}" style="width:100%" v-model="model.${columns[idx].fieldName}"/>
             <#else>
-              <a-input placeholder="请输入${columns[idx].filedComment}" v-model="model.${columns[idx].fieldName}"/>
+              <a-input placeholder="Please enter ${columns[idx].filedComment}" v-model="model.${columns[idx].fieldName}"/>
             </#if>
             </a-form-model-item>
           </a-col>
@@ -29,7 +29,7 @@
 </#list>
       </a-form-model>
 
-      <!-- 子表单区域 -->
+      <!-- Subform Area -->
       <a-tabs v-model="activeKey" @change="handleChangeTabs">
 <#list subTables as sub><#rt/>
         <a-tab-pane tab="${sub.ftlDescription}" :key="refKeys[${sub_index}]" :forceRender="true">
@@ -58,16 +58,16 @@
       mixins: [JEditableTableModelMixin],
       data() {
         return {
-          // 新增时子表默认添加几行空数据
+          // When adding a new subtable, a few rows of empty data are added by default.
           addDefaultRowNum: 1,
           model: {
-          //设置默认值
+          //Set default value
            },
           validatorRules: {
   <#list columns as po>
     <#if po.fieldName !='id'>
       <#if po.nullable =='N'>
-            ${po.fieldName}: [{ required: true, message: '请输入${po.filedComment}!' }],
+            ${po.fieldName}: [{ required: true, message: 'Please enter ${po.filedComment}!' }],
       </#if>
     </#if>
   </#list>
@@ -95,9 +95,9 @@
                 type: FormTypes.input,
         </#if>
                 defaultValue: '',
-                placeholder: '请输入${'$'}{title}',
+                placeholder: 'Please enter ${'$'}{title}',
         <#if col.nullable =='N'>
-                validateRules: [{ required: true, message: '${'$'}{title}不能为空' }],
+                validateRules: [{ required: true, message: '${'$'}{title} Cannot be empty' }],
         </#if>
               },
       </#if>
@@ -117,9 +117,9 @@
         }
       },
       methods: {
-        /** 调用完edit()方法之后会自动调用此方法 */
+        /** This method will be called automatically after calling the edit() method. */
         editAfter() {
-          // 加载子表数据
+          // Load subtable data
           if (this.model.id) {
             let params = { id: this.model.id }
   <#list subTables as sub><#rt/>
@@ -128,11 +128,11 @@
           }
         },
 
-        /** 整理成formData */
+        /** Organized into formData */
         classifyIntoFormData(allValues) {
           let main = Object.assign(this.model, allValues.formValue)
           return {
-            ...main, // 展开
+            ...main, // Expand
   <#list subTables as sub><#rt/>
             ${sub.entityName?uncap_first}List: allValues.tablesValue[${sub_index}].values,
   </#list>

@@ -1,5 +1,5 @@
 <template>
-  <a-modal :title="title" :width="width" :visible="visible" @ok="handleOk" :okButtonProps="{ class: { 'jee-hidden': disableSubmit } }" @cancel="handleCancel" cancelText="关闭">
+  <a-modal :title="title" :width="width" :visible="visible" @ok="handleOk" :okButtonProps="{ class: { 'jee-hidden': disableSubmit } }" @cancel="handleCancel" cancelText="Close">
     <${entityName}Form ref="registerForm" @ok="submitCallback" :formDisabled="disableSubmit" :formBpm="false"></${entityName}Form>
   </a-modal>
 </template>
@@ -16,10 +16,10 @@
   const emit = defineEmits(['register', 'success']);
 
   /**
-   * 新增
+   * New
    */
   function add() {
-    title.value = '新增';
+    title.value = 'New';
     visible.value = true;
     nextTick(() => {
       registerForm.value.add();
@@ -27,11 +27,11 @@
   }
   
   /**
-   * 编辑
+   * Edit
    * @param record
    */
   function edit(record) {
-    title.value = disableSubmit.value ? '详情' : '编辑';
+    title.value = disableSubmit.value ? 'Detail' : 'Edit';
     visible.value = true;
     nextTick(() => {
       registerForm.value.edit(record);

@@ -10,7 +10,7 @@
     switchFullscreen
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="Close">
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
 <#list subTab.colums as po><#rt/>
@@ -32,9 +32,9 @@
           <a-input-number v-decorator="[ '${po.fieldName}', <#if po.nullable =='N'>validatorRules.${po.fieldName} <#else>{}</#if>]" />
           <#else>
           <#if subTab.foreignKeys[0]?uncap_first == po.fieldName>
-          <a-input placeholder="请输入${po.filedComment}" v-decorator="['${po.fieldName}', {'initialValue':this.mainId}]" />
+          <a-input placeholder="Please enter ${po.filedComment}" v-decorator="['${po.fieldName}', {'initialValue':this.mainId}]" />
           <#else>
-          <a-input placeholder="请输入${po.filedComment}" v-decorator="['${po.fieldName}', <#if po.nullable =='N'>validatorRules.${po.fieldName} <#else>{}</#if>]" />
+          <a-input placeholder="Please enter ${po.filedComment}" v-decorator="['${po.fieldName}', <#if po.nullable =='N'>validatorRules.${po.fieldName} <#else>{}</#if>]" />
           </#if>
           </#if>
         </a-form-item>
@@ -58,7 +58,7 @@
     name: '${subTab.entityName}Modal',
     data() {
       return {
-        title: '操作',
+        title: 'Action',
         visible: false,
         model: {},
         labelCol: {
@@ -80,7 +80,7 @@
   <#list subTab.colums as po>
   <#if po.fieldName !='id' && subTab.foreignKeys[0]?uncap_first != po.fieldName>
     <#if po.nullable =='N'>
-          ${po.fieldName}: { rules: [{ required: true, message: '请输入${po.filedComment}!' }] },
+          ${po.fieldName}: { rules: [{ required: true, message: 'Please enter ${po.filedComment}!' }] },
     </#if>
   </#if>
 </#list>
@@ -98,7 +98,7 @@
         if (mainId) {
           this.edit({mainId}, '')
         } else {
-          this.$message.warning('请选择一条数据')
+          this.$message.warning('Please select a piece of data')
         }
       },
       detail(record) {
@@ -121,7 +121,7 @@
         this.visible = true;
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model, <#list subTab.colums as col>'${col.fieldName}', </#list>))
-          // 时间格式化
+          // Time formatting
 <#list subTab.colums as col><#rt/>
 	<#if col.fieldName !='id' && (col.fieldType =='date' || col.fieldType =='datetime')>
           this.form.setFieldsValue({ ${col.fieldName}: this.model.${col.fieldName} ? moment(this.model.${col.fieldName}) : null })
@@ -135,7 +135,7 @@
       },
       handleOk() {
         const that = this;
-        // 触发表单验证
+        // Trigger form validation
         this.form.validateFields((err, values) => {
           if (!err) {
             that.confirmLoading = true;
@@ -149,7 +149,7 @@
               method = 'put';
             }
             let formData = Object.assign(this.model, values);
-            //时间格式化
+            //Time formatting
             <#list subTab.colums as po>
             <#if po.fieldName !='id' && po.fieldType =='date'>
             formData.${po.fieldName} = formData.${po.fieldName}?formData.${po.fieldName}.format():null;

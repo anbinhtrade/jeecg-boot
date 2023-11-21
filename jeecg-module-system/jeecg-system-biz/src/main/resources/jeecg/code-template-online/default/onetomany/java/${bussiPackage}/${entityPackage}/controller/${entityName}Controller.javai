@@ -72,7 +72,7 @@ public class ${entityName}Controller {
 	</#list>
 	
 	/**
-	 * 分页列表查询
+	 * Paging list query
 	 *
 	 * @param ${entityName?uncap_first}
 	 * @param pageNo
@@ -80,8 +80,8 @@ public class ${entityName}Controller {
 	 * @param req
 	 * @return
 	 */
-	//@AutoLog(value = "${tableVo.ftlDescription}-分页列表查询")
-	@ApiOperation(value="${tableVo.ftlDescription}-分页列表查询", notes="${tableVo.ftlDescription}-分页列表查询")
+	//@AutoLog(value = "${tableVo.ftlDescription}-Paging list query")
+	@ApiOperation(value="${tableVo.ftlDescription}-Paging list query", notes="${tableVo.ftlDescription}-Paging list query")
 	@GetMapping(value = "/list")
 	public Result<IPage<${entityName}>> queryPageList(${entityName} ${entityName?uncap_first},
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -94,13 +94,13 @@ public class ${entityName}Controller {
 	}
 	
 	/**
-	 *   添加
+	 *   Add
 	 *
 	 * @param ${entityName?uncap_first}Page
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-添加")
-	@ApiOperation(value="${tableVo.ftlDescription}-添加", notes="${tableVo.ftlDescription}-添加")
+	@AutoLog(value = "${tableVo.ftlDescription}-Add")
+	@ApiOperation(value="${tableVo.ftlDescription}-Add", notes="${tableVo.ftlDescription}-Add")
 	@RequiresPermissions("${entityPackage}:${tableName}:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody ${entityName}Page ${entityName?uncap_first}Page) {
@@ -110,17 +110,17 @@ public class ${entityName}Controller {
         ${entityName?uncap_first}.setBpmStatus("1");
         </#if>
 		${entityName?uncap_first}Service.saveMain(${entityName?uncap_first}, <#list subTables as sub>${entityName?uncap_first}Page.get${sub.entityName}List()<#if sub_has_next>,</#if></#list>);
-		return Result.OK("添加成功！");
+		return Result.OK("Successfully Added！");
 	}
 	
 	/**
-	 *  编辑
+	 *  Edit
 	 *
 	 * @param ${entityName?uncap_first}Page
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-编辑")
-	@ApiOperation(value="${tableVo.ftlDescription}-编辑", notes="${tableVo.ftlDescription}-编辑")
+	@AutoLog(value = "${tableVo.ftlDescription}-Edit")
+	@ApiOperation(value="${tableVo.ftlDescription}-Edit", notes="${tableVo.ftlDescription}-Edit")
 	@RequiresPermissions("${entityPackage}:${tableName}:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody ${entityName}Page ${entityName?uncap_first}Page) {
@@ -131,47 +131,47 @@ public class ${entityName}Controller {
 			return Result.error("未找到对应数据");
 		}
 		${entityName?uncap_first}Service.updateMain(${entityName?uncap_first}, <#list subTables as sub>${entityName?uncap_first}Page.get${sub.entityName}List()<#if sub_has_next>,</#if></#list>);
-		return Result.OK("编辑成功!");
+		return Result.OK("Successfully Edited!");
 	}
 	
 	/**
-	 *   通过id删除
+	 *   Delete by id
 	 *
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-通过id删除")
-	@ApiOperation(value="${tableVo.ftlDescription}-通过id删除", notes="${tableVo.ftlDescription}-通过id删除")
+	@AutoLog(value = "${tableVo.ftlDescription}-Delete by id")
+	@ApiOperation(value="${tableVo.ftlDescription}-Delete by id", notes="${tableVo.ftlDescription}-Delete by id")
 	@RequiresPermissions("${entityPackage}:${tableName}:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<String> delete(@RequestParam(name="id",required=true) String id) {
 		${entityName?uncap_first}Service.delMain(id);
-		return Result.OK("删除成功!");
+		return Result.OK("Successfully Deleted!");
 	}
 	
 	/**
-	 *  批量删除
+	 *  Batch Delete
 	 *
 	 * @param ids
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-批量删除")
-	@ApiOperation(value="${tableVo.ftlDescription}-批量删除", notes="${tableVo.ftlDescription}-批量删除")
+	@AutoLog(value = "${tableVo.ftlDescription}-Batch Delete")
+	@ApiOperation(value="${tableVo.ftlDescription}-Batch Delete", notes="${tableVo.ftlDescription}-Batch Delete")
 	@RequiresPermissions("${entityPackage}:${tableName}:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.${entityName?uncap_first}Service.delBatchMain(Arrays.asList(ids.split(",")));
-		return Result.OK("批量删除成功！");
+		return Result.OK("Successfully Batch Deleted！");
 	}
 	
 	/**
-	 * 通过id查询
+	 * Query by id
 	 *
 	 * @param id
 	 * @return
 	 */
-	//@AutoLog(value = "${tableVo.ftlDescription}-通过id查询")
-	@ApiOperation(value="${tableVo.ftlDescription}-通过id查询", notes="${tableVo.ftlDescription}-通过id查询")
+	//@AutoLog(value = "${tableVo.ftlDescription}-Query by id")
+	@ApiOperation(value="${tableVo.ftlDescription}-Query by id", notes="${tableVo.ftlDescription}-Query by id")
 	@GetMapping(value = "/queryById")
 	public Result<${entityName}> queryById(@RequestParam(name="id",required=true) String id) {
 		${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.getById(id);
@@ -184,12 +184,12 @@ public class ${entityName}Controller {
 	
 	<#list subTables as sub>
 	/**
-	 * 通过id查询
+	 * Query by id
 	 *
 	 * @param id
 	 * @return
 	 */
-	//@AutoLog(value = "${sub.ftlDescription}通过主表ID查询")
+	//@AutoLog(value = "${sub.ftlDescription}Query by main table ID")
 	@ApiOperation(value="${sub.ftlDescription}主表ID查询", notes="${sub.ftlDescription}-通主表ID查询")
 	@GetMapping(value = "/query${sub.entityName}ByMainId")
 	public Result<List<${sub.entityName}>> query${sub.entityName}ListByMainId(@RequestParam(name="id",required=true) String id) {
@@ -199,7 +199,7 @@ public class ${entityName}Controller {
 	</#list>
 
     /**
-    * 导出excel
+    * Export to excel
     *
     * @param request
     * @param ${entityName?uncap_first}
@@ -217,7 +217,7 @@ public class ${entityName}Controller {
           List<String> selectionList = Arrays.asList(selections.split(","));
           queryWrapper.in("id",selectionList);
       }
-      //Step.2 获取导出数据
+      //Step.2 Get export data
       List<${entityName}> ${entityName?uncap_first}List = ${entityName?uncap_first}Service.list(queryWrapper);
 
       // Step.3 组装pageList
@@ -236,13 +236,13 @@ public class ${entityName}Controller {
       ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
       mv.addObject(NormalExcelConstants.FILE_NAME, "${tableVo.ftlDescription}列表");
       mv.addObject(NormalExcelConstants.CLASS, ${entityName}Page.class);
-      mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("${tableVo.ftlDescription}数据", "导出人:"+sysUser.getRealname(), "${tableVo.ftlDescription}"));
+      mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("${tableVo.ftlDescription} Data", "Exporter: "+sysUser.getRealname(), "${tableVo.ftlDescription}"));
       mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
       return mv;
     }
 
     /**
-    * 通过excel导入数据
+    * Import data via excel
     *
     * @param request
     * @param response
@@ -254,7 +254,7 @@ public class ${entityName}Controller {
       MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
       Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
       for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-          // 获取上传文件对象
+          // Get the uploaded file object
           MultipartFile file = entity.getValue();
           ImportParams params = new ImportParams();
           params.setTitleRows(2);
@@ -267,10 +267,10 @@ public class ${entityName}Controller {
                   BeanUtils.copyProperties(page, po);
                   ${entityName?uncap_first}Service.saveMain(po, <#list subTables as sub>page.get${sub.entityName}List()<#if sub_has_next>,</#if></#list>);
               }
-              return Result.OK("文件导入成功！数据行数:" + list.size());
+              return Result.OK("File import successful! Number of data rows: " + list.size());
           } catch (Exception e) {
               log.error(e.getMessage(),e);
-              return Result.error("文件导入失败:"+e.getMessage());
+              return Result.error("File import failed: "+e.getMessage());
           } finally {
               try {
                   file.getInputStream().close();
@@ -279,7 +279,7 @@ public class ${entityName}Controller {
               }
           }
       }
-      return Result.OK("文件导入失败！");
+      return Result.OK("File import failed！");
     }
 
 }

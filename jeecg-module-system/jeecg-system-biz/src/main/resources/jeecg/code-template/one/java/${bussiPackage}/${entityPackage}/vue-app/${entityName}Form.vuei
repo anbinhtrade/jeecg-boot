@@ -1,24 +1,24 @@
 <template>
     <view>
-        <!--标题和返回-->
+        <!--Title And Return-->
 		<cu-custom :bgColor="NavBarColor" isBack :backRouterName="backRouteName">
-			<block slot="backText">返回</block>
+			<block slot="backText">Back</block>
 			<block slot="content">${tableVo.ftlDescription}</block>
 		</cu-custom>
-		 <!--表单区域-->
+		 <!--Form Area-->
 		<view>
 			<form>
     <#list columns as po><#rt/>
     <#if po.fieldName !='id'><#rt/>
          <#if po.fieldType =='date'>
-              <my-date label="${po.filedComment}：" fields="day" v-model="model.${po.fieldName}" placeholder="请输入${po.filedComment}"></my-date>
+              <my-date label="${po.filedComment}：" fields="day" v-model="model.${po.fieldName}" placeholder="Please enter ${po.filedComment}"></my-date>
          <#elseif po.fieldType =='datetime'>
-              <my-date label="${po.filedComment}：" v-model="model.${po.fieldName}" placeholder="请输入${po.filedComment}"></my-date>
+              <my-date label="${po.filedComment}：" v-model="model.${po.fieldName}" placeholder="Please enter ${po.filedComment}"></my-date>
          <#else>
               <view class="cu-form-group">
                 <view class="flex align-center">
                   <view class="title"><text space="ensp">${po.filedComment}：</text></view>
-                  <input <#if "int,decimal,double,"?contains(po.fieldType)>type="number"</#if> placeholder="请输入${po.filedComment}" v-model="model.${po.fieldName}"/>
+                  <input <#if "int,decimal,double,"?contains(po.fieldType)>type="number"</#if> placeholder="Please enter ${po.filedComment}" v-model="model.${po.fieldName}"/>
                 </view>
               </view>
         </#if>
@@ -26,7 +26,7 @@
     </#list>
 				<view class="padding">
 					<button class="cu-btn block bg-blue margin-tb-sm lg" @click="onSubmit">
-						<text v-if="loading" class="cuIcon-loading2 cuIconfont-spin"></text>提交
+						<text v-if="loading" class="cuIcon-loading2 cuIconfont-spin"></text>Submit
 					</button>
 				</view>
 			</form>
@@ -70,7 +70,7 @@
                     let dataId = this.formData.dataId;
                     this.$http.get(this.url.queryById,{params:{id:dataId}}).then((res)=>{
                         if(res.data.success){
-                            console.log("表单数据",res);
+                            console.log("Form Data",res);
                             this.model = res.data.result;
                         }
                     })

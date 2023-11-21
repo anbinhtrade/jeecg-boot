@@ -35,7 +35,7 @@ export const searchFormSchema: FormSchema[] = [
 ];
 
 export const formSchema: FormSchema[] = [
-  // TODO 主键隐藏字段，目前写死为ID
+  // TODO The primary key hidden field is currently hard-coded as ID.
   {label: '', field: 'id', component: 'Input', show: false},
 <#list columns as po><#rt/>
   {

@@ -17,7 +17,7 @@
     @ok="handleOk"
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="Close">
     <${Format.humpToShortbar(entityName)}-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></${Format.humpToShortbar(entityName)}-form>
   </j-modal>
 </template>

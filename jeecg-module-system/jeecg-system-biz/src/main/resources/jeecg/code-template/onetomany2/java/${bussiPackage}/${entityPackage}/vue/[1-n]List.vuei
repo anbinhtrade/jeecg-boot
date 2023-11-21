@@ -3,27 +3,27 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 操作按钮区域 -->
+    <!-- Action button area -->
     <div class="table-operator" :md="24" :sm="24" style="margin: 0px 0px 20px 0px">
-      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus">New</a-button>
 
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
-            <a-icon type="delete"/>删除
+            <a-icon type="delete"/>Delete
           </a-menu-item>
         </a-menu>
-        <a-button style="margin-left: 8px"> 批量操作
+        <a-button style="margin-left: 8px"> Bulk Operation
           <a-icon type="down"/>
         </a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- Table Area-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
-        <a style="margin-left: 24px" @click="onClearSelected">清空</a>
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> Selected <a style="font-weight: 600">{{ selectedRowKeys.length }}</a> Item
+        <a style="margin-left: 24px" @click="onClearSelected">Clear</a>
       </div>
 
       <a-table
@@ -39,19 +39,19 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">Edit</a>
           <a-divider type="vertical"/>
           <a-dropdown>
             <a class="ant-dropdown-link">
-              更多 <a-icon type="down"/>
+              More <a-icon type="down"/>
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleDetail(record)">Detail</a>
               </a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="Are you sure deleting it?" @confirm="() => handleDelete(record.id)">
+                  <a>Delete</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -60,9 +60,9 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- Table Area-end -->
 
-    <!-- 表单区域 -->
+    <!-- Form area -->
     <${subTab.entityName}-modal ref="modalForm" @ok="modalFormOk"/>
   </a-card>
 </template>
@@ -80,8 +80,8 @@
     },
     data() {
       return {
-        description: '信息',
-        // 表头
+        description: 'Information',
+        // Header
         columns: [
         <#list subTab.colums as po><#rt/>
   <#if po.fieldName !='id' && subTab.foreignKeys[0]?uncap_first != po.fieldName>
@@ -93,7 +93,7 @@
   </#if>
 </#list>
          {
-          title: '操作',
+          title: 'Action',
           key: 'operation',
           align: "center",
           width: 130,
@@ -130,7 +130,7 @@
       },
       handleAdd: function () {
         this.$refs.modalForm.add(this.queryParam.mainId);
-        this.$refs.modalForm.title = "添加${subTab.ftlDescription}";
+        this.$refs.modalForm.title = "Add ${subTab.ftlDescription}";
       },
     }
   }

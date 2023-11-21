@@ -23,11 +23,11 @@
       const formDisabled = ref(false);
       const title = ref('')
 
-      //表单赋值
+      //Form assignment
       const [registerModal, {setModalProps, closeModal}] = useModalInner(async (data) => {
         setModalProps({confirmLoading: false,showCancelBtn:data?.showFooter,showOkBtn:data?.showFooter});
         isUpdate.value = !!data?.isUpdate;
-        title.value = data?.isUpdate?'编辑':'新增'
+        title.value = data?.isUpdate?'Edit':'New'
         formDisabled.value = !data?.showFooter;
         if (unref(isUpdate)) {
           console.log('data', data)

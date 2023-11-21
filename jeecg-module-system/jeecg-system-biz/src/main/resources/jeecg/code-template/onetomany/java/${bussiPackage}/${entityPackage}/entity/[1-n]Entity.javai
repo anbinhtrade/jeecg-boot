@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @Data
 @TableName("${subTab.tableName}")
-@ApiModel(value="${tableName}对象", description="${tableVo.ftlDescription}")
+@ApiModel(value="${tableName} object", description="${tableVo.ftlDescription}")
 public class ${subTab.entityName} implements Serializable {
     private static final long serialVersionUID = 1L;
     

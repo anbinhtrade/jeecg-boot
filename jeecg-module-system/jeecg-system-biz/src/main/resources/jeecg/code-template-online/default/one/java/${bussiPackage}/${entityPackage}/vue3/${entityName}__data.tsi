@@ -3,7 +3,7 @@ import {BasicColumn} from '/@/components/Table';
 import {FormSchema} from '/@/components/Table';
 import { rules} from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
-//列表数据
+//List data
 export const columns: BasicColumn[] = [
  <#list columns as po>
    <#if po.isShowList =='Y' && po.fieldName !='id'>
@@ -63,7 +63,7 @@ export const columns: BasicColumn[] = [
    </#if>
  </#list>
 ];
-//查询数据
+//Query data
 export const searchFormSchema: FormSchema[] = [
 <#-- 开始循环 -->
 <#list columns as po>
@@ -308,7 +308,7 @@ export const formSchema: FormSchema[] = [
           return [
             <#-- 非空校验 -->
            <#if po.nullable == 'N' || fieldValidType == '*'>
-                 { required: true, message: '请输入${po.filedComment}!'},
+                 { required: true, message: 'Please enter ${po.filedComment}!'},
            <#elseif fieldValidType!=''>
                  { required: false},
            </#if>
@@ -366,7 +366,7 @@ export const formSchema: FormSchema[] = [
 </#if>
 </#list>
 <#if id_exists == false>
-	// TODO 主键隐藏字段，目前写死为ID
+	// TODO The primary key hidden field is currently hard-coded as ID.
 	{
 	  label: '',
 	  field: 'id',

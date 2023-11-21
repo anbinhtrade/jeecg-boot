@@ -45,7 +45,7 @@
       </a-row>
     </a-form>
 
-		<!-- 子表单区域 -->
+		<!-- Subform Area -->
     <a-tabs v-model:activeKey="activeKey" animated>
 <#list subTables as sub><#rt/>
       <a-tab-pane tab="${sub.ftlDescription}" key="${sub.entityName?uncap_first}" :forceRender="true">
@@ -268,7 +268,7 @@
         console.log('表单提交数据', values)
         const isUpdate = values.id ? true : false
         await saveOrUpdate(values, isUpdate);
-        //关闭弹窗
+        //Close the pop-up window
         emit('success');
       }
       

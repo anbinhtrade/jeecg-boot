@@ -7,7 +7,7 @@
     switchFullscreen
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="Cancel">
     
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
@@ -22,7 +22,7 @@
           <#elseif "int,decimal,double,"?contains(po.fieldType)>
           <a-input-number v-model="model.${po.fieldName}"/>
           <#else>
-          <a-input placeholder="请输入${po.filedComment}" v-model="model.${po.fieldName}" />
+          <a-input placeholder="Please enter ${po.filedComment}" v-model="model.${po.fieldName}" />
           </#if>
         </a-form-model-item>
 </#if>
@@ -41,7 +41,7 @@
     name: "${entityName}Modal",
     data () {
       return {
-        title:"操作",
+        title:"Operation",
         visible: false,
         model: {},
         labelCol: {
@@ -58,7 +58,7 @@
         <#list columns as po>
         <#if po.fieldName !='id'>
         <#if po.nullable =='N'>
-        ${po.fieldName}:[{ required: true, message: '请输入${po.filedComment}!' }],
+        ${po.fieldName}:[{ required: true, message: 'Please enter ${po.filedComment}!' }],
         </#if>
         </#if>
 	    </#list>
@@ -73,7 +73,7 @@
     },
     methods: {
       add () {
-        //初始化默认值
+        //Initialize default value
         this.edit({});
       },
       edit (record) {
@@ -87,7 +87,7 @@
       },
       handleOk () {
         const that = this;
-        // 触发表单验证
+        // Trigger form validation
          this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;

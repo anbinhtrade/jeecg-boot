@@ -16,19 +16,19 @@ enum Api {
 }
 
 /**
- * 导出api
+ * Export API
  * @param params
  */
 export const getExportUrl = Api.exportXls;
 
 /**
- * 导入api
+ * Import APIs
  * @param params
  */
 export const getImportUrl = Api.importExcel;
 
 /**
- * 列表接口
+ * List interface
  * @param params
  */
 export const list = (params) => defHttp.get({ url: Api.list, params });
@@ -45,17 +45,17 @@ export const delete${entityName} = (params,handleSuccess) => {
 }
 
 /**
- * 批量删除
+ * Delete in bulk
  * @param params
  * @param handleSuccess
  */
 export const batchDelete${entityName} = (params, handleSuccess) => {
   createConfirm({
     iconType: 'warning',
-    title: '确认删除',
-    content: '是否删除选中数据',
-    okText: '确认',
-    cancelText: '取消',
+    title: 'Confirm deleting',
+    content: 'Are you sure want to delete the selected data',
+    okText: 'Confirm',
+    cancelText: 'Cancel',
     onOk: () => {
       return defHttp.delete({ url: Api.delete${entityName}, data: params }, { joinParamsToUrl: true }).then(() => {
         handleSuccess();
@@ -65,7 +65,7 @@ export const batchDelete${entityName} = (params, handleSuccess) => {
 }
 
 /**
- * 保存或者更新
+ * Save or update
  * @param params
  * @param isUpdate
  */

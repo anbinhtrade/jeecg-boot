@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
+    <!-- Query area -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
@@ -26,34 +26,34 @@
           <#if query_field_no gt 1>  </#if><a-col :xl="6" :lg="7" :md="8" :sm="24">
             <#if query_field_no gt 1>  </#if><a-form-item label="${po.filedComment}">
             <#if po.classType=='sel_search'>
-              <#if query_field_no gt 1>  </#if><j-search-select-tag placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}" dict="${po.dictTable},${po.dictText},${po.dictField}"/>
+              <#if query_field_no gt 1>  </#if><j-search-select-tag placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}" dict="${po.dictTable},${po.dictText},${po.dictField}"/>
             <#elseif po.classType=='sel_user'>
-              <#if query_field_no gt 1>  </#if><j-select-user-by-dep placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}"/>
+              <#if query_field_no gt 1>  </#if><j-select-user-by-dep placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}"/>
             <#elseif po.classType=='sel_depart'>
-              <#if query_field_no gt 1>  </#if><j-select-depart placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}"/>
+              <#if query_field_no gt 1>  </#if><j-select-depart placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}"/>
             <#elseif po.classType=='list_multi'>
-              <#if query_field_no gt 1>  </#if><j-multi-select-tag placeholder="请选择${po.filedComment}" dictCode="${query_field_dictCode?default("")}" v-model="queryParam.${po.fieldName}"/>
+              <#if query_field_no gt 1>  </#if><j-multi-select-tag placeholder="Please select ${po.filedComment}" dictCode="${query_field_dictCode?default("")}" v-model="queryParam.${po.fieldName}"/>
             <#elseif po.classType=='cat_tree'>
-              <#if query_field_no gt 1>  </#if><j-category-select placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}" pcode="${po.dictField?default("")}"/>
+              <#if query_field_no gt 1>  </#if><j-category-select placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}" pcode="${po.dictField?default("")}"/>
 			<#elseif po.classType=='date'>
-              <#if query_field_no gt 1>  </#if><j-date placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}"></j-date>
+              <#if query_field_no gt 1>  </#if><j-date placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}"></j-date>
 			<#elseif po.classType=='datetime'>
-              <#if query_field_no gt 1>  </#if><j-date :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}"></j-date>
+              <#if query_field_no gt 1>  </#if><j-date :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}"></j-date>
             <#elseif po.classType=='pca'>
               <#if query_field_no gt 1>  </#if><j-area-linkage type="cascader" v-model="queryParam.${po.fieldName}" placeholder="请选择省市区"/>
             <#elseif po.classType=='popup'>
-              <#if query_field_no gt 1>  </#if><j-popup placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}" code="${po.dictTable}" org-fields="${po.dictField}" dest-fields="${po.dictText}" :field="getPopupField('${po.dictText}')" :multi="${po.extendParams.popupMulti?c}"/>
+              <#if query_field_no gt 1>  </#if><j-popup placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}" code="${po.dictTable}" org-fields="${po.dictField}" dest-fields="${po.dictText}" :field="getPopupField('${po.dictText}')" :multi="${po.extendParams.popupMulti?c}"/>
 			<#elseif po.classType=='list' || po.classType=='radio' || po.classType=='checkbox'>
 			<#--  ---------------------------下拉或是单选 判断数据字典是表字典还是普通字典------------------------------- -->
 			<#if po.dictTable?default("")?trim?length gt 1>
-              <#if query_field_no gt 1>  </#if><j-dict-select-tag placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}" dictCode="${po.dictTable},${po.dictText},${po.dictField}"/>
+              <#if query_field_no gt 1>  </#if><j-dict-select-tag placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}" dictCode="${po.dictTable},${po.dictText},${po.dictField}"/>
 			<#elseif po.dictField?default("")?trim?length gt 1>
-              <#if query_field_no gt 1>  </#if><j-dict-select-tag placeholder="请选择${po.filedComment}" v-model="queryParam.${po.fieldName}" dictCode="${po.dictField}"/>
+              <#if query_field_no gt 1>  </#if><j-dict-select-tag placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}" dictCode="${po.dictField}"/>
 			<#else>
-              <#if query_field_no gt 1>  </#if><a-input placeholder="请输入${po.filedComment}" v-model="queryParam.${po.fieldName}"></a-input>
+              <#if query_field_no gt 1>  </#if><a-input placeholder="Please enter ${po.filedComment}" v-model="queryParam.${po.fieldName}"></a-input>
 			</#if>
 			<#else>
-              <#if query_field_no gt 1>  </#if><a-input placeholder="请输入${po.filedComment}" v-model="queryParam.${po.fieldName}"></a-input>
+              <#if query_field_no gt 1>  </#if><a-input placeholder="Please enter ${po.filedComment}" v-model="queryParam.${po.fieldName}"></a-input>
 			</#if>
             <#if query_field_no gt 1>  </#if></a-form-item>
           <#if query_field_no gt 1>  </#if></a-col>
@@ -61,17 +61,17 @@
           <#if query_field_no gt 1>  </#if><a-col :xl="10" :lg="11" :md="12" :sm="24">
             <#if query_field_no gt 1>  </#if><a-form-item label="${po.filedComment}">
 			<#if po.classType=='date'>
-              <#if query_field_no gt 1>  </#if><j-date placeholder="请选择开始日期" class="query-group-cust" v-model="queryParam.${po.fieldName}_begin"></j-date>
+              <#if query_field_no gt 1>  </#if><j-date placeholder="Please select a start date" class="query-group-cust" v-model="queryParam.${po.fieldName}_begin"></j-date>
               <#if query_field_no gt 1>  </#if><span class="query-group-split-cust"></span>
-              <#if query_field_no gt 1>  </#if><j-date placeholder="请选择结束日期" class="query-group-cust" v-model="queryParam.${po.fieldName}_end"></j-date>
+              <#if query_field_no gt 1>  </#if><j-date placeholder="Please select an end date" class="query-group-cust" v-model="queryParam.${po.fieldName}_end"></j-date>
 			<#elseif po.classType=='datetime'>
-              <#if query_field_no gt 1>  </#if><j-date :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择开始时间" class="query-group-cust" v-model="queryParam.${po.fieldName}_begin"></j-date>
+              <#if query_field_no gt 1>  </#if><j-date :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="Please select a start time" class="query-group-cust" v-model="queryParam.${po.fieldName}_begin"></j-date>
               <#if query_field_no gt 1>  </#if><span class="query-group-split-cust"></span>
-              <#if query_field_no gt 1>  </#if><j-date :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择结束时间" class="query-group-cust" v-model="queryParam.${po.fieldName}_end"></j-date>
+              <#if query_field_no gt 1>  </#if><j-date :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="Please select end time" class="query-group-cust" v-model="queryParam.${po.fieldName}_end"></j-date>
 			<#else>
-              <#if query_field_no gt 1>  </#if><a-input placeholder="请输入最小值" class="query-group-cust" v-model="queryParam.${po.fieldName}_begin"></a-input>
+              <#if query_field_no gt 1>  </#if><a-input placeholder="Please enter minimum value" class="query-group-cust" v-model="queryParam.${po.fieldName}_begin"></a-input>
               <#if query_field_no gt 1>  </#if><span class="query-group-split-cust"></span>
-              <#if query_field_no gt 1>  </#if><a-input placeholder="请输入最大值" class="query-group-cust" v-model="queryParam.${po.fieldName}_end"></a-input>
+              <#if query_field_no gt 1>  </#if><a-input placeholder="Please enter the maximum value" class="query-group-cust" v-model="queryParam.${po.fieldName}_end"></a-input>
 			</#if>
             <#if query_field_no gt 1>  </#if></a-form-item>
           <#if query_field_no gt 1>  </#if></a-col>
@@ -96,10 +96,10 @@
 <#if query_flag>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
-              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">Search</a-button>
+              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">Reset</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? 'Collapse' : 'Expand' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </span>
@@ -108,30 +108,30 @@
         </a-row>
       </a-form>
     </div>
-    <!-- 查询区域-END -->
+    <!-- Query area-END -->
     
-    <!-- 操作按钮区域 -->
+    <!-- Action button area -->
     <div class="table-operator">
-      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('${tableVo.ftlDescription}')">导出</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus">New</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('${tableVo.ftlDescription}')">Export</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">Import</a-button>
       </a-upload>
       <!-- 高级查询区域 -->
       <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>Delete</a-menu-item>
         </a-menu>
-        <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
+        <a-button style="margin-left: 8px"> Delete <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- Table Area-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
-        <a style="margin-left: 24px" @click="onClearSelected">清空</a>
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> Selected <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>Item
+        <a style="margin-left: 24px" @click="onClearSelected">Clear</a>
       </div>
 
       <a-table
@@ -174,15 +174,15 @@
         </#if>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">Edit</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
-            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
+            <a class="ant-dropdown-link">More <a-icon type="down" /></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="Are you sure deleting it?" @confirm="() => handleDelete(record.id)">
+                  <a>Delete</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -219,8 +219,8 @@
     },
     data () {
       return {
-        description: '${tableVo.ftlDescription}管理页面',
-        // 表头
+        description: '${tableVo.ftlDescription} Manage Pages',
+        // Header
         columns: [
           {
             title: '#',
@@ -285,7 +285,7 @@
      </#if>
      </#list>
           {
-            title: '操作',
+            title: 'Action',
             dataIndex: 'action',
             align:"center",
             fixed:"right",

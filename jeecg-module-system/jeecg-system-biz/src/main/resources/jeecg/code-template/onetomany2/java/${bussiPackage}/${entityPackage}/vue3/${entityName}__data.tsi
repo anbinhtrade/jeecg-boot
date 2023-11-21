@@ -2,7 +2,7 @@ import {BasicColumn} from '/@/components/Table';
 import {FormSchema} from '/@/components/Table';
 import { rules} from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
-//列表数据
+//List data
 export const columns: BasicColumn[] = [
  <#list columns as po>
    <#if po.fieldName !='id'>
@@ -21,7 +21,7 @@ export const columns: BasicColumn[] = [
    </#if>
  </#list>
 ];
-//查询数据
+//Query data
 export const searchFormSchema: FormSchema[] = [
 <#list columns as po>
 <#if po.fieldName !='id' && po_index<= tableVo.searchFieldNum>
@@ -43,7 +43,7 @@ export const searchFormSchema: FormSchema[] = [
 ];
 
 export const formSchema: FormSchema[] = [
-  // TODO 主键隐藏字段，目前写死为ID
+  // TODO The primary key hidden field is currently hard-coded as ID.
   {label: '', field: 'id', component: 'Input', show: false},
 <#list columns as po><#rt/>
   {
@@ -69,9 +69,9 @@ export const formSchema: FormSchema[] = [
 </#list>
 ];
 
-//子表表格配置
+//Subtable table configuration
 <#list subTables as sub>
-//列表数据
+//List data
 export const ${sub.entityName?uncap_first}Columns: BasicColumn[] = [
  <#list sub.colums as po><#rt/>
    <#if po.fieldName !='id' && sub.foreignKeys[0]?uncap_first != po.fieldName>
@@ -92,9 +92,9 @@ export const ${sub.entityName?uncap_first}Columns: BasicColumn[] = [
 ];
 
 export const ${sub.entityName?uncap_first}FormSchema: FormSchema[] = [
-   // TODO 主键隐藏字段，目前写死为ID
+   // TODO The primary key hidden field is currently hard-coded as ID.
    {label: '', field: 'id', component: 'Input', show: false},
-<#-- 循环子表的列 开始 -->
+<#-- Loop over columns of subtable Start -->
 <#list sub.colums as po><#rt/>
 <#if po.filedComment !='外键' >
    {
@@ -119,6 +119,6 @@ export const ${sub.entityName?uncap_first}FormSchema: FormSchema[] = [
      },
 </#if>
 </#list>
-<#-- 循环子表的列 结束 -->
+<#-- Loop over columns of subtable end -->
   ]
 </#list>

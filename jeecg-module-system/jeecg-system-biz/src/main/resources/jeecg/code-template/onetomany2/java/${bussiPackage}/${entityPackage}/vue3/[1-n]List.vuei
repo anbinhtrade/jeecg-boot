@@ -2,33 +2,33 @@
 #segment#${subTab.entityName}List.vue
 <template>
   <div>
-     <!--table区域-begin-->
+     <!--Table Area-begin-->
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
-      <!--插槽:table标题-->
+      <!--Slot: table title-->
        <template #tableTitle>
-           <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined"> 新增</a-button>
+           <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined"> New</a-button>
            <a-dropdown v-if="selectedRowKeys.length > 0">
                <template #overlay>
                  <a-menu>
                    <a-menu-item key="1" @click="batchHandleDelete">
                      <Icon icon="ant-design:delete-outlined"></Icon>
-                     删除
+                     Delete
                    </a-menu-item>
                  </a-menu>
                </template>
-               <a-button>批量操作
+               <a-button>Delete
                  <Icon icon="mdi:chevron-down"></Icon>
                </a-button>
          </a-dropdown>
        </template>
-        <!--操作栏-->
+        <!--Action bar-->
        <template #action="{ record }">
          <TableAction :actions="getTableAction(record)"/>
        </template>
      </BasicTable>
-    <!-- table区域-end -->
+    <!-- Table Area-end -->
 
-    <!-- 表单区域 -->
+    <!-- Form area -->
     <${subTab.entityName}Modal @register="registerModal" @success="handleSuccess"/>
   </div>
 </template>
@@ -43,15 +43,15 @@
   import {useMessage} from '/@/hooks/web/useMessage';
   import {${subTab.entityName?uncap_first}Columns} from './${entityName}.data';
   import {${subTab.entityName?uncap_first}List, ${subTab.entityName?uncap_first}Delete, ${subTab.entityName?uncap_first}DeleteBatch} from './${entityName}.api';
- //提示弹窗
+ //Prompt pop-up window
   const $message = useMessage()
-  //接收主表id
+  //Receive main table id
   const mainId = inject('mainId') || '';
-  //查询参数
+  //Query parameters
   const searchInfo = ref({});
-  //注册model
+  //Register model
   const [registerModal, {openModal}] = useModal();
- // 列表页面公共参数、方法
+ // List page public parameters and methods
   const {prefixCls, tableContext} = useListPage({
         tableProps: {
             api: ${subTab.entityName?uncap_first}List,
@@ -65,7 +65,7 @@
         },
     });
 
-    //注册table数据
+    //Register table data
     const [registerTable, {reload}, {rowSelection, selectedRowKeys}] = tableContext;
 
     watch(mainId, () => {
@@ -75,11 +75,11 @@
     );
 
     /**
-     * 新增事件
+     * New event
      */
     function handleAdd() {
         if (isEmpty(unref(mainId))) {
-            $message.createMessage.warning('请选择一个主表信息')
+            $message.createMessage.warning('Please select a main table information')
             return;
         }
         openModal(true, {
@@ -89,7 +89,7 @@
     }
 
     /**
-     * 编辑事件
+     * Edit event
      */
     async function handleEdit(record: Recordable) {
         openModal(true, {
@@ -100,14 +100,14 @@
     }
 
     /**
-     * 删除事件
+     * Delete event
      */
     async function handleDelete(record) {
         await ${subTab.entityName?uncap_first}Delete({id: record.id}, reload);
     }
 
     /**
-     * 批量删除事件
+     * Batch delete events
      */
     async function batchHandleDelete() {
         await ${subTab.entityName?uncap_first}DeleteBatch({ids: selectedRowKeys.value}, () => {
@@ -117,24 +117,24 @@
     }
 
     /**
-     * 成功回调
+     * Successful callback
      */
     function handleSuccess() {
         reload();
     }
 
     /**
-     * 操作栏
+     * Action bar
      */
     function getTableAction(record) {
         return [
             {
-                label: '编辑',
+                label: 'Edit',
                 onClick: handleEdit.bind(null, record),
             }, {
-                label: '删除',
+                label: 'Delete',
                 popConfirm: {
-                    title: '是否确认删除',
+                    title: 'Confirm to delete',
                     confirm: handleDelete.bind(null, record),
                 },
             }

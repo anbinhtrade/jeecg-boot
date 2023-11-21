@@ -54,7 +54,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 	private I${entityName}Service ${entityName?uncap_first}Service;
 	
 	/**
-	 * 分页列表查询
+	 * Paginated list queries
 	 *
 	 * @param ${entityName?uncap_first}
 	 * @param pageNo
@@ -62,8 +62,8 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 	 * @param req
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-分页列表查询")
-	@ApiOperation(value="${tableVo.ftlDescription}-分页列表查询", notes="${tableVo.ftlDescription}-分页列表查询")
+	@AutoLog(value = "${tableVo.ftlDescription}-Paginated list queries")
+	@ApiOperation(value="${tableVo.ftlDescription}-Paginated list queries", notes="${tableVo.ftlDescription}-Paginated list queries")
 	@GetMapping(value = "/list")
 	public Result<?> queryPageList(${entityName} ${entityName?uncap_first},
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -77,67 +77,67 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 	}
 	
 	/**
-	 *   添加
+	 *   Add
 	 * @param ${entityName?uncap_first}
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-添加")
-	@ApiOperation(value="${tableVo.ftlDescription}-添加", notes="${tableVo.ftlDescription}-添加")
+	@AutoLog(value = "${tableVo.ftlDescription}-Add")
+	@ApiOperation(value="${tableVo.ftlDescription}-Add", notes="${tableVo.ftlDescription}-Add")
 	@PostMapping(value = "/add")
 	public Result<?> add(@RequestBody ${entityName} ${entityName?uncap_first}) {
 		${entityName?uncap_first}Service.save(${entityName?uncap_first});
-		return Result.OK("添加成功！");
+		return Result.OK("Add successful！");
 	}
 	
 	/**
-	 *  编辑
+	 *  Edit
 	 *
 	 * @param ${entityName?uncap_first}
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-编辑")
-	@ApiOperation(value="${tableVo.ftlDescription}-编辑", notes="${tableVo.ftlDescription}-编辑")
+	@AutoLog(value = "${tableVo.ftlDescription}-Edit")
+	@ApiOperation(value="${tableVo.ftlDescription}-Edit", notes="${tableVo.ftlDescription}-Edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<?> edit(@RequestBody ${entityName} ${entityName?uncap_first}) {
 		${entityName?uncap_first}Service.updateById(${entityName?uncap_first});
-		return Result.OK("编辑成功!");
+		return Result.OK("Edit successful!");
 	}
 	
 	/**
-	 *  通过id删除
+	 *  Delete by ID
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-通过id删除")
-	@ApiOperation(value="${tableVo.ftlDescription}-通过id删除", notes="${tableVo.ftlDescription}-通过id删除")
+	@AutoLog(value = "${tableVo.ftlDescription}-Delete by ID")
+	@ApiOperation(value="${tableVo.ftlDescription}-Delete by ID", notes="${tableVo.ftlDescription}-Delete by ID")
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		${entityName?uncap_first}Service.removeById(id);
-		return Result.OK("删除成功!");
+		return Result.OK("Deletion successful!");
 	}
 	
 	/**
-	 *  批量删除
+	 *  Delete in bulk
 	 *
 	 * @param ids
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-批量删除")
-	@ApiOperation(value="${tableVo.ftlDescription}-批量删除", notes="${tableVo.ftlDescription}-批量删除")
+	@AutoLog(value = "${tableVo.ftlDescription}-Delete in bulk")
+	@ApiOperation(value="${tableVo.ftlDescription}-Delete in bulk", notes="${tableVo.ftlDescription}-Delete in bulk")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.${entityName?uncap_first}Service.removeByIds(Arrays.asList(ids.split(",")));
-		return Result.OK("批量删除成功！");
+		return Result.OK("The batch deletion is successful！");
 	}
 	
 	/**
-	 * 通过id查询
+	 * Query by ID
      *
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "${tableVo.ftlDescription}-通过id查询")
-	@ApiOperation(value="${tableVo.ftlDescription}-通过id查询", notes="${tableVo.ftlDescription}-通过id查询")
+	@AutoLog(value = "${tableVo.ftlDescription}-Query by ID")
+	@ApiOperation(value="${tableVo.ftlDescription}-Query by ID", notes="${tableVo.ftlDescription}-Query by ID")
 	@GetMapping(value = "/queryById")
 	public Result<?> queryById(@RequestParam(name="id",required=true) String id) {
 		${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.getById(id);
@@ -145,7 +145,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 	}
 
 	/**
-     * 导出excel
+     * Export to Excel
      *
      * @param request
      * @param ${entityName?uncap_first}
@@ -156,7 +156,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
     }
 
     /**
-     * 通过excel导入数据
+     * Import data via Excel
      *
      * @param request
      * @param response

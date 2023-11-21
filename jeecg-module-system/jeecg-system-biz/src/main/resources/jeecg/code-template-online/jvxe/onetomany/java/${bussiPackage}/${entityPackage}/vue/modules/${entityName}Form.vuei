@@ -2,7 +2,7 @@
 <template>
   <a-spin :spinning="confirmLoading">
     <j-form-container :disabled="formDisabled">
-      <!-- 主表单区域 -->
+      <!-- Main form region -->
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
 <#assign form_popup = false>
@@ -31,11 +31,11 @@
           <a-col :span="${form_span}" >
             <a-form-model-item label="${po.filedComment}" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="${autoStringSuffixForModel(po)}">
 	<#if po.classType =='date'>
-              <j-date placeholder="请选择${po.filedComment}" v-model="model.${po.fieldName}" style="width: 100%" <#if po.readonly=='Y'>disabled</#if>/>
+              <j-date placeholder="Please select ${po.filedComment}" v-model="model.${po.fieldName}" style="width: 100%" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType =='datetime'>
-              <j-date placeholder="请选择${po.filedComment}" v-model="model.${po.fieldName}" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" <#if po.readonly=='Y'>disabled</#if>/>
+              <j-date placeholder="Please select ${po.filedComment}" v-model="model.${po.fieldName}" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType =='time'>
-             <j-time placeholder="请选择${po.filedComment}" v-model="model.${po.fieldName}" style="width: 100%" <#if po.readonly=='Y'>disabled</#if>/>
+             <j-time placeholder="Please select ${po.filedComment}" v-model="model.${po.fieldName}" style="width: 100%" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType =='popup'>
 	     <#assign form_popup=true>
               <j-popup
@@ -56,25 +56,25 @@
 	<#elseif po.classType =='markdown'>
 	          <j-markdown-editor v-model="model.${autoStringSuffixForModel(po)}" id="${po.fieldName}"></j-markdown-editor>
     <#elseif po.classType =='password'>
-	          <a-input-password v-model="model.${po.fieldName}" placeholder="请输入${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>/>
+	          <a-input-password v-model="model.${po.fieldName}" placeholder="Please enter ${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType =='sel_user'>
               <j-select-user-by-dep v-model="model.${po.fieldName}" :multi="${po.extendParams.multi?default('true')}"<#if po.extendParams.store?default("")?trim?length gt 0> store="${po.extendParams.store}"</#if><#if po.extendParams.text?default("")?trim?length gt 0> text="${po.extendParams.text}"</#if> <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType =='textarea'>
-              <a-textarea v-model="model.${autoStringSuffixForModel(po)}" rows="4" placeholder="请输入${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>/>
+              <a-textarea v-model="model.${autoStringSuffixForModel(po)}" rows="4" placeholder="Please enter ${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType=='list' || po.classType=='radio'>
-              <j-dict-select-tag type="${po.classType}" v-model="model.${po.fieldName}" dictCode="${form_field_dictCode}" placeholder="请选择${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>/>
+              <j-dict-select-tag type="${po.classType}" v-model="model.${po.fieldName}" dictCode="${form_field_dictCode}" placeholder="Please select ${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType=='list_multi' || po.classType=='checkbox'>
-              <j-multi-select-tag type="${po.classType}" v-model="model.${po.fieldName}" dictCode="${form_field_dictCode}" placeholder="请选择${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>/>
+              <j-multi-select-tag type="${po.classType}" v-model="model.${po.fieldName}" dictCode="${form_field_dictCode}" placeholder="Please select ${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType=='sel_search'>
               <j-search-select-tag v-model="model.${po.fieldName}" dict="${form_field_dictCode}" <#if po.readonly=='Y'>disabled</#if>/>
     <#elseif po.classType=='cat_tree'>
     	<#assign form_cat_tree = true>
-              <j-category-select v-model="model.${po.fieldName}" pcode="${po.dictField?default("")}" placeholder="请选择${po.filedComment}" <#if po.dictText?default("")?trim?length gt 1>back="${dashedToCamel(po.dictText)}" @change="handleCategoryChange"</#if> <#if po.readonly=='Y'>disabled</#if>/>
+              <j-category-select v-model="model.${po.fieldName}" pcode="${po.dictField?default("")}" placeholder="Please select ${po.filedComment}" <#if po.dictText?default("")?trim?length gt 1>back="${dashedToCamel(po.dictText)}" @change="handleCategoryChange"</#if> <#if po.readonly=='Y'>disabled</#if>/>
     	<#if po.dictText?default("")?trim?length gt 1>
     	<#assign form_cat_back = "${po.dictText}">
     	</#if>
 	<#elseif po.fieldDbType=='int' || po.fieldDbType=='double' || po.fieldDbType=='BigDecimal'>
-              <a-input-number v-model="model.${po.fieldName}" placeholder="请输入${po.filedComment}" style="width: 100%" <#if po.readonly=='Y'>disabled</#if>/>
+              <a-input-number v-model="model.${po.fieldName}" placeholder="Please enter ${po.filedComment}" style="width: 100%" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType=='file'>
               <j-upload v-model="model.${autoStringSuffixForModel(po)}" <#if po.readonly=='Y'>disabled</#if> <#if po.uploadnum??>:number=${po.uploadnum}</#if>></j-upload>
 	<#elseif po.classType=='image'>
@@ -84,7 +84,7 @@
 		<#elseif po.classType == 'sel_tree'>
   	          <j-tree-select
                 ref="treeSelect"
-                placeholder="请选择${po.filedComment}"
+                placeholder="Please select ${po.filedComment}"
                 v-model="model.${autoStringSuffixForModel(po)}"
                 <#if po.dictText??>
                 <#if po.dictText?split(',')[2]?? && po.dictText?split(',')[0]??>
@@ -99,7 +99,7 @@
                 <#if po.readonly=='Y'>disabled</#if>>
               </j-tree-select>
 	<#else>
-              <a-input v-model="model.${po.fieldName}" placeholder="请输入${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>></a-input>
+              <a-input v-model="model.${po.fieldName}" placeholder="Please enter ${po.filedComment}" <#if po.readonly=='Y'>disabled</#if>></a-input>
     </#if>
             </a-form-model-item>
           </a-col>
@@ -108,7 +108,7 @@
         </a-row>
       </a-form-model>
     </j-form-container>
-      <!-- 子表单区域 -->
+      <!-- Subform Area -->
     <a-tabs v-model="activeKey" @change="handleChangeTabs">
 <#list subTables as sub><#rt/>
   <#if sub.foreignRelationType =='1'>
@@ -178,7 +178,7 @@
         model:{
            <#include "/common/init/initValue.ftl">
          },
-        // 新增时子表默认添加几行空数据
+        // When adding a new subtable, a few rows of empty data are added by default.
         addDefaultRowNum: 1,
         <#include "/common/validatorRulesTemplate/main.ftl">
         refKeys: [<#list subTables as sub>'${sub.entityName?uncap_first}', </#list>],
@@ -194,7 +194,7 @@
 <#if sub.foreignRelationType =='0'>
 <#assign popupBackFields = "">
 
-<#-- 循环子表的列 开始 -->
+<#-- Loop over columns of subtable Start -->
 <#list sub.colums as col><#rt/>
 <#if col.isShow =='Y'>
     <#if col.filedComment !='外键' >
@@ -339,7 +339,7 @@
       <#if col.classType =='file'>
               placeholder: '请选择文件',
       <#else>
-              placeholder: '请输入${'$'}{title}',
+              placeholder: 'Please enter ${'$'}{title}',
       </#if>
       <#if col.defaultVal??>
         <#if col.fieldDbType=="BigDecimal" || col.fieldDbType=="double" || col.fieldDbType=="int">
@@ -350,11 +350,11 @@
       <#else>
               defaultValue:'',
       </#if>
-      <#-- 子表的校验 -->
+      <#-- Verification of subtables -->
       <#assign subFieldValidType = col.fieldValidType!''>
       <#-- 非空校验 -->
       <#if col.nullable == 'N' || subFieldValidType == '*'>
-              validateRules: [{ required: true, message: '${'$'}{title}不能为空' }],
+              validateRules: [{ required: true, message: '${'$'}{title} Cannot be empty' }],
       <#-- 其他情况下，只要有值就被认为是正则校验 -->
       <#elseif subFieldValidType?length gt 0>
         <#assign subMessage = '格式不正确'>
@@ -367,7 +367,7 @@
     </#if>
 </#if>
 </#list>
-<#-- 循环子表的列 结束 -->
+<#-- Loop over columns of subtable end -->
 
 <#-- 处理popup的隐藏列 -->
 <#if popupBackFields?length gt 0>
@@ -477,7 +477,7 @@
         })
         </#if>
       },
-      /** 调用完edit()方法之后会自动调用此方法 */
+      /** This method will be called automatically after calling the edit() method. */
       editAfter() {
         this.$nextTick(() => {
 <#list subTables as sub><#rt/>
@@ -486,7 +486,7 @@
 </#if>
 </#list>         
         })
-        // 加载子表数据
+        // Load subtable data
         if (this.model.id) {
           let params = { id: this.model.id }
 <#list subTables as sub><#rt/>
@@ -517,11 +517,11 @@
               })
             })
         },
-      /** 整理成formData */
+      /** Organized into formData */
       classifyIntoFormData(allValues) {
         let main = Object.assign(this.model, allValues.formValue)
         return {
-          ...main, // 展开
+          ...main, // Expand
 <#assign subManyIndex = 0>
 <#list subTables as sub><#rt/>
 <#if sub.foreignRelationType =='0'>

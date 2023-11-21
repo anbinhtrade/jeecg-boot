@@ -3,28 +3,28 @@
 <template>
  <div class="p-2">
    <#-- 结束循环 -->
-    <!--引用表格-->
+    <!--Reference table-->
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
-      <!--插槽:table标题-->
+      <!--Slot: table title-->
       <template #tableTitle>
-        <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined"> 新增</a-button>
-        <a-button  type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button  type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+        <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined"> New</a-button>
+        <a-button  type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> Export</a-button>
+        <j-upload-button  type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Import</j-upload-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                删除
+                Delete
               </a-menu-item>
             </a-menu>
           </template>
-          <a-button>批量操作
+          <a-button>Delete
             <Icon icon="mdi:chevron-down"></Icon>
           </a-button>
         </a-dropdown>
       </template>
-      <!--操作栏-->
+      <!--Action bar-->
       <template #action="{ record }">
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)"/>
       </template>
@@ -64,12 +64,12 @@
   import { downloadFile } from '/@/utils/common/renderUtils';
   
   const toggleSearchStatus = ref<boolean>(false);
-  //接收主表id
+  //Receive main table id
   const mainId = inject('mainId') || '';
-  //提示弹窗
+  //Prompt pop-up window
   const $message = useMessage()
   const queryParam = {};
-  // 列表页面公共参数、方法
+  // List page public parameters and methods
   const { prefixCls, tableContext, onImportXls, onExportXls } = useListPage({
     tableProps: {
       api: ${sub.entityName?uncap_first}List,
@@ -99,7 +99,7 @@
     }
   });
 
-  //注册table数据
+  //Register table data
   const [registerTable, { reload<#if sub.foreignRelationType =='1'>,getDataSource</#if>}, { rowSelection, selectedRowKeys }] = tableContext;
   const registerModal = ref();
   const formRef = ref();
@@ -115,11 +115,11 @@
   });
   
   /**
-   * 新增事件
+   * New event
    */
   function handleAdd() {
     if (isEmpty(unref(mainId))) {
-        $message.createMessage.warning('请选择一个主表信息')
+        $message.createMessage.warning('Please select a main table information')
         return;
     }
     <#if sub.foreignRelationType =='1'>
@@ -134,7 +134,7 @@
   }
 
   /**
-   * 编辑事件
+   * Edit event
    */
   async function handleEdit(record: Recordable) {
     registerModal.value.disableSubmit = false;
@@ -150,51 +150,51 @@
   }
   
   /**
-   * 删除事件
+   * Delete event
    */
   async function handleDelete(record) {
     await ${sub.entityName?uncap_first}Delete({id: record.id}, handleSuccess);
   }
 
   /**
-   * 批量删除事件
+   * Batch delete events
    */
   async function batchHandleDelete() {
     await ${sub.entityName?uncap_first}DeleteBatch({ids: selectedRowKeys.value}, handleSuccess);
   }
 
   /**
-   * 成功回调
+   * Successful callback
    */
   function handleSuccess() {
     (selectedRowKeys.value = []) && reload();
   }
 
   /**
-   * 操作栏
+   * Action bar
    */
   function getTableAction(record) {
     return [
       {
-        label: '编辑',
+        label: 'Edit',
         onClick: handleEdit.bind(null, record),
       },
     ]
   }
   
   /**
-   * 下拉操作栏
+   * Drop-down action bar
    */
   function getDropDownAction(record){
     return [
       {
-        label: '详情',
+        label: 'Detail',
         onClick: handleDetail.bind(null, record),
       },
       {
-        label: '删除',
+        label: 'Delete',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Confirm to delete',
           confirm: handleDelete.bind(null, record),
         },
       },
@@ -202,7 +202,7 @@
   }
   
   /**
-   * 重置
+   * Reset
    */
   function searchReset() {
     formRef.value.resetFields();

@@ -10,40 +10,40 @@
     import {BasicForm, useForm} from '/@/components/Form/index';
     import {formSchema} from '../${entityName}.data';
     import {saveOrUpdate} from '../${entityName}.api';
-    // Emits声明
+    // Emits Statement
     const emit = defineEmits(['register','success']);
     const isUpdate = ref(true);
-    //表单配置
+    //Form configuration
     const [registerForm, {resetFields, setFieldsValue, validate}] = useForm({
         labelWidth: 150,
         schemas: formSchema,
         showActionButtonGroup: false,
     });
-    //表单赋值
+    //Form Assignment
     const [registerModal, {setModalProps, closeModal}] = useModalInner(async (data) => {
-        //重置表单
+        //Reset form
         await resetFields();
         setModalProps({confirmLoading: false,showCancelBtn:data?.showFooter,showOkBtn:data?.showFooter});
         isUpdate.value = !!data?.isUpdate;
         if (unref(isUpdate)) {
-            //表单赋值
+            //Form Assignment
             await setFieldsValue({
                 ...data.record,
             });
         }
     });
-    //设置标题
-    const title = computed(() => (!unref(isUpdate) ? '新增' : '编辑'));
-    //表单提交事件
+    //Set title
+    const title = computed(() => (!unref(isUpdate) ? 'New' : 'Edit'));
+    //form submission event
     async function handleSubmit(v) {
         try {
             let values = await validate();
             setModalProps({confirmLoading: true});
-            //提交表单
+            //Submit Form
             await saveOrUpdate(values, isUpdate.value);
-            //关闭弹窗
+            //Close pop-up window
             closeModal();
-            //刷新列表
+            //Refresh The List
             emit('success', {isUpdate: isUpdate.value, values});
         } finally {
             setModalProps({confirmLoading: false});

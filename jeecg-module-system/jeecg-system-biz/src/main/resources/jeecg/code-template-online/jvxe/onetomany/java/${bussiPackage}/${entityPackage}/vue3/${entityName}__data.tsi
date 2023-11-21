@@ -4,7 +4,7 @@ import {FormSchema} from '/@/components/Table';
 import { rules} from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
 import {JVxeTypes,JVxeColumn} from '/@/components/jeecg/JVxeTable/types'
-//列表数据
+//List data
 export const columns: BasicColumn[] = [
  <#list columns as po>
    <#if po.isShowList =='Y' && po.fieldName !='id'>
@@ -64,7 +64,7 @@ export const columns: BasicColumn[] = [
    </#if>
  </#list>
 ];
-//查询数据
+//Query data
 export const searchFormSchema: FormSchema[] = [
 <#-- 开始循环 -->
 <#list columns as po>
@@ -305,7 +305,7 @@ export const formSchema: FormSchema[] = [
           return [
             <#-- 非空校验 -->
            <#if po.nullable == 'N' || fieldValidType == '*'>
-                 { required: true, message: '请输入${po.filedComment}!'},
+                 { required: true, message: 'Please enter ${po.filedComment}!'},
            <#elseif fieldValidType!=''>
                  { required: false},
            </#if>
@@ -363,7 +363,7 @@ export const formSchema: FormSchema[] = [
 </#if>
 </#list>
 <#if id_exists == false>
-	// TODO 主键隐藏字段，目前写死为ID
+	// TODO The primary key hidden field is currently hard-coded as ID.
 	{
 	  label: '',
 	  field: 'id',
@@ -510,7 +510,7 @@ export const ${sub.entityName?uncap_first}FormSchema: FormSchema[] = [
           return [
             <#-- 非空校验 -->
            <#if po.nullable == 'N' || fieldValidType == '*'>
-                 { required: true, message: '请输入${po.filedComment}!'},
+                 { required: true, message: 'Please enter ${po.filedComment}!'},
            <#elseif fieldValidType!=''>
                  { required: false},
            </#if>
@@ -578,13 +578,13 @@ export const ${sub.entityName?uncap_first}FormSchema: FormSchema[] = [
 ];
 </#if>
 </#list>
-//子表表格配置
+//Subtable table configuration
 <#list subTables as sub>
 <#if sub.foreignRelationType =='0'>
 export const ${sub.entityName?uncap_first}Columns: JVxeColumn[] = [
 <#assign popupBackFields = "">
 
-<#-- 循环子表的列 开始 -->
+<#-- Loop over columns of subtable Start -->
 <#list sub.colums as col><#rt/>
 <#if col.isShow =='Y'>
 <#if col.filedComment !='外键' >
@@ -712,7 +712,7 @@ export const ${sub.entityName?uncap_first}Columns: JVxeColumn[] = [
 <#if col.classType =='file'>
       placeholder: '请选择文件',
 <#else>
-      placeholder: '请输入${'$'}{title}',
+      placeholder: 'Please enter ${'$'}{title}',
 </#if>
 <#if col.defaultVal??>
 <#if col.fieldDbType=="BigDecimal" || col.fieldDbType=="double" || col.fieldDbType=="int">
@@ -723,13 +723,13 @@ export const ${sub.entityName?uncap_first}Columns: JVxeColumn[] = [
 <#else>
       defaultValue:'',
 </#if>
-<#-- 子表的校验 -->
+<#-- Verification of subtables -->
  <#include "/common/validatorRulesTemplate/sub-vue3.ftl">
     },
 </#if>
 </#if>
 </#list>
-<#-- 循环子表的列 结束 -->
+<#-- Loop over columns of subtable end -->
   ]
 </#if>
 </#list>

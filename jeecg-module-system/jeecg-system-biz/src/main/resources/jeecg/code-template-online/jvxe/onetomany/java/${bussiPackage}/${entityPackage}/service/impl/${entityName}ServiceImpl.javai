@@ -41,7 +41,7 @@ public class ${entityName}ServiceImpl extends ServiceImpl<${entityName}Mapper, $
 		if(${sub.entityName?uncap_first}List!=null && ${sub.entityName?uncap_first}List.size()>0) {
 			for(${sub.entityName} entity:${sub.entityName?uncap_first}List) {
 				<#list sub.foreignKeys as key>
-				//外键设置
+				// Foreign key settings
 				<#if key?lower_case?index_of("${primaryKeyField}")!=-1>
 				entity.set${key?cap_first}(${entityName?uncap_first}.get${primaryKeyField?cap_first}());
 				<#else>
@@ -59,17 +59,17 @@ public class ${entityName}ServiceImpl extends ServiceImpl<${entityName}Mapper, $
 	public void updateMain(${entityName} ${entityName?uncap_first},<#list subTables as sub>List<${sub.entityName}> ${sub.entityName?uncap_first}List<#if sub_has_next>,</#if></#list>) {
 		${entityName?uncap_first}Mapper.updateById(${entityName?uncap_first});
 		
-		//1.先删除子表数据
+		//1. Delete the subtable data first
 		<#list subTables as sub>
 		${sub.entityName?uncap_first}Mapper.deleteByMainId(${entityName?uncap_first}.getId());
 		</#list>
 		
-		//2.子表数据重新插入
+		//2. Re-insert subtable data
 		<#list subTables as sub>
 		if(${sub.entityName?uncap_first}List!=null && ${sub.entityName?uncap_first}List.size()>0) {
 			for(${sub.entityName} entity:${sub.entityName?uncap_first}List) {
 				<#list sub.foreignKeys as key>
-				//外键设置
+				// Foreign key settings
 				<#if key?lower_case?index_of("${primaryKeyField}")!=-1>
 				entity.set${key?cap_first}(${entityName?uncap_first}.get${primaryKeyField?cap_first}());
 				<#else>
