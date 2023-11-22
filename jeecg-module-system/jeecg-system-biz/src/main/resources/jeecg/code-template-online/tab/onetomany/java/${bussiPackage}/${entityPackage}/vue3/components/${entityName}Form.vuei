@@ -3,7 +3,7 @@
   <div>
   <!-- Subform Area -->
     <a-tabs v-model:activeKey="activeKey" animated @change="handleChangeTabs">
-     <!--主表区域 -->
+     <!--Main table area -->
      <a-tab-pane tab="${tableVo.ftlDescription}" :key="refKeys[0]" :forceRender="true" :style="tabsStyle">
        <BasicForm @register="registerForm" ref="formRef"/>
      </a-tab-pane>
@@ -37,7 +37,7 @@
     </a-tabs>
 
     <div style="width: 100%;text-align: center;margin-top: 10px;" v-if="showFlowSubmitButton">
-      <a-button preIcon="ant-design:check-outlined" style="width: 126px" type="primary" @click="handleSubmit">提 交</a-button>
+      <a-button preIcon="ant-design:check-outlined" style="width: 126px" type="primary" @click="handleSubmit">Submit</a-button>
     </div>
   </div>
 </template>
@@ -94,7 +94,7 @@
       }
       return true;
     });
-    // 是否显示提交按钮
+    // Whether to display the submit button
     const showFlowSubmitButton = computed(()=>{
       if(props.formBpm === true){
         if(props.formData.disabled === false){
@@ -115,7 +115,7 @@
     onMounted(()=>{
       initFormData();
     });
-    //渲染流程表单数据
+    //Render process form data
     const queryByIdUrl = '/${entityPackage}/${entityName?uncap_first}/queryById';
     async function initFormData(){
       if(props.formBpm === true){
@@ -150,10 +150,10 @@
       let height: Nullable<string> = null
       let minHeight = '100px'
       // 弹窗wrapper
-      <#-- update-begin-author:taoyan date:2022-11-14 for:VUEN-2674 【代码生成】对接流程表单 附加单据显示问题 5.多tab生成代码后，新增 没有滚动条，只能填写部分字段 --> 
+      <#-- update-begin-author:taoyan date:2022-11-14 for:VUEN-2674 [Code generation] Additional document display problem in the docking process form 5. After generating code for multiple tabs, there is no scroll bar for the new addition. Fill in some fields -->
       let overflow = 'auto';
       return {height, minHeight, overflow};
-      <#-- update-end-author:taoyan date:2022-11-14 for:VUEN-2674 【代码生成】对接流程表单 附加单据显示问题 5.多tab生成代码后，新增 没有滚动条，只能填写部分字段 -->
+      <#-- update-end-author:taoyan date:2022-11-14 for:VUEN-2674 [Code generation] Display problem of additional documents in the docking process form 5. After generating code for multiple tabs, there is no scroll bar for the new addition. Fill in some fields -->
     })
 
     async function reset(){
@@ -184,7 +184,7 @@
          }
        }
       <#if hasOne2One==true>
-     //校验所有一对一子表表单
+     //Verify all one-to-one subforms
      function validateSubForm(allValues){
          return new Promise((resolve,reject)=>{
              Promise.all([
@@ -197,7 +197,7 @@
                  resolve(allValues)
              }).catch(e => {
                  if (e.error === VALIDATE_FAILED) {
-                     // 如果有未通过表单验证的子表，就自动跳转到它所在的tab
+                     // If there is a sub-table that fails form verification, it will automatically jump to the tab where it is located.
                      activeKey.value = e.index == null ? unref(activeKey) : refKeys.value[e.index]
                  } else {
                      console.error(e)
@@ -214,7 +214,7 @@
 </script>
 
 <style lang="less" scoped>
-/** 时间和数字输入框样式 */
+/** Time and number input box styles */
     :deep(.ant-input-number){
         width: 100%
     }

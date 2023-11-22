@@ -30,7 +30,7 @@
                 baseColProps: {span: ${getFormSpan(tableVo.fieldRowNum?default(1))}}
             });
             /**
-            *初始化加载数据
+            * Initialize loading data
             */
             function initFormData(url,id){
                 if(id){
@@ -41,7 +41,7 @@
                 setProps({disabled: props.disabled})
             }
            /**
-            *获取表单数据
+            *Get form data
             */
             function getFormData(){
                let formData = getFieldsValue();
@@ -53,11 +53,11 @@
                return [formData];
             }
             /**
-            *表单校验
+            * form validation
             */
             function validateForm(index){
                 return new Promise((resolve, reject) => {
-                    // 验证子表表单
+                    // Validate subform
                     validate().then(()=>{
                         return resolve()
                     }).catch(()=> {

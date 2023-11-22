@@ -96,7 +96,7 @@
       }
     },
     created () {
-    //备份model原始值
+    //Back up model original value
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods:{
@@ -132,7 +132,7 @@
               formdata_arr.push(this.model)
             }
           }else{
-            this.$emit("validateError","${sub.ftlDescription}表单校验未通过");
+            this.$emit("validateError","${sub.ftlDescription} Form verification failed");
             return false
           }
         })
@@ -140,7 +140,7 @@
       },
       validate(index){
         return new Promise((resolve, reject) => {
-          // 验证主表表单
+          // Validate main form
          this.$refs.form.validate(valid => {
             !valid ? reject({ error: VALIDATE_NO_PASSED ,index}) : resolve()
           })

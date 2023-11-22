@@ -169,8 +169,7 @@ public class ${entityName}Controller {
 	 */
 	@AutoLog(value = "${sub.ftlDescription}-Query by main table id")
 	@ApiOperation(value="${sub.ftlDescription}-Query by main table id", notes="${sub.ftlDescription}-Query by main table id")
-	 <#--  update-begin--Author:kangxiaolin  Date:20190905 for：[442]主子表分开维护，生成的代码子表的分页改为真实的分页--------------------          	 -->
-	@GetMapping(value = "/list${sub.entityName}ByMainId")
+<#-- update-begin--Author:kangxiaolin Date:20190905 for: [442] The main and sub-tables are maintained separately, and the paging of the generated code sub-tables is changed to real paging------------- ------- -->	@GetMapping(value = "/list${sub.entityName}ByMainId")
 	public Result<?> list${sub.entityName}ByMainId(${sub.entityName} ${sub.entityName?uncap_first},
                 								  @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
                 								  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
@@ -199,7 +198,7 @@ ${sub.entityName?uncap_first}.get${key}()!=null<#rt/>
             return Result.OK();
         }
     }
-    <#--   update-end--Author:kangxiaolin  Date:20190905 for：[442]主子表分开维护，生成的代码子表的分页改为真实的分页--------------------          	 -->
+    <#-- update-end--Author:kangxiaolin Date:20190905 for: [442] The main and sub-tables are maintained separately, and the paging of the generated code sub-tables is changed to real paging------------- ------- -->
 	
 	/**
      * Add ${sub.ftlDescription}

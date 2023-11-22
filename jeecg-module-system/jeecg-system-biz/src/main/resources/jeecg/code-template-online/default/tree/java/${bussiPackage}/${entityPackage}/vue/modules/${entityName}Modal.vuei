@@ -80,7 +80,7 @@
       <#assign form_cat_back = "${po.dictText}">
       </#if>
   <#elseif po.classType =='pca'>
-          <j-area-linkage type="cascader" v-model="model.${po.fieldName}" placeholder="请输入省市区" <#if po.readonly=='Y'>disabled</#if> />
+          <j-area-linkage type="cascader" v-model="model.${po.fieldName}" placeholder="Please enter the province and city" <#if po.readonly=='Y'>disabled</#if> />
 	<#elseif po.classType=='umeditor'>
           <j-editor v-model="model.${autoStringSuffixForModel(po)}" <#if po.readonly=='Y'>disabled</#if>/>
   <#elseif po.classType =='markdown'>
@@ -151,7 +151,7 @@
       }
     },
     created () {
-       //备份model原始值
+       //Back up model original value
        this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods: {
@@ -184,7 +184,7 @@
                method = 'put';
             }
              if(this.model.id && this.model.id === this.model[this.pidField]){
-              that.$message.warning("父级节点不能选择自己");
+              that.$message.warning("The parent node cannot select itself");
               that.confirmLoading = false;
               return;
             }

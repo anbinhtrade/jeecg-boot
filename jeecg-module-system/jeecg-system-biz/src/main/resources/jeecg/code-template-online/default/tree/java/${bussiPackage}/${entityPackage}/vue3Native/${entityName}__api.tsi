@@ -34,7 +34,7 @@ export const getImportUrl = Api.importExcel;
 export const list = (params) => defHttp.get({ url: Api.list, params });
 
 /**
- * 删除
+ * Delete
  * @param params
  * @param handleSuccess
  */
@@ -75,19 +75,19 @@ export const saveOrUpdateDict = (params, isUpdate) => {
 }
 
 /**
- * 查询全部树形节点数据
+ * Query all tree node data
  * @param params
  */
 export const loadTreeData = (params) => defHttp.get({ url: Api.loadTreeData,params });
 
 /**
- * 查询子节点数据
+ * Query child node data
  * @param params
  */
 export const getChildList = (params) => defHttp.get({ url: Api.getChildList, params });
   
 /**
- * 批量查询子节点数据
+ * Query child node data in batches
  * @param params
  */
 export const getChildListBatch = (params) => defHttp.get({ url: Api.getChildListBatch, params },{ isTransformResponse:false });

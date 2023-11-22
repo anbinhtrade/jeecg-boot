@@ -52,7 +52,7 @@
 <#elseif po.classType =='switch'>
               <j-switch v-model="model.${po.fieldName}" <#if po.dictField != 'is_open'>:options="${po.dictField}"</#if> <#if po.readonly=='Y'>disabled</#if>></j-switch>
 	<#elseif po.classType =='pca'>
-		      <j-area-linkage type="cascader" v-model="model.${po.fieldName}" placeholder="请输入省市区" <#if po.readonly=='Y'>disabled</#if>/>
+		      <j-area-linkage type="cascader" v-model="model.${po.fieldName}" placeholder="Please enter the province and city" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType =='markdown'>
 	          <j-markdown-editor v-model="model.${autoStringSuffixForModel(po)}" id="${po.fieldName}"></j-markdown-editor>
     <#elseif po.classType =='password'>
@@ -135,7 +135,7 @@
 </#list>
     </a-tabs>
     <#if bpm_flag>
-    <a-row v-if="showFlowSubmitButton" style="text-align: center;width: 100%;margin-top: 16px;"><a-button icon="check" style="width: 126px" type="primary" @click="handleOk">提 交</a-button></a-row>
+    <a-row v-if="showFlowSubmitButton" style="text-align: center;width: 100%;margin-top: 16px;"><a-button icon="check" style="width: 126px" type="primary" @click="handleOk">Submit</a-button></a-row>
     </#if>
   </a-spin>
 </template>
@@ -337,7 +337,7 @@
               width:"200px",
       </#if>
       <#if col.classType =='file'>
-              placeholder: '请选择文件',
+              placeholder: 'Please select file',
       <#else>
               placeholder: 'Please enter ${'$'}{title}',
       </#if>
@@ -352,14 +352,14 @@
       </#if>
       <#-- Verification of subtables -->
       <#assign subFieldValidType = col.fieldValidType!''>
-      <#-- 非空校验 -->
+      <#-- Non-null check -->
       <#if col.nullable == 'N' || subFieldValidType == '*'>
               validateRules: [{ required: true, message: '${'$'}{title} Cannot be empty' }],
-      <#-- 其他情况下，只要有值就被认为是正则校验 -->
+      <#-- In other cases, as long as there is a value, it is considered a regular check -->
       <#elseif subFieldValidType?length gt 0>
-        <#assign subMessage = '格式不正确'>
+        <#assign subMessage = 'Incorrect format'>
         <#if subFieldValidType == 'only' >
-          <#assign subMessage = '不能重复'>
+          <#assign subMessage = 'Cannot be repeated'>
         </#if>
               validateRules: [{ pattern: "${subFieldValidType}", message: "${'$'}{title}${subMessage}" }],
       </#if>
@@ -369,7 +369,7 @@
 </#list>
 <#-- Loop over columns of subtable end -->
 
-<#-- 处理popup的隐藏列 -->
+<#-- Handling hidden columns of popups -->
 <#if popupBackFields?length gt 0>
 <#list popupBackFields?split(",") as item>
 <#if item?length gt 0>
@@ -408,20 +408,20 @@
     },
     props: {
     <#if bpm_flag>
-      //流程表单data
+      //Process form data
       formData: {
         type: Object,
         default: ()=>{},
         required: false
       },
-      //表单模式：false流程表单 true普通表单
+      //Form mode: false process form true normal form
       formBpm: {
         type: Boolean,
         default: false,
         required: false
       },
       </#if>
-      //表单禁用
+      //Form disabled
       disabled: {
         type: Boolean,
         default: false,
@@ -453,7 +453,7 @@
     },
     created () {
      <#if bpm_flag>
-      //如果是流程中表单，则需要加载流程表单data
+      //If it is a form in the process, you need to load the process form data
       this.showFlowData();
      </#if>
     },
@@ -496,7 +496,7 @@
 </#list>
         }
       },
-      //校验所有一对一子表表单
+      //Verify all one-to-one subforms
         validateSubForm(allValues){
             return new Promise((resolve,reject)=>{
               Promise.all([
@@ -509,7 +509,7 @@
                 resolve(allValues)
               }).catch(e => {
                 if (e.error === VALIDATE_FAILED) {
-                  // 如果有未通过表单验证的子表，就自动跳转到它所在的tab
+                  // If there is a sub-table that fails form verification, it will automatically jump to the tab where it is located.
                   this.activeKey = e.index == null ? this.activeKey : this.refKeys[e.index]
                 } else {
                   console.error(e)
@@ -534,7 +534,7 @@
         }
       },
       <#if bpm_flag>
-      //渲染流程表单数据
+      //Render process form data
       showFlowData(){
         if(this.formBpm === true){
           let params = {id:this.formData.dataId};

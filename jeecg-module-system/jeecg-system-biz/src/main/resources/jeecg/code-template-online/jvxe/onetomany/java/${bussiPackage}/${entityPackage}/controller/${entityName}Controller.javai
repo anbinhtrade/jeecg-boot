@@ -129,7 +129,7 @@ public class ${entityName}Controller {
 		BeanUtils.copyProperties(${entityName?uncap_first}Page, ${entityName?uncap_first});
 		${entityName} ${entityName?uncap_first}Entity = ${entityName?uncap_first}Service.getById(${entityName?uncap_first}.getId());
 		if(${entityName?uncap_first}Entity==null) {
-			return Result.error("未找到对应数据");
+			return Result.error("No corresponding data found");
 		}
 		${entityName?uncap_first}Service.updateMain(${entityName?uncap_first}, <#list subTables as sub>${entityName?uncap_first}Page.get${sub.entityName}List()<#if sub_has_next>,</#if></#list>);
 		return Result.OK("Successfully Edited!");
@@ -177,7 +177,7 @@ public class ${entityName}Controller {
 	public Result<${entityName}> queryById(@RequestParam(name="id",required=true) String id) {
 		${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.getById(id);
 		if(${entityName?uncap_first}==null) {
-			return Result.error("未找到对应数据");
+			return Result.error("No corresponding data found");
 		}
 		return Result.OK(${entityName?uncap_first});
 
@@ -208,11 +208,11 @@ public class ${entityName}Controller {
     @RequiresPermissions("${entityPackage}:${tableName}:exportXls")
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, ${entityName} ${entityName?uncap_first}) {
-      // Step.1 组装查询条件查询数据
+      // Step.1 Assemble query condition query data
       QueryWrapper<${entityName}> queryWrapper = QueryGenerator.initQueryWrapper(${entityName?uncap_first}, request.getParameterMap());
       LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 
-      //配置选中数据查询条件
+      //Configure selected data query conditions
       String selections = request.getParameter("selections");
       if(oConvertUtils.isNotEmpty(selections)) {
          List<String> selectionList = Arrays.asList(selections.split(","));
@@ -221,7 +221,7 @@ public class ${entityName}Controller {
       //Step.2 Get export data
       List<${entityName}> ${entityName?uncap_first}List = ${entityName?uncap_first}Service.list(queryWrapper);
 
-      // Step.3 组装pageList
+      // Step.3 Assemble pageList
       List<${entityName}Page> pageList = new ArrayList<${entityName}Page>();
       for (${entityName} main : ${entityName?uncap_first}List) {
           ${entityName}Page vo = new ${entityName}Page();
@@ -233,9 +233,9 @@ public class ${entityName}Controller {
           pageList.add(vo);
       }
 
-      // Step.4 AutoPoi 导出Excel
+      // Step.4 AutoPoi ExportExcel
       ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
-      mv.addObject(NormalExcelConstants.FILE_NAME, "${tableVo.ftlDescription}列表");
+      mv.addObject(NormalExcelConstants.FILE_NAME, "${tableVo.ftlDescription} list");
       mv.addObject(NormalExcelConstants.CLASS, ${entityName}Page.class);
       mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("${tableVo.ftlDescription} Data", "Exporter: "+sysUser.getRealname(), "${tableVo.ftlDescription}"));
       mv.addObject(NormalExcelConstants.DATA_LIST, pageList);

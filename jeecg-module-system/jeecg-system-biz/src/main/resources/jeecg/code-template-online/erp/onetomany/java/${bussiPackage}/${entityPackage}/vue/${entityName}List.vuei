@@ -11,7 +11,7 @@
 <#assign list_need_category=false>
 <#assign list_need_pca=false>
 <#assign subMainFieldMap={}>
-<#-- 开始循环 -->
+<#-- Start loop -->
 <#list columns as po>
 <#if po.isQuery=='Y'>
 <#assign query_flag=true>
@@ -42,11 +42,11 @@
 			<#elseif po.classType=='datetime'>
               <#if query_field_no gt 1>  </#if><j-date :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}"></j-date>
             <#elseif po.classType=='pca'>
-              <#if query_field_no gt 1>  </#if><j-area-linkage type="cascader" v-model="queryParam.${po.fieldName}" placeholder="请选择省市区"/>
+              <#if query_field_no gt 1>  </#if><j-area-linkage type="cascader" v-model="queryParam.${po.fieldName}" placeholder="Please enter the province and city"/>
             <#elseif po.classType=='popup'>
               <#if query_field_no gt 1>  </#if><j-popup placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}" code="${po.dictTable}" org-fields="${po.dictField}" dest-fields="${po.dictText}" :field="getPopupField('${po.dictText}')" :multi="${po.extendParams.popupMulti?c}"/>
 			<#elseif po.classType=='list' || po.classType=='radio' || po.classType=='checkbox'>
-			<#--  ---------------------------下拉或是单选 判断数据字典是表字典还是普通字典------------------------------- -->
+			<#--  ---------------------------Drop down or single selection to determine whether the data dictionary is a table dictionary or an ordinary dictionary------------------------------- -->
 			<#if po.dictTable?default("")?trim?length gt 1>
               <#if query_field_no gt 1>  </#if><j-dict-select-tag placeholder="Please select ${po.filedComment}" v-model="queryParam.${po.fieldName}" dictCode="${po.dictTable},${po.dictText},${po.dictField}"/>
 			<#elseif po.dictField?default("")?trim?length gt 1>
@@ -90,7 +90,7 @@
 <#assign list_need_pca=true>
 </#if>
 </#list>
-<#-- 结束循环 -->
+<#-- end loop -->
 <#t>
 <#if query_field_no gt 2>
           </template>
@@ -119,7 +119,7 @@
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">Import</a-button>
       </a-upload>
-      <!-- 高级查询区域 -->
+      <!-- Advanced query area -->
       <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>
     </div>
 
@@ -149,11 +149,11 @@
           <div v-html="text"></div>
         </template>
         <template slot="imgSlot" slot-scope="text,record">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无图片</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">No pictures</span>
           <img v-else :src="getImgView(text)" :preview="record.id" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
         </template>
         <template slot="fileSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">No file</span>
           <a-button
             v-else
             :ghost="true"
@@ -161,7 +161,7 @@
             icon="download"
             size="small"
             @click="downloadFile(text)">
-            下载
+            Download
           </a-button>
         </template>
         <#if list_need_pca>
@@ -270,9 +270,9 @@
             <#elseif po.classType=='switch'>
             dataIndex: '${po.fieldName}',
             <#if po.dictField != 'is_open'>
-            customRender: (text) => (!text ? "" : (text == ${po.dictField}[0] ? "是" : "否"))
+            customRender: (text) => (!text ? "" : (text == ${po.dictField}[0] ? "Yes" : "No"))
             <#else>
-            customRender: (text) => (!text ? "" : (text == "Y" ? "是" : "否"))
+            customRender: (text) => (!text ? "" : (text == "Y" ? "Yes" : "No"))
             </#if>
             <#elseif po.classType=='cat_tree'>
             <#if list_need_category>
@@ -325,13 +325,13 @@
          </#if>
          </#list>
         },
-        /* 分页参数 */
+        /* Paging parameters */
         ipagination:{
           current: 1,
           pageSize: 5,
           pageSizeOptions: ['5', '10', '50'],
           showTotal: (total, range) => {
-            return range[0] + "-" + range[1] + " 共" + total + "条"
+            return range[0] + "-" + range[1] + " total" + total + "item"
           },
           showQuickJumper: true,
           showSizeChanger: true,
@@ -421,15 +421,15 @@
       },
       loadData(arg) {
         if(!this.url.list){
-          this.$message.error("请设置url.list属性!")
+          this.$message.error("Please set the url.list property!")
           return
         }
-        //加载数据 若传入参数1则加载第一页的内容
+        //Load data. If parameter 1 is passed in, the content of the first page will be loaded.
         if (arg === 1) {
           this.ipagination.current = 1;
         }
         this.onClearSelected()
-        var params = this.getQueryParams();//查询条件
+        var params = this.getQueryParams();//Query conditions
         this.loading = true;
         getAction(this.url.list, params).then((res) => {
           if (res.success) {

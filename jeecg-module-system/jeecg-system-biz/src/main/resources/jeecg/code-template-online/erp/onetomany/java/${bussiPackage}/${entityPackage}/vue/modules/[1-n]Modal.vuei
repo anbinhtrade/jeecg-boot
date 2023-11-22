@@ -50,7 +50,7 @@
 <#elseif po.classType =='switch'>
               <j-switch v-model="model.${po.fieldName}"<#if po.dictField!= 'is_open'>:options="${po.dictField}"</#if> <#if po.readonly=='Y'>disabled</#if>></j-switch>
 	<#elseif po.classType =='pca'>
-		      <j-area-linkage type="cascader" v-model="model.${po.fieldName}"placeholder="请输入省市区" <#if po.readonly=='Y'>disabled</#if>/>
+		      <j-area-linkage type="cascader" v-model="model.${po.fieldName}"placeholder="Please enter the province and city" <#if po.readonly=='Y'>disabled</#if>/>
 	<#elseif po.classType =='markdown'>
 	          <j-markdown-editor v-model="model.${autoStringSuffixForModel(po)}" id="${po.fieldName}"></j-markdown-editor>
     <#elseif po.classType =='password'>
@@ -137,7 +137,7 @@
       }
     },
     created () {
-    //备份model原始值
+    //Back up model original value
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods: {

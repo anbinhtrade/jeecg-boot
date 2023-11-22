@@ -6,32 +6,32 @@
 <body>
 <div  class="box-content">
     <div  class="info-top">
-        <img src="https://jeecgdev.oss-cn-beijing.aliyuncs.com/temp/logo(1)_1697180761742.png" style="float: left; margin: 0 10px 0 0; width: 32px;height:32px" /><div style="color:#fff"><strong>【重要】新数据提醒</strong></div>
+        <img src="https://jeecgdev.oss-cn-beijing.aliyuncs.com/temp/logo(1)_1697180761742.png" style="float: left; margin: 0 10px 0 0; width: 32px;height:32px" /><div style="color:#fff"><strong>【Important】New data reminder</strong></div>
     </div>
     <div class="info-wrap">
         <div class="tips" style="padding:15px;">
             <p style="margin: 10px 0;">
-                尊敬的 ${userName} 用户,您好：
+                Dear valued user ${userName},
             </p>
-            你的表单  <a style="color: #006eff;" href="${formLink}" target="_blank" rel="noopener">【${formName}】</a>
-            在 ${createTime} 新增了1条数据。
+            Your form <a style="color: #006eff;" href="${formLink}" target="_blank" rel="noopener">[${formName}]</a>
+             1 new piece of data was added in ${createTime}.
 
             ${dataMarkdown}
 
             <p>
-                如需查看更多请点击
-                <a style="color: #006eff;" href="${moreLink}" target="_blank" rel="noopener">[查看所有数据]</a>
-            </p>
+                 To see more please click
+                 <a style="color: #006eff;" href="${moreLink}" target="_blank" rel="noopener">[View all data]</a>
+             </p>
         </div>
-        <div class="footer">北京国炬平台</div>
+        <div class="footer">Beijing Guoju Platform</div>
         <div class="footer" id="currentTime"></div>
     </div>
     <div style="width: 600px; margin: 0 auto;  margin-top: 50px; font-size: 12px; -webkit-font-smoothing: subpixel-antialiased; text-size-adjust: 100%;">
         <p style="text-align: center; line-height: 20.4px; text-size-adjust: 100%; font-family: 'Microsoft YaHei'!important; padding: 0px !important; margin: 0px !important; color: #7e8890 !important;">
-            <span class="appleLinks">Copyright © 2023-2024 北京国炬科技股份有限公司. 保留所有权利。</span>
+            <span class="appleLinks">Copyright © 2023-2024 Beijing Guoju Technology Co., Ltd. All rights reserved.</span>
         </p>
         <p style="text-align: center;line-height: 20.4px; text-size-adjust: 100%; font-family: 'Microsoft YaHei'!important; padding: 0px !important; margin: 0px; color: #7e8890 !important; margin-top: 10px;">
-            <span class="appleLinks">邮件由系统自动发送，请勿直接回复本邮件！</span>
+            <span class="appleLinks">The email is automatically sent by the system. Please do not reply to this email directly!</span>
         </p>
     </div>
 </div>

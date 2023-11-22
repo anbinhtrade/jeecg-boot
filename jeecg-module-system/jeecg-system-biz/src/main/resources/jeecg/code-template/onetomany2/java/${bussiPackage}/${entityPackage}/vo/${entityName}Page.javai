@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @Version: V1.0
  */
 @Data
-@ApiModel(value="${tableName}Page对象", description="${tableVo.ftlDescription}")
+@ApiModel(value="${tableName} Page object", description="${tableVo.ftlDescription}")
 public class ${entityName}Page {
 
     <#list originalColumns as po>

@@ -70,7 +70,7 @@ public class ${subTab.entityName} implements Serializable {
     <#assign list_field_dictCode='dicCode = "${camelToDashed(po.extendParams.store?default(\"id\")?trim)}", dicText = "${camelToDashed(po.extendParams.text?default(\"depart_name\")?trim)}", dictTable = "sys_depart"'>
     @Dict(${list_field_dictCode})
 </#if>
-	<#-- 大字段转换 -->
+	<#-- Large field conversion -->
     <#include "/common/blob.ftl">
 </#list>
 }

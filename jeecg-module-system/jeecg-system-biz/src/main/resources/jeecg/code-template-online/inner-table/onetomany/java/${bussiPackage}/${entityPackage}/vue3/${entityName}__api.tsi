@@ -27,7 +27,7 @@ export const getExportUrl = Api.exportXls;
 export const getImportUrl = Api.importExcel;
 <#list subTables as sub><#rt/>
 /**
- * 子表单查询接口
+ * Subform query interface
  * @param params
  */
 export const query${sub.entityName} = Api.${sub.entityName?uncap_first}List
@@ -75,7 +75,7 @@ export const saveOrUpdate = (params, isUpdate) => {
 }
 <#list subTables as sub><#rt/>
 /**
- * 子表列表接口
+ * Subtable list interface
  * @param params
  */
 export const ${sub.entityName?uncap_first}List = (params) =>

@@ -23,12 +23,12 @@ import io.swagger.annotations.ApiModelProperty;
  * @Version: V1.0
  */
 @Data
-@ApiModel(value="${tableName}Page对象", description="${tableVo.ftlDescription}")
+@ApiModel(value="${tableName} Page object", description="${tableVo.ftlDescription}")
 public class ${entityName}Page {
 
 <#assign excel_ignore_arr=['createBy','createTime','updateBy','updateTime','sysOrgCode']>
     <#list originalColumns as po>
-    <#-- 生成字典Code -->
+    <#-- Generate dictionary Code -->
     <#assign list_field_dictCode="">
     <#if po.classType='sel_user'>
       <#assign list_field_dictCode=', dictTable = "sys_user", dicText = "realname", dicCode = "username"'>

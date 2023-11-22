@@ -1,10 +1,10 @@
 <#---->
-<#-- freemarker 的一些工具方法 -->
+<#-- freemarker Some of the tool methods -->
 <#---->
-<#-- 驼峰转其他字符 -->
-<#-- @param str       待转换的文本 -->
-<#-- @param character 要转换成的字符 -->
-<#-- @param case      转换大小写（normal 不转换，lower 小写，upper 大写） -->
+<#-- Hump to other characters -->
+<#-- @param str       The text to be converted -->
+<#-- @param character The character you want to convert to -->
+<#-- @param case      Convert case (normal does not convert, lower lowercase, upper uppercase.)） -->
 <#function camelToChar(str, character, case='normal')>
   <#assign text=str?replace("([a-z])([A-Z]+)","$1${character}$2","r")/>
   <#if case=="upper">
@@ -15,7 +15,7 @@
     <#return text>
   </#if>
 </#function>
-<#--下划线转驼峰-->
+<#--Underline to hump-->
 <#function dashedToCamel(str)>
     <#assign text=""/>
     <#assign strlist = str?split("_")/>
@@ -24,21 +24,21 @@
     </#list>
     <#return text?uncap_first>
 </#function>
-<#-- 驼峰转下划线 -->
+<#-- Hump turned underlined -->
 <#function camelToDashed(str, case='lower')>
   <#return camelToChar(str, "_", case)>
 </#function>
 <#---->
-<#-- 驼峰转横线 -->
+<#-- Hump turns horizontal -->
 <#function camelToHorizontal(str, case='normal')>
   <#return camelToChar(str, "-", case)>
 </#function>
 <#---->
-<#-- 获取 v-model 属性 -->
+<#-- Get the v-model properties -->
 <#function getVModel po,suffix="">
   <#return "v-model=\"queryParam.${po.fieldName}${suffix}\"">
 </#function>
-<#-- 获取 placeholder 属性 -->
+<#-- FETCH placeholder ATTRIBUTE -->
 <#function getPlaceholder po,prefix,fillComment=true>
   <#if fillComment>
     <#return "placeholder=\"${prefix}${po.filedComment}\"">
@@ -46,7 +46,7 @@
     <#return "placeholder=\"${prefix}\"">
   </#if>
 </#function>
-<#-- ** 判断某字段是否配置了校验 * -->
+<#-- ** Check whether a field is configured with validation * -->
 <#function poHasCheck po>
   <#if (po.fieldValidType!'')?trim?length gt 0 || po.nullable == 'N'>
     <#if po.fieldName != 'id'>
@@ -72,7 +72,7 @@
   </#if>
   <#return false>
 </#function>
-<#-- ** 如果配置了校验就显示 validatorRules * -->
+<#-- ** It is displayed if a check is configured validatorRules * -->
 <#function autoWriteRules po>
   <#if poHasCheck(po)>
     <#return ", validatorRules.${po.fieldName}">
@@ -81,7 +81,7 @@
   </#if>
 </#function>
 
-<#-- ** 如果Blob就显示 String * -->
+<#-- ** If the blob is displayed String * -->
 <#function autoStringSuffix po>
   <#if  po.fieldDbType=='Blob'>
     <#return "'${po.fieldName}String'">
@@ -90,7 +90,7 @@
   </#if>
 </#function>
 
-<#-- ** 如果Blob就显示model方式 String * -->
+<#-- ** If the blob is displayed, the model mode is displayed String * -->
 <#function autoStringSuffixForModel po>
     <#if  po.fieldDbType=='Blob'>
         <#return "${po.fieldName}String">
@@ -99,7 +99,7 @@
     </#if>
 </#function>
 
-<#-- ** 高级查询生成 * -->
+<#-- ** Advanced query generation * -->
 <#function superQueryFieldList po>
     <#assign superQuery_dictTable="">
     <#assign superQuery_dictText="">
@@ -133,7 +133,7 @@
 </#function>
 
 
-<#-- vue3 获取表单modal的宽度-->
+<#-- vue3 Get the width of the form modal-->
 <#function getModalWidth fieldRowNum>
     <#assign modal_width = 800>
     <#if fieldRowNum==2>
@@ -146,7 +146,7 @@
     <#return modal_width>
 </#function>
 
-<#-- vue3 获取表单 colspan -->
+<#-- vue3 Get the form colspan -->
 <#function getFormSpan fieldRowNum>
     <#assign form_span = 24>
     <#if fieldRowNum==2>
@@ -159,7 +159,7 @@
     <#return form_span>
 </#function>
 
-<#-- vue3 native 判断字段名不是 pidField  -->
+<#-- vue3 native Determine that the field name is not pidField  -->
 <#function isNotPidField(tableVo, fieldDbName) >
   <#assign flag = true>
   <#if tableVo??>

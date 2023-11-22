@@ -39,14 +39,14 @@
   }
   
   /**
-   * 确定按钮点击事件
+   * OK button click event
    */
   function handleOk() {
     registerForm.value.submitForm();
   }
 
   /**
-   * form保存回调事件
+   * form save callback event
    */
   function submitCallback() {
     handleCancel();
@@ -54,7 +54,7 @@
   }
 
   /**
-   * 取消按钮回调事件
+   * Cancel button callback event
    */
   function handleCancel() {
     visible.value = false;
@@ -68,7 +68,7 @@
 </script>
 
 <style>
-  /**隐藏样式-modal确定按钮 */
+  /**Hidden style-modal OK button */
   .jee-hidden {
     display: none !important;
   }

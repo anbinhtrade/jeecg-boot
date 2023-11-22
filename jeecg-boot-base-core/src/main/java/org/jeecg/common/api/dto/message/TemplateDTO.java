@@ -15,7 +15,7 @@ public class TemplateDTO implements Serializable {
     private static final long serialVersionUID = 5848247133907528650L;
 
     /**
-     * 模板编码
+     * Template coding
      */
     protected String templateCode;
 

@@ -6,76 +6,76 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * online表单枚举 代码生成器用到
+ * online form enumeration code generator used
  * @author: jeecg-boot
  */
 public enum CgformEnum {
 
     /**
-     * 单表
+     * Single table
      */
-    ONE(1, "one", "/jeecg/code-template-online", "default.one", "经典风格", new String[]{"vue3","vue","vue3Native"}),
+    ONE(1, "one", "/jeecg/code-template-online", "default.one", "Classic style", new String[]{"vue3","vue","vue3Native"}),
 
     /**
-     * 多表
+     * Multiple tables
      */
-    MANY(2, "many", "/jeecg/code-template-online", "default.onetomany", "经典风格" ,new String[]{"vue"}),
+    MANY(2, "many", "/jeecg/code-template-online", "default.onetomany", "Classic style" ,new String[]{"vue"}),
     /**
-     * 多表（jvxe风格）
+     * Multiple tables (jvxe style）
      *  */
-    JVXE_TABLE(2, "jvxe", "/jeecg/code-template-online", "jvxe.onetomany", "JVXE风格" ,new String[]{"vue3","vue","vue3Native"}),
+    JVXE_TABLE(2, "jvxe", "/jeecg/code-template-online", "jvxe.onetomany", "JVXE style" ,new String[]{"vue3","vue","vue3Native"}),
 
     /**
-     * 多表 (erp风格)
+     * Multiple tables (erp style)
      */
-    ERP(2, "erp", "/jeecg/code-template-online", "erp.onetomany", "ERP风格" ,new String[]{"vue3","vue","vue3Native"}),
+    ERP(2, "erp", "/jeecg/code-template-online", "erp.onetomany", "ERP style" ,new String[]{"vue3","vue","vue3Native"}),
     /**
-     * 多表（内嵌子表风格）
+     * Multiple tables (embedded subtable style)
      */
-    INNER_TABLE(2, "innerTable", "/jeecg/code-template-online", "inner-table.onetomany", "内嵌子表风格" ,new String[]{"vue3","vue"}),
+    INNER_TABLE(2, "innerTable", "/jeecg/code-template-online", "inner-table.onetomany", "Built-in subtable style" ,new String[]{"vue3","vue"}),
     /**
-     * 多表（tab风格）
+     * Multiple tables (tab style)
      *  */
-    TAB(2, "tab", "/jeecg/code-template-online", "tab.onetomany", "Tab风格" ,new String[]{"vue3","vue"}),
+    TAB(2, "tab", "/jeecg/code-template-online", "tab.onetomany", "Tab style" ,new String[]{"vue3","vue"}),
     /**
-     * 树形列表
+     * Tree list
      */
-    TREE(3, "tree", "/jeecg/code-template-online", "default.tree", "树形列表" ,new String[]{"vue3","vue","vue3Native"});
+    TREE(3, "tree", "/jeecg/code-template-online", "default.tree", "Tree list" ,new String[]{"vue3","vue","vue3Native"});
 
     /**
-     * 类型 1/单表 2/一对多 3/树
+     * Type 1/single table 2/one-to-many 3/tree
      */
     int type;
     /**
-     * 编码标识
+     * Coding identification
      */
     String code;
     /**
-     * 代码生成器模板路径
+     * Code generator template path
      */
     String templatePath;
     /**
-     * 代码生成器模板路径
+     * Code generator template path
      */
     String stylePath;
     /**
-     * 模板风格名称
+     * Template style name
      */
     String note;
     /**
-     * 支持代码风格 vue3:vue3包装代码 vue3Native:vue3原生代码 vue:vue2代码
+     * Support code style vue3:vue3 packaging code vue3Native:vue3 native code vue:vue2 code
      */
     String[] vueStyle;
 
     /**
-     * 构造器
+     * Constructor
      *
-     * @param type 类型 1/单表 2/一对多 3/树
-     * @param code 模板编码
-     * @param templatePath  模板路径
-     * @param stylePath  模板子路径
+     * @param type Type 1/single table 2/one-to-many 3/tree
+     * @param code Template encoding
+     * @param templatePath  Template path
+     * @param stylePath  Template subpath
      * @param note
-     * @param vueStyle 支持代码风格
+     * @param vueStyle Support code styles
      */
     CgformEnum(int type, String code, String templatePath, String stylePath, String note, String[] vueStyle) {
         this.type = type;
@@ -87,7 +87,7 @@ public enum CgformEnum {
     }
 
     /**
-     * 根据code获取模板路径
+     * Obtain the template path based on the code
      *
      * @param code
      * @return
@@ -130,7 +130,7 @@ public enum CgformEnum {
     }
 
     /**
-     * 根据code找枚举
+     * Find enums based on code
      *
      * @param code
      * @return
@@ -145,7 +145,7 @@ public enum CgformEnum {
     }
 
     /**
-     * 根据类型找所有
+     * I look for all by type
      *
      * @param type
      * @return

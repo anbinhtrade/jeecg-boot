@@ -16,17 +16,17 @@ import org.apache.ibatis.annotations.Param;
 public interface ${subTab.entityName}Mapper extends BaseMapper<${subTab.entityName}> {
 
   /**
-   * 通过主表id删除子表数据
+   * Delete subtable data by main table id
    *
-   * @param mainId 主表id
+   * @param mainId main table id
    * @return boolean
    */
 	public boolean deleteByMainId(@Param("mainId") String mainId);
 
   /**
-   * 通过主表id查询子表数据
+   * Query subtable data by main table id
    *
-   * @param mainId 主表id
+   * @param mainId main table id
    * @return List<${subTab.entityName}>
    */
 	public List<${subTab.entityName}> selectByMainId(@Param("mainId") String mainId);

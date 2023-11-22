@@ -128,12 +128,12 @@ export const  ${sub.entityName?uncap_first}SaveOrUpdate = (params, isUpdate) => 
 }
 
 /**
- * 导入
+ * Import
  */
 export const ${sub.entityName?uncap_first}ImportUrl = '/${entityPackage}/${entityName?uncap_first}/import${sub.entityName}'
 
 /**
- * 导出
+ * Export
  */
 export const ${sub.entityName?uncap_first}ExportXlsUrl = '/${entityPackage}/${entityName?uncap_first}/export${sub.entityName}'
 </#list>

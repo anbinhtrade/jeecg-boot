@@ -20,12 +20,12 @@
   import {BasicForm, useForm} from '/@/components/Form';
   import {formSchema} from '../${entityName}.data';
   import {loadTreeData, saveOrUpdateDict} from '../${entityName}.api';
-  // 获取emit
+  // Get emit
   const emit = defineEmits(['register', 'success']);
   const isUpdate = ref(true);
   const expandedRowKeys = ref([]);
   const treeData = ref([]);
-  // 当前编辑的数据
+  // Currently edited data
   let model:Nullable<Recordable> = null;
   //Form configuration
   const [registerForm, {setProps,resetFields, setFieldsValue, validate, updateSchema}] = useForm({
@@ -57,7 +57,7 @@
     } else {
       model = null;
     }
-    //父级节点树信息
+    //Parent node tree information
     treeData.value = await loadTreeData({'async': false,'pcode':''});
     // Disable entire form when hiding bottom
     setProps({ disabled: !!data?.hideFooter })
@@ -66,7 +66,7 @@
   const getTitle = computed(() => (!unref(isUpdate) ? 'New' : 'Edit'));
 
   /**
-   * 根据pid获取展开的节点
+   * Get the expanded node based on pid
    * @param pid
    * @param arr
    */
@@ -91,14 +91,14 @@
       await saveOrUpdateDict(values, isUpdate.value);
       //Close the pop-up window
       closeModal();
-      //展开的节点信息
+      //expanded node information
       await getExpandKeysByPid(values['${pidFieldName}'],unref(treeData))
-      //Refresh the list(isUpdate:是否编辑;values:表单信息;expandedArr:展开的节点信息)
+      //Refresh the list (isUpdate: whether to edit; values: form information; expandedArr: expanded node information)
       emit('success', {
         isUpdate: unref(isUpdate),
         values: {...values},
         expandedArr: unref(expandedRowKeys).reverse(),
-        // 是否更改了父级节点
+        // Whether the parent node has been changed
         changeParent: model != null && (model['${pidFieldName}'] != values['${pidFieldName}']),
       });
     } finally {
@@ -107,7 +107,7 @@
   }
 </script>
 <style lang="less" scoped>
-	/** 时间和数字输入框样式 */
+	/** Time and number input box styles */
     :deep(.ant-input-number){
 		width: 100%
 	}

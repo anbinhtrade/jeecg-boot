@@ -132,7 +132,7 @@
             scopedSlots: { customRender: 'action' },
           }
         ],
-        // 请求参数
+        // Request parameters
     	url: {
               list: "/${entityPackage}/${entityName?uncap_first}/list",
               delete: "/${entityPackage}/${entityName?uncap_first}/delete",

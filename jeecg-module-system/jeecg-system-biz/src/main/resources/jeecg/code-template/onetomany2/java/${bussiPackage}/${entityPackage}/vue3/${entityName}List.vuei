@@ -85,7 +85,7 @@
 
   const mainId = computed(() => (unref(selectedRowKeys).length > 0 ? unref(selectedRowKeys)[0] : ''));
 
-  //下发 orderId,子组件接收
+  //Send orderId, sub-component receives
   provide('mainId', mainId);
 
    /**

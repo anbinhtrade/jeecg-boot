@@ -58,7 +58,7 @@
   }
 </script>
 <style lang="less" scoped>
-	/** 时间和数字输入框样式 */
+	/** Time and number input box styles */
     :deep(.ant-input-number){
 		width: 100%
 	}

@@ -326,7 +326,7 @@
           <#if bpm_flag>startProcess: '/act/process/extActProcess/startMutilProcess'</#if>
         },
         <#if bpm_flag>
-        //代码生成后需手动设置流程编码
+        //After the code is generated, you need to manually set the process code
         flowCode: 'dev_${tableName}_001',
         </#if>
         dictOptions:{},
@@ -354,7 +354,7 @@
        <#assign switch_extend_arr2=a>
        </#if>
       </#list>
-      this.$set(this.dictOptions, '${po.fieldName}', [{text:'是',value:'${switch_extend_arr1}'},{text:'否',value:'${switch_extend_arr2}'}])
+      this.$set(this.dictOptions, '${po.fieldName}', [{text:'Yes',value:'${switch_extend_arr1}'},{text:'No',value:'${switch_extend_arr2}'}])
     </#if>
     </#list>
     </#if>
@@ -374,8 +374,8 @@
       <#if bpm_flag>
       startProcess(record){
         this.$confirm({
-          title:'提示',
-          content:'确认提交流程吗?',
+          title:'Hint',
+          content:'Confirm the submission process??',
           onOk:()=>{
             let params = {
               flowCode: this.flowCode,
@@ -392,7 +392,7 @@
                 this.$message.warning(res.message);
               }
             }).catch((e)=>{
-              this.$message.warning('不识别的请求!');
+              this.$message.warning('Unrecognized request!');
             })
           }
         })

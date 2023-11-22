@@ -18,13 +18,13 @@
 
     <template slot="imgSlot" slot-scope="text,record">
       <div style="font-size: 12px;font-style: italic;">
-        <span v-if="!text">无图片</span>
+        <span v-if="!text">No pictures</span>
         <img v-else :src="getImgView(text)" :preview="record.id" alt="" style="max-width:80px;height:25px;"/>
       </div>
     </template>
 
     <template slot="fileSlot" slot-scope="text">
-      <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
+      <span v-if="!text" style="font-size: 12px;font-style: italic;">No file</span>
       <a-button
               v-else
               ghost
@@ -33,7 +33,7 @@
               size="small"
               @click="downloadFile(text)"
       >
-        <span>下载</span>
+        <span>Download</span>
       </a-button>
     </template>
 
@@ -55,12 +55,12 @@
     },
     data() {
       return {
-        description: '${sub.ftlDescription}内嵌列表',
+        description: '${sub.ftlDescription} embedded list',
         disableMixinCreated: true,
         loading: false,
         dataSource: [],
         columns: [
-<#-- begin 遍历表头 -->
+<#-- begin traverses the table header -->
 <#list sub.originalColumns as po>
   <#if po.isShowList == 'Y'>
           {
@@ -92,9 +92,9 @@
       <#elseif po.classType=='switch'>
             dataIndex: '${po.fieldName}',
             <#if po.dictField != 'is_open'>
-            customRender: (text) => (!text ? "" : (text == ${po.dictField}[0] ? "是" : "否"))
+            customRender: (text) => (!text ? "" : (text == ${po.dictField}[0] ? "Yes" : "No"))
             <#else>
-            customRender: (text) => (!text ? "" : (text == "Y" ? "是" : "否"))
+            customRender: (text) => (!text ? "" : (text == "Y" ? "Yes" : "No"))
             </#if>
     <#else>
             dataIndex: '${po.fieldName}',
@@ -102,7 +102,7 @@
           },
   </#if>
 </#list>
-<#-- end 遍历表头 -->
+<#-- end traverse the table header -->
         ],
 <#assign urlPrefix="/${entityPackage}/${entityName?uncap_first}">
         url: {

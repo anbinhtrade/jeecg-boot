@@ -15,24 +15,24 @@ import java.util.List;
  */
 public interface I${entityName}Service extends IService<${entityName}> {
 
-	/**根节点父ID的值*/
+	/**The value of the parent ID of the root node*/
 	public static final String ROOT_PID_VALUE = "0";
 	
-	/**树节点有子节点状态值*/
+	/**Tree nodes have child node status values*/
 	public static final String HASCHILD = "1";
 	
-	/**树节点无子节点状态值*/
+	/**Tree node has no child node status value*/
 	public static final String NOCHILD = "0";
 
 	/**
-	 * 新增节点
+	 * Add new node
 	 *
 	 * @param ${entityName?uncap_first}
 	 */
 	void add${entityName}(${entityName} ${entityName?uncap_first});
 	
 	/**
-   * 修改节点
+   * Modify node
    *
    * @param ${entityName?uncap_first}
    * @throws JeecgBootException
@@ -40,7 +40,7 @@ public interface I${entityName}Service extends IService<${entityName}> {
 	void update${entityName}(${entityName} ${entityName?uncap_first}) throws JeecgBootException;
 	
 	/**
-	 * 删除节点
+	 * Delete node
 	 *
 	 * @param id
    * @throws JeecgBootException
@@ -48,7 +48,7 @@ public interface I${entityName}Service extends IService<${entityName}> {
 	void delete${entityName}(String id) throws JeecgBootException;
 
 	  /**
-	   * 查询所有数据，无分页
+	   * Query all data without paging
 	   *
 	   * @param queryWrapper
 	   * @return List<${entityName}>
@@ -56,7 +56,7 @@ public interface I${entityName}Service extends IService<${entityName}> {
     List<${entityName}> queryTreeListNoPage(QueryWrapper<${entityName}> queryWrapper);
 
 	/**
-	 * 【vue3专用】根据父级编码加载分类字典的数据
+	 * [Vue3 only] Load the data of the classification dictionary according to the parent encoding
 	 *
 	 * @param parentCode
 	 * @return
@@ -64,7 +64,7 @@ public interface I${entityName}Service extends IService<${entityName}> {
 	List<SelectTreeModel> queryListByCode(String parentCode);
 
 	/**
-	 * 【vue3专用】根据pid查询子节点集合
+	 * [Vue3 only] Query the child node collection based on pid
 	 *
 	 * @param pid
 	 * @return

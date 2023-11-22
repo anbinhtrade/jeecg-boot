@@ -48,7 +48,7 @@
 <#elseif po.classType =='switch'>
               <j-switch v-model="model.${po.fieldName}" <#if po.dictField!= 'is_open'>:options="${po.dictField}"</#if>></j-switch>
 	<#elseif po.classType =='pca'>
-		      <j-area-linkage type="cascader" v-model="model.${po.fieldName}" placeholder="请输入省市区"/>
+		      <j-area-linkage type="cascader" v-model="model.${po.fieldName}" placeholder="Please enter the province and city"/>
 	<#elseif po.classType =='markdown'>
 	          <j-markdown-editor v-model="model.${autoStringSuffixForModel(po)}" id="${po.fieldName}"></j-markdown-editor>
     <#elseif po.classType =='password'>
@@ -124,7 +124,7 @@
       }
     },
     created () {
-     //备份model原始值
+     //Back up model original value
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods:{
@@ -161,7 +161,7 @@
               formdata_arr.push(this.model)
             }
           }else{
-            this.$emit("validateError","${sub.ftlDescription}表单校验未通过");
+            this.$emit("validateError","${sub.ftlDescription} Form verification failed");
             return false
           }
         })
@@ -169,7 +169,7 @@
       },
       validate(index){
         return new Promise((resolve, reject) => {
-          // 验证主表表单
+          // Validate main form
          this.$refs.form.validate(valid => {
             !valid ? reject({ error: VALIDATE_NO_PASSED ,index}) : resolve()
           })

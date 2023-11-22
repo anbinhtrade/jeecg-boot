@@ -52,7 +52,7 @@
 <#elseif po.classType =='switch'>
               <j-switch v-model="model.${po.fieldName}" <#if po.dictField != 'is_open'>:options="${po.dictField}"</#if> <#if po.readonly=='Y'>disabled</#if>></j-switch>
 	<#elseif po.classType =='pca'>
-             <j-area-linkage type="cascader" v-model="model.${po.fieldName}" placeholder="请输入省市区" <#if po.readonly=='Y'>disabled</#if> />
+             <j-area-linkage type="cascader" v-model="model.${po.fieldName}" placeholder="Please enter the province and city" <#if po.readonly=='Y'>disabled</#if> />
 	<#elseif po.classType =='markdown'>
               <j-markdown-editor v-model="model.${autoStringSuffixForModel(po)}" id="${po.fieldName}"></j-markdown-editor>
     <#elseif po.classType =='password'>
@@ -109,7 +109,7 @@
 </#list>
       <#if bpm_flag>
           <a-col v-if="showFlowSubmitButton" :span="24" style="width: 100%;text-align: center;">
-            <a-button icon="check" style="width: 126px" type="primary" @click="submitForm">提 交</a-button>
+            <a-button icon="check" style="width: 126px" type="primary" @click="submitForm">Submit</a-button>
           </a-col>
      </#if>
         </a-row>
@@ -129,20 +129,20 @@
     },
     props: {
      <#if bpm_flag>
-      //流程表单data
+      //Process form data
       formData: {
         type: Object,
         default: ()=>{},
         required: false
       },
-      //表单模式：true流程表单 false普通表单
+      //Form mode: true process form false normal form
       formBpm: {
         type: Boolean,
         default: false,
         required: false
       },
        </#if>
-      //表单禁用
+      //Form disabled
       disabled: {
         type: Boolean,
         default: false,
@@ -195,10 +195,10 @@
      </#if>
     },
     created () {
-       //备份model原始值
+       //Back up model original value
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
       <#if bpm_flag>
-      //如果是流程中表单，则需要加载流程表单data
+      //If it is a form in the process, you need to load the process form data
       this.showFlowData();
       </#if>
     },
@@ -211,7 +211,7 @@
         this.visible = true;
       },
         <#if bpm_flag>
-      //渲染流程表单数据
+      //Render process form data
       showFlowData(){
         if(this.formBpm === true){
           let params = {id:this.formData.dataId};

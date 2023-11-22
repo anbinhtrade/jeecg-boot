@@ -70,7 +70,7 @@
   const labelCol = ref<any>({ xs: { span: 24 }, sm: { span: 5 } });
   const wrapperCol = ref<any>({ xs: { span: 24 }, sm: { span: 16 } });
   const confirmLoading = ref<boolean>(false);
-  //表单验证
+  //Form validation
   const validatorRules = {
    <#list sub.colums as po>
    <#if po.isShow == 'Y' && poHasCheck(po)>
@@ -100,13 +100,13 @@
   function edit(record) {
     nextTick(() => {
       resetFields();
-      //赋值
+      //Assignment
       Object.assign(formData, record);
     });
   }
 
   /**
-   * 提交数据
+   * Submit data
    */
   async function submitForm() {
     // Trigger form validation
@@ -119,12 +119,12 @@
       isUpdate.value = true;
     }
    
-    //循环数据
+    //Loop data
     for (let data in model) {
-      //如果该数据是数组并且是字符串类型
+      //If the data is an array and is of type string
       if (model[data] instanceof Array) {
         let valueType = getValueType(formRef.value.getProps, data);
-        //如果是字符串类型的需要变成以逗号分割的字符串
+        //If it is a string type, it needs to be converted into a comma-separated string.
         if (valueType === 'string') {
           model[data] = model[data].join(',');
         }
@@ -151,7 +151,7 @@
 
   <#if need_popup>
   /**`
-   *  popup组件值改变事件
+   *  popup component value change event
    */
   function setFieldsValue(map) {
     Object.keys(map).map((key) => {
@@ -162,7 +162,7 @@
 
   <#if need_category || need_select_tree>
   /**
-   * 值改变事件触发
+   * Value change event triggers
    * @param key
    * @param value
    */

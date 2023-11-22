@@ -39,14 +39,14 @@
   }
   
   /**
-   * 确定按钮点击事件
+   * OK button click event
    */
   function handleOk() {
     registerForm.value.submitForm();
   }
 
   /**
-   * form保存回调事件
+   * form save callback event
    */
   function submitCallback({ isUpdate, values, expandedArr, changeParent }) {
     handleCancel();
@@ -54,13 +54,13 @@
       isUpdate: isUpdate,
       values: values,
       expandedArr: expandedArr,
-      // 是否更改了父级节点
+      // Whether the parent node has been changed
       changeParent: changeParent,
     });
   }
   
   /**
-   * 取消按钮回调事件
+   * Cancel button callback event
    */
   function handleCancel() {
     visible.value = false;
@@ -74,7 +74,7 @@
 </script>
 
 <style>
-  /**隐藏样式-modal确定按钮 */
+  /**Hidden style-modal OK button */
   .jee-hidden {
     display: none !important;
   }

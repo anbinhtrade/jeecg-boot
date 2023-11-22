@@ -4,7 +4,7 @@
 <#assign list_need_pca=false>
 <#assign bpm_flag=false>
 
-<#-- 开始循环 -->
+<#-- Start loop -->
 <#list columns as po>
 <#if po.fieldDbName=='bpm_status'>
   <#assign bpm_flag=true>
@@ -16,7 +16,7 @@
 <#assign list_need_pca=true>
 </#if>
 </#list>
-<#-- 结束循环 -->
+<#-- end loop -->
     <!--Reference table-->
    <BasicTable @register="registerTable" :rowSelection="rowSelection">
      <!--Slot: table title-->
@@ -42,23 +42,23 @@
       <template #action="{ record }">
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)"/>
       </template>
-      <!--字段回显插槽-->
+      <!--Field echo slot-->
       <template v-slot:bodyCell="{ column, record, index, text }">
       <#list columns as po>
         <#if po.classType=='umeditor' || po.classType=='pca' || po.classType=='file'>
         <template v-if="column.dataIndex==='${po.fieldName}'">
         <#if po.classType=='umeditor'>
-          <!--富文本件字段回显插槽-->
+          <!--Rich text file field echo slot-->
           <div v-html="text"></div>
         </#if>
         <#if po.classType=='pca'>
-          <!--省市区字段回显插槽-->
+          <!--Province and city field echo slot-->
           {{ getAreaTextByCode(text) }}
         </#if>
         <#if po.classType=='file'>
-          <!--文件字段回显插槽-->
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
-          <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
+          <!--File field echo slot-->
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">No file</span>
+          <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">Download</a-button>
         </#if>
         </template>
         </#if>
@@ -210,7 +210,7 @@
 
   <#if bpm_flag==true>
   /**
-   * 提交流程
+   * Submission process
    */
   async function handleProcess(record) {
     let params = {
@@ -244,9 +244,9 @@
     ];
     if(record.bpmStatus == '1' || !record.bpmStatus){
       dropDownAction.push({
-        label: '发起流程',
+        label: 'Initiate process',
         popConfirm: {
-          title: '确认提交流程吗？',
+          title: 'Confirm the submission process?？',
           confirm: handleProcess.bind(null, record),
           placement: 'topLeft',
         }
@@ -272,7 +272,7 @@
 
     <#if list_need_category>
    /**
-    * 初始化字典配置
+    * Initialize dictionary configuration
    */
     function initDictConfig(){
      <#list columns as po>

@@ -78,7 +78,7 @@ export const saveOrUpdate = (params, isUpdate) => {
 }
 
 /**
-* 根据id查询数据
+* Query data based on id
 * @param params
 */
 export const queryDataById = (id) => defHttp.get({url: Api.queryDataById, params:{ id }});

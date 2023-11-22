@@ -33,7 +33,7 @@
     </a-tabs>
 
     <div style="width: 100%;text-align: center" v-if="!formDisabled">
-      <a-button @click="handleSubmit" pre-icon="ant-design:check" type="primary">提 交</a-button>
+      <a-button @click="handleSubmit" pre-icon="ant-design:check" type="primary">Submit</a-button>
     </div>
   </div>
 </template>
@@ -127,7 +127,7 @@
         }
       }
       <#if hasOne2One==true>
-      //校验所有一对一子表表单
+      //Verify all one-to-one subforms
       function validateSubForm(allValues){
         return new Promise((resolve, _reject)=>{
           Promise.all([
@@ -140,7 +140,7 @@
             resolve(allValues)
           }).catch(e => {
             if (e.error === VALIDATE_FAILED) {
-              // 如果有未通过表单验证的子表，就自动跳转到它所在的tab
+              // If there is a sub-table that fails form verification, it will automatically jump to the tab where it is located.
               activeKey.value = e.index == null ? unref(activeKey) : refKeys.value[e.index]
             } else {
               console.error(e)
@@ -159,7 +159,7 @@
       async function initFormData(){
         let params = {id: props.formData.dataId};
         const data = await defHttp.get({url: queryByIdUrl, params});
-        //设置表单的值
+        //Set form values
         await setFieldsValue({...data});
         <#list subTables as sub>
         <#if sub.foreignRelationType =='0'>
@@ -171,7 +171,7 @@
         ${sub.entityName?uncap_first}Form.value.initFormData(${sub.entityName?uncap_first}List, data.id);
         </#if>
         </#list>
-        //默认是禁用
+        //The default is disabled
         await setProps({disabled: formDisabled.value})
       }
 

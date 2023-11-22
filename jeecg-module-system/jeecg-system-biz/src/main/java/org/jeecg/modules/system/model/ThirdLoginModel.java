@@ -47,7 +47,7 @@ public class ThirdLoginModel implements Serializable {
     }
 
     /**
-     * 构造器
+     * Constructor
      * @param source
      * @param uuid
      * @param username

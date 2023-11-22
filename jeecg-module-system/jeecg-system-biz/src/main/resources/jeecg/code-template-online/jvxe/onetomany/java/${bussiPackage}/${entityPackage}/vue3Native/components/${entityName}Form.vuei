@@ -70,7 +70,7 @@
     </a-tabs>
     <#if bpm_flag>
     <div v-if="showFlowSubmitButton" :span="24" style="width: 100%;text-align: center;margin-top: 10px">
-      <a-button preIcon="ant-design:check-outlined" style="width: 126px" type="primary" @click="submitForm">提 交</a-button>
+      <a-button preIcon="ant-design:check-outlined" style="width: 126px" type="primary" @click="submitForm">Submit</a-button>
     </div>
     </#if>
   </a-spin>
@@ -150,7 +150,7 @@
         <#include "/common/init/native/vue3NativeMainInitValue.ftl">
       });
 
-      //表单验证
+      //Form validation
       const validatorRules = reactive({
       <#list columns as po>
       <#if po.isShow == 'Y' && poHasCheck(po)>
@@ -165,7 +165,7 @@
         wrapperCol: {xs: {span: 24}, sm: {span: 16}},
       };
 
-      // 表单禁用
+      // Form disabled
       const disabled = computed(()=>{
         if(props.formBpm === true){
           if(props.formData.disabled === false){
@@ -181,17 +181,17 @@
       onMounted(()=>{
         initFormData();
       });
-      //渲染流程表单数据
+      //Render process form data
       const queryByIdUrl = '/${entityPackage}/${entityName?uncap_first}/queryById';
       async function initFormData(){
         if(props.formBpm === true){
           let params = {id: props.formData.dataId};
           const row = await defHttp.get({url: queryByIdUrl, params});
-          //设置表单的值
+          //Set form values
           Object.keys(row).map(k => {
             formData[k] = row[k];
           });
-          //子表数据
+          //Subtable data
           <#list subTables as sub>
           <#if sub.foreignRelationType =='1'>
           await ${sub.entityName?uncap_first}FormRef.value.initFormData(row['${subMainFieldMap[sub.entityName]}']);
@@ -202,7 +202,7 @@
           </#list>
         }
       }
-      // 是否显示提交按钮
+      // Whether to display the submit button
       const showFlowSubmitButton = computed(()=>{
         if(props.formBpm === true){
           if(props.formData.disabled === false){
@@ -226,9 +226,9 @@
       }
 
       async function edit(row) {
-        //主表数据
+        //Main table data
         await queryMainData(row.id);
-        //子表数据
+        //Subtable data
         <#list subTables as sub>
         <#if sub.foreignRelationType =='1'>
         await ${sub.entityName?uncap_first}FormRef.value.initFormData(row['${subMainFieldMap[sub.entityName]}']);
@@ -265,7 +265,7 @@
         const mainData = await getFormData();
         const subData = await getSubFormAndTableData();
         const values = Object.assign({}, dbData, mainData, subData);
-        console.log('表单提交数据', values)
+        console.log('Form submission data', values)
         const isUpdate = values.id ? true : false
         await saveOrUpdate(values, isUpdate);
         //Close the pop-up window
@@ -281,7 +281,7 @@
       }
 
       /**
-       * 值改变事件触发-树控件回调
+       * Value change event triggers - tree control callback
        * @param key
        * @param value
        */

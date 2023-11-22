@@ -23,7 +23,7 @@
     <div class="jeecg-basic-table-form-container">
       <a-form ref="formRef" @keyup.enter.native="searchQuery" :model="queryParam" :label-col="labelCol" :wrapper-col="wrapperCol">
         <a-row :gutter="24">
-<#-- 开始循环 -->
+<#-- Start loop -->
 <#list columns as po>
 <#if po.fieldDbName=='bpm_status'>
   <#assign bpm_flag=true>
@@ -80,7 +80,7 @@
         </a-row>
       </a-form>
     </div>
-<#-- 结束循环 -->
+<#-- end loop -->
     <!--Reference table-->
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <!--Slot: table title-->
@@ -111,17 +111,17 @@
         <#if po.classType=='umeditor' || po.classType=='pca' || po.classType=='file'>
         <template v-if="column.dataIndex==='${po.fieldName}'">
         <#if po.classType=='umeditor'>
-          <!--富文本件字段回显插槽-->
+          <!--Rich text file field echo slot-->
           <div v-html="text"></div>
         </#if>
         <#if po.classType=='pca'>
-          <!--省市区字段回显插槽-->
+          <!--Province and city field echo slot-->
           {{ getAreaTextByCode(text) }}
         </#if>
         <#if po.classType=='file'>
-          <!--文件字段回显插槽-->
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
-          <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
+          <!--File field echo slot-->
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">No file</span>
+          <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">Download</a-button>
         </#if>
         </template>
         </#if>
@@ -275,9 +275,9 @@
     ];
     if(record.bpmStatus == '1'){
       dropDownAction.push({
-        label: '发起流程',
+        label: 'Initiate process',
         popConfirm: {
-          title: '确认提交流程吗？',
+          title: 'Confirm the submission process?？',
           confirm: handleProcess.bind(null, record),
           placement: 'topLeft',
         }
@@ -314,13 +314,13 @@
   function searchReset() {
     formRef.value.resetFields();
     selectedRowKeys.value = [];
-    //刷新数据
+    //Refresh data
     reload();
   }
   
   <#if need_popup>
   /**
-   *  popup组件值改变事件
+   *  popup component value change event
    */
   function setFieldsValue(map) {
     Object.keys(map).map((key) => {
@@ -331,7 +331,7 @@
 
   <#if need_pca>
   /**
-   * 省市区点击事件
+   * Province and city click events
    * @param key
    * @param value
    */
@@ -342,7 +342,7 @@
 
   <#if bpm_flag==true>
   /**
-   * 提交流程
+   * Submission process
    */
   async function handleProcess(record) {
     let params = {
@@ -358,7 +358,7 @@
 
   <#if need_category>
   /**
-   * form点击事件
+   * form click event
    * @param value
    */
   function handleFormChange(key, value) {
@@ -366,7 +366,7 @@
   }
   
   /**
-   * 初始化字典配置
+   * Initialize dictionary configuration
    */
   function initDictConfig() {
   <#list columns as po>

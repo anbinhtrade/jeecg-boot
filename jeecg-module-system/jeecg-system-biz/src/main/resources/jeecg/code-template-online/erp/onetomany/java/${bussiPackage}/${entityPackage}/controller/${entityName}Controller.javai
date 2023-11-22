@@ -61,7 +61,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 	</#list>
 
 
-	/*---------------------------------主表处理-begin-------------------------------------*/
+	/*---------------------------------Main table processing-begin-------------------------------------*/
 
 	/**
 	 * Paging list query
@@ -141,7 +141,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
     }
 
     /**
-     * 导出
+     * Export
      * @return
      */
     @RequiresPermissions("${entityPackage}:${tableName}:exportXls")
@@ -151,7 +151,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
     }
 
     /**
-     * 导入
+     * Import
      * @return
      */
     @RequiresPermissions("${entityPackage}:${tableName}:importExcel")
@@ -159,11 +159,11 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
         return super.importExcel(request, response, ${entityName}.class);
     }
-	/*---------------------------------主表处理-end-------------------------------------*/
+	/*---------------------------------Main table processing-end-------------------------------------*/
 	
 	<#list subTables as sub>
 
-    /*--------------------------------子表处理-${sub.ftlDescription}-begin----------------------------------------------*/
+    /*--------------------------------Subtable processing-${sub.ftlDescription}-begin----------------------------------------------*/
 	/**
 	 * Query by main table ID
 	 * @return
@@ -234,7 +234,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 	}
 
     /**
-     * 导出
+     * Export
      * @return
      */
     @RequestMapping(value = "/export${sub.entityName}")
@@ -247,7 +247,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 		 List<${sub.entityName}> pageList = ${sub.entityName?uncap_first}Service.list(queryWrapper);
 		 List<${sub.entityName}> exportList = null;
 
-		 // 过滤选中数据
+		 // Filter selected data
 		 String selections = request.getParameter("selections");
 		 if (oConvertUtils.isNotEmpty(selections)) {
 			 List<String> selectionList = Arrays.asList(selections.split(","));
@@ -256,18 +256,18 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 			 exportList = pageList;
 		 }
 
-		 // Step.3 AutoPoi 导出Excel
+		 // Step.3 AutoPoi ExportExcel
 		 ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
-		 //此处设置的filename无效,前端会重更新设置一下
+		 //The filename set here is invalid, the front end will be updated and set again.
 		 mv.addObject(NormalExcelConstants.FILE_NAME, "${sub.ftlDescription}");
 		 mv.addObject(NormalExcelConstants.CLASS, ${sub.entityName}.class);
-		 mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("${sub.ftlDescription}报表", "导出人:" + sysUser.getRealname(), "${sub.ftlDescription}"));
+		 mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("${sub.ftlDescription}Report", "Exporter:" + sysUser.getRealname(), "${sub.ftlDescription}"));
 		 mv.addObject(NormalExcelConstants.DATA_LIST, exportList);
 		 return mv;
     }
 
     /**
-     * 导入
+     * Import
      * @return
      */
     @RequestMapping(value = "/import${sub.entityName}/{mainId}")
@@ -290,8 +290,8 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 				 }
 				 long start = System.currentTimeMillis();
 				 ${sub.entityName?uncap_first}Service.saveBatch(list);
-				 log.info("消耗时间" + (System.currentTimeMillis() - start) + "毫秒");
-				 return Result.OK("文件导入成功！数据行数：" + list.size());
+				 log.info("Time consumed" + (System.currentTimeMillis() - start) + "Milliseconds");
+				 return Result.OK("File import successful! Number of data rows:" + list.size());
 			 } catch (Exception e) {
 				 log.error(e.getMessage(), e);
 				 return Result.error("File import failed: " + e.getMessage());
@@ -306,7 +306,7 @@ public class ${entityName}Controller extends JeecgController<${entityName}, I${e
 		 return Result.error("File import failed！");
     }
 
-    /*--------------------------------子表处理-${sub.ftlDescription}-end----------------------------------------------*/
+    /*--------------------------------Subtable processing-${sub.ftlDescription}-end----------------------------------------------*/
 	</#list>
 
 

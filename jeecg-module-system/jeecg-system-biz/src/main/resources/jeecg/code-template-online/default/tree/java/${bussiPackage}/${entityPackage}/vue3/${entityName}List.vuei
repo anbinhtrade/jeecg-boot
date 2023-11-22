@@ -11,7 +11,7 @@
   </#if>
 </#list>
 <#assign list_need_pca=false>
-<#-- 开始循环 -->
+<#-- Start loop -->
 <#list columns as po>
   <#if po.fieldDbName=='bpm_status'>
     <#assign bpm_flag=true>
@@ -48,36 +48,36 @@
       <template #action="{ record }">
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)"/>
       </template>
-      <!--字段回显插槽-->
+      <!--Field echo slot-->
       <template v-slot:bodyCell="{ column, record, index, text }">
       <#list columns as po>
         <#if po.classType=='umeditor' || po.classType=='pca' || po.classType=='file'>
         <template v-if="column.dataIndex==='${po.fieldName}'">
         <#if po.classType=='umeditor'>
-          <!--富文本件字段回显插槽-->
+          <!--Rich text file field echo slot-->
           <div v-html="text"></div>
         </#if>
         <#if po.classType=='pca'>
-          <!--省市区字段回显插槽-->
+          <!--Province and city field echo slot-->
           {{ getAreaTextByCode(text) }}
         </#if>
         <#if po.classType=='file'>
-          <!--文件字段回显插槽-->
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
-          <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">下载</a-button>
+          <!--File field echo slot-->
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">No file</span>
+          <a-button v-else :ghost="true" type="primary" preIcon="ant-design:download-outlined" size="small" @click="downloadFile(text)">Download</a-button>
         </#if>
         </template>
         </#if>
       </#list>
       </template>
     </BasicTable>
-    <!--字典弹窗-->
+    <!--Dictionary pop-up window-->
     <${entityName}Modal @register="registerModal" @success="handleSuccess"/>
   </div>
 </template>
 
 <script lang="ts" name="${entityPackage}-${entityName?uncap_first}" setup>
-  //ts语法
+  //ts syntax
   import {ref, computed, unref, toRaw, nextTick} from 'vue';
   import {BasicTable, TableAction} from '/@/components/Table';
   import {useModal} from '/@/components/Modal';
@@ -93,7 +93,7 @@
   import { startProcess } from '/@/api/common/api';
   </#if>
   const expandedRowKeys = ref([]);
-  //字典model
+  //Dictionary model
   const [registerModal, {openModal}] = useModal();
    //Register table data
   const { prefixCls,tableContext,onExportXls,onImportXls } = useListPage({
@@ -200,7 +200,7 @@
     (selectedRowKeys.value = []) && reload();
   }
   /**
-   * 添加下级
+   * Add subordinate
    */
   function handleAddSub(record) {
     openModal(true, {
@@ -216,15 +216,15 @@
       if (changeParent) {
         reload();
       } else {
-        // 编辑回调
+        // Edit callback
         updateTableDataRecord(values.id, values);
       }
     } else {
         if(!values['id'] || !values['${pidFieldName}']){
-            //新增根节点
+            //Add root node
             reload();
         }else{
-            //新增子集
+            //Add new subset
             expandedRowKeys.value = [];
             for (let key of unref(expandedArr)) {
                 await expandTreeNode(key)
@@ -234,19 +234,19 @@
   }
 
   /**
-   * 接口请求成功后回调
+   * Callback after successful interface request
    */
   function onFetchSuccess(result) {
       getDataByResult(result.items)&&loadDataByExpandedRows();
   }
   /**
-   * 根据已展开的行查询数据（用于保存后刷新时异步加载子级的数据）
+   * Query data based on expanded rows (used to asynchronously load child data when refreshing after saving)
    */
   async function loadDataByExpandedRows() {
       if (unref(expandedRowKeys).length > 0) {
           const res = await getChildListBatch({ parentIds: unref(expandedRowKeys).join(',')});
           if (res.success && res.result.records.length>0) {
-              //已展开的数据批量子节点
+              //Expanded data batch child node
               let records = res.result.records
               const listMap = new Map();
               for (let item of records) {
@@ -276,12 +276,12 @@
       }
   }
   /**
-   * 处理数据集
+   * Processing data sets
    */
   function getDataByResult(result){
       if(result && result.length>0){
           return result.map(item=>{
-              //判断是否标记了带有子节点
+              //Determine whether a node with child nodes is marked
               if(item["hasChild"]=='1'){
                   let loadChild = { id: item.id+'_loadChild', name: 'loading...', isLoading: true }
                   item.children = [loadChild]
@@ -291,10 +291,10 @@
       }
   }
   /**
-   *树节点展开合并
+   *Expand and merge tree nodes
    * */
   async function handleExpand(expanded, record) {
-    // 判断是否是展开状态，展开状态(expanded)并且存在子集(children)并且未加载过(isLoading)的就去查询子节点数据
+    // Determine whether it is in the expanded state. If it is in the expanded state and there is a subset (children) and has not been loaded (isLoading), query the child node data.
     if (expanded) {
        expandedRowKeys.value.push(record.id)
       if (record.children.length > 0 && !!record.children[0].isLoading) {
@@ -315,7 +315,7 @@
     }
   }
   /**
-   *操作表格后处理树节点展开合并
+   *Expand and merge tree nodes after processing the table
    * */
   async function expandTreeNode(key) {
     let record = findTableDataRecord(key)
@@ -339,7 +339,7 @@
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '添加下级',
+        label: 'Add subordinate',
         onClick: handleAddSub.bind(null, {${pidFieldName}: record.id}),
       }
     ]
@@ -364,9 +364,9 @@
      ];
      if(record.bpmStatus == '1' || !record.bpmStatus){
        dropDownAction.push({
-         label: '发起流程',
+         label: 'Initiate process',
          popConfirm: {
-           title: '确认提交流程吗？',
+           title: 'Confirm the submission process?？',
            confirm: handleProcess.bind(null, record),
            placement: 'topLeft',
          }
@@ -392,7 +392,7 @@
 
   <#if bpm_flag==true>
   /**
-   * 提交流程
+   * Submission process
    */
   async function handleProcess(record) {
     let params = {

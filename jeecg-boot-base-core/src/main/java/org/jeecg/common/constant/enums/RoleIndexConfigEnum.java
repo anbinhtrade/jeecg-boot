@@ -29,7 +29,7 @@ public enum RoleIndexConfigEnum {
     String componentUrl;
 
     /**
-     * 构造器
+     * Constructor
      *
      * @param roleCode 角色编码
      * @param componentUrl 首页组件路径（规则跟菜单配置一样）

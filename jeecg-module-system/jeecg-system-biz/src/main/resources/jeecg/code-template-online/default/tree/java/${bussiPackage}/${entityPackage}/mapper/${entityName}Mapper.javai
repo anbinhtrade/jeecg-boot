@@ -17,14 +17,14 @@ import java.util.Map;
 public interface ${entityName}Mapper extends BaseMapper<${entityName}> {
 
 	/**
-	 * 编辑节点状态
+	 * Edit node status
 	 * @param id
 	 * @param status
 	 */
 	void updateTreeNodeStatus(@Param("id") String id,@Param("status") String status);
 
 	/**
-	 * 【vue3专用】根据父级ID查询树节点数据
+	 * [Vue3 only] Query tree node data based on parent ID
 	 *
 	 * @param pid
 	 * @param query

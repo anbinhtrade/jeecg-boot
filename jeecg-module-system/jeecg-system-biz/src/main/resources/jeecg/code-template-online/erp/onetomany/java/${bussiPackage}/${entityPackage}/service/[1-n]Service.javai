@@ -15,7 +15,7 @@ import java.util.List;
 public interface I${subTab.entityName}Service extends IService<${subTab.entityName}> {
 
   /**
-   * 通过主表id查询子表数据
+   * Query subtable data by main table id
    *
    * @param mainId
    * @return List<${subTab.entityName}>

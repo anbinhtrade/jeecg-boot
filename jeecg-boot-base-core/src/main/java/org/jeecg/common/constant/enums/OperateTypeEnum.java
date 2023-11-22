@@ -67,7 +67,7 @@ public enum OperateTypeEnum {
     }
 
     /**
-     * 构造器
+     * Constructor
      *
      * @param type 类型
      * @param code 编码(请求方式)

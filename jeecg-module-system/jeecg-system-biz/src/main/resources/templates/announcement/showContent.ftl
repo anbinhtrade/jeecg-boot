@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>通告详情</title>
+    <title>Notification details</title>
     <style>
 
         body {
@@ -80,7 +80,7 @@
             height: auto;
         }
 
-        /* 滚动条优化 start */
+        /* Scrollbar optimization start */
         ::-webkit-scrollbar{
             width:8px;
             height:8px;
@@ -99,7 +99,7 @@
         ::-webkit-scrollbar-corner {
             background: #f6f6f6;
         }
-        /* 滚动条优化 end */
+        /* Scrollbar optimization end */
 
     </style>
 </head>
@@ -110,11 +110,11 @@
         <#if data.priority??>
             <span class="rich_media_meta priority ${data.priority}">
                 <#if data.priority == "H">
-                    高
+                    High
                 <#elseif data.priority == "M">
-                    中
+                    Middle
                 <#elseif data.priority == "L">
-                    低
+                    Low
                 <#else >
                     ${data.priority}
                 </#if>
@@ -124,7 +124,7 @@
         <span class="rich_media_meta text">${data.sender}</span>
         </#if>
         <#if data.sendTime??>
-        <span class="rich_media_meta text">${data.sendTime?string('yyyy年MM月dd日')}</span>
+        <span class="rich_media_meta text">${data.sendTime?string('YYYYMMMMDD')}</span>
         </#if>
     </div>
 </div>

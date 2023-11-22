@@ -10,7 +10,7 @@
 
     <script type="text/javascript" src="${base}/bigscreen/template2/js/rem.js"></script>
     <link rel="stylesheet" href="${base}/bigscreen/template2/css/style.css">
-    <title>智慧物流服务中心-首页</title>
+    <title>Smart Logistics Service Center - Home</title>
 </head>
 
 <body style="visibility: hidden;">
@@ -18,13 +18,13 @@
     <div class="box-left">
         <div class="left-top">
             <div class="current-num">
-                <div>当前到件量</div>
+                <div>Current arrival quantity</div>
                 <p>123,456,789</p>
             </div>
         </div>
         <div class="left-center">
             <div class="title-box">
-                <h6>派件入库量占比</h6>
+                <h6>Proportion of dispatched goods into warehouse</h6>
             </div>
             <div class="chart-box pie-chart">
                 <div id="pie"></div>
@@ -37,40 +37,40 @@
         </div>
         <div class="left-bottom" class="select">
             <div class="title-box">
-                <h6>广东省寄派件数据</h6>
+                <h6>Shipping data of Guangdong Province</h6>
                 <img class="line-img" src="${base}/bigscreen/template2/images/line-blue.png" alt="">
-                <button id="filBtn"><img src="${base}/bigscreen/template2/images/select_icon.png" alt="">筛选</button>
+                <button id="filBtn"><img src="${base}/bigscreen/template2/images/select_icon.png" alt="">Shipping</button>
             </div>
             <div class="chart-box">
                 <div class="filter-con" id="filCon" data-type="1">
                     <div class="select" tabindex="0" hidefocus="true">
                         <div class="select-div">
-                            派件
+                            DELIVERY
                         </div>
                         <ul class="select-ul">
-                            <li class="active" data-value="1">派件</li>
-                            <li data-value="2">寄件</li>
+                            <li class="active" data-value="1">Delivery</li>
+                            <li data-value="2">Shipping</li>
                         </ul>
                     </div>
                     <div class="select" tabindex="0" hidefocus="true">
                         <div class="select-div">
-                            公司
+                            FIRM
                         </div>
                         <ul class="select-ul company">
-                            <li class="active" data-value="">公司</li>
-                            <li data-value="1">顺丰</li>
-                            <li data-value="2">京东</li>
+                            <li class="active" data-value="">Firm</li>
+                            <li data-value="1">SF</li>
+                            <li data-value="2">JD.com</li>
                             <li data-value="2">EMS</li>
                         </ul>
                     </div>
                     <div class="select" tabindex="0" hidefocus="true">
                         <div class="select-div">
-                            快件类型
+                            Shipment type
                         </div>
                         <ul class="select-ul">
-                            <li class="active" data-value="">快件类型</li>
-                            <li data-value="0">文件</li>
-                            <li data-value="1">物品</li>
+                            <li class="active" data-value="">Shipment type</li>
+                            <li data-value="0">FILE</li>
+                            <li data-value="1">GOODS</li>
                         </ul>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
     </div>
     <div class="box-center">
         <div class="center-top">
-            <h1>智慧物流服务中心</h1>
+            <h1>Smart Logistics Service Center</h1>
         </div>
         <div class="center-center">
             <div class="weather-box">
@@ -91,38 +91,38 @@
                 <div class="weather">
                     <img id="weatherImg" src="${base}/bigscreen/template2/images/weather/weather_img01.png" alt="">
                     <div id="weather">
-                        <p class="active">多云</p>
+                        <p class="active">CLOUDY</p>
                         <p>16-22℃</p>
-                        <p>深圳市南山区</p>
+                        <p>Nanshan District, Shenzhen</p>
                     </div>
                 </div>
             </div>
             <img src="${base}/bigscreen/template2/images/line_bg.png" alt="">
             <div class="select-box">
                 <ul id="barType">
-                    <li class="active" data-value="1">派件</li>
-                    <li data-value="2">寄件</li>
+                    <li class="active" data-value="1">Delivery</li>
+                    <li data-value="2">Shipping</li>
                 </ul>
                 <div data-type="2">
                     <div class="select" tabindex="0" hidefocus="true">
                         <div class="select-div">
-                            公司
+                            FIRM
                         </div>
                         <ul class="select-ul company">
-                            <li class="active" data-value="">公司</li>
-                            <li data-value="1">顺丰</li>
-                            <li data-value="2">京东</li>
+                            <li class="active" data-value="">FIRM</li>
+                            <li data-value="1">SF</li>
+                            <li data-value="2">JD.com</li>
                             <li data-value="2">EMS</li>
                         </ul>
                     </div>
                     <div class="select" tabindex="0" hidefocus="true">
                         <div class="select-div">
-                            快件类型
+                            Shipment type
                         </div>
                         <ul class="select-ul">
-                            <li class="active" data-value="">快件类型</li>
-                            <li data-value="0">文件</li>
-                            <li data-value="1">物品</li>
+                            <li class="active" data-value="">Shipment type</li>
+                            <li data-value="0">FILE</li>
+                            <li data-value="1">GOODS</li>
                         </ul>
                     </div>
                 </div>
@@ -134,9 +134,9 @@
             </div>
             <div class="city-data">
                 <div class="city-box">
-                    <p id="titleQ"><span>全网</span>到珠海</p>
+                    <p id="titleQ"><span>The whole network</span>to Zhuhai</p>
                     <ul class="city-btn" data-city="1">
-                        <li class="active">全网</li>
+                        <li class="active">The whole network</li>
                         <li>ABCDE</li>
                         <li>FGHIJ</li>
                         <li>KLMNO</li>
@@ -149,10 +149,10 @@
                 </div>
                 <ul class="ranking-box">
                     <li><span></span>
-                        <p>城市</p>
-                        <p>派件</p>
+                        <p>CITY</p>
+                        <p>DELIVERY</p>
                     </li>
-                    <!--                        <li><span>1</span><p>上海</p><p>1sss25(万件)</p></li>-->
+                    <!--                        <li><span>1</span> <p>Shanghai</p> <p>1 SSS 25 (10,000 pieces).</p></li>-->
                 </ul>
                 <div class="enlarge-box">
                     <button class="enlarge-btn" id="fangda"></button>
@@ -178,75 +178,75 @@
     <div class="box-right">
         <div class="right-top">
             <div class="title-box">
-                <h6 id="barTitle">派件数据</h6>
+                <h6 id="barTitle">Dispatch data</h6>
                 <img class="line-img" src="${base}/bigscreen/template2/images/line-blue.png" alt="">
-                <button data-state=1 id="tabBtn"><img src="${base}/bigscreen/template2/images/chart_icon.png" alt=""><span>图表</span></button>
+                <button data-state=1 id="tabBtn"><img src="${base}/bigscreen/template2/images/chart_icon.png" alt=""><span>Chart</span></button>
             </div>
-            <p class="unit">单位：件</p>
+            <p class="unit">Unit: piece</p>
             <div class="chart-box">
                 <div id="chart3" style="width:100%;height:100%;"></div>
             </div>
             <div class="data-box" style="display:none;">
                 <table class="table1">
                     <tr>
-                        <td>入库件</td>
+                        <td>Warehousing parts</td>
                         <td colspan="3" class="table-data dph-data1">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td rowspan="2">在库件</td>
+                        <td rowspan="2">In-stock items</td>
                         <td rowspan="2" class="table-data dph-data2">0</td>
-                        <td>正常件</td>
+                        <td>Normal parts</td>
                         <td class="table-data dph-data3">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td>滞留件</td>
+                        <td>Detained parts</td>
                         <td class="table-data dph-data5">0</td>
                     </tr>
                     <tr>
-                        <td rowspan="2">出库件</td>
+                        <td rowspan="2">Outbound items</td>
                         <td rowspan="2" class="dph-data6">0</td>
-                        <td>派送件</td>
+                        <td>Delivery items</td>
                         <td class="table-data dph-data7">0</td>
                     </tr>
                     <tr>
-                        <td>自提件</td>
+                        <td>Self-pickup</td>
                         <td class="table-data dph-data8">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td>退签件</td>
+                        <td>Return document</td>
                         <td colspan="3" class="table-data dph-data9">0</td>
                     </tr>
                     <tr>
-                        <td>丢失件</td>
+                        <td>Lost items</td>
                         <td colspan="3" class="table-data dph-data4">0</td>
                     </tr>
                 </table>
                 <table class="table1" style="display:none;">
                     <tr>
-                        <td>入库件</td>
+                        <td>Warehousing parts</td>
                         <td colspan="3" class="table-data mail-data1">1</td>
                     </tr>
                     <tr class="bg-color">
-                        <td rowspan="2">在库件</td>
+                        <td rowspan="2">In-stock items</td>
                         <td rowspan="2" class="table-data mail-data2">1</td>
-                        <td>正常件</td>
+                        <td>Normal parts</td>
                         <td class="table-data mail-data7">1</td>
                     </tr>
                     <tr class="bg-color">
-                        <td>滞留件</td>
+                        <td>Detained parts</td>
                         <td class="table-data mail-data4">1</td>
                     </tr>
 
                     <tr>
-                        <td>出库件</td>
+                        <td>Outbound items</td>
                         <td colspan="3" class="mail-data6">1</td>
                     </tr>
                     <tr class="bg-color">
-                        <td>丢失件</td>
+                        <td>Lost items</td>
                         <td colspan="3" class="mail-data3">1</td>
                     </tr>
                     <tr>
-                        <td>撤销件</td>
+                        <td>Cancellation</td>
                         <td colspan="3" class="table-data mail-data5">1</td>
                     </tr>
                 </table>
@@ -254,9 +254,9 @@
         </div>
         <div class="right-center">
             <div class="title-box">
-                <p id="switchBtn"><span class="active" data-dataType="income">收入数据</span><img class="line-img" src="${base}/bigscreen/template2/images/line-blue.png" alt=""><span data-dataType="expend">支出数据</span></p>
+                <p id="switchBtn"><span class="active" data-dataType="income">Revenue data</span><img class="line-img" src="${base}/bigscreen/template2/images/line-blue.png" alt=""><span data-dataType="expend">Spending data</span></p>
                 <img class="line-img" src="${base}/bigscreen/template2/images/line-blue.png" alt="">
-                <button id="dateBtn"><img src="${base}/bigscreen/template2/images/data_icon.png" alt="">日期</button>
+                <button id="dateBtn"><img src="${base}/bigscreen/template2/images/data_icon.png" alt="">Date</button>
             </div>
             <div class="data-box">
                 <p class="data-number" id="totalProfit">123,456.5元</p>
@@ -274,12 +274,12 @@
         </div>
         <div class="right-bottom">
             <div class="title-box">
-                <button id="setBtn"><img src="${base}/bigscreen/template2/images/settings_icon.png" alt="">设置</button>
+                <button id="setBtn"><img src="${base}/bigscreen/template2/images/settings_icon.png" alt="">Set up</button>
             </div>
             <div class="data-box">
                 <div class="settings-box">
-                    <p><img src="${base}/bigscreen/template2/images/teacher_icon.png" alt="">今日值班：<span id="name_a"></span><span id="date_a"></span></p>
-                    <p><img src="${base}/bigscreen/template2/images/people_iocn.png" alt="">负责人：<span id="lea_a"></span></p>
+                    <p><img src="${base}/bigscreen/template2/images/teacher_icon.png" alt="">On duty today：<span id="name_a"></span><span id="date_a"></span></p>
+                    <p><img src="${base}/bigscreen/template2/images/people_iocn.png" alt="">Principal：<span id="lea_a"></span></p>
                 </div>
             </div>
         </div>
@@ -288,7 +288,7 @@
 <div class="container">
     <div class="pop-up">
         <span class="close-pop"></span>
-        <h2 class="title">当前到件量</h2>
+        <h2 class="title">Current arrival quantity</h2>
         <div class="pop-data-box">
             <p>123,456,789</p>
         </div>
@@ -296,7 +296,7 @@
 
     <div class="pop-up">
         <span class="close-pop"></span>
-        <h2 class="title">派件入库量占比</h2>
+        <h2 class="title">Proportion of dispatched goods into warehouse</h2>
         <div class="chart-box pie-chart">
             <div id="pie1"></div>
             <div>
@@ -308,36 +308,36 @@
 
     <div class="pop-up">
         <span class="close-pop"></span>
-        <h2 class="title">广东省寄派件数据 </h2>
+        <h2 class="title">Shipping data of Guangdong Province </h2>
         <div class="filter-con pop-filter" style="display:flex" data-type="3">
             <div class="select" tabindex="0" hidefocus="true">
                 <div class="select-div">
-                    派件
+                    Delivery
                 </div>
                 <ul class="select-ul">
-                    <li class="active" data-value="1">派件</li>
-                    <li data-value="2">寄件</li>
+                    <li class="active" data-value="1">Delivery</li>
+                    <li data-value="2">Shipping</li>
                 </ul>
             </div>
             <div class="select" tabindex="0" hidefocus="true">
                 <div class="select-div">
-                    公司
+                    Firm
                 </div>
                 <ul class="select-ul company">
-                    <li class="active" data-value="">公司</li>
-                    <li data-value="1">顺丰</li>
-                    <li data-value="2">京东</li>
+                    <li class="active" data-value="">FIRM</li>
+                    <li data-value="1">SF</li>
+                    <li data-value="2">JD.com</li>
                     <li data-value="2">EMS</li>
                 </ul>
             </div>
             <div class="select" tabindex="0" hidefocus="true">
                 <div class="select-div">
-                    快件类型
+                    Shipment type
                 </div>
                 <ul class="select-ul">
-                    <li class="active" data-value="">快件类型</li>
-                    <li data-value="0">文件</li>
-                    <li data-value="1">物品</li>
+                    <li class="active" data-value="">Shipment type</li>
+                    <li data-value="0">File</li>
+                    <li data-value="1">Goods</li>
                 </ul>
             </div>
         </div>
@@ -351,29 +351,29 @@
         <div class="filter-con pop-filters" style="display:flex" data-type="4">
             <div class="select-pop" tabindex="0" hidefocus="true">
                 <ul id="barTypes">
-                    <li class="active" data-value="1">派件</li>
-                    <li data-value="2">寄件</li>
+                    <li class="active" data-value="1">DELIVERY</li>
+                    <li data-value="2">SHIPPING</li>
                 </ul>
             </div>
             <div class="select" tabindex="0" hidefocus="true">
                 <div class="select-div">
-                    公司
+                    FIRM
                 </div>
                 <ul class="select-ul company">
-                    <li class="active" data-value="">公司</li>
-                    <li data-value="1">顺丰</li>
-                    <li data-value="2">京东</li>
+                    <li class="active" data-value="">FIRM</li>
+                    <li data-value="1">SF</li>
+                    <li data-value="2">JD.com</li>
                     <li data-value="2">EMS</li>
                 </ul>
             </div>
             <div class="select" tabindex="0" hidefocus="true">
                 <div class="select-div">
-                    快件类型
+                    Shipment type
                 </div>
                 <ul class="select-ul">
-                    <li class="active" data-value="">快件类型</li>
-                    <li data-value="0">文件</li>
-                    <li data-value="1">物品</li>
+                    <li class="active" data-value="">Shipment type</li>
+                    <li data-value="0">FILE</li>
+                    <li data-value="1">GOODS</li>
                 </ul>
             </div>
         </div>
@@ -383,72 +383,72 @@
             </div>
         </div>
         <div class="cont-div">
-            <h2 class="title" id="barTitles">派件数据</h2>
-            <button class="btn-class" data-state=1 id="tabBtns"><img src="${base}/bigscreen/template2/images/chart_icon.png" alt=""><span>图表</span></button>
+            <h2 class="title" id="barTitles">Dispatch data</h2>
+            <button class="btn-class" data-state=1 id="tabBtns"><img src="${base}/bigscreen/template2/images/chart_icon.png" alt=""><span>Chart</span></button>
             <div class="chart-box pop-chart">
                 <div id="chart3s" style="width:100%;height:90%;"></div>
             </div>
             <div class="data-box" style="top:25%;width:8.6rem;display:none;">
                 <table class="table2">
                     <tr>
-                        <td>入库件</td>
+                        <td>Warehousing parts</td>
                         <td colspan="3" class="table-data dph-data1">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td rowspan="2">在库件</td>
+                        <td rowspan="2">In-stock items</td>
                         <td rowspan="2" class="table-data dph-data2">0</td>
-                        <td>正常件</td>
+                        <td>Normal parts</td>
                         <td class="table-data dph-data3">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td>滞留件</td>
+                        <td>Detained parts</td>
                         <td class="table-data dph-data5">0</td>
                     </tr>
                     <tr>
-                        <td rowspan="2">出库件</td>
+                        <td rowspan="2">Outbound items</td>
                         <td rowspan="2" class="dph-data6">0</td>
-                        <td>派送件</td>
+                        <td>Delivery items</td>
                         <td class="table-data dph-data7">0</td>
                     </tr>
                     <tr>
-                        <td>自提件</td>
+                        <td>Self-pickup</td>
                         <td class="table-data dph-data8">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td>退签件</td>
+                        <td>Return document</td>
                         <td colspan="3" class="table-data dph-data9">0</td>
                     </tr>
                     <tr>
-                        <td>丢失件</td>
+                        <td>Lost items</td>
                         <td colspan="3" class="table-data dph-data4">0</td>
                     </tr>
                 </table>
                 <table class="table2" style="display:none;">
                     <tr>
-                        <td>入库件</td>
+                        <td>Warehousing parts</td>
                         <td colspan="3" class="table-data mail-data1">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td rowspan="2">在库件</td>
+                        <td rowspan="2">In-stock items</td>
                         <td rowspan="2" class="table-data mail-data2">0</td>
-                        <td>正常件</td>
+                        <td>Normal parts</td>
                         <td class="table-data mail-data7">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td>滞留件</td>
+                        <td>Detained parts</td>
                         <td class="table-data mail-data4">0</td>
                     </tr>
 
                     <tr>
-                        <td>出库件</td>
+                        <td>Outbound items</td>
                         <td colspan="3" class="mail-data6">0</td>
                     </tr>
                     <tr class="bg-color">
-                        <td>丢失件</td>
+                        <td>Lost items</td>
                         <td colspan="3" class="mail-data3">0</td>
                     </tr>
                     <tr>
-                        <td>撤销件</td>
+                        <td>Cancellation</td>
                         <td colspan="3" class="table-data mail-data5">0</td>
                     </tr>
                 </table>
@@ -456,7 +456,7 @@
         </div>
         <div class="cont-div">
             <h2 class="title" id="titles"></h2>
-            <button class="btn-class" id="dateBtns"><img src="${base}/bigscreen/template2/images/data_icon.png" alt="">日期</button>
+            <button class="btn-class" id="dateBtns"><img src="${base}/bigscreen/template2/images/data_icon.png" alt="">Date</button>
             <div class="data-box  pop-time">
                 <div class="time-box" id="timeBoxs">
                     <div class="time-div">
@@ -476,9 +476,9 @@
         <div class="pop-data">
             <div class="city-data">
                 <div class="city-box">
-                    <p id="titleQs"><span>全网</span>到珠海</p>
+                    <p id="titleQs"><span>The whole network</span>to Zhuhai</p>
                     <ul class="city-btn" data-city="2">
-                        <li class="active">全网</li>
+                        <li class="active">The whole network</li>
                         <li>ABCDE</li>
                         <li>FGHIJ</li>
                         <li>KLMNO</li>
@@ -491,10 +491,10 @@
                 </div>
                 <ul class="ranking-box">
                     <li><span></span>
-                        <p>城市</p>
-                        <p>派件</p>
+                        <p>CITY</p>
+                        <p>DELIVERY</p>
                     </li>
-                    <!--                        <li><span>1</span><p>上海</p><p>1sss25(万件)</p></li>-->
+                    <!--                        <li><span>1</span> <p>Shanghai</p> <p>1 SSS 25 (10,000 pieces).</p></li>-->
                 </ul>
 
             </div>
@@ -502,42 +502,42 @@
     </div>
     <div class="pop-up">
         <span class="close-pop"></span>
-        <h2 class="title">设置</h2>
+        <h2 class="title">Set up</h2>
         <div class="set-div">
             <div class="set-box">
-                <label class="four-f" for="">排班日期</label>
+                <label class="four-f" for="">Schedule dates</label>
                 <div class="time-div">
                     <input class="time-input" type="text" value="" id="times">
                     <img src="${base}/bigscreen/template2/images/selsct_time.png" alt="">
                 </div>
             </div>
             <div class="set-box">
-                <label for="">值班人</label>
+                <label for="">WATCHMAN</label>
                 <input type="text" value="">
                 <button class="plus" id="addT"></button>
                 <button class="mineus" id="mineusT" style="display:none;"></button>
             </div>
             <div class="set-box">
-                <label for="">负责人</label>
+                <label for="">Principal</label>
                 <input type="text" value="">
                 <button class="plus" id="addL"></button>
                 <button class="mineus" id="mineusL" style="display:none;"></button>
-                <button class="add-btn" id="addSet"><img src="${base}/bigscreen/template2/images/plus.png" alt="">添加</button>
+                <button class="add-btn" id="addSet"><img src="${base}/bigscreen/template2/images/plus.png" alt="">Add to</button>
             </div>
             <table class="table3">
                 <thead>
                 <tr>
-                    <th>值班人</th>
-                    <th>排班日期</th>
-                    <th>负责人</th>
-                    <th>操作</th>
+                    <th>WATCHMAN</th>
+                    <th>Schedule dates</th>
+                    <th>Principal</th>
+                    <th>OPERATION</th>
                 </tr>
                 </thead>
                 <tbody id="tList">
                 <!--
                                         <tr>
                                             <td colspan="4">
-                                                <p style="width:9.6rem;">暂无数据</p>
+                                                <p style="width:9.6rem;">No data yet</p>
                                             </td>
                                         </tr>
                 -->
@@ -590,24 +590,24 @@
                 <p id="page"><span>0</span>/<span>0</span></p>
                 <button class="next"></button>
                 <input type="number">
-                <button class="skip">跳转</button>
+                <button class="skip">JUMP</button>
             </div>
         </div>
-        <div class="tishi">日期已存在!</div>
+        <div class="tishi">The date already exists!</div>
         <div class="edit-div" style="display:none;">
-            <h4>编辑</h4>
+            <h4>EDIT</h4>
             <span class="close-edit"></span>
             <div class="set-box">
-                <label for="">值班人</label>
+                <label for="">WATCHMAN</label>
                 <input class="input-edit" id="editT" type="text" value="">
             </div>
             <div class="set-box">
-                <label for="">负责人</label>
+                <label for="">Principal</label>
                 <input class="input-edit" id="editL" type="text" value="">
             </div>
             <div class="set-box edit-box">
-                <button id="qxEdit">取消</button>
-                <button id="qdEdit">确定</button>
+                <button id="qxEdit">CANCEL</button>
+                <button id="qdEdit">Are you sure</button>
             </div>
         </div>
     </div>
@@ -659,11 +659,11 @@
                 $('.container').attr('style', 'visibility: visible').find('.pop-up').eq(3).attr('style', 'visibility: visible').siblings().attr('style', 'visibility: hidden');
                 $('.pop-data .ranking-box').hide();
                 if ($('#switchBtn').find('.active').data('datatype') == "income") {
-                    $('#titles').html('收入数据');
+                    $('#titles').html('Revenue data');
                     $('#totalProfits').html('123,456.5元');
                     $('.cont-div').eq(2).attr('style', 'visibility: visible').siblings('.cont-div').attr('style', 'visibility: hidden');
                 } else if ($('#switchBtn').find('.active').data('datatype') == 'expend') {
-                    $('#titles').html('支出数据');
+                    $('#titles').html('Spending data');
                     $('#totalProfits').html('32,111.4元');
                     $('.cont-div').eq(2).attr('style', 'visibility: visible').siblings('div').attr('style', 'visibility: hidden');
                 }

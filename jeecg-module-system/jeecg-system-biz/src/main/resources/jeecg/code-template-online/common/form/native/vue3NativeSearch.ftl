@@ -51,7 +51,7 @@
                 <#if query_field_no gt 1>  </#if>:multi="${po.extendParams.popupMulti?c}"
                 <#if query_field_no gt 1>  </#if>:setFieldsValue="setFieldsValue" />
             <#elseif po.classType=='list' || po.classType=='radio' || po.classType=='checkbox'>
-            <#--  ---------------------------下拉或是单选 判断数据字典是表字典还是普通字典------------------------------- -->
+            <#--  ---------------------------Drop down or single selection to determine whether the data dictionary is a table dictionary or an ordinary dictionary------------------------------- -->
             <#if po.dictTable?default("")?trim?length gt 1>
               <#if query_field_no gt 1>  </#if><j-dict-select-tag placeholder="Please select ${po.filedComment}" v-model:value="queryParam.${po.fieldName}" dictCode="${po.dictTable},${po.dictText},${po.dictField}"/>
             <#elseif po.dictField?default("")?trim?length gt 1>

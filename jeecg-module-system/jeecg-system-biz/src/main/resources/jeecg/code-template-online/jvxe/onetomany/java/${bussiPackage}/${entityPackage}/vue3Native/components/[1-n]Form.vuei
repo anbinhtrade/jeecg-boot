@@ -77,7 +77,7 @@
         id: '',
         <#include "/common/init/native/vue3NativeSubInitValue.ftl">
       });
-      //表单验证
+      //Form validation
       const validatorRules = reactive({
     <#list sub.colums as po>
     <#if po.isShow == 'Y' && poHasCheck(po)>
@@ -122,7 +122,7 @@
       }
 
       /**
-       * 值改变事件触发-树控件回调
+       * Value change event triggers - tree control callback
        * @param key
        * @param value
        */
