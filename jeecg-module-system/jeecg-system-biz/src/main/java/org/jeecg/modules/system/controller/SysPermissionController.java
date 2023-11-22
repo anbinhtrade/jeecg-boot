@@ -108,7 +108,7 @@ public class SysPermissionController {
 			}
 			result.setResult(treeList);
 			result.setSuccess(true);
-            log.info("=======Get all menu data=====Time consuming:" + (System.currentTimeMillis() - start) + "MILLISECOND");
+            log.info("=======Get all menu data=====Time consuming: " + (System.currentTimeMillis() - start) + " Milliseconds");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}

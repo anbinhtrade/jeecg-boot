@@ -192,7 +192,7 @@ public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler
         if (!waitMergerFields.isEmpty()) {
             this.autoAddWhiteList(tableName, String.join(",", waitMergerFields));
         }
-        log.info("白名单校验：查询表\"{}\"，查询字段 {} 通过校验", tableName, queryFields);
+        log.info("Whitelist verification: query table \"{}\", query field {} passed the verification", tableName, queryFields);
         return true;
     }
 

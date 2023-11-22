@@ -55,13 +55,13 @@ public abstract class AbstractQueryBlackListHandler {
         try {
             list = this.getQueryTableInfo(sql.toLowerCase());
         } catch (Exception e) {
-            log.warn("校验sql语句，解析报错：{}",e.getMessage());
+            log.warn("Verify sql statement, parse error: {}",e.getMessage());
         }
         
         if(list==null){
             return true;
         }
-        log.info("  获取sql信息 ：{} ", list.toString());
+        log.info("  Get sql information: {}", list.toString());
         boolean flag = checkTableAndFieldsName(list);
         if(flag == false){
             return false;
@@ -73,7 +73,7 @@ public abstract class AbstractQueryBlackListHandler {
             if (fieldRule != null) {
                 if ("*".equals(fieldRule) || table.isAll()) {
                     flag = false;
-                    log.warn("sql黑名单校验，表【"+name+"】禁止查询");
+                    log.warn("SQL blacklist verification, table ["+name+"] is prohibited from querying");
                     break;
                 } else if (table.existSameField(fieldRule)) {
                     flag = false;

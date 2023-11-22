@@ -73,7 +73,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 	public void deletePermission(String id) throws JeecgBootException {
 		SysPermission sysPermission = this.getById(id);
 		if(sysPermission==null) {
-			throw new JeecgBootException("未找到菜单信息");
+			throw new JeecgBootException("Menu information not found");
 		}
 		String pid = sysPermission.getParentId();
 		if(oConvertUtils.isNotEmpty(pid)) {
@@ -148,7 +148,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 	public void deletePermissionLogical(String id) throws JeecgBootException {
 		SysPermission sysPermission = this.getById(id);
 		if(sysPermission==null) {
-			throw new JeecgBootException("未找到菜单信息");
+			throw new JeecgBootException("Menu information not found");
 		}
 		String pid = sysPermission.getParentId();
 		Long count = this.count(new QueryWrapper<SysPermission>().lambda().eq(SysPermission::getParentId, pid));
@@ -186,7 +186,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 		SysPermission p = this.getById(sysPermission.getId());
 		//TODO 该节点判断是否还有子节点
 		if(p==null) {
-			throw new JeecgBootException("未找到菜单信息");
+			throw new JeecgBootException("Menu information not found");
 		}else {
 			sysPermission.setUpdateTime(new Date());
 			//----------------------------------------------------------------------
