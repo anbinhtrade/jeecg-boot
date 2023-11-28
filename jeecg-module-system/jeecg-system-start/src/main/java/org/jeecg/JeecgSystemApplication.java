@@ -6,6 +6,7 @@ import org.jeecg.config.Module2Configuration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Import;
@@ -21,7 +22,7 @@ import java.net.UnknownHostException;
 @Slf4j
 @SpringBootApplication
 @Import(Module2Configuration.class)
-//@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
+@EnableConfigurationProperties
 public class JeecgSystemApplication extends SpringBootServletInitializer {
 
     @Override

@@ -283,3 +283,10 @@ justauth:
     type: default
     prefix: 'demo::'
     timeout: 1h
+
+app:
+  user-service:
+    url: http://localhost:8081
+  notification-service:
+    url: https://api-internal.abs.vn/v1/noti-business/plan/
+  user-agent: Jeecg-abs/1.0.0 (https://abs.vn)
