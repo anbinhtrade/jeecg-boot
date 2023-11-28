@@ -25,7 +25,8 @@ public class UserController {
 
 
     @GetMapping("/search")
-    public ResponseEntity<List<UserSearchDto>> searchUser(@RequestParam String searchTerm) throws IOException {
-        return extUserClient.extSearch(searchTerm);
+    public ResponseEntity<List<UserSearchDto>> searchUser(@RequestParam String searchTerm,
+                                                          @RequestParam String ids) throws IOException {
+        return extUserClient.extSearch(searchTerm, ids);
     }
 }

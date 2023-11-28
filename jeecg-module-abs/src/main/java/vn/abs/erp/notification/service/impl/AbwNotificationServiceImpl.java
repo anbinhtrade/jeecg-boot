@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 /**
  * @Description: Notification ABS
  * @Author: jeecg-boot
- * @Date:   2023-11-23
+ * @Date:   2023-11-28
  * @Version: V1.0
  */
 @Service
@@ -35,12 +35,12 @@ public class AbwNotificationServiceImpl extends ServiceImpl<AbwNotificationMappe
                 .bannerImage("sample_banner")
                 .thumbnailImage("sample_thumbnail")
                 .body(abwNotification.getMsgBody())
-                .plan("sample_plan")
+                .plan(abwNotification.getMsgPlan())
                 .actions(null)
                 .data(null)
                 .build();
         NotificationResult notificationResult = extNotificationClient.sendNotification(notificationDto);
-        // TODO - add status to notification and save
+        abwNotification.setMsgStatus(notificationResult.getCode() == 200 ? "SENT_SUCCESS" : "SENT_FAILED");
         save(abwNotification);
     }
 }

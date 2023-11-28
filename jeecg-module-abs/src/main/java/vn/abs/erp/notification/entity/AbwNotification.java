@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 /**
  * @Description: Notification ABS
  * @Author: jeecg-boot
- * @Date:   2023-11-23
+ * @Date:   2023-11-28
  * @Version: V1.0
  */
 @Data
@@ -64,29 +64,33 @@ public class AbwNotification implements Serializable {
 	@Excel(name = "Banner", width = 15)
     @ApiModelProperty(value = "Banner")
     private java.lang.String msgBannerImage;
-	/**创建人*/
-    @ApiModelProperty(value = "创建人")
-    private java.lang.String createBy;
-	/**创建日期*/
-	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建日期")
-    private java.util.Date createTime;
-	/**更新人*/
-    @ApiModelProperty(value = "更新人")
-    private java.lang.String updateBy;
-	/**更新日期*/
-	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "更新日期")
-    private java.util.Date updateTime;
-	/**所属部门*/
-    @ApiModelProperty(value = "所属部门")
-    private java.lang.String sysOrgCode;
+	/**Trạng thái*/
+	@Excel(name = "Trạng thái", width = 15)
+    @ApiModelProperty(value = "Trạng thái")
+    private java.lang.String msgStatus;
 	/**Hẹn giờ*/
 	@Excel(name = "Hẹn giờ", width = 20, format = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "Hẹn giờ")
     private java.util.Date msgPlan;
+	/**Người gửi*/
+    @ApiModelProperty(value = "Người gửi")
+    private java.lang.String createBy;
+	/**Thời gian gửi*/
+	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "Thời gian gửi")
+    private java.util.Date createTime;
+	/**Người cập nhật*/
+    @ApiModelProperty(value = "Người cập nhật")
+    private java.lang.String updateBy;
+	/**Thời gian cập nhật*/
+	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "Thời gian cập nhật")
+    private java.util.Date updateTime;
+	/**Mã đơn vị*/
+    @ApiModelProperty(value = "Mã đơn vị")
+    private java.lang.String sysOrgCode;
 }

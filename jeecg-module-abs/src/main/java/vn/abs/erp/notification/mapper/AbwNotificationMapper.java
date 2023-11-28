@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * @Description: Notification ABS
  * @Author: jeecg-boot
- * @Date:   2023-11-23
+ * @Date:   2023-11-28
  * @Version: V1.0
  */
 public interface AbwNotificationMapper extends BaseMapper<AbwNotification> {

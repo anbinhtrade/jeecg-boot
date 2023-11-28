@@ -1,31 +1,30 @@
 package vn.abs.erp.notification.controller;
 
-import java.util.Arrays;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.jeecg.common.api.vo.Result;
-import org.jeecg.common.system.query.QueryGenerator;
-import vn.abs.erp.notification.entity.AbwNotification;
-import vn.abs.erp.notification.service.IAbwNotificationService;
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.system.base.controller.JeecgController;
+import org.jeecg.common.system.query.QueryGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.jeecg.common.aspect.annotation.AutoLog;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import vn.abs.erp.notification.entity.AbwNotification;
+import vn.abs.erp.notification.service.IAbwNotificationService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
  /**
  * @Description: Notification ABS
  * @Author: jeecg-boot
- * @Date:   2023-11-23
+ * @Date:   2023-11-28
  * @Version: V1.0
  */
 @Api(tags="Notification ABS")

@@ -287,6 +287,8 @@ justauth:
 app:
   user-service:
     url: http://localhost:8081
+  internal:
+    secret-key: my_abs_secret_key
   notification-service:
-    url: https://api-internal.abs.vn/v1/noti-business/plan/
+    url: https://api.pro.abs.vn/v1/noti-business/plan/
   user-agent: Jeecg-abs/1.0.0 (https://abs.vn)

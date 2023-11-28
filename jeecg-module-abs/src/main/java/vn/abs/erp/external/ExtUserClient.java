@@ -22,21 +22,24 @@ public class ExtUserClient {
     @Value("${app.user-agent}")
     private String userAgent;
 
+    @Value("${app.internal.secret-key}")
+    private String internalSecretKey;
+
     private final ObjectMapper objectMapper;
 
     public ExtUserClient(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    public ResponseEntity<List<UserSearchDto>> extSearch(final String searchTerm) throws IOException {
+    public ResponseEntity<List<UserSearchDto>> extSearch(final String searchTerm, final String ids) throws IOException {
         OkHttpClient client = AbsHttpClient.getClient();
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, "");
-        String requestUrl = userServiceBaseUrl + "/i/user/search?searchTerm=" + searchTerm;
+        String requestUrl = userServiceBaseUrl + "/i/user/search?searchTerm=" + searchTerm+"&ids="+ids;
         Request request = new Request.Builder()
                 .url(requestUrl)
                 .method("GET", null)
-                .addHeader("x-api-secret", "my_abs_secret_key")
+                .addHeader("x-api-secret", internalSecretKey)
                 .addHeader("User-Agent", userAgent)
                 .build();
         try (Response response = client.newCall(request).execute()) {

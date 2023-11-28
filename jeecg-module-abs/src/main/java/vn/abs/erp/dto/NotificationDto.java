@@ -1,11 +1,13 @@
 package vn.abs.erp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Notification dto - Request
@@ -18,7 +20,8 @@ public class NotificationDto implements Serializable {
     private String title;
     private String body;
     private String content;
-    private String plan;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    private Date plan;
     private NotificationData data;
     private NotificationAction[] actions;
     private String bannerImage;
