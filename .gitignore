@@ -11,3 +11,4 @@ rebel.xml
 **/*.lock
 os_del.cmd
 /.vscode/
+/jeecg-module-system/jeecg-system-start/src/main/resources/application-dev.yml
